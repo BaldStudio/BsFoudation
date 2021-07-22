@@ -18,7 +18,15 @@
 		D23FF0D525AD9B5500D755D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23FF0D325AD9B5500D755D9 /* LaunchScreen.storyboard */; };
 		D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */; };
 		D23FF0E525AD9C5600D755D9 /* BsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D27A8A1D25203F1A006A6125 /* BsFoundation.framework */; platformFilter = ios; };
-		D27A8A992520AEAC006A6125 /* BsFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* BsFoundation.swift */; };
+		D247E2BD26A5AAFB00614D87 /* AVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247E2BC26A5AAFB00614D87 /* AVC.swift */; };
+		D247E2BF26A7077600614D87 /* BVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247E2BE26A7077600614D87 /* BVC.swift */; };
+		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
+		D298D2B326A7EC8C00A05ACF /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298D2B226A7EC8C00A05ACF /* Debug.swift */; };
+		D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C119DD26A8069E000C42C4 /* Manifest.swift */; };
+		D2D449D826A5587000D77E53 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449D726A5587000D77E53 /* Context.swift */; };
+		D2D449DA26A558AA00D77E53 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449D926A558AA00D77E53 /* Service.swift */; };
+		D2D449DC26A55BEA00D77E53 /* AppletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449DB26A55BEA00D77E53 /* AppletManager.swift */; };
+		D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449DD26A55C0000D77E53 /* ServiceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,11 +66,19 @@
 		D23FF0E025AD9C5600D755D9 /* BsFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BsFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundationTests.swift; sourceTree = "<group>"; };
 		D23FF0E425AD9C5600D755D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D247E2BC26A5AAFB00614D87 /* AVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVC.swift; sourceTree = "<group>"; };
+		D247E2BE26A7077600614D87 /* BVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BVC.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D27A8A982520AEAC006A6125 /* BsFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundation.swift; sourceTree = "<group>"; };
+		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
+		D298D2B226A7EC8C00A05ACF /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		D2C119DD26A8069E000C42C4 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
+		D2D449D726A5587000D77E53 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		D2D449D926A558AA00D77E53 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		D2D449DB26A55BEA00D77E53 /* AppletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletManager.swift; sourceTree = "<group>"; };
+		D2D449DD26A55C0000D77E53 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		D2F3DFA0269FD3D8006DB903 /* BsFoundationDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BsFoundationDemo.entitlements; sourceTree = "<group>"; };
-		D2FCEA6A25F9F779005EAA15 /* BsFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BsFoundation.podspec; sourceTree = SOURCE_ROOT; };
+		D2FCEA6A25F9F779005EAA15 /* BsFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BsFoundation.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D5C2F2360140B33361DA6AB8 /* Pods-BsFoundationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationDemo.debug.xcconfig"; path = "Target Support Files/Pods-BsFoundationDemo/Pods-BsFoundationDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +131,6 @@
 				642C892E32F1859B02CB8512 /* Pods-BsFoundationTests.debug.xcconfig */,
 				9B4F7FFA965B4F9C0116DBED /* Pods-BsFoundationTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -135,6 +150,8 @@
 				D23FF0C825AD9B5200D755D9 /* AppDelegate.swift */,
 				D23FF0CA25AD9B5200D755D9 /* SceneDelegate.swift */,
 				D23FF0CC25AD9B5200D755D9 /* ViewController.swift */,
+				D247E2BE26A7077600614D87 /* BVC.swift */,
+				D247E2BC26A5AAFB00614D87 /* AVC.swift */,
 				D23FF0CE25AD9B5200D755D9 /* Main.storyboard */,
 				D23FF0D125AD9B5500D755D9 /* Assets.xcassets */,
 				D23FF0D325AD9B5500D755D9 /* LaunchScreen.storyboard */,
@@ -186,7 +203,13 @@
 		D27A8A28252052BE006A6125 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D27A8A982520AEAC006A6125 /* BsFoundation.swift */,
+				D2D449D726A5587000D77E53 /* Context.swift */,
+				D27A8A982520AEAC006A6125 /* Applet.swift */,
+				D2D449DB26A55BEA00D77E53 /* AppletManager.swift */,
+				D2D449D926A558AA00D77E53 /* Service.swift */,
+				D2D449DD26A55C0000D77E53 /* ServiceManager.swift */,
+				D2C119DD26A8069E000C42C4 /* Manifest.swift */,
+				D298D2B226A7EC8C00A05ACF /* Debug.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -270,7 +293,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = BaldStudio;
 				TargetAttributes = {
 					D23FF0C525AD9B5200D755D9 = {
@@ -440,8 +463,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D247E2BF26A7077600614D87 /* BVC.swift in Sources */,
 				D23FF0CD25AD9B5200D755D9 /* ViewController.swift in Sources */,
 				D23FF0C925AD9B5200D755D9 /* AppDelegate.swift in Sources */,
+				D247E2BD26A5AAFB00614D87 /* AVC.swift in Sources */,
 				D23FF0CB25AD9B5200D755D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +483,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D27A8A992520AEAC006A6125 /* BsFoundation.swift in Sources */,
+				D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */,
+				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,
+				D298D2B326A7EC8C00A05ACF /* Debug.swift in Sources */,
+				D2D449D826A5587000D77E53 /* Context.swift in Sources */,
+				D2D449DA26A558AA00D77E53 /* Service.swift in Sources */,
+				D2D449DC26A55BEA00D77E53 /* AppletManager.swift in Sources */,
+				D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +548,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.com.bald-studio.BsFoundationDemo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bald-studio.BsFoundationDemo";
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -544,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.com.bald-studio.BsFoundationDemo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bald-studio.BsFoundationDemo";
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -629,6 +660,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -692,6 +724,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -747,7 +780,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.com.bald-studio.BsFoundation";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bald-studio.BsFoundation";
 				PRODUCT_MODULE_NAME = BsFoundation;
 				PRODUCT_NAME = BsFoundation;
 				SKIP_INSTALL = YES;
@@ -783,7 +816,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.com.bald-studio.BsFoundation";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bald-studio.BsFoundation";
 				PRODUCT_MODULE_NAME = BsFoundation;
 				PRODUCT_NAME = BsFoundation;
 				SKIP_INSTALL = YES;
