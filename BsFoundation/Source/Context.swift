@@ -32,7 +32,7 @@ public extension Context {
     
     static func start(applet id: String, closure: ((inout Context.Operation) -> Void)? = nil) {
         let app = shared.appletManager.find(appletBy: id, createIfNotExist: true)
-        guard let toApp = app else { BsLog.debug("未找到applet: \(id)");  return }
+        guard let toApp = app else { logger.debug("未找到applet: \(id)");  return }
         
         var param: Operation? = nil
         if let callout = closure {
@@ -77,8 +77,8 @@ public extension Context {
             toApp.didFinishLaunching(options: param?.options)
         }
         
-        BsLog.debug("当前应用栈\(shared.appletManager.applets)")
-        BsLog.debug("当前后台应用栈\(shared.appletManager.pendingApplets)")
+        logger.debug("当前应用栈\(shared.appletManager.applets)")
+        logger.debug("当前后台应用栈\(shared.appletManager.pendingApplets)")
 
     }
     
@@ -109,8 +109,8 @@ public extension Context {
 
         navigationController.popToViewController(toApp.controller, animated: animated)
         
-        BsLog.debug("当前应用栈\(shared.appletManager.applets)")
-        BsLog.debug("当前后台应用栈\(shared.appletManager.pendingApplets)")
+        logger.debug("当前应用栈\(shared.appletManager.applets)")
+        logger.debug("当前后台应用栈\(shared.appletManager.pendingApplets)")
     }
     
 }

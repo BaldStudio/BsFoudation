@@ -62,8 +62,8 @@ class AppletManager: Service {
         
         applet.didFinishLaunching()
         
-        BsLog.debug("当前应用栈\(applets)")
-        BsLog.debug("当前后台应用栈\(pendingApplets)")
+        logger.debug("当前应用栈\(applets)")
+        logger.debug("当前后台应用栈\(pendingApplets)")
     }
     
     func pop() {
@@ -71,7 +71,7 @@ class AppletManager: Service {
             fatalError()
         }
         
-        BsLog.debug("退出当前应用\(app)")
+        logger.debug("退出当前应用\(app)")
                 
         applets.removeLast()
         if (app.shouldTerminate) {
@@ -84,8 +84,8 @@ class AppletManager: Service {
 
         lastAppet?.willEnterForeground()
         
-        BsLog.debug("当前应用栈\(applets)")
-        BsLog.debug("当前后台应用栈\(pendingApplets)")
+        logger.debug("当前应用栈\(applets)")
+        logger.debug("当前后台应用栈\(pendingApplets)")
     }
 
 }

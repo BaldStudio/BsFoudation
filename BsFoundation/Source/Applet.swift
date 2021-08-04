@@ -10,7 +10,7 @@ import UIKit
 
 open class Applet {
     deinit {
-        BsLog.debug("销毁 \(manifest.name)")
+        logger.debug("销毁 \(manifest.name)")
     }
     
     var controller = _AppletController()
@@ -34,7 +34,7 @@ open class Applet {
     }
     
     public required init() {
-        BsLog.debug("初始化 \(manifest.name)")
+        logger.debug("初始化 \(manifest.name)")
     }
         
     open var manifest: Manifest {
@@ -46,23 +46,23 @@ open class Applet {
     }
     
     open func willFinishLaunching(options: [String: Any]? = nil) {
-        BsLog.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) ++++ " + "\(#function)")
     }
 
     open func didFinishLaunching(options: [String: Any]? = nil) {
-        BsLog.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) ++++ " + "\(#function)")
     }
      
     open func didEnterBackground() {
-        BsLog.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) ++++ " + "\(#function)")
     }
 
     open func willEnterForeground() {
-        BsLog.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) ++++ " + "\(#function)")
     }
     
     open func willTerminate() {
-        BsLog.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) ++++ " + "\(#function)")
     }
 
 }
@@ -97,20 +97,20 @@ class _AppletController: UIViewController {
     func onTransition() {
         transitionCoordinator?.animate(alongsideTransition: nil, completion: { (ctx) in
             // toVC和当前vc所属app不同 且当前vc的app不为空 那么 需要进行app栈信息同步
-            guard !ctx.isCancelled else { BsLog.debug("取消手势操作"); return }
-            guard ctx.presentationStyle != .none else { BsLog.debug("是 push/pop 行为"); return }
+            guard !ctx.isCancelled else { logger.debug("取消手势操作"); return }
+            guard ctx.presentationStyle != .none else { logger.debug("是 push/pop 行为"); return }
 
-            guard let curApp = self.applet else { BsLog.debug("\(self)所属的applet为空"); return }
+            guard let curApp = self.applet else { logger.debug("\(self)所属的applet为空"); return }
             var toVC = ctx.viewController(forKey: .to)
             if toVC is UINavigationController {
                 toVC = toVC?.children.last
             }
-            guard let toApp = toVC!.applet else { BsLog.debug("\(toVC!)所属的app为空"); return }
+            guard let toApp = toVC!.applet else { logger.debug("\(toVC!)所属的app为空"); return }
             
-            BsLog.debug("vc所属的app为\(curApp.manifest.name)")
-            BsLog.debug("toVC所属的app为\(toApp.manifest.name)")
+            logger.debug("vc所属的app为\(curApp.manifest.name)")
+            logger.debug("toVC所属的app为\(toApp.manifest.name)")
             if toApp != curApp && Context.currentApplet == curApp {
-                BsLog.debug("触发app栈同步，栈当前应用\(curApp.manifest.name)")
+                logger.debug("触发app栈同步，栈当前应用\(curApp.manifest.name)")
                 Context.shared.appletManager.pop()
             }
         })
@@ -121,7 +121,7 @@ class _AppletController: UIViewController {
             let nav = Context.navigationController
             let topvc = nav.children.last!
             if topvc.applet != nil, topvc.applet != Context.currentApplet {
-                BsLog.debug("触发app栈同步，出栈当前应用\(Context.currentApplet!.manifest.name)")
+                logger.debug("触发app栈同步，出栈当前应用\(Context.currentApplet!.manifest.name)")
                 Context.shared.appletManager.pop()
             }
         }
@@ -155,7 +155,7 @@ extension UIViewController {
     }
     var applet: Applet? {
         set {
-            BsLog.debug("\(self) 绑定至Applet \(newValue!.manifest.name)")
+            logger.debug("\(self) 绑定至Applet \(newValue!.manifest.name)")
             objc_setAssociatedObject(self,
                                      &AppletReferenceKey,
                                      WeakReference(newValue),
