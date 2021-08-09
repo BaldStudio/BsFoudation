@@ -13,33 +13,33 @@ open class Applet {
         logger.debug("销毁 \(manifest.name)")
     }
     
-    var controller = _AppletController()
+    public required init() {
         
-    public internal(set) var state: State = .normal
+    }
 
+    var launched = false
+    
+    var root = AppletController()
+            
     public var content: UIViewController? {
         willSet {
             guard let vc = newValue else {
-                content?.willMove(toParent: nil)
-                content?.removeFromParent()
-                content?.view.removeFromSuperview()
+                if let child = content {
+                    child.willMove(toParent: nil)
+                    child.removeFromParent()
+                    child.view.removeFromSuperview()
+                }
                 return
             }
             
-            controller.applet = self
-            controller.addChild(vc)
-            controller.view.addSubview(vc.view)
-            vc.didMove(toParent: controller)
+            root.applet = self
+            root.addChild(vc)
+            root.view.addSubview(vc.view)
+            vc.didMove(toParent: root)
         }
     }
-    
-    public required init() {
-        logger.debug("初始化 \(manifest.name)")
-    }
         
-    open var manifest: Manifest {
-        fatalError("子类必须实现manifest内容")
-    }
+    public internal(set) var manifest: Manifest!
     
     open var shouldTerminate: Bool {
         true
@@ -64,14 +64,13 @@ open class Applet {
     open func willTerminate() {
         logger.debug("\(manifest.name) ++++ " + "\(#function)")
     }
-
-}
-
-public extension Applet {
-    enum State {
-        case normal
-        case pending
+    
+    open class var bundle: Bundle? {
+        let path = Bundle.main.path(forResource: NSStringFromClass(Self.self).components(separatedBy: ".").first,
+                                    ofType: "bundle")
+        return Bundle(path: path ?? "")
     }
+
 }
 
 extension Applet: Equatable {
@@ -82,88 +81,110 @@ extension Applet: Equatable {
 
 extension Applet: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
-        let addr = unsafeBitCast(self, to: Int.self)
-        return String(format: "<name: \(manifest.name) %p version: \(manifest.version) >", addr)
+        String(format: "<name: \(manifest.name) version: \(manifest.version) >")
     }
     
     public var debugDescription: String {
-        let addr = unsafeBitCast(self, to: Int.self)
-        return String(format: "<name: \(manifest.name) %p version: \(manifest.version) >", addr)
+//        let addr = unsafeBitCast(self, to: Int.self)
+//        return String(format: "<name: \(manifest.name) %p version: \(manifest.version) >", addr)
+        String(format: "<name: \(manifest.name)>")
     }
 }
 
-class _AppletController: UIViewController {
+class AppletController: UIViewController {
+    weak var applet: Applet?
     
-    func onTransition() {
-        transitionCoordinator?.animate(alongsideTransition: nil, completion: { (ctx) in
-            // toVC和当前vc所属app不同 且当前vc的app不为空 那么 需要进行app栈信息同步
-            guard !ctx.isCancelled else { logger.debug("取消手势操作"); return }
-            guard ctx.presentationStyle != .none else { logger.debug("是 push/pop 行为"); return }
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        transition()
+    }
 
-            guard let curApp = self.applet else { logger.debug("\(self)所属的applet为空"); return }
-            var toVC = ctx.viewController(forKey: .to)
-            if toVC is UINavigationController {
-                toVC = toVC?.children.last
+    public override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        transition(from: parent)
+    }
+    
+    
+    func transition() {
+        guard let trasnCoor = transitionCoordinator else {
+            logger.debug("transitionCoordinator is nil；ARE YOU KIDDING ME?")
+            return
+        }
+        
+        trasnCoor.animate(alongsideTransition: nil) {
+            if ($0.isCancelled) {
+                logger.debug("取消 -= 滑动返回 =- 操作")
+                return
             }
-            guard let toApp = toVC!.applet else { logger.debug("\(toVC!)所属的app为空"); return }
             
-            logger.debug("vc所属的app为\(curApp.manifest.name)")
-            logger.debug("toVC所属的app为\(toApp.manifest.name)")
-            if toApp != curApp && Context.currentApplet == curApp {
-                logger.debug("触发app栈同步，栈当前应用\(curApp.manifest.name)")
-                Context.shared.appletManager.pop()
+            if $0.presentationStyle == .none {
+                logger.debug("是 push/pop 行为")
+                return
             }
-        })
+            
+            // 处理Modal视图控制器的行为
+            guard let fromApplet = self.applet else {
+                logger.debug("\(self)所属的applet为nil")
+                return
+            }
+            
+            guard let vc = $0.viewController(forKey: .to) else {
+                logger.debug("转场的目标控制器为nil")
+                return
+            }
+            
+            guard vc is AppletController else {
+                logger.debug("不是 AppletController, 无需切换 Applet")
+                return
+            }
+            
+            let toVC = vc as! AppletController
+                        
+            guard let toApplet = toVC.applet else {
+                logger.debug("\(self)所属的applet为nil")
+                return
+            }
+            
+            logger.debug("from \(fromApplet.manifest.name)")
+            logger.debug("to \(toApplet.manifest.name)")
+            
+            if Context.currentApplet == fromApplet {
+                logger.debug("更新Applet栈数据，当前栈顶 \(fromApplet.manifest.name)")
+                Context.appletManager.pop()
+            }
+        }
     }
     
     func transition(from parent: UIViewController?) {
         if parent == nil { // remove
             let nav = Context.navigationController
-            let topvc = nav.children.last!
-            if topvc.applet != nil, topvc.applet != Context.currentApplet {
-                logger.debug("触发app栈同步，出栈当前应用\(Context.currentApplet!.manifest.name)")
-                Context.shared.appletManager.pop()
+            guard let vc = nav.topViewController else {
+                logger.debug("导航栈是空的")
+                return
             }
-        }
-        
-//        else if let app = self.applet {
-//            BsLog.debug("触发app栈同步，入栈当前应用\(Context.currentApplet)")
-//            Context.shared.appletManager.push(applet: app)
-//        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        onTransition()
-    }
+            
+            guard vc is AppletController else {
+                logger.debug("不是 AppletController")
+                if let topApplet = Context.currentApplet {
+                    /*
+                     前置的是普通ViewController，不是Applet根视图
+                     所以栈同步需要放在这里去做掉
+                    */
+                    logger.debug("更新Applet栈数据，当前栈顶 \(topApplet.manifest.name)")
+                    Context.appletManager.pop()
+                }
+                return
+            }
+            
+            let toVC = vc as! AppletController
+            
+            guard let toApplet = toVC.applet else {
+                logger.debug("\(self)所属的applet为nil")
+                return
+            }
 
-    override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
-        transition(from: parent)
-    }
-    
-}
-
-var AppletReferenceKey = "com.bald-studio.viewController.AppletReferenceKey"
-
-extension UIViewController {
-    struct WeakReference {
-        weak var rawValue: Applet?
-        init(_ rawValue: Applet?) {
-            self.rawValue = rawValue
-        }
-    }
-    var applet: Applet? {
-        set {
-            logger.debug("\(self) 绑定至Applet \(newValue!.manifest.name)")
-            objc_setAssociatedObject(self,
-                                     &AppletReferenceKey,
-                                     WeakReference(newValue),
-                                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-        get {
-            let ref = objc_getAssociatedObject(self, &AppletReferenceKey) as? WeakReference
-            return ref?.rawValue
+            logger.debug("更新Applet栈数据，当前栈顶 \(toApplet.manifest.name)")
+            Context.appletManager.pop()
         }
     }
 }
