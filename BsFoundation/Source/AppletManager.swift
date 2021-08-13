@@ -10,6 +10,7 @@ import UIKit
 
 class AppletManager: Service {
     var applets: ContiguousArray<Applet> = []
+    /// TODO: 改成集合类型
     var residentApplets: ContiguousArray<Applet> = []
 
     var manifestsById: [String: Manifest] = [:]
@@ -25,6 +26,8 @@ class AppletManager: Service {
             return nil
         }
         
+        cls.bundleName = manifest.name.components(separatedBy: ".").first ?? ""
+        logger.debug("当前 Appelt 所属BundleName：\(cls.bundleName)")
         let applet = cls.init()
         applet.manifest = manifest
         if !applet.shouldTerminate {
@@ -34,7 +37,7 @@ class AppletManager: Service {
         return applet
     }
     
-    func lookup(appletBy id: String) -> Applet? {
+    func lookup(applet id: String) -> Applet? {
         for app in applets {
             if let m = app.manifest, m.id == id {
                 return app
@@ -57,7 +60,26 @@ class AppletManager: Service {
     }
     
     @discardableResult
-    func pop() -> Applet? {
+    func pop(to target: Applet? = nil) -> Applet? {
+        if let target = target {
+            for a in applets.reversed() {
+                if a == target {
+                    target.willEnterForeground()
+                    return target
+                }
+                
+                if (a.shouldTerminate) {
+                    a.willTerminate()
+                }
+                else {
+                    a.didEnterBackground()
+                }
+                applets.removeLast()
+            }
+            
+            return target
+        }
+        
         guard let applet = lastAppet else {
             logger.debug("当前应用栈\(applets)是空的啊")
             return nil
@@ -89,7 +111,7 @@ class AppletManager: Service {
 }
 
 extension AppletManager {
-    func lookup(residentAppletBy id: String) -> Applet? {
+    func lookup(residentApplet id: String) -> Applet? {
         for app in residentApplets {
             if let m = app.manifest, m.id == id {
                 return app

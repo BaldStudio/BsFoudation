@@ -46,29 +46,29 @@ open class Applet {
     }
     
     open func willFinishLaunching(options: [String: Any]? = nil) {
-        logger.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) \(#function)")
     }
 
     open func didFinishLaunching(options: [String: Any]? = nil) {
-        logger.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) \(#function)")
     }
      
     open func didEnterBackground() {
-        logger.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) \(#function)")
     }
 
     open func willEnterForeground() {
-        logger.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) \(#function)")
     }
     
     open func willTerminate() {
-        logger.debug("\(manifest.name) ++++ " + "\(#function)")
+        logger.debug("\(manifest.name) \(#function)")
     }
     
+    public static var bundleName: String = ""
+    
     open class var bundle: Bundle? {
-        let path = Bundle.main.path(forResource: NSStringFromClass(Self.self).components(separatedBy: ".").first,
-                                    ofType: "bundle")
-        return Bundle(path: path ?? "")
+        Bundle(path: Bundle.main.path(forResource: bundleName, ofType: "bundle") ?? "")
     }
 
 }
@@ -87,7 +87,7 @@ extension Applet: CustomStringConvertible, CustomDebugStringConvertible {
     public var debugDescription: String {
 //        let addr = unsafeBitCast(self, to: Int.self)
 //        return String(format: "<name: \(manifest.name) %p version: \(manifest.version) >", addr)
-        String(format: "<name: \(manifest.name)>")
+        String(format: "\(manifest.name)")
     }
 }
 
@@ -118,7 +118,7 @@ class AppletController: UIViewController {
             }
             
             if $0.presentationStyle == .none {
-                logger.debug("是 push/pop 行为")
+                logger.debug("转场类型为 push/pop")
                 return
             }
             

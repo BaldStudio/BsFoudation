@@ -14,27 +14,29 @@ let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
 public let BsApp = UIApplication.shared
 
 // FIXME: 暂时忽略UIScene的情况
-public let BsWindow = BsApp.delegate!.window!!
+public private(set) var BsWindow: UIWindow!
 
 public struct Bootstrap {
     public static func start(inital delegate: UIApplicationDelegate,
-                             navigationController: UINavigationController,
+                             principal rootClass: UIViewController.Type,
                              _ filePath: String? = nil) {
+        loadApplets(filePath)
+        
         let win = UIWindow(frame: UIScreen.main.bounds)
+        BsWindow = win
         if let delegate = delegate as? NSObject {
             delegate.setValue(win, forKey: "window")
         }
         
         win.backgroundColor = .white
         win.makeKeyAndVisible()
-        win.rootViewController = navigationController
-        Context.navigationController = navigationController
+        win.rootViewController = rootClass.init()
         
-        loadApplets(filePath)
     }
     
     private static func loadApplets(_ filePath: String? = nil) {
-        guard let path = filePath ?? Bundle.main.path(forResource: "AppletRoutine",  ofType: "plist"),
+        guard let path = filePath ?? Bundle.main.path(forResource: "AppletRoutine",
+                                                      ofType: "plist"),
               let xml = FileManager.default.contents(atPath: path)
         else { fatalError("路由数据路径识别失败") }
         

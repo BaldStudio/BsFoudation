@@ -20,7 +20,7 @@ public struct Context: Service {
 
 public extension Context {
     
-    static var navigationController = UINavigationController()
+    static var navigationController = NavigationController()
     
     static var currentApplet: Applet? {
         appletManager.lastAppet
@@ -38,7 +38,7 @@ public extension Context {
     
     @discardableResult
     static func start(applet id: String, closure: ((inout Context.Operation) -> Void)? = nil) -> Applet? {
-        let app = lookup(appletBy: id) ?? appletManager.create(by: id)
+        let app = lookup(applet: id) ?? appletManager.create(by: id)
         guard let toApp = app else { logger.debug("未找到applet: \(id)");  return nil }
         
         var param: Operation? = nil
@@ -58,9 +58,9 @@ public extension Context {
                 
         appletManager.add(toApp)
                 
-        if let p = param, p.mode != Mode.none {
-            let animated = p.animated ?? true
-            CATransaction.setCompletionBlock(p.completion)
+        if param?.mode != Mode.none {
+            let animated = param?.animated ?? true
+            CATransaction.setCompletionBlock(param?.completion)
             CATransaction.begin()
             navigationController.pushViewController(toApp.root, animated: animated)
             CATransaction.commit()
@@ -83,7 +83,7 @@ public extension Context {
     }
     
     @discardableResult
-    static func exitApp(_ id: String? = nil, closure: ((inout Operation) -> Void)? = nil) -> Applet? {
+    static func exit(toApplet id: String? = nil, closure: ((inout Operation) -> Void)? = nil) -> Applet? {
         
         var param: Operation? = nil
         if let callout = closure {
@@ -94,49 +94,39 @@ public extension Context {
         let animated = param?.animated ?? true
         
         if id == nil || id?.count == 0 {
-            if let p = param {
-                if p.mode == Mode.none {
-                    p.completion?()
-                }
-                else {
-                    CATransaction.setCompletionBlock(p.completion)
-                    CATransaction.begin()
-                    navigationController.popViewController(animated: animated)
-                    CATransaction.commit()
-                }
+            if param?.mode == Mode.none {
+                param?.completion?()
+            }
+            else {
+                CATransaction.setCompletionBlock(param?.completion)
+                CATransaction.begin()
+                navigationController.popViewController(animated: animated)
+                CATransaction.commit()
             }
             return appletManager.pop()
         }
 
-        guard let toApp = lookup(appletBy: id!) else { return nil }
+        guard let target = lookup(applet: id!) else { return nil }
         
-        toApp.willEnterForeground()
-        for vc in navigationController.children.reversed() {
-            if vc is AppletController, vc != toApp.root  {
-                appletManager.pop()
-            }
+        appletManager.pop(to: target)
+        
+        if param?.mode == Mode.none {
+            param?.completion?()
         }
-
-        if let p = param {
-            if p.mode == Mode.none {
-                p.completion?()
-
-            }
-            else {
-                CATransaction.setCompletionBlock(p.completion)
-                CATransaction.begin()
-                navigationController.popToViewController(toApp.root, animated: animated)
-                CATransaction.commit()
-            }
+        else {
+            CATransaction.setCompletionBlock(param?.completion)
+            CATransaction.begin()
+            navigationController.popToViewController(target.root, animated: animated)
+            CATransaction.commit()
         }
 
         logger.debug("当前应用栈\(appletManager.applets)")
         logger.debug("当前后台应用栈\(appletManager.residentApplets)")
-        return toApp
+        return target
     }
     
-    static func lookup(appletBy id: String) -> Applet? {
-        appletManager.lookup(appletBy: id) ?? appletManager.lookup(residentAppletBy: id)
+    static func lookup(applet id: String) -> Applet? {
+        appletManager.lookup(applet: id) ?? appletManager.lookup(residentApplet: id)
     }
 
 }
