@@ -9,6 +9,7 @@
 import UIKit
 
 public struct Context: Service {
+    
     static let appletManager = AppletManager()
 
     init() {
@@ -20,7 +21,8 @@ public struct Context: Service {
 
 public extension Context {
     
-    static var navigationController = NavigationController()
+    static var tabBarController: TabBarController!
+    static var navigationController: NavigationController!
     
     static var currentApplet: Applet? {
         appletManager.lastAppet

@@ -21,17 +21,23 @@ public struct Bootstrap {
                              principal rootClass: UIViewController.Type,
                              _ filePath: String? = nil) {
         loadApplets(filePath)
-        
-        let win = UIWindow(frame: UIScreen.main.bounds)
-        BsWindow = win
-        if let delegate = delegate as? NSObject {
-            delegate.setValue(win, forKey: "window")
+
+        guard let delegate = delegate as? NSObject else {
+            return
         }
         
-        win.backgroundColor = .white
-        win.makeKeyAndVisible()
-        win.rootViewController = rootClass.init()
+        var win = delegate.value(forKey: "window") as? UIWindow
+        if win == nil {
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            delegate.setValue(window, forKey: "window")
+            window.backgroundColor = .white
+            window.makeKeyAndVisible()
+            win = window
+        }
         
+        BsWindow = win
+        win!.rootViewController = rootClass.init()
+
     }
     
     private static func loadApplets(_ filePath: String? = nil) {

@@ -9,11 +9,13 @@
 import UIKit
 
 open class NavigationController: UINavigationController {
-
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    open func push(_ viewController: UIViewController) {
+        pushViewController(viewController, animated: true)
     }
     
+    open func pop() -> UIViewController? {
+        popViewController(animated: true)
+    }
+
 }

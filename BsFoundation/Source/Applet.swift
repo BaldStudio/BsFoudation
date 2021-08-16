@@ -157,8 +157,7 @@ class AppletController: UIViewController {
     
     func transition(from parent: UIViewController?) {
         if parent == nil { // remove
-            let nav = Context.navigationController
-            guard let vc = nav.topViewController else {
+            guard let vc = Context.navigationController.topViewController else {
                 logger.debug("导航栈是空的")
                 return
             }
