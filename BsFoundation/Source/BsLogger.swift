@@ -30,7 +30,7 @@ public final class BsLogger {
     /// 日志文件的路径
     public let filePath: String
     
-    /// 哪种级别的日志需要写到本地，默认 none
+    /// 设置哪种级别的日志需要写到本地，默认 none
     public var persistentLevel: Level
         
     /// 当前可输出的日志类型，默认 verbose
@@ -173,7 +173,7 @@ extension BsLogger {
         }
         
         guard let content = ("\n" + string).data(using: .utf8) else {
-            print("日志内容转码失败，UTF8，\(string)")
+            print("【UTF8】日志内容编码失败\(string)")
             return
         }
          

@@ -37,14 +37,14 @@ public extension Context {
     }
     
     @discardableResult
-    static func start(applet id: String, closure: ((inout Context.Operation) -> Void)? = nil) -> Applet? {
+    static func start(applet id: String, closure: ((inout Option) -> Void)? = nil) -> Applet? {
         let app = lookup(applet: id) ?? appletManager.create(by: id)
         guard let toApp = app else { logger.debug("未找到applet: \(id)");  return nil }
         
-        var param: Operation? = nil
+        var options: Option? = nil
         if let callout = closure {
-            param = Operation()
-            callout(&(param!))
+            options = Option()
+            callout(&(options!))
         }
         
         let fromApp = appletManager.lastAppet
@@ -53,14 +53,14 @@ public extension Context {
             toApp.willEnterForeground()
         }
         else {
-            toApp.willFinishLaunching(options: param?.options)
+            toApp.willFinishLaunching(options: options?.params)
         }
                 
         appletManager.add(toApp)
                 
-        if param?.mode != Mode.none {
-            let animated = param?.animated ?? true
-            CATransaction.setCompletionBlock(param?.completion)
+        if options?.mode != Mode.none {
+            let animated = options?.animated ?? true
+            CATransaction.setCompletionBlock(options?.completion)
             CATransaction.begin()
             navigationController.pushViewController(toApp.root, animated: animated)
             CATransaction.commit()
@@ -69,12 +69,12 @@ public extension Context {
         fromApp?.didEnterBackground()
         
         if !toApp.launched {
-            toApp.didFinishLaunching(options: param?.options)
+            toApp.didFinishLaunching(options: options?.params)
             toApp.launched = true
         }
         
-        if param?.mode == Mode.none {
-            param?.completion?()
+        if options?.mode == Mode.none {
+            options?.completion?()
         }
         
         logger.debug("当前应用栈\(appletManager.applets)")
@@ -83,22 +83,22 @@ public extension Context {
     }
     
     @discardableResult
-    static func exit(toApplet id: String? = nil, closure: ((inout Operation) -> Void)? = nil) -> Applet? {
+    static func exit(toApplet id: String? = nil, closure: ((inout Option) -> Void)? = nil) -> Applet? {
         
-        var param: Operation? = nil
+        var options: Option? = nil
         if let callout = closure {
-            param = Operation()
-            callout(&(param!))
+            options = Option()
+            callout(&(options!))
         }
 
-        let animated = param?.animated ?? true
+        let animated = options?.animated ?? true
         
         if id == nil || id?.count == 0 {
-            if param?.mode == Mode.none {
-                param?.completion?()
+            if options?.mode == Mode.none {
+                options?.completion?()
             }
             else {
-                CATransaction.setCompletionBlock(param?.completion)
+                CATransaction.setCompletionBlock(options?.completion)
                 CATransaction.begin()
                 navigationController.popViewController(animated: animated)
                 CATransaction.commit()
@@ -110,11 +110,11 @@ public extension Context {
         
         appletManager.pop(to: target)
         
-        if param?.mode == Mode.none {
-            param?.completion?()
+        if options?.mode == Mode.none {
+            options?.completion?()
         }
         else {
-            CATransaction.setCompletionBlock(param?.completion)
+            CATransaction.setCompletionBlock(options?.completion)
             CATransaction.begin()
             navigationController.popToViewController(target.root, animated: animated)
             CATransaction.commit()
@@ -137,9 +137,9 @@ public extension Context {
         case navigate
     }
     
-    struct Operation {
+    struct Option {
         public var mode: Mode = .navigate
-        public var options: [String: Any]? = nil
+        public var params: [String: Any]? = nil
         public var animated: Bool? = true
         public var completion: (() -> Void)? = nil
     }
