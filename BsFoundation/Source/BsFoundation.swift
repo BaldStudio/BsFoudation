@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BsLogger
 
 let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
                       category: "BsFoundation")

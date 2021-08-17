@@ -13,5 +13,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "13.0"
   s.ios.source_files = 'BsFoundation/Source/**/*'
-
+  
+  s.ios.dependency 'BsLogger'
+  
 end
