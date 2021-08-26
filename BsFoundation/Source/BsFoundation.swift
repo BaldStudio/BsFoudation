@@ -15,7 +15,34 @@ let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
 public let BsApp = UIApplication.shared
 
 // FIXME: 暂时忽略UIScene的情况
-public private(set) var BsWindow: UIWindow!
+private var _BsWindow: UIWindow!
+public var BsWindow: UIWindow {
+    guard _BsWindow == nil else {
+        return _BsWindow
+    }
+    
+    var win = BsApp.delegate?.window
+    if win != nil {
+        _BsWindow = win!
+        return _BsWindow
+    }
+    
+    win = BsApp.windows.first
+    if win != nil {
+        _BsWindow = win!
+        return _BsWindow
+    }
+    
+    if let scene = BsApp.connectedScenes.first as? UIWindowScene {
+        win = scene.windows.first
+        if win != nil {
+            _BsWindow = win!
+            return _BsWindow
+        }
+    }
+    
+    fatalError("Can not fina main window")
+}
 
 public struct Bootstrap {
     public static func start(inital delegate: UIApplicationDelegate,
@@ -36,7 +63,7 @@ public struct Bootstrap {
             win = window
         }
         
-        BsWindow = win
+        _BsWindow = win
         win!.rootViewController = rootClass.init()
 
     }

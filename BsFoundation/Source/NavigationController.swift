@@ -9,7 +9,7 @@
 import UIKit
 
 open class NavigationController: UINavigationController {
-    
+        
     open func push(_ viewController: UIViewController) {
         pushViewController(viewController, animated: true)
     }
