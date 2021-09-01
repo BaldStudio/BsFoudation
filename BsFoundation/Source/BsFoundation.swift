@@ -14,7 +14,6 @@ let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
 
 public let BsApp = UIApplication.shared
 
-// FIXME: 暂时忽略UIScene的情况
 private var _BsWindow: UIWindow!
 public var BsWindow: UIWindow {
     guard _BsWindow == nil else {
