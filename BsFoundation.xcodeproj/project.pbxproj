@@ -43,6 +43,7 @@
 		D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */; };
 		D26FC64126E0AF8C003B9F11 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63426E0AF8C003B9F11 /* UIColor.swift */; };
 		D26FC64226E0AF8C003B9F11 /* Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63526E0AF8C003B9F11 /* Closure.swift */; };
+		D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */; };
 		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
 		D2BDAEFF26C54F9C003C0DC7 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAEFE26C54F9C003C0DC7 /* NavigationController.swift */; };
 		D2BDAF2626C6498C003C0DC7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAF2526C6498C003C0DC7 /* TabBarController.swift */; };
@@ -115,6 +116,7 @@
 		D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUI.swift; sourceTree = "<group>"; };
 		D26FC63426E0AF8C003B9F11 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D26FC63526E0AF8C003B9F11 /* Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closure.swift; sourceTree = "<group>"; };
+		D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsHapticEngine.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		D26FC60726E0AE75003B9F11 /* CoreUI */ = {
 			isa = PBXGroup;
 			children = (
+				D26FC64326E0B42F003B9F11 /* BsHapticEngine */,
 				D26FC60926E0AE93003B9F11 /* BsListKit */,
 				D26FC60826E0AE8B003B9F11 /* ViewControllers */,
 			);
@@ -307,6 +310,14 @@
 			path = SwiftPlus;
 			sourceTree = "<group>";
 		};
+		D26FC64326E0B42F003B9F11 /* BsHapticEngine */ = {
+			isa = PBXGroup;
+			children = (
+				D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */,
+			);
+			path = BsHapticEngine;
+			sourceTree = "<group>";
+		};
 		D27A8A1325203F1A006A6125 = {
 			isa = PBXGroup;
 			children = (
@@ -371,7 +382,6 @@
 				D23FF0C225AD9B5200D755D9 /* Sources */,
 				D23FF0C325AD9B5200D755D9 /* Frameworks */,
 				D23FF0C425AD9B5200D755D9 /* Resources */,
-				927DB2457385748A9D1514A4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -391,7 +401,6 @@
 				D23FF0DC25AD9C5600D755D9 /* Sources */,
 				D23FF0DD25AD9C5600D755D9 /* Frameworks */,
 				D23FF0DE25AD9C5600D755D9 /* Resources */,
-				511F1902C92CF149814FD472 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -412,7 +421,6 @@
 				D27A8A1925203F1A006A6125 /* Sources */,
 				D27A8A1A25203F1A006A6125 /* Frameworks */,
 				D27A8A1B25203F1A006A6125 /* Resources */,
-				596F1B67BDF6765D1464F6F3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -515,40 +523,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		511F1902C92CF149814FD472 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		596F1B67BDF6765D1464F6F3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BsFoundation/Pods-BsFoundation-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BsFoundation/Pods-BsFoundation-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BsFoundation/Pods-BsFoundation-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		738E67DA60D8F2E869EC1251 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -569,23 +543,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		927DB2457385748A9D1514A4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BsFoundationDemo/Pods-BsFoundationDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BsFoundationDemo/Pods-BsFoundationDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BsFoundationDemo/Pods-BsFoundationDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A474A59FD371E853A4E7603A /* [CP] Check Pods Manifest.lock */ = {
@@ -666,6 +623,7 @@
 				D26FC61C26E0AEA7003B9F11 /* BsListKit.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
 				D26FC61926E0AEA7003B9F11 /* CollectionView+Item.swift in Sources */,
+				D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
 				D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */,
 			);
