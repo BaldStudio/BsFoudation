@@ -7,7 +7,6 @@ use_frameworks!
 
 target 'BsFoundation' do
 
-  pod 'BsLogger', :git => 'git@github.com:BaldStudio/BsLogger.git'
   
 end
 
