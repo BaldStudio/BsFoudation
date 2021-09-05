@@ -73,7 +73,7 @@ extension CollectionView {
         open var minimumLineSpacing: CGFloat = 0
         open var minimumInteritemSpacing: CGFloat = 0
 
-        //MARK: - Section Header
+        // MARK: - Section Header
         open var headerSize: CGSize = .zero
         
         open var headerClass: AnyClass = UICollectionReusableView.self
@@ -112,7 +112,7 @@ extension CollectionView {
 
         }
 
-        //MARK: - Section Footer
+        // MARK: - Section Footer
         open var footerSize: CGSize = .zero
         
         open var footerClass: AnyClass = UICollectionReusableView.self
@@ -147,7 +147,7 @@ extension CollectionView {
 
         }
         
-        //MARK: - Closure
+        // MARK: - Closure
 
         public var updateHeaderView: ((UICollectionReusableView?, IndexPath) -> UICollectionReusableView)?
         public var willDisplayHeaderView: ((UICollectionReusableView, IndexPath) -> Void)?

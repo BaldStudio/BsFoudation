@@ -45,13 +45,19 @@ open class TableView: UITableView {
     }
     
     open override var delegate: UITableViewDelegate? {
-        didSet {
-            guard let d = delegate else { return }
+        set {            
+            if newValue == nil {
+                super.delegate = nil
+                return
+            }
             
-            if !(d is Proxy) {
-                proxy.target = d
+            if !(newValue is Proxy) {
+                proxy.target = newValue
             }
             super.delegate = proxy
+        }
+        get {
+            super.delegate
         }
     }
 

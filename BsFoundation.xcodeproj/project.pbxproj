@@ -44,6 +44,7 @@
 		D26FC64126E0AF8C003B9F11 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63426E0AF8C003B9F11 /* UIColor.swift */; };
 		D26FC64226E0AF8C003B9F11 /* Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63526E0AF8C003B9F11 /* Closure.swift */; };
 		D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */; };
+		D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64C26E20924003B9F11 /* Runtime.swift */; };
 		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
 		D2BDAEFF26C54F9C003C0DC7 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAEFE26C54F9C003C0DC7 /* NavigationController.swift */; };
 		D2BDAF2626C6498C003C0DC7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAF2526C6498C003C0DC7 /* TabBarController.swift */; };
@@ -117,6 +118,7 @@
 		D26FC63426E0AF8C003B9F11 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D26FC63526E0AF8C003B9F11 /* Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closure.swift; sourceTree = "<group>"; };
 		D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsHapticEngine.swift; sourceTree = "<group>"; };
+		D26FC64C26E20924003B9F11 /* Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				D26FC63426E0AF8C003B9F11 /* UIColor.swift */,
 				D26FC62926E0AF8B003B9F11 /* UIImage.swift */,
 				D26FC63126E0AF8C003B9F11 /* UIView.swift */,
+				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 			);
 			path = SwiftPlus;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				D26FC63E26E0AF8C003B9F11 /* UIView.swift in Sources */,
 				D26FC62126E0AEA7003B9F11 /* TableView+DataSource.swift in Sources */,
 				D26FC61A26E0AEA7003B9F11 /* CollectionView+Section.swift in Sources */,
+				D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */,
 				D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */,
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,

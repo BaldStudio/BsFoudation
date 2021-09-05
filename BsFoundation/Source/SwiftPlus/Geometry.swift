@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - Point
+// MARK: - Point
 
 public extension CGPoint {
     static func + (left: CGPoint, right: CGPoint) -> CGPoint {
@@ -48,7 +48,7 @@ public extension CGPoint {
 
 }
 
-//MARK: - Size
+// MARK: - Size
 
 public extension CGSize {
     static func + (left: CGSize, right: CGSize) -> CGSize {

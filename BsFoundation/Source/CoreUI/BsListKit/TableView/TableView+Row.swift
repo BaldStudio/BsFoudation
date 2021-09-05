@@ -62,7 +62,7 @@ extension TableView {
             didSelectRow?(indexPath)
         }
         
-        //MARK: - Closure
+        // MARK: - Closure
         
         public var updateCell: ((UITableViewCell, IndexPath) -> UITableViewCell)?
         public var didSelectRow: ((IndexPath) -> Void)?

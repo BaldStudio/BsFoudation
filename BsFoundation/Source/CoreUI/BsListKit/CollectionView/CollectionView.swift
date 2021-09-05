@@ -9,7 +9,7 @@
 import UIKit
 
 open class CollectionView: UICollectionView {
-    private var proxy: CollectionViewProxy? = CollectionViewProxy()
+    private var proxy = CollectionViewProxy()
     
     public private(set) var rootNode = DataSource()
 
@@ -41,19 +41,12 @@ open class CollectionView: UICollectionView {
     }
     
     public override var delegate: UICollectionViewDelegate? {
-        willSet {
+        set {
             if newValue == nil {
                 super.delegate = nil
-                proxy = nil
                 return
             }
-             
-            if proxy == nil {
-                proxy = CollectionViewProxy()
-            }
-                        
-            guard let proxy = proxy else { fatalError("collectionView proxy init failed") }
-            
+                         
             if !(newValue is CollectionViewProxy) {
                 proxy.target = newValue
             }
@@ -62,7 +55,9 @@ open class CollectionView: UICollectionView {
             
             proxy._dataSource = rootNode
             proxy._collectionView = self
-
+        }
+        get {
+            super.delegate
         }
     }
 

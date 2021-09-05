@@ -23,7 +23,7 @@ public extension SwiftPlus where T: ColorProvider {
     }
 }
 
-//MARK: - Int
+// MARK: - Int
 
 extension Int: _ColorProvider {
     fileprivate var _color: UIColor {
@@ -41,7 +41,7 @@ extension Int: _ColorProvider {
     }
 }
 
-//MARK: - String
+// MARK: - String
 
 extension String: _ColorProvider {
     fileprivate var _color: UIColor {
@@ -91,7 +91,7 @@ extension String: _ColorProvider {
     }
 }
 
-//MARK: - Color Struct
+// MARK: - Color Struct
 
 public struct BsColor {
     /// RGBA
@@ -138,7 +138,7 @@ public struct BsColor {
     }
 }
 
-//MARK: - UIColor
+// MARK: - UIColor
 
 extension UIColor: _ColorProvider {
     fileprivate var _color: UIColor {

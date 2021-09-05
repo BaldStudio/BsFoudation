@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Common
+
 public extension SwiftPlus where T: UIView {
     /// 获取nib
     static func nib(_ name: String? = nil) -> UINib {
@@ -32,6 +34,7 @@ public extension SwiftPlus where T: UIView {
         this.layer.borderColor = c.cgColor
     }
     
+    /// 截图
     var snapshot: UIImage? {
         UIGraphicsBeginImageContextWithOptions(this.layer.frame.size, false, 0)
         defer {
@@ -64,38 +67,53 @@ public extension SwiftPlus where T: UIView {
 
 }
 
+// MARK: - Responder
+
+public extension SwiftPlus where T: UIView {
+    var viewController: UIViewController? {
+        var responder: UIResponder? = this
+        while responder != nil {
+            responder = responder!.next
+            if let target = responder as? UIViewController {
+                return target
+            }
+        }
+        
+        return BsWindow.rootViewController
+    }
+}
+
 // MARK: - Gestures
 
 public extension SwiftPlus where T: UIView {
     /// 添加tap手势
     func onTap(_ closure: @escaping Closure.primary) {
-        this._onTap = closure
+        this.bs_onTap = closure
         let tap = UITapGestureRecognizer(target: this,
-                                         action: #selector(UIView._handleTapEvent(sender:)))
+                                         action: #selector(T.bs_onTapEvent(_:)))
         this.addGestureRecognizer(tap)
     }
 
 }
 
 private extension UIView {
-    private var _onTapEventKey: UnsafePointer<CChar> {
-        "com.bald-studio.view.onTapEventKey".withCString { $0 }
+    struct AssociateKeys {
+        static var onTapEvent = "onTapEventKey"
     }
-    
-    var _onTap: Closure.primary? {
+        
+    var bs_onTap: Closure.primary? {
         set {
             objc_setAssociatedObject(self,
-                                     _onTapEventKey,
+                                     &AssociateKeys.onTapEvent,
                                      newValue,
                                      .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
-        
         get {
-            objc_getAssociatedObject(self, _onTapEventKey) as? Closure.primary
+            objc_getAssociatedObject(self, &AssociateKeys.onTapEvent) as? Closure.primary
         }
     }
     
-    @objc func _handleTapEvent(sender: UITapGestureRecognizer) {
-        _onTap?()
+    @objc func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
+        bs_onTap?()
     }
 }

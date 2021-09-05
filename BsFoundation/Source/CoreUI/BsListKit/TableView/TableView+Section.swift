@@ -71,7 +71,7 @@ extension TableView {
             tableView.reloadSections([i], with: animation)
         }
         
-        //MARK: - Section Header
+        // MARK: - Section Header
         
         open var headerViewClass: AnyClass = UITableViewHeaderFooterView.self
 
@@ -99,7 +99,7 @@ extension TableView {
             didEndDisplayingHeaderView?(view, section)
         }
 
-        //MARK: - Section Footer
+        // MARK: - Section Footer
         open var footerViewClass: AnyClass = UITableViewHeaderFooterView.self
 
         open var footerHeight: CGFloat = 0.0
@@ -126,7 +126,7 @@ extension TableView {
             didEndDisplayingFooterView?(view, section)
         }
 
-        //MARK: - Closure
+        // MARK: - Closure
 
         public var updateHeaderView: ((UITableViewHeaderFooterView?, Int) -> UITableViewHeaderFooterView?)?
         public var willDisplayHeaderView: ((UIView, Int) -> Void)?
