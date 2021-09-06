@@ -1,5 +1,5 @@
 //
-//  NavigationController.swift
+//  BsNavigationController.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/8/12.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class NavigationController: UINavigationController {
+open class BsNavigationController: UINavigationController {
         
     open func push(_ viewController: UIViewController) {
         pushViewController(viewController, animated: true)

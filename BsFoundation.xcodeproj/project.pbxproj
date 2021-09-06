@@ -46,8 +46,14 @@
 		D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */; };
 		D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64C26E20924003B9F11 /* Runtime.swift */; };
 		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
-		D2BDAEFF26C54F9C003C0DC7 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAEFE26C54F9C003C0DC7 /* NavigationController.swift */; };
-		D2BDAF2626C6498C003C0DC7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAF2526C6498C003C0DC7 /* TabBarController.swift */; };
+		D29BA96926E5C11A003A5ECA /* BsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96826E5C11A003A5ECA /* BsView.swift */; };
+		D29BA96B26E5C164003A5ECA /* BsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96A26E5C164003A5ECA /* BsViewController.swift */; };
+		D29BA96D26E5C193003A5ECA /* BsRoundRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96C26E5C193003A5ECA /* BsRoundRectView.swift */; };
+		D29BA96F26E5C37C003A5ECA /* BsShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96E26E5C37C003A5ECA /* BsShadowView.swift */; };
+		D29BA97126E5C421003A5ECA /* BsBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA97026E5C421003A5ECA /* BsBlurView.swift */; };
+		D29BA97326E5C431003A5ECA /* BsGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA97226E5C431003A5ECA /* BsGradientView.swift */; };
+		D2BDAEFF26C54F9C003C0DC7 /* BsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */; };
+		D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */; };
 		D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C119DD26A8069E000C42C4 /* Manifest.swift */; };
 		D2D449D826A5587000D77E53 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449D726A5587000D77E53 /* Context.swift */; };
 		D2D449DA26A558AA00D77E53 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449D926A558AA00D77E53 /* Service.swift */; };
@@ -122,8 +128,14 @@
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
-		D2BDAEFE26C54F9C003C0DC7 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		D2BDAF2526C6498C003C0DC7 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D29BA96826E5C11A003A5ECA /* BsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsView.swift; sourceTree = "<group>"; };
+		D29BA96A26E5C164003A5ECA /* BsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsViewController.swift; sourceTree = "<group>"; };
+		D29BA96C26E5C193003A5ECA /* BsRoundRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsRoundRectView.swift; sourceTree = "<group>"; };
+		D29BA96E26E5C37C003A5ECA /* BsShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsShadowView.swift; sourceTree = "<group>"; };
+		D29BA97026E5C421003A5ECA /* BsBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsBlurView.swift; sourceTree = "<group>"; };
+		D29BA97226E5C431003A5ECA /* BsGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsGradientView.swift; sourceTree = "<group>"; };
+		D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsNavigationController.swift; sourceTree = "<group>"; };
+		D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTabBarController.swift; sourceTree = "<group>"; };
 		D2C119DD26A8069E000C42C4 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
 		D2D449D726A5587000D77E53 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		D2D449D926A558AA00D77E53 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -237,18 +249,24 @@
 			children = (
 				D26FC64326E0B42F003B9F11 /* BsHapticEngine */,
 				D26FC60926E0AE93003B9F11 /* BsListKit */,
-				D26FC60826E0AE8B003B9F11 /* ViewControllers */,
+				D26FC60826E0AE8B003B9F11 /* BsUIKit */,
 			);
 			path = CoreUI;
 			sourceTree = "<group>";
 		};
-		D26FC60826E0AE8B003B9F11 /* ViewControllers */ = {
+		D26FC60826E0AE8B003B9F11 /* BsUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				D2BDAEFE26C54F9C003C0DC7 /* NavigationController.swift */,
-				D2BDAF2526C6498C003C0DC7 /* TabBarController.swift */,
+				D29BA96A26E5C164003A5ECA /* BsViewController.swift */,
+				D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */,
+				D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */,
+				D29BA96826E5C11A003A5ECA /* BsView.swift */,
+				D29BA96E26E5C37C003A5ECA /* BsShadowView.swift */,
+				D29BA97026E5C421003A5ECA /* BsBlurView.swift */,
+				D29BA97226E5C431003A5ECA /* BsGradientView.swift */,
+				D29BA96C26E5C193003A5ECA /* BsRoundRectView.swift */,
 			);
-			path = ViewControllers;
+			path = BsUIKit;
 			sourceTree = "<group>";
 		};
 		D26FC60926E0AE93003B9F11 /* BsListKit */ = {
@@ -595,10 +613,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29BA97126E5C421003A5ECA /* BsBlurView.swift in Sources */,
+				D29BA96F26E5C37C003A5ECA /* BsShadowView.swift in Sources */,
 				D26FC61F26E0AEA7003B9F11 /* TableView+Section.swift in Sources */,
 				D26FC63F26E0AF8C003B9F11 /* Data.swift in Sources */,
 				D26FC62226E0AEA7003B9F11 /* TableView.swift in Sources */,
 				D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */,
+				D29BA96D26E5C193003A5ECA /* BsRoundRectView.swift in Sources */,
 				D239FC7826BA717F00FD1DA0 /* BsFoundation.swift in Sources */,
 				D26FC64126E0AF8C003B9F11 /* UIColor.swift in Sources */,
 				D26FC63E26E0AF8C003B9F11 /* UIView.swift in Sources */,
@@ -610,14 +631,16 @@
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
-				D2BDAF2626C6498C003C0DC7 /* TabBarController.swift in Sources */,
+				D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */,
 				D26FC63926E0AF8C003B9F11 /* BsSwiftPlus.swift in Sources */,
-				D2BDAEFF26C54F9C003C0DC7 /* NavigationController.swift in Sources */,
+				D2BDAEFF26C54F9C003C0DC7 /* BsNavigationController.swift in Sources */,
+				D29BA96B26E5C164003A5ECA /* BsViewController.swift in Sources */,
 				D26FC64226E0AF8C003B9F11 /* Closure.swift in Sources */,
 				D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */,
 				D26FC62626E0AF35003B9F11 /* BsLogger.swift in Sources */,
 				D2D449D826A5587000D77E53 /* Context.swift in Sources */,
 				D26FC61826E0AEA7003B9F11 /* CollectionView.swift in Sources */,
+				D29BA97326E5C431003A5ECA /* BsGradientView.swift in Sources */,
 				D26FC62726E0AF35003B9F11 /* BsLoggerManager.swift in Sources */,
 				D26FC63D26E0AF8C003B9F11 /* String.swift in Sources */,
 				D26FC61B26E0AEA7003B9F11 /* CollectionView+DataSource.swift in Sources */,
@@ -626,6 +649,7 @@
 				D26FC62026E0AEA7003B9F11 /* TableView+Row.swift in Sources */,
 				D26FC61C26E0AEA7003B9F11 /* BsListKit.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
+				D29BA96926E5C11A003A5ECA /* BsView.swift in Sources */,
 				D26FC61926E0AEA7003B9F11 /* CollectionView+Item.swift in Sources */,
 				D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,

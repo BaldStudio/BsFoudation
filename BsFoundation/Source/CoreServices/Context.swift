@@ -21,8 +21,8 @@ public struct Context: Service {
 
 public extension Context {
     
-    static var tabBarController: TabBarController!
-    static var navigationController: NavigationController!
+    static var tabBarController: BsTabBarController!
+    static var navigationController: BsNavigationController!
     
     static var currentApplet: Applet? {
         appletManager.lastAppet

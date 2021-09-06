@@ -1,5 +1,5 @@
 //
-//  TabBarController.swift
+//  BsTabBarController.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/8/13.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-open class TabBarController: UITabBarController {
+open class BsTabBarController: UITabBarController {
 
 }
