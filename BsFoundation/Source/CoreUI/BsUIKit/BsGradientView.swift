@@ -12,7 +12,7 @@ import UIKit
 open class BsGradientView: BsView {
     
     public var gradientLayer: CAGradientLayer {
-        layer as!CAGradientLayer
+        layer as! CAGradientLayer
     }
         
     @IBInspectable

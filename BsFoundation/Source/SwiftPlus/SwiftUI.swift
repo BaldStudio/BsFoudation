@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension Binding {
-    func bs_OnChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+    func bs_onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
         Binding(
             get: {
                 wrappedValue

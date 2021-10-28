@@ -32,7 +32,7 @@ extension CollectionView {
             
         }
 
-        open internal(set) var fittingMode: AutofitMode = .none
+        open var fittingMode: AutofitMode = .none
         
         open var cellSize: CollectionViewCellSize = CGSize.zero
 
