@@ -1,5 +1,5 @@
 //
-//  TableView+DataSource.swift
+//  BsTableView+DataSource.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/8.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension TableView {
+extension BsTableView {
     public class DataSource: NSObject, UITableViewDataSource, NodeRepresentable {
         var registryMap: Dictionary<String, Any> = [:]
                 
@@ -18,7 +18,7 @@ extension TableView {
             }
         }
         
-        public typealias Parent = TableView
+        public typealias Parent = BsTableView
         public typealias Child = Section
 
         public weak internal(set) var parent: Parent? = nil

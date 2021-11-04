@@ -39,7 +39,7 @@ public var BsWindow: UIWindow {
         }
     }
     
-    fatalError("Can not fina main window")
+    fatalError("Can not find main window")
 }
 
 public struct Bootstrap {

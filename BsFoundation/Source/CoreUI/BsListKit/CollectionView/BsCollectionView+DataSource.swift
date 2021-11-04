@@ -1,5 +1,5 @@
 //
-//  CollectionView+DataSource.swift
+//  BsCollectionView+DataSource.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/12.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension CollectionView {
+extension BsCollectionView {
     open class DataSource: NSObject, UICollectionViewDataSource, NodeRepresentable {
         var registryMap: Dictionary<String, Any> = [:]
                 
@@ -18,7 +18,7 @@ extension CollectionView {
             }
         }
         
-        public typealias Parent = CollectionView
+        public typealias Parent = BsCollectionView
         public typealias Child = Section
 
         public weak internal(set) var parent: Parent? = nil

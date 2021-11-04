@@ -50,13 +50,13 @@ public protocol NibLoadable {
     var nib: UINib { get }
 }
 
-public extension NibLoadable where Self: TableView.Row {
+public extension NibLoadable where Self: BsTableView.Row {
     var nib: UINib {
         return UINib(nibName: "\(self.cellClass)", bundle: Bundle(for: self.cellClass))
     }
 }
 
-public extension NibLoadable where Self: CollectionView.Item {
+public extension NibLoadable where Self: BsCollectionView.Item {
     var nib: UINib {
         return UINib(nibName: "\(self.cellClass)", bundle: Bundle(for: self.cellClass))
     }

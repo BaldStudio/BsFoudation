@@ -1,5 +1,5 @@
 //
-//  TableView+Row.swift
+//  BsTableView+Row.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/8.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension TableView {
+extension BsTableView {
     open class Row {
         public weak internal(set) var parent: Section? = nil
         
@@ -72,9 +72,9 @@ extension TableView {
     }
 }
 
-extension TableView.Row: Equality {
+extension BsTableView.Row: Equality {
     
-    func tableView(_ tableView: TableView, autofitCellHeightAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: BsTableView, autofitCellHeightAt indexPath: IndexPath) -> CGFloat {
         if (cellHeight > 0) {
             return cellHeight
         }

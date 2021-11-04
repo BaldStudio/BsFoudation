@@ -21,7 +21,7 @@ open class BsView: UIView {
         commonInit()
     }
     
-    func commonInit() {
+    open func commonInit() {
 
     }
 }

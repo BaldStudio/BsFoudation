@@ -1,5 +1,5 @@
 //
-//  CollectionView.swift
+//  BsCollectionView.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/8.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-open class CollectionView: UICollectionView {
-    private var proxy = CollectionViewProxy()
+open class BsCollectionView: UICollectionView {
+    private var proxy = BsCollectionViewProxy()
     
     public private(set) var rootNode = DataSource()
 
@@ -35,7 +35,7 @@ open class CollectionView: UICollectionView {
                 ds.parent = self
             }
             else {
-                fatalError("the dataSource MUST be CollectionView.DataSource type")
+                fatalError("the dataSource MUST be BsCollectionView.DataSource type")
             }
         }
     }
@@ -47,7 +47,7 @@ open class CollectionView: UICollectionView {
                 return
             }
                          
-            if !(newValue is CollectionViewProxy) {
+            if !(newValue is BsCollectionViewProxy) {
                 proxy.target = newValue
             }
             
@@ -87,9 +87,9 @@ open class CollectionView: UICollectionView {
     }
 }
 
-private class CollectionViewProxy: Proxy, UICollectionViewDelegate {
-    weak var _dataSource: CollectionView.DataSource!
-    weak var _collectionView: CollectionView!
+private class BsCollectionViewProxy: Proxy, UICollectionViewDelegate {
+    weak var _dataSource: BsCollectionView.DataSource!
+    weak var _collectionView: BsCollectionView!
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         _dataSource[indexPath].collectionView(collectionView, didSelectItemAt: indexPath)
@@ -105,7 +105,7 @@ private class CollectionViewProxy: Proxy, UICollectionViewDelegate {
                         willDisplaySupplementaryView view: UICollectionReusableView,
                         forElementKind elementKind: String,
                         at indexPath: IndexPath) {
-        if elementKind == CollectionView.Section.headerKind {
+        if elementKind == BsCollectionView.Section.headerKind {
             return _dataSource[indexPath.section].collectionView(collectionView,
                                                                  willDisplayHeaderView: view,
                                                                  at: indexPath)
@@ -119,7 +119,7 @@ private class CollectionViewProxy: Proxy, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didEndDisplayingSupplementaryView view: UICollectionReusableView,
                         forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        if elementKind == CollectionView.Section.headerKind {
+        if elementKind == BsCollectionView.Section.headerKind {
             return _dataSource[indexPath.section].collectionView(collectionView,
                                                                  didEndDisplayingHeaderView: view,
                                                                  at: indexPath)
@@ -132,7 +132,7 @@ private class CollectionViewProxy: Proxy, UICollectionViewDelegate {
 
 }
 
-extension CollectionViewProxy: UICollectionViewDelegateFlowLayout {
+extension BsCollectionViewProxy: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

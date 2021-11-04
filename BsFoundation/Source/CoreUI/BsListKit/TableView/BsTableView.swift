@@ -1,5 +1,5 @@
 //
-//  TableView.swift
+//  BsTableView.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/8.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-open class TableView: UITableView {
-    private var proxy = TableViewProxy()
+open class BsTableView: UITableView {
+    private var proxy = BsTableViewProxy()
     
     public private(set) var rootNode = DataSource()
 
@@ -83,9 +83,9 @@ open class TableView: UITableView {
     
 }
 
-private class TableViewProxy: Proxy, UITableViewDelegate {
-    weak var _dataSource: TableView.DataSource!
-    weak var _tableView: TableView!
+private class BsTableViewProxy: Proxy, UITableViewDelegate {
+    weak var _dataSource: BsTableView.DataSource!
+    weak var _tableView: BsTableView!
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 0
@@ -117,7 +117,7 @@ private class TableViewProxy: Proxy, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sec: TableView.Section = _dataSource[section]
+        let sec: BsTableView.Section = _dataSource[section]
         let reuseID = sec.headerReuseIdentifier
         
         if !_dataSource.isRegistered(reuseID) {

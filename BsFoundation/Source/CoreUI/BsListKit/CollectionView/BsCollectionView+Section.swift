@@ -1,5 +1,5 @@
 //
-//  CollectionView+Section.swift
+//  BsCollectionView+Section.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/12.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension CollectionView {
+extension BsCollectionView {
     open class Section: NodeRepresentable {
         static let headerKind = UICollectionView.elementKindSectionHeader
         static let footerKind = UICollectionView.elementKindSectionFooter
@@ -160,4 +160,4 @@ extension CollectionView {
     }
 }
 
-extension CollectionView.Section: Equality {}
+extension BsCollectionView.Section: Equality {}

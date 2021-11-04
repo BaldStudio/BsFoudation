@@ -1,5 +1,5 @@
 //
-//  CollectionView+Item.swift
+//  BsCollectionView+Item.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/12.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension CollectionView {
+extension BsCollectionView {
     open class Item {
         
         var cellSizeCache: CGSize? = nil
         
         var cellSizeRawValue: CGSize {
-            (cellSize as? _CollectionViewCellSize)?.bs_raw_size ?? .zero
+            (cellSize as? _BsCollectionViewCellSize)?.bs_raw_size ?? .zero
         }
         
         public weak internal(set) var parent: Section? = nil
@@ -34,7 +34,7 @@ extension CollectionView {
 
         open var fittingMode: AutofitMode = .none
         
-        open var cellSize: CollectionViewCellSize = CGSize.zero
+        open var cellSize: BsCollectionViewCellSize = CGSize.zero
 
         open var cellClass: AnyClass = UICollectionViewCell.self
 
@@ -69,7 +69,7 @@ extension CollectionView {
     }
 }
 
-extension CollectionView.Item: Equality {
+extension BsCollectionView.Item: Equality {
 
     public enum AutofitMode {
         case none
@@ -78,7 +78,7 @@ extension CollectionView.Item: Equality {
         case horizontal // 水平方向自适应  as 定高算宽
     }
     
-    func collectionView(_ collectionView: CollectionView, autofitItemSizeAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: BsCollectionView, autofitItemSizeAt indexPath: IndexPath) -> CGSize {
         guard cellSizeCache == nil else {
             return cellSizeCache!
         }
@@ -113,36 +113,36 @@ extension CollectionView.Item: Equality {
 
 }
 
-public protocol CollectionViewCellSize {}
-private protocol _CollectionViewCellSize: CollectionViewCellSize {
+public protocol BsCollectionViewCellSize {}
+private protocol _BsCollectionViewCellSize: BsCollectionViewCellSize {
     var bs_raw_size: CGSize { get }
 }
 
-extension CGSize: _CollectionViewCellSize {
+extension CGSize: _BsCollectionViewCellSize {
     var bs_raw_size: CGSize {
         return self
     }
 }
 
-extension CGFloat: _CollectionViewCellSize {
+extension CGFloat: _BsCollectionViewCellSize {
     var bs_raw_size: CGSize {
         return CGSize(width: self, height: self)
     }
 }
 
-extension Float: _CollectionViewCellSize {
+extension Float: _BsCollectionViewCellSize {
     var bs_raw_size: CGSize {
         return CGSize(width: CGFloat(self), height: CGFloat(self))
     }
 }
 
-extension Double: _CollectionViewCellSize {
+extension Double: _BsCollectionViewCellSize {
     var bs_raw_size: CGSize {
         return CGSize(width: CGFloat(self), height: CGFloat(self))
     }
 }
 
-extension Int: _CollectionViewCellSize {
+extension Int: _BsCollectionViewCellSize {
     var bs_raw_size: CGSize {
         return CGSize(width: CGFloat(self), height: CGFloat(self))
     }

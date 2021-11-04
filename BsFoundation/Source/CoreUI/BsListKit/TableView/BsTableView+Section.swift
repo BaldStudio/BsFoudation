@@ -1,5 +1,5 @@
 //
-//  TableView+Section.swift
+//  BsTableView+Section.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2021/7/8.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension TableView {
+extension BsTableView {
     open class Section: NodeRepresentable {
         public init() {}
         
@@ -139,4 +139,4 @@ extension TableView {
     }
 }
 
-extension TableView.Section: Equality {}
+extension BsTableView.Section: Equality {}
