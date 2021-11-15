@@ -11,6 +11,17 @@ import UIKit
 // MARK: - Common
 
 public extension SwiftPlus where T: UIView {
+    /// 截图
+    var snapshot: UIImage? {
+        UIGraphicsBeginImageContextWithOptions(this.layer.frame.size, false, 0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        this.layer.render(in: context)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+
     /// 获取nib
     static func nib(_ name: String? = nil) -> UINib {
         let nibName = name ?? "\(this)"
@@ -33,18 +44,28 @@ public extension SwiftPlus where T: UIView {
         this.layer.borderWidth = w
         this.layer.borderColor = c.cgColor
     }
-    
-    /// 截图
-    var snapshot: UIImage? {
-        UIGraphicsBeginImageContextWithOptions(this.layer.frame.size, false, 0)
-        defer {
-            UIGraphicsEndImageContext()
-        }
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        this.layer.render(in: context)
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
+        
+}
 
+// MARK: - Hierarchy
+
+public extension SwiftPlus where T: UIView {
+    func removeSubviews() {
+        this.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func subviews<T>(ofType _: T.Type) -> [T] {
+        var views = [T]()
+        for subview in this.subviews {
+            if let view = subview as? T {
+                views.append(view)
+            }
+            else if !subview.subviews.isEmpty {
+                views.append(contentsOf: subview.bs.subviews(ofType: T.self))
+            }
+        }
+        return views
+    }
 }
 
 // MARK: - Layout
@@ -115,7 +136,8 @@ private extension UIView {
         }
     }
     
-    @objc func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
+    @objc
+    func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
         bs_onTap?()
     }
 }

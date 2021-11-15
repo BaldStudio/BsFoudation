@@ -8,4 +8,7 @@
 
 import Foundation
 
-
+public extension SwiftPlus where T == String {
+    
+    
+}

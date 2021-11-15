@@ -45,6 +45,7 @@
 		D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */; };
 		D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64C26E20924003B9F11 /* Runtime.swift */; };
 		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
+		D28AE20D273E6C7400D0E935 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AE20C273E6C7400D0E935 /* Date.swift */; };
 		D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftPlus.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
 		D296015D2733E43900B6511A /* BsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296015C2733E43900B6511A /* BsCollectionViewCell.swift */; };
@@ -125,6 +126,7 @@
 		D26FC64C26E20924003B9F11 /* Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
+		D28AE20C273E6C7400D0E935 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D29601502732ACA500B6511A /* SwiftPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftPlus.swift; sourceTree = "<group>"; };
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D296015C2733E43900B6511A /* BsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				D26FC63126E0AF8C003B9F11 /* UIView.swift */,
 				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 				D29601522732ACB900B6511A /* Collection.swift */,
+				D28AE20C273E6C7400D0E935 /* Date.swift */,
 			);
 			path = SwiftPlus;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				D26FC61A26E0AEA7003B9F11 /* BsCollectionView+Section.swift in Sources */,
 				D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */,
 				D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */,
+				D28AE20D273E6C7400D0E935 /* Date.swift in Sources */,
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,

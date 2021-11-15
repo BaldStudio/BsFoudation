@@ -87,3 +87,29 @@ public extension CGSize {
     }
 
 }
+
+// MARK: - UIEdgeInsets
+public extension UIEdgeInsets {
+
+    init(horizontal: CGFloat = 0, vertical: CGFloat = 0) {
+        self.init(top: vertical,
+                  left: horizontal,
+                  bottom: vertical,
+                  right: horizontal)
+    }
+    
+    init(all inset: CGFloat) {
+        self.init(top: inset,
+                  left: inset,
+                  bottom: inset,
+                  right: inset)
+    }
+    
+    static func only(top: CGFloat = 0,
+                     left: CGFloat = 0,
+                     bottom: CGFloat = 0,
+                     right: CGFloat = 0) -> Self {
+        Self(top: top, left: left, bottom: bottom, right: right)
+    }
+    
+}
