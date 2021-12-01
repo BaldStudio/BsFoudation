@@ -52,6 +52,8 @@
 		D296015F2733E4C700B6511A /* BsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296015E2733E4C700B6511A /* BsTableViewCell.swift */; };
 		D29BA96926E5C11A003A5ECA /* BsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96826E5C11A003A5ECA /* BsView.swift */; };
 		D29BA96B26E5C164003A5ECA /* BsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96A26E5C164003A5ECA /* BsViewController.swift */; };
+		D2B8BA81275748DE00E4D4B8 /* BsStoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B8BA7F275748DE00E4D4B8 /* BsStoreKit.swift */; };
+		D2B8BA82275748DE00E4D4B8 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B8BA80275748DE00E4D4B8 /* Recommend.swift */; };
 		D2BDAEFF26C54F9C003C0DC7 /* BsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */; };
 		D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */; };
 		D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C119DD26A8069E000C42C4 /* Manifest.swift */; };
@@ -134,6 +136,8 @@
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
 		D29BA96826E5C11A003A5ECA /* BsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsView.swift; sourceTree = "<group>"; };
 		D29BA96A26E5C164003A5ECA /* BsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsViewController.swift; sourceTree = "<group>"; };
+		D2B8BA7F275748DE00E4D4B8 /* BsStoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsStoreKit.swift; sourceTree = "<group>"; };
+		D2B8BA80275748DE00E4D4B8 /* Recommend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
 		D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsNavigationController.swift; sourceTree = "<group>"; };
 		D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTabBarController.swift; sourceTree = "<group>"; };
 		D2C119DD26A8069E000C42C4 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
@@ -299,13 +303,13 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
-		D26FC62326E0AF2E003B9F11 /* Logger */ = {
+		D26FC62326E0AF2E003B9F11 /* BsLogger */ = {
 			isa = PBXGroup;
 			children = (
 				D26FC62426E0AF35003B9F11 /* BsLogger.swift */,
 				D26FC62526E0AF35003B9F11 /* BsLoggerManager.swift */,
 			);
-			path = Logger;
+			path = BsLogger;
 			sourceTree = "<group>";
 		};
 		D26FC62826E0AF76003B9F11 /* SwiftPlus */ = {
@@ -374,12 +378,22 @@
 			isa = PBXGroup;
 			children = (
 				D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */,
+				D2B8BA7E275748D100E4D4B8 /* BsStoreKit */,
 				D26FC62826E0AF76003B9F11 /* SwiftPlus */,
-				D26FC62326E0AF2E003B9F11 /* Logger */,
+				D26FC62326E0AF2E003B9F11 /* BsLogger */,
 				D26FC60726E0AE75003B9F11 /* CoreUI */,
 				D26FC60626E0AE33003B9F11 /* CoreServices */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		D2B8BA7E275748D100E4D4B8 /* BsStoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8BA7F275748DE00E4D4B8 /* BsStoreKit.swift */,
+				D2B8BA80275748DE00E4D4B8 /* Recommend.swift */,
+			);
+			path = BsStoreKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -630,6 +644,7 @@
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,
+				D2B8BA81275748DE00E4D4B8 /* BsStoreKit.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
 				D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */,
 				D296015D2733E43900B6511A /* BsCollectionViewCell.swift in Sources */,
@@ -653,6 +668,7 @@
 				D26FC61926E0AEA7003B9F11 /* BsCollectionView+Item.swift in Sources */,
 				D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
+				D2B8BA82275748DE00E4D4B8 /* Recommend.swift in Sources */,
 				D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
