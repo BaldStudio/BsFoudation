@@ -76,6 +76,7 @@ public extension SwiftPlus where T: UIView {
         guard let superview = this.superview else { fatalError() }
         
         this.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             this.leftAnchor.constraint(equalTo: superview.leftAnchor,
                                        constant: edges.left),
@@ -87,7 +88,7 @@ public extension SwiftPlus where T: UIView {
                                          constant: edges.bottom),
         ])
     }
-
+    
 }
 
 // MARK: - Responder

@@ -94,15 +94,15 @@ public extension UIEdgeInsets {
     init(horizontal: CGFloat = 0, vertical: CGFloat = 0) {
         self.init(top: vertical,
                   left: horizontal,
-                  bottom: vertical,
-                  right: horizontal)
+                  bottom: -vertical,
+                  right: -horizontal)
     }
     
     init(all inset: CGFloat) {
         self.init(top: inset,
                   left: inset,
-                  bottom: inset,
-                  right: inset)
+                  bottom: -inset,
+                  right: -inset)
     }
     
     static func only(top: CGFloat = 0,

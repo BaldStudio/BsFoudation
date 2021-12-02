@@ -45,6 +45,7 @@
 		D26FC64526E0B449003B9F11 /* BsHapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64426E0B449003B9F11 /* BsHapticEngine.swift */; };
 		D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64C26E20924003B9F11 /* Runtime.swift */; };
 		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
+		D2825A9F2758AF23007CCFCF /* AppletEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2825A9E2758AF23007CCFCF /* AppletEnvironment.swift */; };
 		D28AE20D273E6C7400D0E935 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AE20C273E6C7400D0E935 /* Date.swift */; };
 		D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftPlus.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
@@ -128,6 +129,7 @@
 		D26FC64C26E20924003B9F11 /* Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
+		D2825A9E2758AF23007CCFCF /* AppletEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletEnvironment.swift; sourceTree = "<group>"; };
 		D28AE20C273E6C7400D0E935 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		D29601502732ACA500B6511A /* SwiftPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftPlus.swift; sourceTree = "<group>"; };
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				D2D449D726A5587000D77E53 /* Context.swift */,
 				D27A8A982520AEAC006A6125 /* Applet.swift */,
 				D2D449DB26A55BEA00D77E53 /* AppletManager.swift */,
+				D2825A9E2758AF23007CCFCF /* AppletEnvironment.swift */,
 				D2D449D926A558AA00D77E53 /* Service.swift */,
 				D2D449DD26A55C0000D77E53 /* ServiceManager.swift */,
 				D2C119DD26A8069E000C42C4 /* Manifest.swift */,
@@ -644,6 +647,7 @@
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,
+				D2825A9F2758AF23007CCFCF /* AppletEnvironment.swift in Sources */,
 				D2B8BA81275748DE00E4D4B8 /* BsStoreKit.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
 				D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */,
