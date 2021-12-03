@@ -10,9 +10,4 @@ import UIKit
 
 open class BsViewController: UIViewController {
 
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-
 }

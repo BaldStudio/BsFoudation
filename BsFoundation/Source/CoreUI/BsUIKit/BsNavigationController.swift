@@ -9,13 +9,21 @@
 import UIKit
 
 open class BsNavigationController: UINavigationController {
-        
-    open func push(_ viewController: UIViewController) {
-        pushViewController(viewController, animated: true)
+            
+    open override var shouldAutorotate: Bool {
+        topViewController?.shouldAutorotate ?? super.shouldAutorotate
     }
     
-    open func pop() -> UIViewController? {
-        popViewController(animated: true)
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
+    
+    open override var childForStatusBarStyle: UIViewController? {
+        topViewController
+    }
+    
+    open override var childForStatusBarHidden: UIViewController? {
+        topViewController
     }
 
 }

@@ -103,7 +103,7 @@ extension Applet: CustomStringConvertible, CustomDebugStringConvertible {
     }
 }
 
-class AppletController: UIViewController {
+class AppletController: BsViewController {
     weak var applet: Applet?
     
     public override func viewWillDisappear(_ animated: Bool) {
@@ -116,6 +116,21 @@ class AppletController: UIViewController {
         transition(from: parent)
     }
     
+    public override var shouldAutorotate: Bool {
+        children.first?.shouldAutorotate ?? super.shouldAutorotate
+    }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        children.first?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
+    
+    public override var childForStatusBarStyle: UIViewController? {
+        children.first
+    }
+    
+    public override var childForStatusBarHidden: UIViewController? {
+        children.first
+    }
     
     func transition() {
         guard let trasnCoor = transitionCoordinator else {
