@@ -127,7 +127,7 @@ class AppletController: BsViewController {
         }
         
         trasnCoor.animate(alongsideTransition: nil) {
-            if ($0.isCancelled) {
+            if $0.isCancelled {
                 logger.debug("取消 -= 滑动返回 =- 操作")
                 return
             }

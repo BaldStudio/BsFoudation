@@ -68,7 +68,7 @@ class AppletManager: Service {
                     return target
                 }
                 
-                if (a.shouldTerminate) {
+                if a.shouldTerminate {
                     a.willTerminate()
                 }
                 else {
@@ -93,7 +93,7 @@ class AppletManager: Service {
         logger.debug("退出当前应用\(applet)")
                 
         applets.removeLast()
-        if (applet.shouldTerminate) {
+        if applet.shouldTerminate {
             applet.willTerminate()
         }
         else {

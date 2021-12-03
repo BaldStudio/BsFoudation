@@ -90,7 +90,7 @@ private class BsTableViewProxy: Proxy, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 0
         let row = _dataSource[indexPath]
-        if (row.autofitCellHeight) {
+        if row.autofitCellHeight {
             height = row.tableView(_tableView, autofitCellHeightAt: indexPath)
         }
         else {

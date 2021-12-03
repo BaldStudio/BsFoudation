@@ -9,10 +9,6 @@
 import Foundation
 
 public extension SwiftPlus where T: Bundle {
-    static func info(for key: InfoKey, of bundle: Bundle = .main) -> String {
-        return bundle.infoDictionary?[key.rawValue] as? String ?? ""
-    }
-    
     struct InfoKey {
         public var rawValue: String
         
@@ -28,5 +24,12 @@ public extension SwiftPlus where T: Bundle {
             self.rawValue = rawValue
         }
     }
+
+    static func info(for key: InfoKey, of bundle: Bundle = .main) -> String {
+        return bundle.infoDictionary?[key.rawValue] as? String ?? ""
+    }
     
+    func image(_ name: String) -> UIImage {
+        UIImage(named: name, in: this, compatibleWith: nil)!
+    }
 }

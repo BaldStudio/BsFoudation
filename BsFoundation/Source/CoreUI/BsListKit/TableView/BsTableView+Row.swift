@@ -74,8 +74,9 @@ extension BsTableView {
 
 extension BsTableView.Row: Equality {
     
-    func tableView(_ tableView: BsTableView, autofitCellHeightAt indexPath: IndexPath) -> CGFloat {
-        if (cellHeight > 0) {
+    func tableView(_ tableView: BsTableView,
+                   autofitCellHeightAt indexPath: IndexPath) -> CGFloat {
+        if cellHeight > 0 {
             return cellHeight
         }
         
