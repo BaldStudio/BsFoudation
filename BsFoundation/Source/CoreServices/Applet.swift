@@ -9,19 +9,7 @@
 import UIKit
 
 open class Applet {
-    static var environment: AppletEnvironment?
-    
-    public func setupEnvironment(_ env: AppletEnvironment) {
-        Self.environment = env
-    }
-
-    public static func currentEnvironment<E>() -> E? {
-        environment as? E
-    }
-    
     deinit {
-        Self.environment?.dispose()
-        Self.environment = nil
         logger.debug("销毁 \(manifest.name)")
     }
     
