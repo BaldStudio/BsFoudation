@@ -89,6 +89,9 @@ public extension SwiftPlus where T: UIView {
         ])
     }
     
+    func removeAllConstraints() {
+        this.removeConstraints(this.constraints)
+    }
 }
 
 // MARK: - Responder

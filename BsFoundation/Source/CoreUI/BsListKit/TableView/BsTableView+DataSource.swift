@@ -81,7 +81,6 @@ extension BsTableView {
         }
         
         public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let a = self[indexPath]
             let row = self[indexPath]
             let reuseID = row.reuseIdentifier            
             if !isRegistered(reuseID) {

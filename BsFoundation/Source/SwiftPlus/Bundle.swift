@@ -6,7 +6,7 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public extension SwiftPlus where T: Bundle {
     struct InfoKey {
