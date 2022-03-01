@@ -97,7 +97,7 @@ public struct BsColor {
     /// RGBA
     public struct RGBA: _ColorProvider {
         var _color: UIColor {
-            return color
+            color
         }
         
         public let red: Int
@@ -113,7 +113,7 @@ public struct BsColor {
     /// 16进制数
     public struct Hex: _ColorProvider {
         var _color: UIColor {
-            return color
+            color
         }
 
         public let value: Int
@@ -126,7 +126,7 @@ public struct BsColor {
     /// 16进制字符串
     public struct HexString: _ColorProvider {
         var _color: UIColor {
-            return color
+            color
         }
 
         public let value: String
@@ -142,7 +142,7 @@ public struct BsColor {
 
 extension UIColor: _ColorProvider {
     fileprivate var _color: UIColor {
-        return self
+        self
     }
 }
 

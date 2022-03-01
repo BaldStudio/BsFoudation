@@ -116,7 +116,7 @@
 		D26FC62526E0AF35003B9F11 /* BsLoggerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLoggerManager.swift; sourceTree = "<group>"; };
 		D26FC62926E0AF8B003B9F11 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		D26FC62A26E0AF8B003B9F11 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
-		D26FC62B26E0AF8B003B9F11 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
+		D26FC62B26E0AF8B003B9F11 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; tabWidth = 2; wrapsLines = 1; };
 		D26FC62D26E0AF8B003B9F11 /* DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
 		D26FC62F26E0AF8C003B9F11 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
@@ -320,9 +320,13 @@
 				D29601502732ACA500B6511A /* SwiftPlus.swift */,
 				D26FC62A26E0AF8B003B9F11 /* Bundle.swift */,
 				D26FC63526E0AF8C003B9F11 /* Closure.swift */,
+				D29601522732ACB900B6511A /* Collection.swift */,
 				D26FC63226E0AF8C003B9F11 /* Data.swift */,
+				D28AE20C273E6C7400D0E935 /* Date.swift */,
 				D26FC62D26E0AF8B003B9F11 /* DispatchQueue.swift */,
 				D26FC62F26E0AF8C003B9F11 /* Geometry.swift */,
+				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
+				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 				D26FC63026E0AF8C003B9F11 /* String.swift */,
 				D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */,
 				D26FC62B26E0AF8B003B9F11 /* Then.swift */,
@@ -330,10 +334,6 @@
 				D26FC63426E0AF8C003B9F11 /* UIColor.swift */,
 				D26FC62926E0AF8B003B9F11 /* UIImage.swift */,
 				D26FC63126E0AF8C003B9F11 /* UIView.swift */,
-				D26FC64C26E20924003B9F11 /* Runtime.swift */,
-				D29601522732ACB900B6511A /* Collection.swift */,
-				D28AE20C273E6C7400D0E935 /* Date.swift */,
-				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
 			);
 			path = SwiftPlus;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 					};
 					D27A8A1C25203F1A006A6125 = {
 						CreatedOnToolsVersion = 11.7;
-						LastSwiftMigration = 1170;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};

@@ -10,7 +10,7 @@ import UIKit
 
 open class Applet {
     deinit {
-        logger.debug("销毁 \(manifest.name)")
+        logger.debug("销毁 \(description)")
     }
     
     public required init() {
@@ -46,23 +46,23 @@ open class Applet {
     }
     
     open func willFinishLaunching(options: [String: Any]? = nil) {
-        logger.debug("\(manifest.name) \(#function)")
+        logger.debug("\(description) \(#function)")
     }
 
     open func didFinishLaunching(options: [String: Any]? = nil) {
-        logger.debug("\(manifest.name) \(#function)")
+        logger.debug("\(description) \(#function)")
     }
      
     open func didEnterBackground() {
-        logger.debug("\(manifest.name) \(#function)")
+        logger.debug("\(description) \(#function)")
     }
 
     open func willEnterForeground() {
-        logger.debug("\(manifest.name) \(#function)")
+        logger.debug("\(description) \(#function)")
     }
     
     open func willTerminate() {
-        logger.debug("\(manifest.name) \(#function)")
+        logger.debug("\(description) \(#function)")
     }
     
     public static var bundleName: String = ""
@@ -79,15 +79,9 @@ extension Applet: Equatable {
     }
 }
 
-extension Applet: CustomStringConvertible, CustomDebugStringConvertible {
+extension Applet: CustomStringConvertible {
     public var description: String {
-        String(format: "<name: \(manifest.name) version: \(manifest.version) >")
-    }
-    
-    public var debugDescription: String {
-//        let addr = unsafeBitCast(self, to: Int.self)
-//        return String(format: "<name: \(manifest.name) %p version: \(manifest.version) >", addr)
-        String(format: "\(manifest.name)")
+        manifest.description
     }
 }
 
@@ -103,23 +97,7 @@ class AppletController: BsViewController {
         super.didMove(toParent: parent)
         transition(from: parent)
     }
-    
-    public override var shouldAutorotate: Bool {
-        children.first?.shouldAutorotate ?? super.shouldAutorotate
-    }
-    
-    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        children.first?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
-    }
-    
-    public override var childForStatusBarStyle: UIViewController? {
-        children.first
-    }
-    
-    public override var childForStatusBarHidden: UIViewController? {
-        children.first
-    }
-    
+        
     func transition() {
         guard let trasnCoor = transitionCoordinator else {
             logger.debug("transitionCoordinator is nil；ARE YOU KIDDING ME?")
@@ -128,7 +106,7 @@ class AppletController: BsViewController {
         
         trasnCoor.animate(alongsideTransition: nil) {
             if $0.isCancelled {
-                logger.debug("取消 -= 滑动返回 =- 操作")
+                logger.debug("取消操作：滑动返回")
                 return
             }
             
@@ -139,32 +117,32 @@ class AppletController: BsViewController {
             
             // 处理Modal视图控制器的行为
             guard let fromApplet = self.applet else {
-                logger.debug("\(self)所属的applet为nil")
+                logger.debug("\(self) 所属的 Applet 为 nil")
                 return
             }
             
             guard let vc = $0.viewController(forKey: .to) else {
-                logger.debug("转场的目标控制器为nil")
+                logger.debug("转场的目标控制器为 nil")
                 return
             }
             
             guard vc is AppletController else {
-                logger.debug("不是 AppletController, 无需切换 Applet")
+                logger.debug("目标控制器不是 AppletController 类型, 无需切换 Applet")
                 return
             }
             
             let toVC = vc as! AppletController
                         
             guard let toApplet = toVC.applet else {
-                logger.debug("\(self)所属的applet为nil")
+                logger.debug("\(self) 所属的 Applet 为 nil")
                 return
             }
             
-            logger.debug("from \(fromApplet.manifest.name)")
-            logger.debug("to \(toApplet.manifest.name)")
+            logger.debug("from \(fromApplet.description)")
+            logger.debug("to \(toApplet.description)")
             
             if Context.currentApplet == fromApplet {
-                logger.debug("更新Applet栈数据，当前栈顶 \(fromApplet.manifest.name)")
+                logger.debug("更新应用栈数据，当前栈顶 \(fromApplet.description)")
                 Context.appletManager.pop()
             }
         }
@@ -172,19 +150,19 @@ class AppletController: BsViewController {
     
     func transition(from parent: UIViewController?) {
         if parent == nil { // remove
-            guard let vc = Context.navigationController.topViewController else {
+            guard let vc = Context.navigationController?.topViewController else {
                 logger.debug("导航栈是空的")
                 return
             }
             
             guard vc is AppletController else {
-                logger.debug("不是 AppletController")
+                logger.debug("目标控制器不是 AppletController 类型")
                 if let topApplet = Context.currentApplet {
                     /*
                      前置的是普通ViewController，不是Applet根视图
                      所以栈同步需要放在这里去做掉
                     */
-                    logger.debug("更新Applet栈数据，当前栈顶 \(topApplet.manifest.name)")
+                    logger.debug("更新应用栈数据，当前栈顶 \(topApplet.description)")
                     Context.appletManager.pop()
                 }
                 return
@@ -193,11 +171,11 @@ class AppletController: BsViewController {
             let toVC = vc as! AppletController
             
             guard let toApplet = toVC.applet else {
-                logger.debug("\(self)所属的applet为nil")
+                logger.debug("\(self) 所属的 Applet 为 nil")
                 return
             }
 
-            logger.debug("更新Applet栈数据，当前栈顶 \(toApplet.manifest.name)")
+            logger.debug("更新应用栈数据，当前栈顶 \(toApplet.description)")
             Context.appletManager.pop()
         }
     }

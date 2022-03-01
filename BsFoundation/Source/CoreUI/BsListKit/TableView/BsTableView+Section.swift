@@ -19,6 +19,8 @@ extension BsTableView {
         public var children: ContiguousArray<Child> = []
         
         public func append(_ child: Child) {
+            //          child.removeFromParent
+
             if let p = child.parent {
                 p.remove(child)
                 child.parent = nil

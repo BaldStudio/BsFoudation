@@ -25,5 +25,12 @@ open class BsNavigationController: UINavigationController {
     open override var childForStatusBarHidden: UIViewController? {
         topViewController
     }
-
+    
+    open override var childForHomeIndicatorAutoHidden: UIViewController? {
+        topViewController
+    }
+    
+    open override var childForScreenEdgesDeferringSystemGestures: UIViewController? {
+        topViewController
+    }
 }

@@ -13,7 +13,7 @@ import CoreGraphics
 
 public protocol Then {}
 
-extension Then where Self: Any {
+public extension Then where Self: Any {
 
   /// Makes it available to set properties with closures just after initializing and copying the value types.
   ///
@@ -21,7 +21,8 @@ extension Then where Self: Any {
   ///       $0.origin.x = 10
   ///       $0.size.width = 100
   ///     }
-  public func with(_ block: (inout Self) throws -> Void) rethrows -> Self {
+  @inlinable
+  func with(_ block: (inout Self) throws -> Void) rethrows -> Self {
     var copy = self
     try block(&copy)
     return copy
@@ -34,13 +35,14 @@ extension Then where Self: Any {
   ///       $0.set("devxoul@gmail.com", forKey: "email")
   ///       $0.synchronize()
   ///     }
-  public func `do`(_ block: (Self) throws -> Void) rethrows {
+  @inlinable
+  func `do`(_ block: (Self) throws -> Void) rethrows {
     try block(self)
   }
 
 }
 
-extension Then where Self: AnyObject {
+public extension Then where Self: AnyObject {
 
   /// Makes it available to set properties with closures just after initializing.
   ///
@@ -49,7 +51,8 @@ extension Then where Self: AnyObject {
   ///       $0.textColor = UIColor.black
   ///       $0.text = "Hello, World!"
   ///     }
-  public func then(_ block: (Self) throws -> Void) rethrows -> Self {
+  @inlinable
+  func then(_ block: (Self) throws -> Void) rethrows -> Self {
     try block(self)
     return self
   }
@@ -68,4 +71,3 @@ extension CGVector: Then {}
   extension UIOffset: Then {}
   extension UIRectEdge: Then {}
 #endif
-

@@ -14,7 +14,7 @@ extension BsCollectionView {
         var cellSizeCache: CGSize? = nil
         
         var cellSizeRawValue: CGSize {
-            (cellSize as? _BsCollectionViewCellSize)?.bs_raw_size ?? .zero
+            (cellSize as? _BsCollectionViewCellSize)?.rawValue ?? .zero
         }
         
         public weak internal(set) var parent: Section? = nil
@@ -115,35 +115,35 @@ extension BsCollectionView.Item: Equality {
 
 public protocol BsCollectionViewCellSize {}
 private protocol _BsCollectionViewCellSize: BsCollectionViewCellSize {
-    var bs_raw_size: CGSize { get }
+    var rawValue: CGSize { get }
 }
 
 extension CGSize: _BsCollectionViewCellSize {
-    var bs_raw_size: CGSize {
+    var rawValue: CGSize {
         return self
     }
 }
 
 extension CGFloat: _BsCollectionViewCellSize {
-    var bs_raw_size: CGSize {
+    var rawValue: CGSize {
         return CGSize(width: self, height: self)
     }
 }
 
 extension Float: _BsCollectionViewCellSize {
-    var bs_raw_size: CGSize {
+    var rawValue: CGSize {
         return CGSize(width: CGFloat(self), height: CGFloat(self))
     }
 }
 
 extension Double: _BsCollectionViewCellSize {
-    var bs_raw_size: CGSize {
+    var rawValue: CGSize {
         return CGSize(width: CGFloat(self), height: CGFloat(self))
     }
 }
 
 extension Int: _BsCollectionViewCellSize {
-    var bs_raw_size: CGSize {
+    var rawValue: CGSize {
         return CGSize(width: CGFloat(self), height: CGFloat(self))
     }
 }

@@ -24,6 +24,7 @@ public extension SwiftPlus where T: UIImage {
 
 public extension UIImage {
     
+    @inlinable
     convenience init(color: UIColor) {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 1)

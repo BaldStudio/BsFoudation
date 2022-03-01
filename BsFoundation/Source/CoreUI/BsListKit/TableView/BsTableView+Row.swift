@@ -9,7 +9,7 @@
 import UIKit
 
 extension BsTableView {
-    open class Row {
+    open class Row: Equality {
         public weak internal(set) var parent: Section? = nil
         
         public init() {}
@@ -72,7 +72,7 @@ extension BsTableView {
     }
 }
 
-extension BsTableView.Row: Equality {
+extension BsTableView.Row {
     
     func tableView(_ tableView: BsTableView,
                    autofitCellHeightAt indexPath: IndexPath) -> CGFloat {

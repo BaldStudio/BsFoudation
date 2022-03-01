@@ -21,19 +21,19 @@ class AppletManager: Service {
 
     func create(by id: String) -> Applet? {
         guard let manifest = manifestsById[id],
-            let cls = NSClassFromString(manifest.name) as? Applet.Type
+            let cls = NSClassFromString("\(manifest.bundle).\(manifest.name)") as? Applet.Type
         else {
             return nil
         }
         
-        cls.bundleName = manifest.name.components(separatedBy: ".").first ?? ""
-        logger.debug("当前 Appelt 所属BundleName：\(cls.bundleName)")
+        cls.bundleName = manifest.bundle
+        logger.debug("当前 Appelt 所在 Bundle 为：\(cls.bundleName)")
         let applet = cls.init()
         applet.manifest = manifest
         if !applet.shouldTerminate {
             add(resident: applet)
         }
-        logger.debug("初始化 \(manifest.name)")
+        logger.debug("初始化 \(manifest.description)")
         return applet
     }
     
@@ -49,8 +49,8 @@ class AppletManager: Service {
         
     func push(_ applet: Applet) {
         defer {
-            logger.debug("当前应用栈\(applets)")
-            logger.debug("当前后台应用栈\(residentApplets)")
+            logger.debug("当前应用栈 \(applets)")
+            logger.debug("当前后台应用栈 \(residentApplets)")
         }
 
         applet.willFinishLaunching()
@@ -81,16 +81,16 @@ class AppletManager: Service {
         }
         
         guard let applet = lastAppet else {
-            logger.debug("当前应用栈\(applets)是空的啊")
+            logger.debug("当前应用栈 \(applets)")
             return nil
         }
         
         defer {
-            logger.debug("当前应用栈\(applets)")
-            logger.debug("当前后台应用栈\(residentApplets)")
+            logger.debug("当前应用栈 \(applets)")
+            logger.debug("当前后台应用栈 \(residentApplets)")
         }
         
-        logger.debug("退出当前应用\(applet)")
+        logger.debug("退出当前应用 \(applet.description)")
                 
         applets.removeLast()
         if applet.shouldTerminate {

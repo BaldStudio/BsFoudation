@@ -9,25 +9,18 @@
 import Foundation
 
 @propertyWrapper
-public struct Restrict<T: Comparable & Numeric> {
-    var value: T = 0
+public struct Clamp<T: Comparable & Numeric> {
+    var value: T
+    let range: ClosedRange<T>
 
-    let minimum: T
-    let maximum: T
-    
+    public init(wrappedValue value: T, _ range: ClosedRange<T>) {
+        precondition(range.contains(value), "value MUST be between \(range)")
+        self.value = value
+        self.range = range
+    }
+
     public var wrappedValue: T {
         get { value }
-        set {
-            precondition(minimum < maximum, "ERROR> minimum MUST less than maximum")
-            
-            value = max(minimum, newValue)
-            value = min(maximum, value)
-        }
+        set { value = min(max(range.lowerBound, newValue), range.upperBound) }
     }
-    
-    public init(min: T, max: T) {
-        minimum = min
-        maximum = max
-    }
-
 }

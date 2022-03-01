@@ -10,5 +10,8 @@ import Foundation
 
 public extension SwiftPlus where T == String {
     
+    var toURL: URL? {
+        URL(string: this)
+    }
     
 }

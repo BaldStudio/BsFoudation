@@ -9,11 +9,11 @@
 import Foundation
 
 public struct SwiftPlus<T> {
-    internal static var this: T.Type {
+    static var this: T.Type {
         T.self
     }
 
-    internal var this: T
+    var this: T
 }
 
 public protocol SwiftCompatible {
@@ -24,14 +24,14 @@ public protocol SwiftCompatible {
 
 public extension SwiftCompatible {
     var bs: SwiftPlus<Self> {
-        return SwiftPlus(this: self)
+        SwiftPlus(this: self)
     }
     
     static var bs: SwiftPlus<Self>.Type {
-        return SwiftPlus<Self>.self
+        SwiftPlus<Self>.self
     }
 }
 
 extension NSObject: SwiftCompatible {}
-
-
+extension String: SwiftCompatible {}
+extension Date: SwiftCompatible {}

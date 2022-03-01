@@ -19,7 +19,7 @@ public var BsWindow: UIWindow {
         return _BsWindow
     }
     
-    var win = BsApp.delegate?.window
+    var win = BsApp.delegate?.window ?? nil
     if win != nil {
         _BsWindow = win!
         return _BsWindow
@@ -81,7 +81,7 @@ public struct Bootstrap {
         let list = result as! [[String: String]]
         
         let manifests = list.compactMap {
-            Manifest(id: $0["id"]!, name: $0["name"]!, version: $0["version"]!)
+            Manifest(id: $0["id"]!, name: $0["name"]!, bundle: $0["bundle"]!, version: $0["version"]!)
         }
         
         Context.registerApplets(with: manifests)

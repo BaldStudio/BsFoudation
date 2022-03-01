@@ -10,7 +10,7 @@ import UIKit
 
 open class BsTableView: UITableView {
     private var proxy = BsTableViewProxy()
-    
+        
     public private(set) var rootNode = DataSource()
 
     public override init(frame: CGRect, style: Style) {

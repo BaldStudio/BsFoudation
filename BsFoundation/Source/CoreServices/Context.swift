@@ -41,7 +41,7 @@ public extension Context {
     @discardableResult
     static func start(applet id: String, closure: ((inout Option) -> Void)? = nil) -> Applet? {
         let app = lookup(applet: id) ?? appletManager.create(by: id)
-        guard let toApp = app else { logger.debug("未找到applet: \(id)");  return nil }
+        guard let toApp = app else { logger.debug("未找到 Applet: \(id)");  return nil }
         
         var options: Option? = nil
         if let callout = closure {
@@ -64,7 +64,7 @@ public extension Context {
             let animated = options?.animated ?? true
             CATransaction.setCompletionBlock(options?.completion)
             CATransaction.begin()
-            navigationController.pushViewController(toApp.root, animated: animated)
+            navigationController?.pushViewController(toApp.root, animated: animated)
             CATransaction.commit()
         }
         
@@ -79,8 +79,8 @@ public extension Context {
             options?.completion?()
         }
         
-        logger.debug("当前应用栈\(appletManager.applets)")
-        logger.debug("当前后台应用栈\(appletManager.residentApplets)")
+        logger.debug("当前应用栈 \(appletManager.applets)")
+        logger.debug("当前后台应用栈 \(appletManager.residentApplets)")
         return toApp
     }
     
@@ -102,7 +102,7 @@ public extension Context {
             else {
                 CATransaction.setCompletionBlock(options?.completion)
                 CATransaction.begin()
-                navigationController.popViewController(animated: animated)
+                navigationController?.popViewController(animated: animated)
                 CATransaction.commit()
             }
             return appletManager.pop()
@@ -118,12 +118,12 @@ public extension Context {
         else {
             CATransaction.setCompletionBlock(options?.completion)
             CATransaction.begin()
-            navigationController.popToViewController(target.root, animated: animated)
+            navigationController?.popToViewController(target.root, animated: animated)
             CATransaction.commit()
         }
 
-        logger.debug("当前应用栈\(appletManager.applets)")
-        logger.debug("当前后台应用栈\(appletManager.residentApplets)")
+        logger.debug("当前应用栈 \(appletManager.applets)")
+        logger.debug("当前后台应用栈 \(appletManager.residentApplets)")
         return target
     }
     
