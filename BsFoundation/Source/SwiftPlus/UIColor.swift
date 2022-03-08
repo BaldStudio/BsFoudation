@@ -91,53 +91,6 @@ extension String: _ColorProvider {
     }
 }
 
-// MARK: - Color Struct
-
-public struct BsColor {
-    /// RGBA
-    public struct RGBA: _ColorProvider {
-        var _color: UIColor {
-            color
-        }
-        
-        public let red: Int
-        public let green: Int
-        public let blue: Int
-        public let alpha: Int
-        
-        public var color: UIColor {
-            UIColor.bs.color(red: red, green: green, blue: blue, alpha: alpha)
-        }
-    }
-    
-    /// 16进制数
-    public struct Hex: _ColorProvider {
-        var _color: UIColor {
-            color
-        }
-
-        public let value: Int
-        
-        public var color: UIColor {
-            value._color
-        }
-    }
-    
-    /// 16进制字符串
-    public struct HexString: _ColorProvider {
-        var _color: UIColor {
-            color
-        }
-
-        public let value: String
-
-        public var color: UIColor {
-            value._color
-        }
-
-    }
-}
-
 // MARK: - UIColor
 
 extension UIColor: _ColorProvider {
@@ -185,14 +138,24 @@ public extension SwiftPlus where T: UIColor {
                        green: g / 255.0,
                        blue: b / 255.0,
                        alpha: a / 255.0)
-     }
-
+    }
+    
+    /// 0xFFFFFF
+    static func hex(_ hex: Int) -> UIColor {
+        hex._color
+    }
+    
+    /// "0xFFFFFF"
+    static func hex(_ hex: String) -> UIColor {
+        hex._color
+    }
+    
     /// 随机色
     static var random: UIColor {
-        func randomNum() -> Int {
+        var randomNum: Int {
             Int.random(in: 0...255)
         }
         
-        return self.color(red: randomNum(), green: randomNum(), blue: randomNum())
+        return color(red: randomNum, green: randomNum, blue: randomNum)
     }
 }

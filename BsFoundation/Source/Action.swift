@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Closure {
+public enum Action {
     /// takes nothing returns nothing
     public typealias primary = () -> Void
     

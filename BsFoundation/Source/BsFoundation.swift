@@ -6,12 +6,46 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
-import UIKit
+@_exported import UIKit
 
 let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
                       category: "BsFoundation")
 
+//MARK: - Application
+
 public let BsApp = UIApplication.shared
+
+//public extension SwiftPlus where T: UIApplication {
+//    var logo: UIImage? {
+//        UIImage(named: "AppIcon60x60")
+//    }
+//
+//    var mainWindow: UIWindow? {
+//        set {
+//
+//        }
+//        get {
+//            var window = BsApp.delegate?.window ?? nil
+//            if window != nil {
+//                return window
+//            }
+//
+//            window = BsApp.windows.first
+//            if window != nil {
+//                return window
+//            }
+//
+//            if let scene = BsApp.connectedScenes.first as? UIWindowScene {
+//                window = scene.windows.first
+//                if window != nil {
+//                    return window
+//                }
+//            }
+//
+//            return nil
+//        }
+//    }
+//}
 
 private var _BsWindow: UIWindow!
 public var BsWindow: UIWindow {

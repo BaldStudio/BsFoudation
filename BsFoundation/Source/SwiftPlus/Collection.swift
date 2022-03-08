@@ -10,8 +10,8 @@ import Foundation
 
 public extension Collection {
     
+    @inlinable
     subscript (safe index: Self.Index) -> Iterator.Element? {
         (startIndex ..< endIndex).contains(index) ? self[index] : nil
     }
-    
 }

@@ -44,7 +44,68 @@ public extension SwiftPlus where T: UIView {
         this.layer.borderWidth = w
         this.layer.borderColor = c.cgColor
     }
+    
+    func drawLines(forEdge edges: UIRectEdge,
+                   offset: CGFloat = 0,
+                   color: UIColor = .separator) -> [UIView] {
+        var lines: [UIView] = []
+        let offset = max(offset, 0)
         
+        func addLine() -> UIView {
+            let line = UIView()
+            line.isUserInteractionEnabled = false
+            line.translatesAutoresizingMaskIntoConstraints = false
+            line.backgroundColor = color
+            this.addSubview(line)
+            return line
+        }
+        
+        if edges.contains(.top) {
+            let line = addLine()
+            lines.append(line)
+            NSLayoutConstraint.activate([
+                line.leadingAnchor.constraint(equalTo: this.leadingAnchor, constant: offset),
+                line.trailingAnchor.constraint(equalTo: this.trailingAnchor, constant: -offset),
+                line.topAnchor.constraint(equalTo: this.topAnchor),
+                line.heightAnchor.constraint(equalToConstant: 0.5)
+            ])
+        }
+        
+        if edges.contains(.bottom) {
+            let line = addLine()
+            lines.append(line)
+            NSLayoutConstraint.activate([
+                line.leadingAnchor.constraint(equalTo: this.leadingAnchor, constant: offset),
+                line.trailingAnchor.constraint(equalTo: this.trailingAnchor, constant: -offset),
+                line.bottomAnchor.constraint(equalTo: this.bottomAnchor),
+                line.heightAnchor.constraint(equalToConstant: 0.5)
+            ])
+        }
+
+        if edges.contains(.left) {
+            let line = addLine()
+            lines.append(line)
+            NSLayoutConstraint.activate([
+                line.leadingAnchor.constraint(equalTo: this.leadingAnchor),
+                line.topAnchor.constraint(equalTo: this.topAnchor, constant: offset),
+                line.bottomAnchor.constraint(equalTo: this.bottomAnchor, constant: -offset),
+                line.widthAnchor.constraint(equalToConstant: 0.5)
+            ])
+        }
+
+        if edges.contains(.right) {
+            let line = addLine()
+            lines.append(line)
+            NSLayoutConstraint.activate([
+                line.trailingAnchor.constraint(equalTo: this.trailingAnchor),
+                line.topAnchor.constraint(equalTo: this.topAnchor, constant: offset),
+                line.bottomAnchor.constraint(equalTo: this.bottomAnchor, constant: -offset),
+                line.widthAnchor.constraint(equalToConstant: 0.5)
+            ])
+        }
+        
+        return lines
+    }
 }
 
 // MARK: - Hierarchy
@@ -114,7 +175,7 @@ public extension SwiftPlus where T: UIView {
 
 public extension SwiftPlus where T: UIView {
     /// 添加tap手势
-    func onTap(_ closure: @escaping Closure.primary) {
+    func onTap(_ closure: @escaping Action.primary) {
         this.bs_onTap = closure
         let tap = UITapGestureRecognizer(target: this,
                                          action: #selector(T.bs_onTapEvent(_:)))
@@ -124,19 +185,19 @@ public extension SwiftPlus where T: UIView {
 }
 
 private extension UIView {
-    struct AssociateKeys {
-        static var onTapEvent = "onTapEventKey"
+    struct AssociatedKeys {
+        static var onTapEvent = 0
     }
         
-    var bs_onTap: Closure.primary? {
+    var bs_onTap: Action.primary? {
         set {
             objc_setAssociatedObject(self,
-                                     &AssociateKeys.onTapEvent,
+                                     &AssociatedKeys.onTapEvent,
                                      newValue,
                                      .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-            objc_getAssociatedObject(self, &AssociateKeys.onTapEvent) as? Closure.primary
+            objc_getAssociatedObject(self, &AssociatedKeys.onTapEvent) as? Action.primary
         }
     }
     

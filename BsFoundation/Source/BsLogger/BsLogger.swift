@@ -137,7 +137,7 @@ extension BsLogger {
             try FileManager.default.removeItem(atPath: category ? filePath : fileDir)
         }
         catch {
-            print("\(#file) line:\(#line) 删除失败: \(error)")
+            print("日志删除失败::\(error)")
         }
     }
     
@@ -150,12 +150,12 @@ extension BsLogger {
         guard let url = URL(string: filePath),
               let fileHandle = try? FileHandle(forWritingTo: url)
         else {
-            print("追加日志内容失败，\(filePath)")
+            print("追加日志内容失败::\(filePath)")
             return
         }
         
         guard let content = ("\n" + string).data(using: .utf8) else {
-            print("【UTF8】日志内容编码失败\(string)")
+            print("【UTF8】日志内容编码失败::\(string)")
             return
         }
          
@@ -183,7 +183,7 @@ extension BsLogger {
                                                     attributes: nil)
         }
         catch {
-            print("创建日志文件夹失败: \(error)")
+            print("创建日志文件夹失败::\(error)")
         }
     }
 }

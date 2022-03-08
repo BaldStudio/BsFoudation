@@ -12,7 +12,7 @@ import Foundation
 
 public extension SwiftPlus where T: DispatchQueue {
     
-    func delay(_ delay: TimeInterval, action: @escaping Closure.primary) {
+    func delay(_ delay: TimeInterval, action: @escaping Action.primary) {
         let when = DispatchTime.now() + delay
         this.asyncAfter(deadline: when) {
             action()
@@ -28,7 +28,7 @@ public extension SwiftPlus where T: DispatchQueue {
 public extension SwiftPlus where T: DispatchQueue {
     
     func debounce(interval: TimeInterval = 1.0,
-                  action: @escaping Closure.primary) -> Closure.primary {
+                  action: @escaping Action.primary) -> Action.primary {
         var worker: DispatchWorkItem?
         
         return {
@@ -45,7 +45,7 @@ public extension SwiftPlus where T: DispatchQueue {
 public extension SwiftPlus where T: DispatchQueue {
     
     func throttle(interval: TimeInterval = 1.0,
-                  action: @escaping Closure.primary) -> Closure.primary {
+                  action: @escaping Action.primary) -> Action.primary {
         var worker: DispatchWorkItem?
         
         var lastFire = DispatchTime.now()
@@ -86,7 +86,7 @@ public extension SwiftPlus where T: DispatchQueue {
     static func once(file: String = #file,
                      function: String = #function,
                      line: Int = #line,
-                     action: Closure.primary) {
+                     action: Action.primary) {
         let token = "\(file):\(function):\(line)"
         once(token: token, action: action)
     }
@@ -97,7 +97,7 @@ public extension SwiftPlus where T: DispatchQueue {
      - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
      - parameter block: Block to execute once
      */
-    static func once(token: String, action: Closure.primary) {
+    static func once(token: String, action: Action.primary) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
 

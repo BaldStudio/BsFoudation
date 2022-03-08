@@ -124,6 +124,7 @@ public extension CGSize {
 }
 
 extension CGSize: ExpressibleByArrayLiteral {
+    @inlinable
     public init(arrayLiteral elements: CGFloat...) {
         assert(elements.count == 2)
         self.init(width: elements[0], height: elements[1])

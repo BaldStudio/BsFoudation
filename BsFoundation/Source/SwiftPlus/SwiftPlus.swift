@@ -34,4 +34,5 @@ public extension SwiftCompatible {
 
 extension NSObject: SwiftCompatible {}
 extension String: SwiftCompatible {}
-extension Date: SwiftCompatible {}
+extension Data: SwiftCompatible {}
+
