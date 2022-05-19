@@ -18,10 +18,7 @@ open class BsProxy: NSObject {
     }
         
     open override func forwardingTarget(for aSelector: Selector!) -> Any? {
-        if target?.responds(to: aSelector) == true {
-            return target
-        }
-        return super.forwardingTarget(for: aSelector)
+        target?.responds(to: aSelector) == true ? target : super.forwardingTarget(for: aSelector)
     }
     
     open override func responds(to aSelector: Selector!) -> Bool {

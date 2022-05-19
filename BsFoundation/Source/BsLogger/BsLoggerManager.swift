@@ -1,6 +1,6 @@
 //
 //  BsLoggerManager.swift
-//  BsFoundation
+//  BsLogger
 //
 //  Created by crzorz on 2021/8/19.
 //  Copyright © 2021 BaldStudio. All rights reserved.

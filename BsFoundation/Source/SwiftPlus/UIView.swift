@@ -167,7 +167,7 @@ public extension SwiftPlus where T: UIView {
             }
         }
         
-        return BsWindow.rootViewController
+        return BsAppMainWindow.rootViewController
     }
 }
 

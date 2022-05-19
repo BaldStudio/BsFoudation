@@ -19,9 +19,11 @@
 		D23FF0D525AD9B5500D755D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23FF0D325AD9B5500D755D9 /* LaunchScreen.storyboard */; };
 		D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */; };
 		D23FF0E525AD9C5600D755D9 /* BsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D27A8A1D25203F1A006A6125 /* BsFoundation.framework */; platformFilter = ios; };
+		D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF4282D015B005C2C01 /* BsLogger.swift */; };
+		D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF5282D015B005C2C01 /* BsLoggerManager.swift */; };
+		D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF9282D020A005C2C01 /* Recommend.swift */; };
+		D25B3BFC282D020A005C2C01 /* BsStoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BFA282D020A005C2C01 /* BsStoreKit.swift */; };
 		D25DE051275F84C000626FB6 /* PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25DE050275F84C000626FB6 /* PropertyWrapper.swift */; };
-		D26FC62626E0AF35003B9F11 /* BsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62426E0AF35003B9F11 /* BsLogger.swift */; };
-		D26FC62726E0AF35003B9F11 /* BsLoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62526E0AF35003B9F11 /* BsLoggerManager.swift */; };
 		D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62926E0AF8B003B9F11 /* UIImage.swift */; };
 		D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62A26E0AF8B003B9F11 /* Bundle.swift */; };
 		D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62B26E0AF8B003B9F11 /* Then.swift */; };
@@ -38,14 +40,6 @@
 		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
 		D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftPlus.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
-		D29BA96926E5C11A003A5ECA /* BsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96826E5C11A003A5ECA /* BsView.swift */; };
-		D29BA96B26E5C164003A5ECA /* BsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BA96A26E5C164003A5ECA /* BsViewController.swift */; };
-		D2A332CB27CF68D500705185 /* BsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A332CA27CF68D500705185 /* BsPageViewController.swift */; };
-		D2A332D927CF6A1E00705185 /* BsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A332D627CF6A1E00705185 /* BsCollectionViewController.swift */; };
-		D2A332DA27CF6A1E00705185 /* BsWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A332D727CF6A1E00705185 /* BsWebViewController.swift */; };
-		D2A332DB27CF6A1E00705185 /* BsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A332D827CF6A1E00705185 /* BsTableViewController.swift */; };
-		D2BDAEFF26C54F9C003C0DC7 /* BsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */; };
-		D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */; };
 		D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C119DD26A8069E000C42C4 /* Manifest.swift */; };
 		D2C8B9CE27D741AD00F790DF /* BsProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9CD27D741AC00F790DF /* BsProxy.swift */; };
 		D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9D127D744AB00F790DF /* UIApplication.swift */; };
@@ -93,9 +87,11 @@
 		D23FF0E025AD9C5600D755D9 /* BsFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BsFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundationTests.swift; sourceTree = "<group>"; };
 		D23FF0E425AD9C5600D755D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D25B3BF4282D015B005C2C01 /* BsLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLogger.swift; sourceTree = "<group>"; };
+		D25B3BF5282D015B005C2C01 /* BsLoggerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLoggerManager.swift; sourceTree = "<group>"; };
+		D25B3BF9282D020A005C2C01 /* Recommend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
+		D25B3BFA282D020A005C2C01 /* BsStoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsStoreKit.swift; sourceTree = "<group>"; };
 		D25DE050275F84C000626FB6 /* PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrapper.swift; sourceTree = "<group>"; };
-		D26FC62426E0AF35003B9F11 /* BsLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLogger.swift; sourceTree = "<group>"; };
-		D26FC62526E0AF35003B9F11 /* BsLoggerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLoggerManager.swift; sourceTree = "<group>"; };
 		D26FC62926E0AF8B003B9F11 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		D26FC62A26E0AF8B003B9F11 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		D26FC62B26E0AF8B003B9F11 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; tabWidth = 2; wrapsLines = 1; };
@@ -114,14 +110,6 @@
 		D29601502732ACA500B6511A /* SwiftPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftPlus.swift; sourceTree = "<group>"; };
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
-		D29BA96826E5C11A003A5ECA /* BsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsView.swift; sourceTree = "<group>"; };
-		D29BA96A26E5C164003A5ECA /* BsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsViewController.swift; sourceTree = "<group>"; };
-		D2A332CA27CF68D500705185 /* BsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsPageViewController.swift; sourceTree = "<group>"; };
-		D2A332D627CF6A1E00705185 /* BsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsCollectionViewController.swift; sourceTree = "<group>"; };
-		D2A332D727CF6A1E00705185 /* BsWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsWebViewController.swift; sourceTree = "<group>"; };
-		D2A332D827CF6A1E00705185 /* BsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsTableViewController.swift; sourceTree = "<group>"; };
-		D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsNavigationController.swift; sourceTree = "<group>"; };
-		D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTabBarController.swift; sourceTree = "<group>"; };
 		D2C119DD26A8069E000C42C4 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
 		D2C8B9CD27D741AC00F790DF /* BsProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsProxy.swift; sourceTree = "<group>"; };
 		D2C8B9D127D744AB00F790DF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -215,6 +203,24 @@
 			path = BsFoundationTests;
 			sourceTree = "<group>";
 		};
+		D25B3BF3282D015B005C2C01 /* BsLogger */ = {
+			isa = PBXGroup;
+			children = (
+				D25B3BF4282D015B005C2C01 /* BsLogger.swift */,
+				D25B3BF5282D015B005C2C01 /* BsLoggerManager.swift */,
+			);
+			path = BsLogger;
+			sourceTree = "<group>";
+		};
+		D25B3BF8282D020A005C2C01 /* BsStoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				D25B3BFA282D020A005C2C01 /* BsStoreKit.swift */,
+				D25B3BF9282D020A005C2C01 /* Recommend.swift */,
+			);
+			path = BsStoreKit;
+			sourceTree = "<group>";
+		};
 		D26FC60626E0AE33003B9F11 /* CoreServices */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,51 +234,17 @@
 			path = CoreServices;
 			sourceTree = "<group>";
 		};
-		D26FC60726E0AE75003B9F11 /* CoreUI */ = {
-			isa = PBXGroup;
-			children = (
-				D26FC60826E0AE8B003B9F11 /* BsUIKit */,
-			);
-			path = CoreUI;
-			sourceTree = "<group>";
-		};
-		D26FC60826E0AE8B003B9F11 /* BsUIKit */ = {
-			isa = PBXGroup;
-			children = (
-				D29BA96826E5C11A003A5ECA /* BsView.swift */,
-				D29BA96A26E5C164003A5ECA /* BsViewController.swift */,
-				D2A332D627CF6A1E00705185 /* BsCollectionViewController.swift */,
-				D2A332D827CF6A1E00705185 /* BsTableViewController.swift */,
-				D2A332D727CF6A1E00705185 /* BsWebViewController.swift */,
-				D2BDAF2526C6498C003C0DC7 /* BsTabBarController.swift */,
-				D2BDAEFE26C54F9C003C0DC7 /* BsNavigationController.swift */,
-				D2A332CA27CF68D500705185 /* BsPageViewController.swift */,
-			);
-			path = BsUIKit;
-			sourceTree = "<group>";
-		};
-		D26FC62326E0AF2E003B9F11 /* BsLogger */ = {
-			isa = PBXGroup;
-			children = (
-				D26FC62426E0AF35003B9F11 /* BsLogger.swift */,
-				D26FC62526E0AF35003B9F11 /* BsLoggerManager.swift */,
-			);
-			path = BsLogger;
-			sourceTree = "<group>";
-		};
 		D26FC62826E0AF76003B9F11 /* SwiftPlus */ = {
 			isa = PBXGroup;
 			children = (
 				D29601502732ACA500B6511A /* SwiftPlus.swift */,
+				D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */,
 				D26FC62A26E0AF8B003B9F11 /* Bundle.swift */,
 				D29601522732ACB900B6511A /* Collection.swift */,
 				D26FC63226E0AF8C003B9F11 /* Data.swift */,
 				D26FC62D26E0AF8B003B9F11 /* DispatchQueue.swift */,
 				D26FC62F26E0AF8C003B9F11 /* Geometry.swift */,
-				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
-				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 				D26FC63026E0AF8C003B9F11 /* String.swift */,
-				D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */,
 				D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */,
 				D2C8B9D127D744AB00F790DF /* UIApplication.swift */,
 				D26FC63426E0AF8C003B9F11 /* UIColor.swift */,
@@ -320,9 +292,11 @@
 				D2C8B9CD27D741AC00F790DF /* BsProxy.swift */,
 				D26FC62B26E0AF8B003B9F11 /* Then.swift */,
 				D26FC63526E0AF8C003B9F11 /* Action.swift */,
+				D26FC64C26E20924003B9F11 /* Runtime.swift */,
+				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
 				D26FC62826E0AF76003B9F11 /* SwiftPlus */,
-				D26FC62326E0AF2E003B9F11 /* BsLogger */,
-				D26FC60726E0AE75003B9F11 /* CoreUI */,
+				D25B3BF3282D015B005C2C01 /* BsLogger */,
+				D25B3BF8282D020A005C2C01 /* BsStoreKit */,
 				D26FC60626E0AE33003B9F11 /* CoreServices */,
 			);
 			path = Source;
@@ -574,6 +548,7 @@
 				D2C8B9CE27D741AD00F790DF /* BsProxy.swift in Sources */,
 				D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */,
 				D26FC63F26E0AF8C003B9F11 /* Data.swift in Sources */,
+				D25B3BFC282D020A005C2C01 /* BsStoreKit.swift in Sources */,
 				D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */,
 				D239FC7826BA717F00FD1DA0 /* BsFoundation.swift in Sources */,
 				D25DE051275F84C000626FB6 /* PropertyWrapper.swift in Sources */,
@@ -585,25 +560,18 @@
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,
+				D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
-				D2BDAF2626C6498C003C0DC7 /* BsTabBarController.swift in Sources */,
-				D2BDAEFF26C54F9C003C0DC7 /* BsNavigationController.swift in Sources */,
-				D29BA96B26E5C164003A5ECA /* BsViewController.swift in Sources */,
+				D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */,
+				D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */,
 				D26FC64226E0AF8C003B9F11 /* Action.swift in Sources */,
 				D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */,
-				D26FC62626E0AF35003B9F11 /* BsLogger.swift in Sources */,
 				D2D449D826A5587000D77E53 /* Context.swift in Sources */,
-				D26FC62726E0AF35003B9F11 /* BsLoggerManager.swift in Sources */,
 				D26FC63D26E0AF8C003B9F11 /* String.swift in Sources */,
-				D2A332D927CF6A1E00705185 /* BsCollectionViewController.swift in Sources */,
 				D2D449DA26A558AA00D77E53 /* Service.swift in Sources */,
-				D2A332DB27CF6A1E00705185 /* BsTableViewController.swift in Sources */,
 				D2D449DC26A55BEA00D77E53 /* AppletManager.swift in Sources */,
 				D29601532732ACB900B6511A /* Collection.swift in Sources */,
-				D2A332CB27CF68D500705185 /* BsPageViewController.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
-				D29BA96926E5C11A003A5ECA /* BsView.swift in Sources */,
-				D2A332DA27CF6A1E00705185 /* BsWebViewController.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
 				D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */,
 			);
