@@ -37,16 +37,10 @@
 		D26FC64126E0AF8C003B9F11 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63426E0AF8C003B9F11 /* UIColor.swift */; };
 		D26FC64226E0AF8C003B9F11 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63526E0AF8C003B9F11 /* Action.swift */; };
 		D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64C26E20924003B9F11 /* Runtime.swift */; };
-		D27A8A992520AEAC006A6125 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A8A982520AEAC006A6125 /* Applet.swift */; };
 		D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftPlus.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
-		D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C119DD26A8069E000C42C4 /* Manifest.swift */; };
 		D2C8B9CE27D741AD00F790DF /* BsProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9CD27D741AC00F790DF /* BsProxy.swift */; };
 		D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9D127D744AB00F790DF /* UIApplication.swift */; };
-		D2D449D826A5587000D77E53 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449D726A5587000D77E53 /* Context.swift */; };
-		D2D449DA26A558AA00D77E53 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449D926A558AA00D77E53 /* Service.swift */; };
-		D2D449DC26A55BEA00D77E53 /* AppletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449DB26A55BEA00D77E53 /* AppletManager.swift */; };
-		D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D449DD26A55C0000D77E53 /* ServiceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,17 +100,11 @@
 		D26FC63526E0AF8C003B9F11 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		D26FC64C26E20924003B9F11 /* Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D27A8A982520AEAC006A6125 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		D29601502732ACA500B6511A /* SwiftPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftPlus.swift; sourceTree = "<group>"; };
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
-		D2C119DD26A8069E000C42C4 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
 		D2C8B9CD27D741AC00F790DF /* BsProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsProxy.swift; sourceTree = "<group>"; };
 		D2C8B9D127D744AB00F790DF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		D2D449D726A5587000D77E53 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
-		D2D449D926A558AA00D77E53 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		D2D449DB26A55BEA00D77E53 /* AppletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletManager.swift; sourceTree = "<group>"; };
-		D2D449DD26A55C0000D77E53 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		D2F3DFA0269FD3D8006DB903 /* BsFoundationDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BsFoundationDemo.entitlements; sourceTree = "<group>"; };
 		D2FCEA6A25F9F779005EAA15 /* BsFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BsFoundation.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D5C2F2360140B33361DA6AB8 /* Pods-BsFoundationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationDemo.debug.xcconfig"; path = "Target Support Files/Pods-BsFoundationDemo/Pods-BsFoundationDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -221,19 +209,6 @@
 			path = BsStoreKit;
 			sourceTree = "<group>";
 		};
-		D26FC60626E0AE33003B9F11 /* CoreServices */ = {
-			isa = PBXGroup;
-			children = (
-				D2D449D726A5587000D77E53 /* Context.swift */,
-				D27A8A982520AEAC006A6125 /* Applet.swift */,
-				D2D449DB26A55BEA00D77E53 /* AppletManager.swift */,
-				D2D449D926A558AA00D77E53 /* Service.swift */,
-				D2D449DD26A55C0000D77E53 /* ServiceManager.swift */,
-				D2C119DD26A8069E000C42C4 /* Manifest.swift */,
-			);
-			path = CoreServices;
-			sourceTree = "<group>";
-		};
 		D26FC62826E0AF76003B9F11 /* SwiftPlus */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +272,6 @@
 				D26FC62826E0AF76003B9F11 /* SwiftPlus */,
 				D25B3BF3282D015B005C2C01 /* BsLogger */,
 				D25B3BF8282D020A005C2C01 /* BsStoreKit */,
-				D26FC60626E0AE33003B9F11 /* CoreServices */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -549,7 +523,6 @@
 				D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */,
 				D26FC63F26E0AF8C003B9F11 /* Data.swift in Sources */,
 				D25B3BFC282D020A005C2C01 /* BsStoreKit.swift in Sources */,
-				D2C119DE26A8069E000C42C4 /* Manifest.swift in Sources */,
 				D239FC7826BA717F00FD1DA0 /* BsFoundation.swift in Sources */,
 				D25DE051275F84C000626FB6 /* PropertyWrapper.swift in Sources */,
 				D26FC64126E0AF8C003B9F11 /* UIColor.swift in Sources */,
@@ -559,21 +532,16 @@
 				D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */,
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
-				D27A8A992520AEAC006A6125 /* Applet.swift in Sources */,
 				D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
 				D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */,
 				D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */,
 				D26FC64226E0AF8C003B9F11 /* Action.swift in Sources */,
 				D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */,
-				D2D449D826A5587000D77E53 /* Context.swift in Sources */,
 				D26FC63D26E0AF8C003B9F11 /* String.swift in Sources */,
-				D2D449DA26A558AA00D77E53 /* Service.swift in Sources */,
-				D2D449DC26A55BEA00D77E53 /* AppletManager.swift in Sources */,
 				D29601532732ACB900B6511A /* Collection.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
-				D2D449DE26A55C0000D77E53 /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

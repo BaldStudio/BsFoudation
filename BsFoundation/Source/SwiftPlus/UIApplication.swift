@@ -15,3 +15,34 @@ public extension SwiftPlus where T: UIApplication {
     }
     
 }
+
+public let BsApp = UIApplication.shared
+
+private var _BsAppWindow: UIWindow? = nil
+public var BsAppWindow: UIWindow! {
+    if _BsAppWindow != nil {
+        return _BsAppWindow
+    }
+    
+    var window = BsApp.delegate?.window ?? nil
+    if window != nil {
+        _BsAppWindow = window
+        return window
+    }
+
+    window = BsApp.windows.first
+    if window != nil {
+        _BsAppWindow = window
+        return window
+    }
+
+    if let scene = BsApp.connectedScenes.first as? UIWindowScene {
+        window = scene.windows.first
+        if window != nil {
+            _BsAppWindow = window
+            return window
+        }
+    }
+    
+    fatalError("Can not find main window")
+}
