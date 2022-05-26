@@ -8,6 +8,8 @@
 
 import Foundation
 
+//MARK: - Clamp
+
 @propertyWrapper
 public struct Clamp<T: Comparable & Numeric> {
     var value: T
@@ -22,5 +24,34 @@ public struct Clamp<T: Comparable & Numeric> {
     public var wrappedValue: T {
         get { value }
         set { value = min(max(range.lowerBound, newValue), range.upperBound) }
+    }
+}
+
+//MARK: - Lazy
+
+@propertyWrapper
+public struct Lazy<T> {
+    private var closure: () -> T
+    private var value: T?
+    
+    public init(default value: @autoclosure @escaping () -> T) {
+        closure = value
+    }
+    
+    public init(body value: @escaping () -> T) {
+        closure = value
+    }
+
+    public var wrappedValue: T? {
+        mutating get {
+            if value == nil {
+                value = closure()
+            }
+            
+            return value
+        }
+        set {
+            value = newValue
+        }
     }
 }

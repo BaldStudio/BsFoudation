@@ -39,7 +39,6 @@
 		D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC64C26E20924003B9F11 /* Runtime.swift */; };
 		D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftPlus.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
-		D2C8B9CE27D741AD00F790DF /* BsProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9CD27D741AC00F790DF /* BsProxy.swift */; };
 		D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9D127D744AB00F790DF /* UIApplication.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +102,6 @@
 		D29601502732ACA500B6511A /* SwiftPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftPlus.swift; sourceTree = "<group>"; };
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
-		D2C8B9CD27D741AC00F790DF /* BsProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsProxy.swift; sourceTree = "<group>"; };
 		D2C8B9D127D744AB00F790DF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		D2F3DFA0269FD3D8006DB903 /* BsFoundationDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BsFoundationDemo.entitlements; sourceTree = "<group>"; };
 		D2FCEA6A25F9F779005EAA15 /* BsFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BsFoundation.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -264,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */,
-				D2C8B9CD27D741AC00F790DF /* BsProxy.swift */,
 				D26FC62B26E0AF8B003B9F11 /* Then.swift */,
 				D26FC63526E0AF8C003B9F11 /* Action.swift */,
 				D26FC64C26E20924003B9F11 /* Runtime.swift */,
@@ -519,7 +516,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C8B9CE27D741AD00F790DF /* BsProxy.swift in Sources */,
 				D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */,
 				D26FC63F26E0AF8C003B9F11 /* Data.swift in Sources */,
 				D25B3BFC282D020A005C2C01 /* BsStoreKit.swift in Sources */,
