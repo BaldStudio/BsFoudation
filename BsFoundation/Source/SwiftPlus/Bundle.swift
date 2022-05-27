@@ -14,8 +14,8 @@ public extension SwiftPlus where T: Bundle {
         this.infoDictionary?[key.rawValue] as? String ?? ""
     }
     
-    func image(_ name: String) -> UIImage {
-        UIImage(named: name, in: this, compatibleWith: nil)!
+    func image(_ name: String) -> UIImage? {
+        UIImage(named: name, in: this, compatibleWith: nil)
     }
 }
 

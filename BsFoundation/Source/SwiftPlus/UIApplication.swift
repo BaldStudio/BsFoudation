@@ -6,43 +6,39 @@
 //  Copyright © 2022 BaldStudio. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-public extension SwiftPlus where T: UIApplication {
-    
-    var icon: UIImage? {
-        UIImage(named: "AppIcon60x60")
-    }
-    
-}
+private var _window: UIWindow? = nil
 
 public let BsApp = UIApplication.shared
 
-private var _BsAppWindow: UIWindow? = nil
-public var BsAppWindow: UIWindow! {
-    if _BsAppWindow != nil {
-        return _BsAppWindow
+public let BsAppWindow = BsApp.bs.window!
+
+public let BsAppIcon = BsApp.bs.icon!
+
+public let BsAppBundle = Bundle.main
+
+public extension SwiftPlus where T: UIApplication {
+    
+    var icon: UIImage! {
+        UIImage(named: "AppIcon60x60")
     }
     
-    var window = BsApp.delegate?.window ?? nil
-    if window != nil {
-        _BsAppWindow = window
-        return window
-    }
+    var window: UIWindow! {
+        if _window != nil { return _window }
+                
+        _window = BsApp.delegate?.window ?? nil
+        if _window != nil { return _window }
 
-    window = BsApp.windows.first
-    if window != nil {
-        _BsAppWindow = window
-        return window
-    }
+        _window = BsApp.windows.first
+        if _window != nil { return _window }
 
-    if let scene = BsApp.connectedScenes.first as? UIWindowScene {
-        window = scene.windows.first
-        if window != nil {
-            _BsAppWindow = window
-            return window
+        if let scene = BsApp.connectedScenes.first as? UIWindowScene {
+            _window = scene.windows.first
+            if _window != nil { return _window }
         }
+        
+        fatalError("Can not find main window")
     }
     
-    fatalError("Can not find main window")
 }
