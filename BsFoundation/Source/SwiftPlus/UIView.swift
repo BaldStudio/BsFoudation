@@ -93,7 +93,7 @@ public extension SwiftPlus where T: UIView {
 
 public extension SwiftPlus where T: UIView {
     var viewController: UIViewController? {
-        nearest(ofKind: UIViewController.self) ?? BsAppWindow.rootViewController
+        nearest(ofKind: UIViewController.self) ?? BsAppMainWindow.rootViewController
     }
 }
 
