@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+//MARK: - Binding
+
 public extension Binding {
     func bs_onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
         Binding(
@@ -22,7 +24,7 @@ public extension Binding {
     }
 }
 
-// MARK: - AppStorage
+//MARK: - AppStorage
 
 @frozen @propertyWrapper
 public struct AppStorageCompat<Value> : DynamicProperty {

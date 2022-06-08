@@ -9,10 +9,12 @@
 import Foundation
 
 public struct SwiftPlus<T> {
+    @usableFromInline
     static var this: T.Type {
         T.self
     }
 
+    @usableFromInline
     var this: T
 }
 

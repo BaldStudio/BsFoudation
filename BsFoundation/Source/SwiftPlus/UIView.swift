@@ -38,13 +38,112 @@ public extension SwiftPlus where T: UIView {
         guard let view = objects?.first as? T else { return nil }
         return view
     }
+        
+}
+
+// MARK: - Hierarchy
+
+public extension SwiftPlus where T: UIView {
+    @inlinable
+    func removeSubviews() {
+        this.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func subviews<T>(ofKind: T.Type) -> [T] {
+        var views: [T] = []
+        for subview in this.subviews {
+            if let view = subview as? T {
+                views.append(view)
+            }
+            else if !subview.subviews.isEmpty {
+                views.append(contentsOf: subview.bs.subviews(ofKind: T.self))
+            }
+        }
+        return views
+    }
+}
+
+// MARK: - Layout
+
+public extension SwiftPlus where T: UIView {
+        
+    func edgesEqualToSuperview(_ edges: UIEdgeInsets = .zero) {
+        guard let superview = this.superview else { fatalError() }
+        
+        this.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            this.leftAnchor.constraint(equalTo: superview.leftAnchor,
+                                       constant: edges.left),
+            this.rightAnchor.constraint(equalTo: superview.rightAnchor,
+                                        constant: edges.right),
+            this.topAnchor.constraint(equalTo: superview.topAnchor,
+                                      constant: edges.top),
+            this.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
+                                         constant: edges.bottom),
+        ])
+    }
+    
+    func removeAllConstraints() {
+        this.removeConstraints(this.constraints)
+    }
+}
+
+// MARK: - Responder
+
+public extension SwiftPlus where T: UIView {
+    var viewController: UIViewController? {
+        nearest(ofKind: UIViewController.self) ?? BsAppWindow.rootViewController
+    }
+}
+
+// MARK: - Gestures
+
+public extension SwiftPlus where T: UIView {
+    /// 添加tap手势
+    func onTap(_ closure: @escaping Action.primary) {
+        this.bs_onTap = closure
+        let tap = UITapGestureRecognizer(target: this,
+                                         action: #selector(T.bs_onTapEvent(_:)))
+        this.addGestureRecognizer(tap)
+    }
+
+}
+
+private extension UIView {
+    struct AssociatedKeys {
+        static var onTapEvent = 0
+    }
+        
+    var bs_onTap: Action.primary? {
+        set {
+            objc_setAssociatedObject(self,
+                                     &AssociatedKeys.onTapEvent,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        get {
+            objc_getAssociatedObject(self, &AssociatedKeys.onTapEvent) as? Action.primary
+        }
+    }
+    
+    @objc
+    func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
+        bs_onTap?()
+    }
+}
+
+// MARK: Shape
+
+public extension SwiftPlus where T: UIView {
     
     /// 添加边框
+    @inlinable
     func border(_ w: CGFloat = 0.5, _ c: UIColor = .white) {
         this.layer.borderWidth = w
         this.layer.borderColor = c.cgColor
     }
-    
+
     func drawLines(forEdge edges: UIRectEdge,
                    offset: CGFloat = 0,
                    color: UIColor = .separator) -> [UIView] {
@@ -106,103 +205,5 @@ public extension SwiftPlus where T: UIView {
         
         return lines
     }
-}
-
-// MARK: - Hierarchy
-
-public extension SwiftPlus where T: UIView {
-    func removeSubviews() {
-        this.subviews.forEach { $0.removeFromSuperview() }
-    }
     
-    func subviews<T>(ofType _: T.Type) -> [T] {
-        var views = [T]()
-        for subview in this.subviews {
-            if let view = subview as? T {
-                views.append(view)
-            }
-            else if !subview.subviews.isEmpty {
-                views.append(contentsOf: subview.bs.subviews(ofType: T.self))
-            }
-        }
-        return views
-    }
-}
-
-// MARK: - Layout
-
-public extension SwiftPlus where T: UIView {
-        
-    func edgesEqualToSuperview(_ edges: UIEdgeInsets = .zero) {
-        guard let superview = this.superview else { fatalError() }
-        
-        this.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            this.leftAnchor.constraint(equalTo: superview.leftAnchor,
-                                       constant: edges.left),
-            this.rightAnchor.constraint(equalTo: superview.rightAnchor,
-                                        constant: edges.right),
-            this.topAnchor.constraint(equalTo: superview.topAnchor,
-                                      constant: edges.top),
-            this.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
-                                         constant: edges.bottom),
-        ])
-    }
-    
-    func removeAllConstraints() {
-        this.removeConstraints(this.constraints)
-    }
-}
-
-// MARK: - Responder
-
-public extension SwiftPlus where T: UIView {
-    var viewController: UIViewController? {
-        var responder: UIResponder? = this
-        while responder != nil {
-            responder = responder!.next
-            if let target = responder as? UIViewController {
-                return target
-            }
-        }
-        
-        return BsAppWindow.rootViewController
-    }
-}
-
-// MARK: - Gestures
-
-public extension SwiftPlus where T: UIView {
-    /// 添加tap手势
-    func onTap(_ closure: @escaping Action.primary) {
-        this.bs_onTap = closure
-        let tap = UITapGestureRecognizer(target: this,
-                                         action: #selector(T.bs_onTapEvent(_:)))
-        this.addGestureRecognizer(tap)
-    }
-
-}
-
-private extension UIView {
-    struct AssociatedKeys {
-        static var onTapEvent = 0
-    }
-        
-    var bs_onTap: Action.primary? {
-        set {
-            objc_setAssociatedObject(self,
-                                     &AssociatedKeys.onTapEvent,
-                                     newValue,
-                                     .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-            objc_getAssociatedObject(self, &AssociatedKeys.onTapEvent) as? Action.primary
-        }
-    }
-    
-    @objc
-    func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
-        bs_onTap?()
-    }
 }

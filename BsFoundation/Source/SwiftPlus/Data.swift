@@ -10,6 +10,7 @@ import Foundation
 
 public extension SwiftPlus where T == Data {
     
+    @inlinable
     var bytes: [UInt8] {
         [UInt8](this)
     }

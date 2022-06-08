@@ -94,12 +94,12 @@ public extension SwiftPlus where T: UIImage {
         let size = this.size
         
         if (size.width < 1 || size.height < 1) {
-            print("*** error: invalid size: \(size.width) x \(size.height). Both dimensions must be >= 1: \(this)")
+            logger.error("*** error: invalid size: \(size.width) x \(size.height). Both dimensions must be >= 1: \(this)")
             return nil
         }
         
         guard let cgImage = this.cgImage else {
-            print("*** error: image must be backed by a CGImage: \(this)")
+            logger.error("*** error: image must be backed by a CGImage: \(this)")
             return nil
         }
         
@@ -226,7 +226,7 @@ public extension SwiftPlus where T: UIImage {
                     outputContext.clip(to: imageRect, mask: maskCGImage);
                 }
                 else {
-                    print("*** error: maskImage must be backed by a CGImage: \(String(describing: maskImage))")
+                    logger.error("*** error: maskImage must be backed by a CGImage: \(String(describing: maskImage))")
                 }
             }
 

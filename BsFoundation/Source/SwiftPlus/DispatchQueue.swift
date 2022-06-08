@@ -8,10 +8,10 @@
 
 import Foundation
 
-// MARK: - delay
-
 public extension SwiftPlus where T: DispatchQueue {
-    
+        
+    // MARK: - delay
+    @inlinable
     func delay(_ delay: TimeInterval, action: @escaping Action.primary) {
         let when = DispatchTime.now() + delay
         this.asyncAfter(deadline: when) {
@@ -19,14 +19,10 @@ public extension SwiftPlus where T: DispatchQueue {
         }
     }
     
-}
+    // MARK: - debounce
 
-// https://gist.github.com/simme/b78d10f0b29325743a18c905c5512788
-
-// MARK: - debounce
-
-public extension SwiftPlus where T: DispatchQueue {
-    
+    // https://gist.github.com/simme/b78d10f0b29325743a18c905c5512788
+    //
     func debounce(interval: TimeInterval = 1.0,
                   action: @escaping Action.primary) -> Action.primary {
         var worker: DispatchWorkItem?
@@ -38,11 +34,7 @@ public extension SwiftPlus where T: DispatchQueue {
         }
     }
     
-}
-
-// MARK: - throttle
-
-public extension SwiftPlus where T: DispatchQueue {
+    // MARK: - throttle
     
     func throttle(interval: TimeInterval = 1.0,
                   action: @escaping Action.primary) -> Action.primary {
@@ -52,7 +44,7 @@ public extension SwiftPlus where T: DispatchQueue {
         let deadline = { lastFire + interval }
         
         return {
-            guard (worker == nil) else { return }
+            guard worker == nil else { return }
             
             worker = DispatchWorkItem {
                 action()
@@ -60,7 +52,7 @@ public extension SwiftPlus where T: DispatchQueue {
                 worker = nil
             }
             
-            if (DispatchTime.now() > deadline()) {
+            if DispatchTime.now() > deadline() {
                 this.async(execute: worker!)
                 return
             }
@@ -68,6 +60,17 @@ public extension SwiftPlus where T: DispatchQueue {
             this.asyncAfter(deadline: .now() + interval, execute: worker!)
         }
     }
+    
+    @inlinable
+    static func mainAsync(execute work: @escaping Action.primary) {
+        if Thread.isMainThread {
+            work()
+        }
+        else {
+            DispatchQueue.main.async(execute: work)
+        }
+    }
+
 }
 
 // MARK: - once
@@ -77,6 +80,7 @@ private extension DispatchQueue {
 }
 
 // https://gist.github.com/nil-biribiri/67f158c8a93ff0a5d8c99ff41d8fe3bd
+
 public extension SwiftPlus where T: DispatchQueue {
 
     /**

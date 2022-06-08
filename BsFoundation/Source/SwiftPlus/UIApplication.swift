@@ -20,13 +20,14 @@ public let BsAppBundle = Bundle.main
 
 public extension SwiftPlus where T: UIApplication {
     
+    @inlinable
     var icon: UIImage! {
         UIImage(named: "AppIcon60x60")
     }
     
     var window: UIWindow! {
-        if _window != nil { return _window }
-                
+        guard _window == nil else { return _window }
+                        
         _window = BsApp.delegate?.window ?? nil
         if _window != nil { return _window }
 

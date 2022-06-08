@@ -10,10 +10,12 @@ import UIKit
 
 public extension SwiftPlus where T: Bundle {
     
+    @inlinable
     func info(for key: Bundle.InfoKey) -> String {
         this.infoDictionary?[key.rawValue] as? String ?? ""
     }
     
+    @inlinable
     func image(_ name: String) -> UIImage? {
         UIImage(named: name, in: this, compatibleWith: nil)
     }

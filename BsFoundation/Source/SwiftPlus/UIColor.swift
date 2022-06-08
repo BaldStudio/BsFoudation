@@ -123,21 +123,15 @@ public extension SwiftPlus where T: UIColor {
     }
 
     static func color(red: Int, green: Int, blue: Int, alpha: Int = 255) -> UIColor {
-        func filter(_ i: Int) -> CGFloat {
-            var n = max(0, i)
-            n = min(255, n)
-            return CGFloat(n)
-        }
-        
-        let r = filter(red)
-        let g = filter(green)
-        let b = filter(blue)
-        let a = filter(alpha)
+        let r = CGFloat(min(255, max(0, red)))
+        let g = CGFloat(min(255, max(0, green)))
+        let b = CGFloat(min(255, max(0, blue)))
+        let a = CGFloat(min(255, max(0, alpha)))
 
-        return UIColor(red: r / 255.0,
-                       green: g / 255.0,
-                       blue: b / 255.0,
-                       alpha: a / 255.0)
+        return UIColor(red: r / 255,
+                       green: g / 255,
+                       blue: b / 255,
+                       alpha: a / 255)
     }
     
     /// 0xFFFFFF
@@ -152,10 +146,8 @@ public extension SwiftPlus where T: UIColor {
     
     /// 随机色
     static var random: UIColor {
-        var randomNum: Int {
-            Int.random(in: 0...255)
-        }
-        
-        return color(red: randomNum, green: randomNum, blue: randomNum)
+        return color(red: .random(in: 0...255),
+                     green: .random(in: 0...255),
+                     blue: .random(in: 0...255))
     }
 }

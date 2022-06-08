@@ -13,6 +13,8 @@ public protocol AnyOptional {
 }
 
 extension Optional: AnyOptional {
+    
+    @inlinable
     public var isNil: Bool {
         self == nil
     }

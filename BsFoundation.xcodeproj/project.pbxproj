@@ -24,6 +24,8 @@
 		D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF9282D020A005C2C01 /* Recommend.swift */; };
 		D25B3BFC282D020A005C2C01 /* BsStoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BFA282D020A005C2C01 /* BsStoreKit.swift */; };
 		D25DE051275F84C000626FB6 /* PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25DE050275F84C000626FB6 /* PropertyWrapper.swift */; };
+		D2602B69284A82220016DB4F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2602B68284A82220016DB4F /* UIFont.swift */; };
+		D2602B6E284AC5D20016DB4F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2602B6D284AC5D20016DB4F /* UIViewController.swift */; };
 		D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62926E0AF8B003B9F11 /* UIImage.swift */; };
 		D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62A26E0AF8B003B9F11 /* Bundle.swift */; };
 		D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62B26E0AF8B003B9F11 /* Then.swift */; };
@@ -40,6 +42,7 @@
 		D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftPlus.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
 		D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9D127D744AB00F790DF /* UIApplication.swift */; };
+		D2F42DF4284DBBBE00FAF01D /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F42DF3284DBBBE00FAF01D /* UIResponder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,8 @@
 		D25B3BF9282D020A005C2C01 /* Recommend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
 		D25B3BFA282D020A005C2C01 /* BsStoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsStoreKit.swift; sourceTree = "<group>"; };
 		D25DE050275F84C000626FB6 /* PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrapper.swift; sourceTree = "<group>"; };
+		D2602B68284A82220016DB4F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		D2602B6D284AC5D20016DB4F /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		D26FC62926E0AF8B003B9F11 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		D26FC62A26E0AF8B003B9F11 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		D26FC62B26E0AF8B003B9F11 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; tabWidth = 2; wrapsLines = 1; };
@@ -104,6 +109,7 @@
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
 		D2C8B9D127D744AB00F790DF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		D2F3DFA0269FD3D8006DB903 /* BsFoundationDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BsFoundationDemo.entitlements; sourceTree = "<group>"; };
+		D2F42DF3284DBBBE00FAF01D /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
 		D2FCEA6A25F9F779005EAA15 /* BsFoundation.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BsFoundation.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D5C2F2360140B33361DA6AB8 /* Pods-BsFoundationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationDemo.debug.xcconfig"; path = "Target Support Files/Pods-BsFoundationDemo/Pods-BsFoundationDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +229,9 @@
 				D26FC63426E0AF8C003B9F11 /* UIColor.swift */,
 				D26FC62926E0AF8B003B9F11 /* UIImage.swift */,
 				D26FC63126E0AF8C003B9F11 /* UIView.swift */,
+				D2602B68284A82220016DB4F /* UIFont.swift */,
+				D2602B6D284AC5D20016DB4F /* UIViewController.swift */,
+				D2F42DF3284DBBBE00FAF01D /* UIResponder.swift */,
 			);
 			path = SwiftPlus;
 			sourceTree = "<group>";
@@ -518,17 +527,20 @@
 			files = (
 				D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */,
 				D26FC63F26E0AF8C003B9F11 /* Data.swift in Sources */,
+				D2602B69284A82220016DB4F /* UIFont.swift in Sources */,
 				D25B3BFC282D020A005C2C01 /* BsStoreKit.swift in Sources */,
 				D239FC7826BA717F00FD1DA0 /* BsFoundation.swift in Sources */,
 				D25DE051275F84C000626FB6 /* PropertyWrapper.swift in Sources */,
 				D26FC64126E0AF8C003B9F11 /* UIColor.swift in Sources */,
 				D26FC63E26E0AF8C003B9F11 /* UIView.swift in Sources */,
+				D2F42DF4284DBBBE00FAF01D /* UIResponder.swift in Sources */,
 				D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */,
 				D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */,
 				D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */,
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */,
+				D2602B6E284AC5D20016DB4F /* UIViewController.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
 				D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */,
 				D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */,

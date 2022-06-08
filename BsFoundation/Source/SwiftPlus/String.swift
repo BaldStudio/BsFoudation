@@ -10,8 +10,14 @@ import Foundation
 
 public extension SwiftPlus where T == String {
     
-    var toURL: URL? {
+    @inlinable
+    var url: URL? {
         URL(string: this)
     }
     
+    @inlinable
+    var trimmed: String {
+        this.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
 }

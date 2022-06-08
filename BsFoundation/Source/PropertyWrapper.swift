@@ -29,6 +29,7 @@ public struct Clamp<T: Comparable & Numeric> {
 
 //MARK: - Lazy
 
+// https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md
 @propertyWrapper
 public struct Lazy<T> {
     private var closure: () -> T
@@ -37,7 +38,7 @@ public struct Lazy<T> {
     public init(default value: @autoclosure @escaping () -> T) {
         closure = value
     }
-    
+
     public init(body value: @escaping () -> T) {
         closure = value
     }
