@@ -8,6 +8,10 @@
 
 @_exported import UIKit
 
-let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
-                      category: "BsFoundation")
+let logger: BsLogger = {
+    let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
+                          category: "BsFoundation")
+    logger.level = .none
+    return logger
+}()
 
