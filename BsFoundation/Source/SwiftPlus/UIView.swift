@@ -66,22 +66,26 @@ public extension SwiftPlus where T: UIView {
 // MARK: - Layout
 
 public extension SwiftPlus where T: UIView {
-        
-    func edgesEqualToSuperview(_ edges: UIEdgeInsets = .zero) {
-        guard let superview = this.superview else { fatalError() }
+    
+    func edgesEqualTo(_ v: UIView, with insets: UIEdgeInsets = .zero) {
         
         this.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            this.leftAnchor.constraint(equalTo: superview.leftAnchor,
-                                       constant: edges.left),
-            this.rightAnchor.constraint(equalTo: superview.rightAnchor,
-                                        constant: edges.right),
-            this.topAnchor.constraint(equalTo: superview.topAnchor,
-                                      constant: edges.top),
-            this.bottomAnchor.constraint(equalTo: superview.bottomAnchor,
-                                         constant: edges.bottom),
+            this.leftAnchor.constraint(equalTo: v.leftAnchor,
+                                       constant: insets.left),
+            this.rightAnchor.constraint(equalTo: v.rightAnchor,
+                                        constant: insets.right),
+            this.topAnchor.constraint(equalTo: v.topAnchor,
+                                      constant: insets.top),
+            this.bottomAnchor.constraint(equalTo: v.bottomAnchor,
+                                         constant: insets.bottom),
         ])
+    }
+    
+    func edgesEqualToSuperview(with insets: UIEdgeInsets = .zero) {
+        guard let superview = this.superview else { fatalError() }
+        edgesEqualTo(superview, with: insets)
     }
     
     func removeAllConstraints() {
