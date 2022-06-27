@@ -9,30 +9,19 @@
 import UIKit
 import Accelerate
 
-public extension UIImage {
-    
-    convenience init(color: UIColor) {
+public extension SwiftPlus where T: UIImage {
+
+    static func make(with color: UIColor) -> UIImage? {
+
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 1)
-
         defer {
             UIGraphicsEndImageContext()
         }
-
         color.setFill()
         UIRectFill(rect)
-
-        guard let result = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
-            self.init()
-            return
-        }
-        
-        self.init(cgImage: result)
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
-    
-}
-
-public extension SwiftPlus where T: UIImage {
 
     func cropped(to rect: CGRect) -> UIImage {
         guard rect.size.width <= this.size.width,

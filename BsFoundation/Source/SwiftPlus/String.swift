@@ -11,7 +11,7 @@ import Foundation
 public extension SwiftPlus where T == String {
     
     @inlinable
-    var url: URL? {
+    var toURL: URL? {
         URL(string: this)
     }
     
@@ -20,4 +20,19 @@ public extension SwiftPlus where T == String {
         this.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    /// 从 idx 截取至末尾
+    @inlinable
+    func slice(at idx: Int) -> String {
+        String(this.suffix(this.count - idx))
+    }
+    
+    /// 从 idx 截取至 idx + count
+    func slice(at idx: Int = 0, count: Int) -> String {
+        let begin = this.index(this.startIndex,
+                               offsetBy: idx)
+        let end = this.index(this.startIndex,
+                             offsetBy: idx + count)
+        return String(this[begin..<end])
+    }
+    
 }
