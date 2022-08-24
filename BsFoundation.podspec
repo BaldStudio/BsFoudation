@@ -16,4 +16,16 @@ Pod::Spec.new do |s|
     
   s.ios.frameworks = 'UIKit'
   
+  s.subspec 'BsLogger' do |ss|
+    ss.ios.source_files = 'BsFoundation/Source/BsLogger/**/*'
+  end
+
+  s.subspec 'AppStore' do |ss|
+    ss.ios.source_files = 'BsFoundation/Source/AppStore/**/*'
+  end
+
+  s.subspec 'SwiftPlus' do |ss|
+    ss.ios.source_files = 'BsFoundation/Source/SwiftPlus/**/*'
+  end
+
 end

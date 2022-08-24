@@ -12,9 +12,12 @@ extension UIColor {
         
     public convenience init(_ hex: Int, alpha: CGFloat = 1.0) {
         let hex = min(0xFFFFFF, max(0, hex))
-        self.init(red: (hex & 0xFF0000) >> 16,
-                  green: (hex & 0xFF00) >> 8,
-                  blue: (hex & 0xFF),
+        let r = CGFloat((hex & 0xFF0000) >> 16) / 255
+        let g = CGFloat((hex & 0xFF00) >> 8) / 255
+        let b = CGFloat((hex & 0xFF)) / 255
+        self.init(red: r,
+                  green: g,
+                  blue: b,
                   alpha: alpha)
     }
     
@@ -36,21 +39,6 @@ extension UIColor {
         self.init(Int(hex, radix: 16) ?? 0, alpha: alpha)
     }
     
-    public convenience init(red: Int,
-                     green: Int,
-                     blue: Int,
-                     alpha: CGFloat = 1.0) {
-        
-        let r = CGFloat(min(255, max(0, red)))
-        let g = CGFloat(min(255, max(0, green)))
-        let b = CGFloat(min(255, max(0, blue)))
-        self.init(red: r / 255,
-                  green: g / 255,
-                  blue: b / 255,
-                  alpha: alpha)
-
-    }
-
 }
 
 public extension SwiftPlus where T: UIColor {
@@ -72,8 +60,9 @@ public extension SwiftPlus where T: UIColor {
         
     /// 随机色
     static var random: UIColor {
-        UIColor(red: .random(in: 0...255),
-                green: .random(in: 0...255),
-                blue: .random(in: 0...255))
+        UIColor(red: .random(in: 0...1),
+                green: .random(in: 0...1),
+                blue: .random(in: 0...1),
+                alpha: 1.0)
     }
 }
