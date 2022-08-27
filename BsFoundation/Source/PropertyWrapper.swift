@@ -12,8 +12,8 @@ import Foundation
 
 @propertyWrapper
 public struct Clamp<T: Comparable & Numeric> {
-    var value: T
-    let range: ClosedRange<T>
+    private var value: T
+    private let range: ClosedRange<T>
 
     public init(wrappedValue value: T, _ range: ClosedRange<T>) {
         precondition(range.contains(value), "value MUST be between \(range)")

@@ -67,7 +67,7 @@ public extension SwiftPlus where T: UIView {
 
 public extension SwiftPlus where T: UIView {
     
-    func edgesEqualTo(_ v: UIView, with insets: UIEdgeInsets = .zero) {
+    func edgesEqual(to v: UIView, with insets: UIEdgeInsets = .zero) {
         
         this.translatesAutoresizingMaskIntoConstraints = false
         
@@ -85,7 +85,7 @@ public extension SwiftPlus where T: UIView {
     
     func edgesEqualToSuperview(with insets: UIEdgeInsets = .zero) {
         guard let superview = this.superview else { fatalError() }
-        edgesEqualTo(superview, with: insets)
+        edgesEqual(to: superview, with: insets)
     }
     
     func removeAllConstraints() {
