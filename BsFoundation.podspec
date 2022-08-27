@@ -28,4 +28,8 @@ Pod::Spec.new do |s|
     ss.ios.source_files = 'BsFoundation/Source/SwiftPlus/**/*'
   end
 
+  s.subspec 'Device' do |ss|
+    ss.ios.source_files = 'BsFoundation/Source/Device/**/*'
+  end
+  
 end

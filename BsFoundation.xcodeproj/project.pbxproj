@@ -11,6 +11,9 @@
 		4C4EEF61B276C330050F825B /* Pods_BsFoundationDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7C8F6657DFE4BF87E0ED35 /* Pods_BsFoundationDemo.framework */; };
 		4EDB573DF6B23D2107FBE4E2 /* Pods_BsFoundationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCA9A10BC581349B7297273 /* Pods_BsFoundationTests.framework */; };
 		D20F0A8728B5D46E00BD6E4C /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0A8628B5D46E00BD6E4C /* AppStore.swift */; };
+		D20F0BC428B9B17C00BD6E4C /* GUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC128B9B17C00BD6E4C /* GUID.swift */; };
+		D20F0BC528B9B17C00BD6E4C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC228B9B17C00BD6E4C /* Keychain.swift */; };
+		D20F0BC628B9B17C00BD6E4C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC328B9B17C00BD6E4C /* Device.swift */; };
 		D239FC7826BA717F00FD1DA0 /* BsFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */; };
 		D23FF0C925AD9B5200D755D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0C825AD9B5200D755D9 /* AppDelegate.swift */; };
 		D23FF0CB25AD9B5200D755D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0CA25AD9B5200D755D9 /* SceneDelegate.swift */; };
@@ -72,6 +75,9 @@
 		9B4F7FFA965B4F9C0116DBED /* Pods-BsFoundationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationTests.release.xcconfig"; path = "Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B7C8F6657DFE4BF87E0ED35 /* Pods_BsFoundationDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BsFoundationDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20F0A8628B5D46E00BD6E4C /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		D20F0BC128B9B17C00BD6E4C /* GUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUID.swift; sourceTree = "<group>"; };
+		D20F0BC228B9B17C00BD6E4C /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		D20F0BC328B9B17C00BD6E4C /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundation.swift; sourceTree = "<group>"; };
 		D23FF0C625AD9B5200D755D9 /* BsFoundationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BsFoundationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23FF0C825AD9B5200D755D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +170,16 @@
 				9B4F7FFA965B4F9C0116DBED /* Pods-BsFoundationTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D20F0BC028B9B17C00BD6E4C /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				D20F0BC328B9B17C00BD6E4C /* Device.swift */,
+				D20F0BC128B9B17C00BD6E4C /* GUID.swift */,
+				D20F0BC228B9B17C00BD6E4C /* Keychain.swift */,
+			);
+			path = Device;
 			sourceTree = "<group>";
 		};
 		D23DCF1D2595CCAC004EB5E3 /* Supporting Files */ = {
@@ -275,6 +291,7 @@
 				D26FC63526E0AF8C003B9F11 /* Action.swift */,
 				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
+				D20F0BC028B9B17C00BD6E4C /* Device */,
 				D26FC62826E0AF76003B9F11 /* SwiftPlus */,
 				D25B3BF3282D015B005C2C01 /* BsLogger */,
 				D25B3BF8282D020A005C2C01 /* AppStore */,
@@ -525,6 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20F0BC428B9B17C00BD6E4C /* GUID.swift in Sources */,
 				D29601512732ACA500B6511A /* SwiftPlus.swift in Sources */,
 				D26FC63F26E0AF8C003B9F11 /* Data.swift in Sources */,
 				D2602B69284A82220016DB4F /* UIFont.swift in Sources */,
@@ -538,10 +556,12 @@
 				D26FC64D26E20924003B9F11 /* Runtime.swift in Sources */,
 				D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */,
 				D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */,
+				D20F0BC528B9B17C00BD6E4C /* Keychain.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */,
 				D2602B6E284AC5D20016DB4F /* UIViewController.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
+				D20F0BC628B9B17C00BD6E4C /* Device.swift in Sources */,
 				D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */,
 				D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */,
 				D26FC64226E0AF8C003B9F11 /* Action.swift in Sources */,
