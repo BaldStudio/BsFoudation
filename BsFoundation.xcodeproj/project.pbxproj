@@ -10,6 +10,9 @@
 		3798FEC93D16520D160D502C /* Pods_BsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A0F94D4B8EF7F876E2EF52 /* Pods_BsFoundation.framework */; };
 		4C4EEF61B276C330050F825B /* Pods_BsFoundationDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7C8F6657DFE4BF87E0ED35 /* Pods_BsFoundationDemo.framework */; };
 		4EDB573DF6B23D2107FBE4E2 /* Pods_BsFoundationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCA9A10BC581349B7297273 /* Pods_BsFoundationTests.framework */; };
+		D200AD1928FCF9C800B43F52 /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1828FCF9C800B43F52 /* MachO.swift */; };
+		D200AD1B28FCFE7D00B43F52 /* MachOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1A28FCFE7D00B43F52 /* MachOTests.swift */; };
+		D200AD1F28FCFEAC00B43F52 /* MachOTestsOC.m in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1E28FCFEAC00B43F52 /* MachOTestsOC.m */; };
 		D20F0A8728B5D46E00BD6E4C /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0A8628B5D46E00BD6E4C /* AppStore.swift */; };
 		D20F0BC428B9B17C00BD6E4C /* GUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC128B9B17C00BD6E4C /* GUID.swift */; };
 		D20F0BC528B9B17C00BD6E4C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC228B9B17C00BD6E4C /* Keychain.swift */; };
@@ -49,6 +52,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D200AD2628FD064A00B43F52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D27A8A1425203F1A006A6125 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D23FF0C525AD9B5200D755D9;
+			remoteInfo = BsFoundationDemo;
+		};
 		D23FF0E625AD9C5600D755D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D27A8A1425203F1A006A6125 /* Project object */;
@@ -74,6 +84,11 @@
 		642C892E32F1859B02CB8512 /* Pods-BsFoundationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationTests.debug.xcconfig"; path = "Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F7FFA965B4F9C0116DBED /* Pods-BsFoundationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationTests.release.xcconfig"; path = "Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B7C8F6657DFE4BF87E0ED35 /* Pods_BsFoundationDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BsFoundationDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D200AD1828FCF9C800B43F52 /* MachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
+		D200AD1A28FCFE7D00B43F52 /* MachOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachOTests.swift; sourceTree = "<group>"; };
+		D200AD1D28FCFEAC00B43F52 /* MachOTestsOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachOTestsOC.h; sourceTree = "<group>"; };
+		D200AD1E28FCFEAC00B43F52 /* MachOTestsOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MachOTestsOC.m; sourceTree = "<group>"; };
+		D200AD2228FD01A800B43F52 /* BsFoundationTests-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BsFoundationTests-Bridge.h"; sourceTree = "<group>"; };
 		D20F0A8628B5D46E00BD6E4C /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D20F0BC128B9B17C00BD6E4C /* GUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUID.swift; sourceTree = "<group>"; };
 		D20F0BC228B9B17C00BD6E4C /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -172,6 +187,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D200AD1C28FCFE8800B43F52 /* MachO */ = {
+			isa = PBXGroup;
+			children = (
+				D200AD1A28FCFE7D00B43F52 /* MachOTests.swift */,
+				D200AD1D28FCFEAC00B43F52 /* MachOTestsOC.h */,
+				D200AD1E28FCFEAC00B43F52 /* MachOTestsOC.m */,
+			);
+			path = MachO;
+			sourceTree = "<group>";
+		};
+		D200AD2028FD013A00B43F52 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D23FF0E425AD9C5600D755D9 /* Info.plist */,
+				D200AD2228FD01A800B43F52 /* BsFoundationTests-Bridge.h */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D20F0BC028B9B17C00BD6E4C /* Device */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */,
-				D23FF0E425AD9C5600D755D9 /* Info.plist */,
+				D200AD2028FD013A00B43F52 /* Supporting Files */,
+				D200AD1C28FCFE8800B43F52 /* MachO */,
 			);
 			path = BsFoundationTests;
 			sourceTree = "<group>";
@@ -233,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				D29601502732ACA500B6511A /* SwiftPlus.swift */,
+				D26FC62B26E0AF8B003B9F11 /* Then.swift */,
 				D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */,
 				D26FC62A26E0AF8B003B9F11 /* Bundle.swift */,
 				D29601522732ACB900B6511A /* Collection.swift */,
@@ -287,10 +323,10 @@
 			isa = PBXGroup;
 			children = (
 				D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */,
-				D26FC62B26E0AF8B003B9F11 /* Then.swift */,
 				D26FC63526E0AF8C003B9F11 /* Action.swift */,
 				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
+				D200AD1828FCF9C800B43F52 /* MachO.swift */,
 				D20F0BC028B9B17C00BD6E4C /* Device */,
 				D26FC62826E0AF76003B9F11 /* SwiftPlus */,
 				D25B3BF3282D015B005C2C01 /* BsLogger */,
@@ -356,6 +392,7 @@
 			);
 			dependencies = (
 				D23FF0E725AD9C5600D755D9 /* PBXTargetDependency */,
+				D200AD2728FD064A00B43F52 /* PBXTargetDependency */,
 			);
 			name = BsFoundationTests;
 			productName = BsFoundationTests;
@@ -396,6 +433,8 @@
 					};
 					D23FF0DF25AD9C5600D755D9 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1320;
+						TestTargetID = D23FF0C525AD9B5200D755D9;
 					};
 					D27A8A1C25203F1A006A6125 = {
 						CreatedOnToolsVersion = 11.7;
@@ -534,6 +573,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D200AD1B28FCFE7D00B43F52 /* MachOTests.swift in Sources */,
+				D200AD1F28FCFEAC00B43F52 /* MachOTestsOC.m in Sources */,
 				D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +609,7 @@
 				D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */,
 				D26FC63D26E0AF8C003B9F11 /* String.swift in Sources */,
 				D29601532732ACB900B6511A /* Collection.swift in Sources */,
+				D200AD1928FCF9C800B43F52 /* MachO.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
 			);
@@ -576,6 +618,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D200AD2728FD064A00B43F52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D23FF0C525AD9B5200D755D9 /* BsFoundationDemo */;
+			targetProxy = D200AD2628FD064A00B43F52 /* PBXContainerItemProxy */;
+		};
 		D23FF0E725AD9C5600D755D9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -622,7 +669,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/BsFoundationDemo/Supporting Files/BsFoundationDemo.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97LF6BB4ZK;
-				INFOPLIST_FILE = "$(SRCROOT)/BsFoundationDemo/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,7 +696,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/BsFoundationDemo/Supporting Files/BsFoundationDemo.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97LF6BB4ZK;
-				INFOPLIST_FILE = "$(SRCROOT)/BsFoundationDemo/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -669,11 +716,12 @@
 			baseConfigurationReference = 642C892E32F1859B02CB8512 /* Pods-BsFoundationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_OPTIMIZATION_PROFILE_FILE = "$(SRCROOT)/OptimizationProfiles/$(PRODUCT_NAME).profdata";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97LF6BB4ZK;
-				INFOPLIST_FILE = BsFoundationTests/Info.plist;
+				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -683,8 +731,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.com.bald-studio.BsFoundationTests";
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${TARGET_NAME}/Supporting Files/BsFoundationTests-Bridge.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BsFoundationDemo.app/BsFoundationDemo";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -694,11 +745,12 @@
 			baseConfigurationReference = 9B4F7FFA965B4F9C0116DBED /* Pods-BsFoundationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_OPTIMIZATION_PROFILE_FILE = "$(SRCROOT)/OptimizationProfiles/$(PRODUCT_NAME).profdata";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97LF6BB4ZK;
-				INFOPLIST_FILE = BsFoundationTests/Info.plist;
+				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -708,8 +760,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.com.bald-studio.BsFoundationTests";
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${TARGET_NAME}/Supporting Files/BsFoundationTests-Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BsFoundationDemo.app/BsFoundationDemo";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -850,7 +904,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "BsFoundation/Supporting Files/BsFoundation-Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/BsFoundation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -886,7 +940,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "BsFoundation/Supporting Files/BsFoundation-Info.plist";
+				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/BsFoundation-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
