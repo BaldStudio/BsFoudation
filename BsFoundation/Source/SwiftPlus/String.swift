@@ -14,24 +14,15 @@ public extension SwiftPlus where T == String {
     var toURL: URL? {
         URL(string: this)
     }
-    
-    @inlinable
-    var trimmed: String {
-        this.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    /// 从 idx 截取至末尾
-    @inlinable
-    func slice(at idx: Int) -> String {
-        String(this.suffix(this.count - idx))
-    }
-    
-    /// 从 idx 截取至 idx + count
-    func slice(at idx: Int = 0, count: Int) -> String {
+        
+    /// 从 idx 截取至 idx + count，默认会截取到末尾
+    func slice(at idx: Int = 0, count: Int = .max) -> String {
+        let i = min(this.count, max(idx, 0))
+        let len = min(this.count - i, max(count, 0))
         let begin = this.index(this.startIndex,
-                               offsetBy: idx)
-        let end = this.index(this.startIndex,
-                             offsetBy: idx + count)
+                               offsetBy: i)
+        let end = this.index(begin,
+                             offsetBy: len)
         return String(this[begin..<end])
     }
     

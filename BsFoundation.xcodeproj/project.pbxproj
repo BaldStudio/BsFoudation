@@ -13,6 +13,9 @@
 		D200AD1928FCF9C800B43F52 /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1828FCF9C800B43F52 /* MachO.swift */; };
 		D200AD1B28FCFE7D00B43F52 /* MachOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1A28FCFE7D00B43F52 /* MachOTests.swift */; };
 		D200AD1F28FCFEAC00B43F52 /* MachOTestsOC.m in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1E28FCFEAC00B43F52 /* MachOTestsOC.m */; };
+		D200AD5D28FFD1DD00B43F52 /* ClampTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD5C28FFD1DD00B43F52 /* ClampTests.swift */; };
+		D200AD6028FFD64400B43F52 /* LazyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD5F28FFD64400B43F52 /* LazyTests.swift */; };
+		D200AD6328FFDD9B00B43F52 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD6228FFDD9B00B43F52 /* StringTests.swift */; };
 		D20F0A8728B5D46E00BD6E4C /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0A8628B5D46E00BD6E4C /* AppStore.swift */; };
 		D20F0BC428B9B17C00BD6E4C /* GUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC128B9B17C00BD6E4C /* GUID.swift */; };
 		D20F0BC528B9B17C00BD6E4C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC228B9B17C00BD6E4C /* Keychain.swift */; };
@@ -89,6 +92,9 @@
 		D200AD1D28FCFEAC00B43F52 /* MachOTestsOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MachOTestsOC.h; sourceTree = "<group>"; };
 		D200AD1E28FCFEAC00B43F52 /* MachOTestsOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MachOTestsOC.m; sourceTree = "<group>"; };
 		D200AD2228FD01A800B43F52 /* BsFoundationTests-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BsFoundationTests-Bridge.h"; sourceTree = "<group>"; };
+		D200AD5C28FFD1DD00B43F52 /* ClampTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampTests.swift; sourceTree = "<group>"; };
+		D200AD5F28FFD64400B43F52 /* LazyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyTests.swift; sourceTree = "<group>"; };
+		D200AD6228FFDD9B00B43F52 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		D20F0A8628B5D46E00BD6E4C /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D20F0BC128B9B17C00BD6E4C /* GUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUID.swift; sourceTree = "<group>"; };
 		D20F0BC228B9B17C00BD6E4C /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -206,6 +212,23 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D200AD5E28FFD26A00B43F52 /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				D200AD5C28FFD1DD00B43F52 /* ClampTests.swift */,
+				D200AD5F28FFD64400B43F52 /* LazyTests.swift */,
+			);
+			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		D200AD6128FFDD4F00B43F52 /* SwiftPlus */ = {
+			isa = PBXGroup;
+			children = (
+				D200AD6228FFDD9B00B43F52 /* StringTests.swift */,
+			);
+			path = SwiftPlus;
+			sourceTree = "<group>";
+		};
 		D20F0BC028B9B17C00BD6E4C /* Device */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,8 +263,10 @@
 			isa = PBXGroup;
 			children = (
 				D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */,
-				D200AD2028FD013A00B43F52 /* Supporting Files */,
+				D200AD6128FFDD4F00B43F52 /* SwiftPlus */,
+				D200AD5E28FFD26A00B43F52 /* PropertyWrapper */,
 				D200AD1C28FCFE8800B43F52 /* MachO */,
+				D200AD2028FD013A00B43F52 /* Supporting Files */,
 			);
 			path = BsFoundationTests;
 			sourceTree = "<group>";
@@ -575,6 +600,9 @@
 			files = (
 				D200AD1B28FCFE7D00B43F52 /* MachOTests.swift in Sources */,
 				D200AD1F28FCFEAC00B43F52 /* MachOTestsOC.m in Sources */,
+				D200AD6028FFD64400B43F52 /* LazyTests.swift in Sources */,
+				D200AD5D28FFD1DD00B43F52 /* ClampTests.swift in Sources */,
+				D200AD6328FFDD9B00B43F52 /* StringTests.swift in Sources */,
 				D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

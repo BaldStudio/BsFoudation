@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import BsFoundation
 
 class MachOTests: XCTestCase {
 

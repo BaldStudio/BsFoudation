@@ -22,7 +22,7 @@ extension UIColor {
     }
     
     public convenience init(_ hexString: String, alpha: CGFloat = 1.0) {
-        var hex = hexString.bs.trimmed.uppercased()
+        var hex = hexString.uppercased()
         
         if hex.hasPrefix("0X") {
             hex = hex.bs.slice(at: 2)
