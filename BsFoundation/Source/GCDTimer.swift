@@ -19,8 +19,6 @@ public class GCDTimer {
     private var selector: Selector
     
     open private(set) var userInfo: Any? = nil
-
-    private var repeats = true
     
     private var queue: DispatchQueue
     private var timer: DispatchSourceTimer
@@ -39,13 +37,11 @@ public class GCDTimer {
                          target: AnyObject,
                          selector: Selector,
                          userInfo: Any? = nil,
-                         repeats: Bool = true,
                          queue: DispatchQueue = .main) {
         self.timeInterval = timeInterval
         self.target = target
         self.selector = selector
         self.userInfo = userInfo
-        self.repeats = repeats
         
         if (queue == .main) {
             self.queue = queue
@@ -64,27 +60,23 @@ public class GCDTimer {
                               target: AnyObject,
                               selector: Selector,
                               userInfo: Any? = nil,
-                              repeats: Bool = true,
                               queue: DispatchQueue = .main) -> Self {
         let timer = Self.init(timeInterval: timeInterval,
                               target: target,
                               selector: selector,
                               userInfo: userInfo,
-                              repeats: repeats,
                               queue: queue)
         timer.schedule()
         return timer
     }
     
 //    public init(timeInterval: TimeInterval,
-//                repeats: Bool,
 //                queue: DispatchQueue = .main,
 //                block: @escaping @Sendable (Self) -> Void) {
 //
 //    }
 //
 //    public class func scheduled(timeInterval: TimeInterval,
-//                              repeats: Bool,
 //                              queue: DispatchQueue = .main,
 //                              block: @escaping @Sendable (Self) -> Void) -> Self {
 //
@@ -110,10 +102,6 @@ public class GCDTimer {
         }
         
         _ = target?.perform(selector, with: target)
-        
-        if !repeats {
-            invalidate()
-        }
     }
     
     public func invalidate() {
@@ -131,6 +119,6 @@ public class GCDTimer {
 
 extension GCDTimer: CustomStringConvertible {
     public var description: String {
-        "\(self) timeInterval=\(timeInterval) target=\(String(describing: target)) selector=\(selector) userInfo=\(userInfo ?? "") repeats=\(repeats) timer=\(timer)"
+        "\(self) timeInterval=\(timeInterval) target=\(String(describing: target)) selector=\(selector) userInfo=\(userInfo ?? "") timer=\(timer)"
     }
 }
