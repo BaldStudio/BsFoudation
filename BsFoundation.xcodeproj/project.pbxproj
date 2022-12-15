@@ -20,6 +20,7 @@
 		D20F0BC428B9B17C00BD6E4C /* GUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC128B9B17C00BD6E4C /* GUID.swift */; };
 		D20F0BC528B9B17C00BD6E4C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC228B9B17C00BD6E4C /* Keychain.swift */; };
 		D20F0BC628B9B17C00BD6E4C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F0BC328B9B17C00BD6E4C /* Device.swift */; };
+		D222369B294B0B3D00135713 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D222369A294B0B3D00135713 /* GCDTimer.swift */; };
 		D239FC7826BA717F00FD1DA0 /* BsFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */; };
 		D23FF0C925AD9B5200D755D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0C825AD9B5200D755D9 /* AppDelegate.swift */; };
 		D23FF0CB25AD9B5200D755D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0CA25AD9B5200D755D9 /* SceneDelegate.swift */; };
@@ -99,6 +100,7 @@
 		D20F0BC128B9B17C00BD6E4C /* GUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUID.swift; sourceTree = "<group>"; };
 		D20F0BC228B9B17C00BD6E4C /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		D20F0BC328B9B17C00BD6E4C /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		D222369A294B0B3D00135713 /* GCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
 		D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundation.swift; sourceTree = "<group>"; };
 		D23FF0C625AD9B5200D755D9 /* BsFoundationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BsFoundationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23FF0C825AD9B5200D755D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				D26FC64C26E20924003B9F11 /* Runtime.swift */,
 				D25DE050275F84C000626FB6 /* PropertyWrapper.swift */,
 				D200AD1828FCF9C800B43F52 /* MachO.swift */,
+				D222369A294B0B3D00135713 /* GCDTimer.swift */,
 				D20F0BC028B9B17C00BD6E4C /* Device */,
 				D26FC62826E0AF76003B9F11 /* SwiftPlus */,
 				D25B3BF3282D015B005C2C01 /* BsLogger */,
@@ -639,6 +642,7 @@
 				D29601532732ACB900B6511A /* Collection.swift in Sources */,
 				D200AD1928FCF9C800B43F52 /* MachO.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
+				D222369B294B0B3D00135713 /* GCDTimer.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
