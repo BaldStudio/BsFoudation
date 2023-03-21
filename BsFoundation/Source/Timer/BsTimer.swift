@@ -1,5 +1,5 @@
 //
-//  GCDTimer.swift
+//  BsTimer.swift
 //  BsFoundation
 //
 //  Created by crzorz on 2022/12/15.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class GCDTimer {
+public final class BsTimer {
     
-    private static var isInvalidated: Int32 = 0
+    private static var isInvalidated: UInt32 = 0
     
     private var timeInterval: TimeInterval = 0
     
@@ -22,7 +22,7 @@ public class GCDTimer {
     
     private var timer: DispatchSourceTimer!
 
-    private var block: ((GCDTimer) -> Void)?
+    private var block: ((BsTimer) -> Void)?
     
     public private(set) var userInfo: Any? = nil
 
@@ -52,8 +52,8 @@ public class GCDTimer {
                               target: AnyObject,
                               selector: Selector,
                               userInfo: Any? = nil,
-                              queue: DispatchQueue = .main) -> GCDTimer {
-        let timer = GCDTimer(timeInterval: timeInterval,
+                              queue: DispatchQueue = .main) -> BsTimer {
+        let timer = BsTimer(timeInterval: timeInterval,
                              target: target,
                              selector: selector,
                              userInfo: userInfo,
@@ -64,7 +64,7 @@ public class GCDTimer {
     
     public init(timeInterval: TimeInterval,
                 queue: DispatchQueue = .main,
-                block: @escaping (GCDTimer) -> Void) {
+                block: @escaping (BsTimer) -> Void) {
         self.timeInterval = timeInterval
         initQueueAndTimer(queue)
         self.block = block
@@ -72,8 +72,8 @@ public class GCDTimer {
 
     public class func scheduled(timeInterval: TimeInterval,
                                 queue: DispatchQueue = .main,
-                                block: @escaping (GCDTimer) -> Void) -> GCDTimer {
-        let timer = GCDTimer(timeInterval: timeInterval,
+                                block: @escaping (BsTimer) -> Void) -> BsTimer {
+        let timer = BsTimer(timeInterval: timeInterval,
                              queue: queue,
                              block: block)
         timer.schedule()
@@ -82,7 +82,7 @@ public class GCDTimer {
     
     private func initQueueAndTimer(_ targetQueue: DispatchQueue) {
         let id = Unmanaged.passUnretained(self as AnyObject).toOpaque()
-        queue = DispatchQueue(label: "com.baldstudio.gcdtimer.\(id)",
+        queue = DispatchQueue(label: "com.baldstudio.BsTimer.\(id)",
                               target: targetQueue)
         timer = DispatchSource.makeTimerSource(flags: .strict,
                                                queue: self.queue)
@@ -103,7 +103,7 @@ public class GCDTimer {
     }
     
     public func fire() {
-        guard OSAtomicAnd32OrigBarrier(1, &GCDTimer.isInvalidated) == 0 else {
+        guard OSAtomicAnd32OrigBarrier(1, &BsTimer.isInvalidated) == 0 else {
             return
         }
         
@@ -116,7 +116,7 @@ public class GCDTimer {
     }
     
     public func invalidate() {
-        if (OSAtomicAnd32OrigBarrier(7, &Self.isInvalidated) != 0) {
+        if (OSAtomicAnd32OrigBarrier(7, &BsTimer.isInvalidated) != 0) {
             return
         }
         
@@ -127,7 +127,7 @@ public class GCDTimer {
 
 }
 
-extension GCDTimer: CustomStringConvertible {
+extension BsTimer: CustomStringConvertible {
     public var description: String {
         if block == nil {
             return "\(type(of: self)) timer=\(String(describing: timer)) timeInterval=\(timeInterval) target=\(String(describing: target)) selector=\(String(describing: selector)) userInfo=\(userInfo ?? "")"

@@ -1,5 +1,5 @@
 //
-//  GCDTimerTests.swift
+//  BsTimerTests.swift
 //  BsFoundationTests
 //
 //  Created by crzorz on 2022/12/15.
@@ -8,8 +8,8 @@
 
 import XCTest
 
-final class GCDTimerTests: XCTestCase {
-    var timer: GCDTimer!
+final class BsTimerTests: XCTestCase {
+    var timer: BsTimer!
     override func setUp() {
         timer = nil
     }
@@ -20,27 +20,27 @@ final class GCDTimerTests: XCTestCase {
     }
     
     func testSelector() {
-        timer = GCDTimer.scheduled(timeInterval: 0.5, target: self, selector: #selector(onTimer(_:)))
+        timer = BsTimer.scheduled(timeInterval: 0.5, target: self, selector: #selector(onTimer(_:)))
         timer.fire()
         timer.tolerance = 0.01
     }
 
     func testBlock() {
-        timer = GCDTimer.scheduled(timeInterval: 0.01, block: { timer in
+        timer = BsTimer.scheduled(timeInterval: 0.01, block: { timer in
             print("block timer: \(timer)")
         })
         timer.fire()
     }
 
     func testAsyncQueue() {
-        timer = GCDTimer.scheduled(timeInterval: 0.01, queue: DispatchQueue(label: "tset"), block: { timer in
+        timer = BsTimer.scheduled(timeInterval: 0.01, queue: DispatchQueue(label: "tset"), block: { timer in
             print("async block timer: \(timer)")
         })
         timer.fire()
     }
 }
 
-extension GCDTimerTests {
+extension BsTimerTests {
     @objc func onTimer(_ sender: AnyObject) {
         print("on timer: \(sender)")
     }

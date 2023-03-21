@@ -14,37 +14,38 @@ public protocol MachODataConvertible {
     static func convert(_ t: RawType) -> Self
 }
 
-public struct MachOSegment {
-    public let rawValue: String
+/// 这里如果是 struct 会崩，莫名其妙的
+public final class MachOSegment {
+    public let name: String
     
-    public init(rawValue: String) {
-        self.rawValue = rawValue
+    public init(name: String) {
+        self.name = name
     }
-    
+
     // refer to __DATA
-    public static let data = Self(rawValue: SEG_DATA)
+    public static let data = MachOSegment(name: SEG_DATA)
     
     // refer to __TEXT
-    public static let text = Self(rawValue: SEG_TEXT)
+    public static let text = MachOSegment(name: SEG_TEXT)
 
 }
 
-public struct MachOSection {
-    public let rawValue: String
+public final class MachOSection {
+    public let name: String
     
-    public init(rawValue: String) {
-        self.rawValue = rawValue
+    public init(name: String) {
+        self.name = name
     }
-    
+
     // refer to __data
-    public static let data = Self(rawValue: SECT_DATA)
+    public static let data = MachOSection(name: SECT_DATA)
     
     // refer to __text
-    public static let text = Self(rawValue: SECT_TEXT)
+    public static let text = MachOSection(name: SECT_TEXT)
 }
 
-public func fetchMachOData<T: MachODataConvertible>(segment: MachOSegment,
-                                                    section: MachOSection) -> [T] {
+public func loadMachOData<T: MachODataConvertible>(segment: MachOSegment,
+                                                   section: MachOSection) -> [T] {
     
     var frameworkNames: [String] = []
     
@@ -81,18 +82,18 @@ public func fetchMachOData<T: MachODataConvertible>(segment: MachOSegment,
         }
     }
     
-    return fetchMachOData(by: frameworkNames, segment: segment, section: section)
+    return loadMachOData(by: frameworkNames, segment: segment, section: section)
 }
 
-public func fetchMachOData<T: MachODataConvertible>(by frameworkNames: [String],
+public func loadMachOData<T: MachODataConvertible>(by frameworkNames: [String],
                                                     segment: MachOSegment,
                                                     section: MachOSection) -> [T] {
     var results: [T] = []
     for name in frameworkNames {
         var size: UInt = 0
         guard let memory = getsectdatafromFramework(name,
-                                                    segment.rawValue,
-                                                    section.rawValue,
+                                                    segment.name,
+                                                    section.name,
                                                     &size)
         else { continue }
         

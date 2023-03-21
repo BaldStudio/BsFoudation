@@ -12,7 +12,7 @@ class MachOTests: XCTestCase {
 
     func testFetch() {
                 
-        let data: [MachOData] = fetchMachOData(segment: .test, section: .test)
+        let data: [MachOData] = loadMachOData(segment: .test, section: .test)
         XCTAssertTrue(data.count == 1)
         XCTAssertTrue(data.first!.name == "test")
         
@@ -32,9 +32,9 @@ struct MachOData: MachODataConvertible {
 }
 
 extension MachOSegment {
-    public static let test = Self(rawValue: MACH_O_TEST_SEG)
+    public static let test = MachOSegment(name: MACH_O_TEST_SEG)
 }
 
 extension MachOSection {
-    public static let test = Self(rawValue: MACH_O_TEST_SECT)
+    public static let test = MachOSection(name: MACH_O_TEST_SECT)
 }

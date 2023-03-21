@@ -16,3 +16,10 @@ public extension SwiftPlus where T == Data {
     }
     
 }
+
+public extension Data {
+    @inlinable
+    mutating func append<E: Numeric>(_ value: E) {
+        Swift.withUnsafeBytes(of: value) { append(contentsOf: $0) }
+    }
+}
