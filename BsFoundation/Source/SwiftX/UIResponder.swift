@@ -8,11 +8,11 @@
 
 import UIKit
 
-public extension SwiftPlus where T: UIResponder {
+public extension SwiftX where T: UIResponder {
     
-    func nearest<T>(ofKind kind: T.Type) -> T? {
+    func nearest<Responder>(ofKind kind: Responder.Type) -> Responder? {
         guard !this.isKind(of: kind as! AnyClass) else {
-            return this as? T
+            return this as? Responder
         }
         
         return this.next?.bs.nearest(ofKind: kind)

@@ -27,11 +27,11 @@ public struct Clamp<T: Comparable & Numeric> {
     }
 }
 
-//MARK: - Lazy
+//MARK: - NullResetable
 
 // https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md
 @propertyWrapper
-public struct Lazy<T> {
+public struct NullResetable<T> {
     private var closure: () -> T
     private var value: T?
     

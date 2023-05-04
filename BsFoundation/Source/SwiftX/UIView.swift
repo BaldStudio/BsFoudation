@@ -1,6 +1,6 @@
 //
 //  UIView.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/7/16.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -10,16 +10,12 @@ import UIKit
 
 // MARK: - Common
 
-public extension SwiftPlus where T: UIView {
+public extension SwiftX where T: UIView {
     /// 截图
     var snapshot: UIImage? {
-        UIGraphicsBeginImageContextWithOptions(this.layer.frame.size, false, 0)
-        defer {
-            UIGraphicsEndImageContext()
+        return UIGraphicsImageRenderer(bounds: this.bounds).image { _ in
+            this.drawHierarchy(in: this.bounds, afterScreenUpdates: true)
         }
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        this.layer.render(in: context)
-        return UIGraphicsGetImageFromCurrentImageContext()
     }
 
     /// 获取nib
@@ -35,28 +31,27 @@ public extension SwiftPlus where T: UIView {
         let nibName = nibNameOrNil ?? "\(this)"
         let bundle = nibBundleOrNil ?? Bundle(for: this)
         let objects = bundle.loadNibNamed(nibName, owner: nil, options: nil)
-        guard let view = objects?.first as? T else { return nil }
-        return view
+        return objects?.first as? T
     }
         
 }
 
 // MARK: - Hierarchy
 
-public extension SwiftPlus where T: UIView {
+public extension SwiftX where T: UIView {
     @inlinable
     func removeSubviews() {
         this.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func subviews<T>(ofKind: T.Type) -> [T] {
-        var views: [T] = []
+    func subviews<View>(ofKind: View.Type) -> [View] {
+        var views: [View] = []
         for subview in this.subviews {
-            if let view = subview as? T {
+            if let view = subview as? View {
                 views.append(view)
             }
             else if !subview.subviews.isEmpty {
-                views.append(contentsOf: subview.bs.subviews(ofKind: T.self))
+                views.append(contentsOf: subview.bs.subviews(ofKind: View.self))
             }
         }
         return views
@@ -65,7 +60,7 @@ public extension SwiftPlus where T: UIView {
 
 // MARK: - Layout
 
-public extension SwiftPlus where T: UIView {
+public extension SwiftX where T: UIView {
     
     func edgesEqual(to v: UIView, with insets: UIEdgeInsets = .zero) {
         
@@ -75,11 +70,11 @@ public extension SwiftPlus where T: UIView {
             this.leftAnchor.constraint(equalTo: v.leftAnchor,
                                        constant: insets.left),
             this.rightAnchor.constraint(equalTo: v.rightAnchor,
-                                        constant: insets.right),
+                                        constant: -insets.right),
             this.topAnchor.constraint(equalTo: v.topAnchor,
                                       constant: insets.top),
             this.bottomAnchor.constraint(equalTo: v.bottomAnchor,
-                                         constant: insets.bottom),
+                                         constant: -insets.bottom),
         ])
     }
     
@@ -91,55 +86,68 @@ public extension SwiftPlus where T: UIView {
     func removeAllConstraints() {
         this.removeConstraints(this.constraints)
     }
+    
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+        this.safeAreaLayoutGuide.topAnchor
+    }
+    
+    var safeLeftAnchor: NSLayoutXAxisAnchor {
+        this.safeAreaLayoutGuide.leftAnchor
+    }
+    
+    var safeRightAnchor: NSLayoutXAxisAnchor {
+        this.safeAreaLayoutGuide.rightAnchor
+    }
+    
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+        this.safeAreaLayoutGuide.bottomAnchor
+    }
+    
 }
 
 // MARK: - Responder
 
-public extension SwiftPlus where T: UIView {
+public extension SwiftX where T: UIView {
     var viewController: UIViewController? {
-        nearest(ofKind: UIViewController.self) ?? BsAppMainWindow.rootViewController
+        nearest(ofKind: UIViewController.self) ?? BsAppMainWindow?.rootViewController
     }
 }
 
 // MARK: - Gestures
 
-public extension SwiftPlus where T: UIView {
+public extension SwiftX where T: UIView {
     /// 添加tap手势
-    func onTap(_ closure: @escaping Action.primary) {
-        this.bs_onTap = closure
+    func onTap(_ closure: @escaping Closure.primary) {
+        this.onTap = closure
         let tap = UITapGestureRecognizer(target: this,
                                          action: #selector(T.bs_onTapEvent(_:)))
         this.addGestureRecognizer(tap)
     }
-
 }
 
 private extension UIView {
-    struct AssociatedKeys {
-        static var onTapEvent = 0
+    struct AssociateKey {
+        static var tapEvent = 0
     }
-        
-    var bs_onTap: Action.primary? {
-        set {
-            objc_setAssociatedObject(self,
-                                     &AssociatedKeys.onTapEvent,
-                                     newValue,
-                                     .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
+    
+    var onTap: Closure.primary? {
         get {
-            objc_getAssociatedObject(self, &AssociatedKeys.onTapEvent) as? Action.primary
+            value(forAssociated: &AssociateKey.tapEvent)
+        }
+        set {
+            set(associate: newValue, for: &AssociateKey.tapEvent)
         }
     }
     
     @objc
     func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
-        bs_onTap?()
+        onTap?()
     }
 }
 
 // MARK: Shape
 
-public extension SwiftPlus where T: UIView {
+public extension SwiftX where T: UIView {
     
     /// 添加边框
     @inlinable

@@ -1,6 +1,6 @@
 //
 //  Geometry.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/7/16.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -159,6 +159,16 @@ public extension UIEdgeInsets {
         Self(top: top, left: left, bottom: bottom, right: right)
     }
     
+    @inlinable
+    var vertical: CGFloat {
+        `left` + `right`
+    }
+    
+    @inlinable
+    var horizontal: CGFloat {
+        top + bottom
+    }
+
 }
 
 extension UIEdgeInsets: ExpressibleByArrayLiteral {

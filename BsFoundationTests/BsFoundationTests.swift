@@ -6,6 +6,7 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
+@_exported
 import XCTest
 
 @_exported @testable

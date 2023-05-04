@@ -1,6 +1,6 @@
 //
 //  UIColor.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/7/16.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -15,6 +15,7 @@ extension UIColor {
         let r = CGFloat((hex & 0xFF0000) >> 16) / 255
         let g = CGFloat((hex & 0xFF00) >> 8) / 255
         let b = CGFloat((hex & 0xFF)) / 255
+        let alpha = min(1, max(0, alpha))
         self.init(red: r,
                   green: g,
                   blue: b,
@@ -31,6 +32,7 @@ extension UIColor {
             hex = hex.bs.slice(at: 1)
         }
 
+        let alpha = min(1, max(0, alpha))
         guard hex.count == 6 else {
             self.init(0, alpha: alpha)
             return
@@ -39,11 +41,19 @@ extension UIColor {
         self.init(Int(hex, radix: 16) ?? 0, alpha: alpha)
     }
     
+    /// rgb color, value limit 0 - 255
+    public convenience init(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, alpha: CGFloat = 1.0) {
+        let r = min(255, max(0, alpha))
+        let g = min(255, max(0, alpha))
+        let b = min(255, max(0, alpha))
+        let alpha = min(1, max(0, alpha))
+        self.init(red: r, green: g, blue: b, alpha: alpha)
+    }
 }
 
-public extension SwiftPlus where T: UIColor {
+public extension SwiftX where T: UIColor {
     
-    var toImage: UIImage? {
+    var toImage: UIImage {
         UIImage.bs.make(with: this)
     }
     
@@ -69,7 +79,7 @@ public extension SwiftPlus where T: UIColor {
 
 #if DEBUG
 
-public extension SwiftPlus where T: UIColor {
+public extension SwiftX where T: UIColor {
     var literial: String {
         var r: CGFloat = 0
         var g: CGFloat = 0

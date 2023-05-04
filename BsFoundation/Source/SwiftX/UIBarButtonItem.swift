@@ -1,6 +1,6 @@
 //
 //  UIBarButtonItem.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/8/4.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension SwiftPlus where T: UIBarButtonItem {
+public extension SwiftX where T: UIBarButtonItem {
     @inlinable
     static var spacer: UIBarButtonItem {
         UIBarButtonItem(barButtonSystemItem: .flexibleSpace,

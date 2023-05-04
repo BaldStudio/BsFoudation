@@ -1,6 +1,6 @@
 //
 //  DispatchQueue.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/7/16.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-public extension SwiftPlus where T: DispatchQueue {
+public extension SwiftX where T: DispatchQueue {
         
     // MARK: - delay
     @inlinable
-    func delay(_ delay: TimeInterval, action: @escaping Action.primary) {
+    func delay(_ delay: TimeInterval, action: @escaping Closure.primary) {
         let when = DispatchTime.now() + delay
         this.asyncAfter(deadline: when) {
             action()
@@ -24,9 +24,8 @@ public extension SwiftPlus where T: DispatchQueue {
     // https://gist.github.com/simme/b78d10f0b29325743a18c905c5512788
     //
     func debounce(interval: TimeInterval = 1.0,
-                  action: @escaping Action.primary) -> Action.primary {
+                  action: @escaping Closure.primary) -> Closure.primary {
         var worker: DispatchWorkItem?
-        
         return {
             worker?.cancel()
             worker = DispatchWorkItem { action() }
@@ -37,7 +36,7 @@ public extension SwiftPlus where T: DispatchQueue {
     // MARK: - throttle
     
     func throttle(interval: TimeInterval = 1.0,
-                  action: @escaping Action.primary) -> Action.primary {
+                  action: @escaping Closure.primary) -> Closure.primary {
         var worker: DispatchWorkItem?
         
         var lastFire = DispatchTime.now()
@@ -62,11 +61,10 @@ public extension SwiftPlus where T: DispatchQueue {
     }
     
     @inlinable
-    static func mainAsync(execute work: @escaping Action.primary) {
+    static func asyncMain(execute work: @escaping Closure.primary) {
         if Thread.isMainThread {
             work()
-        }
-        else {
+        } else {
             DispatchQueue.main.async(execute: work)
         }
     }
@@ -81,7 +79,7 @@ private extension DispatchQueue {
 
 // https://gist.github.com/nil-biribiri/67f158c8a93ff0a5d8c99ff41d8fe3bd
 
-public extension SwiftPlus where T: DispatchQueue {
+public extension SwiftX where T: DispatchQueue {
 
     /**
      Executes a block of code, associated with a auto generate unique token by file name + fuction name + line of code, only once.  The code is thread safe and will
@@ -90,7 +88,7 @@ public extension SwiftPlus where T: DispatchQueue {
     static func once(file: String = #file,
                      function: String = #function,
                      line: Int = #line,
-                     action: Action.primary) {
+                     action: Closure.primary) {
         let token = "\(file):\(function):\(line)"
         once(token: token, action: action)
     }
@@ -101,7 +99,7 @@ public extension SwiftPlus where T: DispatchQueue {
      - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
      - parameter block: Block to execute once
      */
-    static func once(token: String, action: Action.primary) {
+    static func once(token: String, action: Closure.primary) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
 

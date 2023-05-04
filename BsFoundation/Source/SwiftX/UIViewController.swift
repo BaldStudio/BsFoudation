@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-public extension SwiftPlus where T: UIViewController {
+public extension SwiftX where T: UIViewController {
     
     @inlinable
     var root: UIViewController? {
@@ -26,7 +26,7 @@ public extension SwiftPlus where T: UIViewController {
 
 //MARK: - SwiftUI
 
-public extension SwiftPlus where T: UIViewController {
+public extension SwiftX where T: UIViewController {
     
     @inlinable
     func showHostingView<Content: View>(_ view: Content) {

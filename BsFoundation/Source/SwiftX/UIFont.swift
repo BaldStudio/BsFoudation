@@ -10,7 +10,7 @@ import UIKit
 
 private let fm = FileManager.default
 
-public extension SwiftPlus where T: UIFont {
+public extension SwiftX where T: UIFont {
     
     /// iOS上注册的字体都是进程级别的，每次启动都需要注册一遍
     @discardableResult

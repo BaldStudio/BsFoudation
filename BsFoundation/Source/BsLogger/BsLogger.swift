@@ -58,8 +58,8 @@ public final class BsLogger {
         log(message, level: .info)
     }
 
-    public func warning(_ message: String) {
-        log(message, level: .warning)
+    public func warn(_ message: String) {
+        log(message, level: .warn)
     }
 
     public func error(_ message: String) {
@@ -82,11 +82,11 @@ extension BsLogger {
         
         public static let none = Level(rawValue: -1)
 
-        public static let verbose: Level = [.debug, .info, .warning, .error]
+        public static let verbose: Level = [.debug, .info, .warn, .error]
         
         public static let debug = Level(rawValue: 1 << 0)
         public static let info = Level(rawValue: 1 << 1)
-        public static let warning = Level(rawValue: 1 << 2)
+        public static let warn = Level(rawValue: 1 << 2)
         public static let error = Level(rawValue: 1 << 3)
     }
 }
@@ -100,7 +100,7 @@ extension BsLogger {
         switch lv {
         case .error:
             prefix = "❌ ERROR"
-        case .warning:
+        case .warn:
             prefix = "⚠️ WARNING"
         case .info:
             prefix = "🟢 INFO"

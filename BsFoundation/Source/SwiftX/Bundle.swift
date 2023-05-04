@@ -1,6 +1,6 @@
 //
 //  Bundle.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/7/16.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension SwiftPlus where T: Bundle {
+public extension SwiftX where T: Bundle {
     
     @inlinable
     func info(for key: Bundle.InfoKey) -> String {

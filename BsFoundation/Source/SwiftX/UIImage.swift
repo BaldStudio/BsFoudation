@@ -1,6 +1,6 @@
 //
 //  UIImage.swift
-//  BsSwiftPlus
+//  BsSwiftX
 //
 //  Created by crzorz on 2021/8/26.
 //  Copyright © 2021 BaldStudio. All rights reserved.
@@ -9,18 +9,22 @@
 import UIKit
 import Accelerate
 
-public extension SwiftPlus where T: UIImage {
+public extension UIImage {
+    
+    convenience init?(named name: String, in bundle: Bundle?) {
+        self.init(named: name, in: bundle, compatibleWith: nil)
+    }
+    
+}
 
-    static func make(with color: UIColor) -> UIImage? {
+public extension SwiftX where T: UIImage {
 
+    static func make(with color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 1)
-        defer {
-            UIGraphicsEndImageContext()
+        return UIGraphicsImageRenderer(bounds: rect).image {
+            color.setFill()
+            $0.fill(rect)
         }
-        color.setFill()
-        UIRectFill(rect)
-        return UIGraphicsGetImageFromCurrentImageContext()
     }
 
     func cropped(to rect: CGRect) -> UIImage {
@@ -32,13 +36,12 @@ public extension SwiftPlus where T: UIImage {
                        scale: this.scale,
                        orientation: this.imageOrientation)
     }
-    
-    
+        
 }
 
 //MARK: - Blur Effect
 
-public extension SwiftPlus where T: UIImage {
+public extension SwiftX where T: UIImage {
     
     func applyLightEffect() -> UIImage? {
         applyBlur(withRadius: 30, saturation: 1.8, tintColor: UIColor(white: 1.0, alpha: 0.3))

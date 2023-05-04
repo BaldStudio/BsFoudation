@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
     ss.ios.source_files = 'BsFoundation/Source/AppStore/**/*'
   end
 
-  s.subspec 'SwiftPlus' do |ss|
-    ss.ios.source_files = 'BsFoundation/Source/SwiftPlus/**/*'
+  s.subspec 'SwiftX' do |ss|
+    ss.ios.source_files = 'BsFoundation/Source/SwiftX/**/*'
   end
 
   s.subspec 'Device' do |ss|
