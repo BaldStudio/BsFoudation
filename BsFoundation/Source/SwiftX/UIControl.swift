@@ -6,36 +6,36 @@
 //  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-import UIKit
+private struct RuntimeKey {
+    static var touchUpInside = 0
+}
 
 // MARK: - Touch Actions
 
-private extension UIControl {
-    struct AssociateKey {
-        static var touchUpInside = 0
+public extension SwiftX where T: UIControl {
+    
+    func onTouchUpInside(_ action: @escaping BlockT<UIControl>) {
+        this.touchUpInsideAction = action
+        this.removeTarget(this, action: #selector(this.bs_onTouchUpInsideAction), for: .touchUpInside)
+        this.addTarget(this, action: #selector(this.bs_onTouchUpInsideAction), for: .touchUpInside)
     }
     
-    var touchUpInsideAction: SwiftX.TouchUpInsideAction? {
+}
+
+private extension UIControl {
+    
+    var touchUpInsideAction: BlockT<UIControl>? {
         get {
-            value(forAssociated: &AssociateKey.touchUpInside)
+            value(forAssociated: &RuntimeKey.touchUpInside)
         }
         set {
-            set(associate: newValue, for: &AssociateKey.touchUpInside)
+            set(associate: newValue, for: &RuntimeKey.touchUpInside)
         }
     }
     
     @objc
-    func bs_onTriggerTouchUpInsideAction() {
+    func bs_onTouchUpInsideAction() {
         touchUpInsideAction?(self)
     }
-}
-
-public extension SwiftX where T: UIControl {
-    typealias TouchUpInsideAction = (UIControl) -> Void
     
-    func onTouchUpInside(_ action: @escaping TouchUpInsideAction) {
-        this.touchUpInsideAction = action
-        this.removeTarget(this, action: #selector(T.bs_onTriggerTouchUpInsideAction), for: .touchUpInside)
-        this.addTarget(this, action: #selector(T.bs_onTriggerTouchUpInsideAction), for: .touchUpInside)
-    }
 }

@@ -6,7 +6,10 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
-import UIKit
+private struct RuntimeKey {
+    static var singleTap = 0
+    static var gestures = 0
+}
 
 // MARK: - Common
 
@@ -116,32 +119,72 @@ public extension SwiftX where T: UIView {
 // MARK: - Gestures
 
 public extension SwiftX where T: UIView {
-    /// 添加tap手势
-    func onTap(_ closure: @escaping Closure.primary) {
-        this.onTap = closure
-        let tap = UITapGestureRecognizer(target: this,
-                                         action: #selector(T.bs_onTapEvent(_:)))
-        this.addGestureRecognizer(tap)
+    @discardableResult
+    func addGestureAction<Target: AnyObject, Gesture: UIGestureRecognizer>(_ target: Target,
+                                                                      action: @escaping Action<Target, Gesture>) -> Gesture {
+        let gesture = Gesture(target: this, action: #selector(UIView.bs_onGestureEvent(_:)))
+        this.addGestureRecognizer(gesture)
+        this.gestures.append(UIView.GestureAction(gesture: gesture) { [weak target] gesture in
+            guard let target, let gesture = gesture as? Gesture else { return }
+            action(target)(gesture)
+        })
+        return gesture
     }
+    
+    func removeGestureAction(_ gesture: UIGestureRecognizer) {
+        this.gestures.removeAll { $0.gesture == gesture }
+        this.removeGestureRecognizer(gesture)
+    }
+    
+    // MARK: - single tap
+    
+    func onSingleTap(_ closure: @escaping BlockT<UITapGestureRecognizer>) {
+        this.singleTap = closure
+        addGestureAction(this, action: UIView._onSingleTap)
+    }
+    
 }
 
 private extension UIView {
-    struct AssociateKey {
-        static var tapEvent = 0
+    
+    struct GestureAction {
+        let gesture: UIGestureRecognizer
+        let action: (UIGestureRecognizer) -> Void
     }
     
-    var onTap: Closure.primary? {
+    var gestures: [GestureAction] {
         get {
-            value(forAssociated: &AssociateKey.tapEvent)
+            var value: [GestureAction]? = value(forAssociated: &RuntimeKey.gestures)
+            if value.isNil {
+                value = []
+                set(associate: value, for: &RuntimeKey.gestures)
+            }
+            return value!
+            
         }
         set {
-            set(associate: newValue, for: &AssociateKey.tapEvent)
+            set(associate: newValue, for: &RuntimeKey.gestures)
         }
     }
     
     @objc
-    func bs_onTapEvent(_ sender: UITapGestureRecognizer) {
-        onTap?()
+    func bs_onGestureEvent(_ sender: UIGestureRecognizer) {
+        for gesture in gestures where gesture.gesture == sender {
+            gesture.action(sender)
+        }
+    }
+    
+    func _onSingleTap(_ sender: UITapGestureRecognizer) {
+        singleTap?(sender)
+    }
+    
+    var singleTap: BlockT<UITapGestureRecognizer>? {
+        get {
+            value(forAssociated: &RuntimeKey.singleTap)
+        }
+        set {
+            set(associate: newValue, for: &RuntimeKey.singleTap)
+        }
     }
 }
 

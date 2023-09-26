@@ -12,7 +12,7 @@ public extension SwiftX where T: DispatchQueue {
         
     // MARK: - delay
     @inlinable
-    func delay(_ delay: TimeInterval, action: @escaping Closure.primary) {
+    func delay(_ delay: TimeInterval, action: @escaping Block) {
         let when = DispatchTime.now() + delay
         this.asyncAfter(deadline: when) {
             action()
@@ -24,7 +24,7 @@ public extension SwiftX where T: DispatchQueue {
     // https://gist.github.com/simme/b78d10f0b29325743a18c905c5512788
     //
     func debounce(interval: TimeInterval = 1.0,
-                  action: @escaping Closure.primary) -> Closure.primary {
+                  action: @escaping Block) -> Block {
         var worker: DispatchWorkItem?
         return {
             worker?.cancel()
@@ -36,7 +36,7 @@ public extension SwiftX where T: DispatchQueue {
     // MARK: - throttle
     
     func throttle(interval: TimeInterval = 1.0,
-                  action: @escaping Closure.primary) -> Closure.primary {
+                  action: @escaping Block) -> Block {
         var worker: DispatchWorkItem?
         
         var lastFire = DispatchTime.now()
@@ -61,7 +61,7 @@ public extension SwiftX where T: DispatchQueue {
     }
     
     @inlinable
-    static func asyncMain(execute work: @escaping Closure.primary) {
+    static func asyncMain(execute work: @escaping Block) {
         if Thread.isMainThread {
             work()
         } else {
@@ -88,7 +88,7 @@ public extension SwiftX where T: DispatchQueue {
     static func once(file: String = #file,
                      function: String = #function,
                      line: Int = #line,
-                     action: Closure.primary) {
+                     action: Block) {
         let token = "\(file):\(function):\(line)"
         once(token: token, action: action)
     }
@@ -99,7 +99,7 @@ public extension SwiftX where T: DispatchQueue {
      - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
      - parameter block: Block to execute once
      */
-    static func once(token: String, action: Closure.primary) {
+    static func once(token: String, action: Block) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
 

@@ -6,10 +6,11 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
-import Foundation
+public typealias Block = () -> Void
 
-public enum Closure {
-    /// takes nothing returns nothing
-    public typealias primary = () -> Void
-    
-}
+public typealias BlockT<T> = (T) -> Void
+
+public typealias BlockTN<T> = (T?) -> Void
+
+/// replace for target-action
+public typealias Action<Type, Input> = (Type) -> (Input) -> Void
