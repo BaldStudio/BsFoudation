@@ -144,13 +144,10 @@ public extension UIEdgeInsets {
     }
     
     @inlinable
-    init(all inset: CGFloat) {
-        self.init(top: inset,
-                  left: inset,
-                  bottom: inset,
-                  right: inset)
+    static func all(_ inset: CGFloat) -> Self {
+        Self(top: inset, left: inset, bottom: inset, right: inset)
     }
-    
+
     @inlinable
     static func only(top: CGFloat = 0,
                      left: CGFloat = 0,

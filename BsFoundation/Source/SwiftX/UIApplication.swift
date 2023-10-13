@@ -36,6 +36,10 @@ public var BsAppKeyWindow: UIWindow? {
     return nil
 }
 
+public var BsAppRootViewController: UIViewController? {
+    BsAppMainWindow?.rootViewController
+}
+
 public let BsAppIcon = BsApp.bs.icon
 
 public let BsAppBundle = Bundle.main

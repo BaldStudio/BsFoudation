@@ -59,6 +59,7 @@
 		D29601512732ACA500B6511A /* SwiftX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftX.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
 		D2986EA2295D6FA2007A334E /* SchemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2986EA1295D6FA2007A334E /* SchemeService.swift */; };
+		D2B89DFA2AD8E3A40047CD72 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B89DF92AD8E3A40047CD72 /* UIStackView.swift */; };
 		D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9D127D744AB00F790DF /* UIApplication.swift */; };
 		D2D70DC32A53CE4B0042C251 /* CAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D70DC22A53CE4B0042C251 /* CAShapeLayer.swift */; };
 		D2E3287229C092EF000E375C /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E3287129C092EF000E375C /* DataTests.swift */; };
@@ -154,6 +155,7 @@
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
 		D2986EA1295D6FA2007A334E /* SchemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeService.swift; sourceTree = "<group>"; };
+		D2B89DF92AD8E3A40047CD72 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		D2C8B9D127D744AB00F790DF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		D2D70DC22A53CE4B0042C251 /* CAShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAShapeLayer.swift; sourceTree = "<group>"; };
 		D2E3287129C092EF000E375C /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				D28584FC2A83669000604748 /* UIControl.swift */,
 				D2250ACD2AB84C780098A3D1 /* UIButton.swift */,
 				D2250AD22AB84D410098A3D1 /* UIImageView.swift */,
+				D2B89DF92AD8E3A40047CD72 /* UIStackView.swift */,
 			);
 			path = SwiftX;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				D222369B294B0B3D00135713 /* BsTimer.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
 				D2D70DC32A53CE4B0042C251 /* CAShapeLayer.swift in Sources */,
+				D2B89DFA2AD8E3A40047CD72 /* UIStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

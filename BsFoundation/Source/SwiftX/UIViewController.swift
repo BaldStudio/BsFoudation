@@ -22,6 +22,14 @@ public extension SwiftX where T: UIViewController {
         return parent
     }
     
+    /// 判断是 push 或 present，然后执行对应的退出方法
+    func showPrevoiusViewController() {
+        if let navigationController = this.navigationController, navigationController.children.count > 1 {
+            navigationController.popViewController(animated: true)
+        } else {
+            this.dismiss(animated: true)
+        }
+    }
 }
 
 //MARK: - SwiftUI

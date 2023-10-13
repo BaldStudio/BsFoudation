@@ -26,4 +26,13 @@ public extension SwiftX where T == String {
         return String(this[begin..<end])
     }
     
+    var isBlank: Bool {
+        this.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    @inlinable
+    var isNotEmpty: Bool {
+        !this.isEmpty
+    }
+
 }
