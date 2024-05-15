@@ -9,7 +9,6 @@
 import Foundation
 
 public final class BsTimer {
-    
     private static var isInvalidated: UInt32 = 0
     
     private var timeInterval: TimeInterval = 0

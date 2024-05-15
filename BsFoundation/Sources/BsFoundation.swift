@@ -7,17 +7,9 @@
 //
 
 @_exported import UIKit
+@_exported import BsLogging
 
-let logger: BsLogger = {
-    let logger = BsLogger(subsystem: "com.bald-studio.BsFoundation",
-                          category: "BsFoundation")
-    logger.level = .none
-    return logger
-}()
-
-public func setLoggerLevel(_ lv: BsLogger.Level) {
-    logger.level = lv
-}
+let logger = Logger(label: "BsFoundation")
 
 public func hasDefined(_ macro: String) -> Bool {
     

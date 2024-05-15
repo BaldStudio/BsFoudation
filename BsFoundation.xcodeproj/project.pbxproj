@@ -37,8 +37,6 @@
 		D23FF0D525AD9B5500D755D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23FF0D325AD9B5500D755D9 /* LaunchScreen.storyboard */; };
 		D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */; };
 		D23FF0E525AD9C5600D755D9 /* BsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D27A8A1D25203F1A006A6125 /* BsFoundation.framework */; platformFilter = ios; };
-		D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF4282D015B005C2C01 /* BsLogger.swift */; };
-		D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF5282D015B005C2C01 /* BsLoggerManager.swift */; };
 		D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B3BF9282D020A005C2C01 /* Recommend.swift */; };
 		D2602B69284A82220016DB4F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2602B68284A82220016DB4F /* UIFont.swift */; };
 		D2602B6E284AC5D20016DB4F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2602B6D284AC5D20016DB4F /* UIViewController.swift */; };
@@ -131,8 +129,6 @@
 		D23FF0E025AD9C5600D755D9 /* BsFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BsFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundationTests.swift; sourceTree = "<group>"; };
 		D23FF0E425AD9C5600D755D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D25B3BF4282D015B005C2C01 /* BsLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLogger.swift; sourceTree = "<group>"; };
-		D25B3BF5282D015B005C2C01 /* BsLoggerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BsLoggerManager.swift; sourceTree = "<group>"; };
 		D25B3BF9282D020A005C2C01 /* Recommend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
 		D2602B68284A82220016DB4F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		D2602B6D284AC5D20016DB4F /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +198,28 @@
 				5DCA9A10BC581349B7297273 /* Pods_BsFoundationTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F035F162BF5AC3C00A070A3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6F035F182BF5AC4C00A070A3 /* Extensions */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6F035F172BF5AC4000A070A3 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		6F035F182BF5AC4C00A070A3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C0D24F6F577BBF0F9A287082 /* Pods */ = {
@@ -340,15 +358,6 @@
 			path = BsFoundationTests;
 			sourceTree = "<group>";
 		};
-		D25B3BF3282D015B005C2C01 /* BsLogger */ = {
-			isa = PBXGroup;
-			children = (
-				D25B3BF4282D015B005C2C01 /* BsLogger.swift */,
-				D25B3BF5282D015B005C2C01 /* BsLoggerManager.swift */,
-			);
-			path = BsLogger;
-			sourceTree = "<group>";
-		};
 		D25B3BF8282D020A005C2C01 /* AppStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,16 +430,18 @@
 		D27A8A1F25203F1A006A6125 /* BsFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				D27A8A28252052BE006A6125 /* Source */,
+				D27A8A28252052BE006A6125 /* Sources */,
 				D23DCF1D2595CCAC004EB5E3 /* Supporting Files */,
 			);
 			path = BsFoundation;
 			sourceTree = "<group>";
 		};
-		D27A8A28252052BE006A6125 /* Source */ = {
+		D27A8A28252052BE006A6125 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				D239FC7726BA717F00FD1DA0 /* BsFoundation.swift */,
+				6F035F172BF5AC4000A070A3 /* UIKit */,
+				6F035F162BF5AC3C00A070A3 /* Core */,
 				D2250ACF2AB84CBD0098A3D1 /* Collections */,
 				D2137E9529CD98940031221C /* Utils */,
 				D2986EA0295D6DFA007A334E /* Scheme */,
@@ -438,10 +449,9 @@
 				D222369C294B0F7600135713 /* Mach */,
 				D20F0BC028B9B17C00BD6E4C /* Device */,
 				D26FC62826E0AF76003B9F11 /* SwiftX */,
-				D25B3BF3282D015B005C2C01 /* BsLogger */,
 				D25B3BF8282D020A005C2C01 /* AppStore */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		D2986EA0295D6DFA007A334E /* Scheme */ = {
@@ -726,11 +736,9 @@
 				D20F0BC528B9B17C00BD6E4C /* Keychain.swift in Sources */,
 				D26FC63626E0AF8C003B9F11 /* UIImage.swift in Sources */,
 				D2250ACE2AB84C780098A3D1 /* UIButton.swift in Sources */,
-				D25B3BF6282D015B005C2C01 /* BsLogger.swift in Sources */,
 				D2602B6E284AC5D20016DB4F /* UIViewController.swift in Sources */,
 				D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */,
 				D20F0BC628B9B17C00BD6E4C /* Device.swift in Sources */,
-				D25B3BF7282D015B005C2C01 /* BsLoggerManager.swift in Sources */,
 				D25B3BFB282D020A005C2C01 /* Recommend.swift in Sources */,
 				D2137E9929CD98940031221C /* PropertyWrapper.swift in Sources */,
 				D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */,
@@ -800,7 +808,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/BsFoundationDemo/Supporting Files/BsFoundationDemo.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97LF6BB4ZK;
+				DEVELOPMENT_TEAM = Y64ARVLCP4;
 				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -827,7 +835,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/BsFoundationDemo/Supporting Files/BsFoundationDemo.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97LF6BB4ZK;
+				DEVELOPMENT_TEAM = Y64ARVLCP4;
 				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -852,7 +860,7 @@
 				CLANG_OPTIMIZATION_PROFILE_FILE = "$(SRCROOT)/OptimizationProfiles/$(PRODUCT_NAME).profdata";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97LF6BB4ZK;
+				DEVELOPMENT_TEAM = Y64ARVLCP4;
 				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -881,7 +889,7 @@
 				CLANG_OPTIMIZATION_PROFILE_FILE = "$(SRCROOT)/OptimizationProfiles/$(PRODUCT_NAME).profdata";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97LF6BB4ZK;
+				DEVELOPMENT_TEAM = Y64ARVLCP4;
 				INFOPLIST_FILE = "${TARGET_NAME}/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1032,7 +1040,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0.0.1.1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UZSPZPV6Q6;
+				DEVELOPMENT_TEAM = Y64ARVLCP4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1068,7 +1076,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0.0.1.1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UZSPZPV6Q6;
+				DEVELOPMENT_TEAM = Y64ARVLCP4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
