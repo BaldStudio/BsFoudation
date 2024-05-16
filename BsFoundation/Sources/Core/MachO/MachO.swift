@@ -6,7 +6,6 @@
 //  Copyright © 2022 BaldStudio. All rights reserved.
 //
 
-import Foundation
 import MachO
 
 public protocol MachODataConvertible {

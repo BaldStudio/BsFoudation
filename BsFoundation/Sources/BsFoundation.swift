@@ -10,16 +10,3 @@
 @_exported import BsLogging
 
 let logger = Logger(label: "BsFoundation")
-
-public func hasDefined(_ macro: String) -> Bool {
-    
-    if macro == "DEBUG" {
-#if DEBUG
-        return true
-#else
-        return false
-#endif
-    }
-    
-    return false
-}
