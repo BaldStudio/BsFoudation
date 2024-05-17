@@ -7,6 +7,9 @@ use_frameworks!
 
 target 'BsFoundation' do
   
+  pod 'BsLogging'
+  pod 'SwiftCollections', '1.1.0'
+  
 end
 
 target 'BsFoundationDemo' do

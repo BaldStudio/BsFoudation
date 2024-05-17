@@ -6,4 +6,8 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
-import Foundation
+public extension UIImageView {
+    convenience init?(image name: String, in bundle: Bundle? = nil) {
+        self.init(image: UIImage(named: name, in: bundle, with: nil))
+    }
+}

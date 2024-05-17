@@ -6,4 +6,8 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
-import Foundation
+public extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State = .normal) {
+        setBackgroundImage(color.asImage, for: state)
+    }
+}

@@ -8,20 +8,18 @@
 
 import UIKit
 
-public let BsApp = UIApplication.shared
-
 public var BsAppMainWindow: UIWindow? {
-    if let window = BsApp.delegate?.window {
+    if let window = BsApp.shared.delegate?.window {
         return window
     }
-    if let scene = BsApp.connectedScenes.first as? UIWindowScene {
+    if let scene = BsApp.shared.connectedScenes.first as? UIWindowScene {
         return scene.windows.first
     }
-    return BsApp.windows.first
+    return BsApp.shared.windows.first
 }
 
 public var BsAppKeyWindow: UIWindow? {
-    for scene in BsApp.connectedScenes where scene.activationState == .foregroundActive {
+    for scene in BsApp.shared.connectedScenes where scene.activationState == .foregroundActive {
         if let windowScene = scene as? UIWindowScene {
             if #available(iOS 15.0, *), let keyWindow = windowScene.keyWindow {
                 return keyWindow
@@ -32,7 +30,7 @@ public var BsAppKeyWindow: UIWindow? {
             }
         }
     }
-    for window in BsApp.windows where window.isKeyWindow { return window }
+    for window in BsApp.shared.windows where window.isKeyWindow { return window }
     return nil
 }
 
@@ -40,7 +38,7 @@ public var BsAppRootViewController: UIViewController? {
     BsAppMainWindow?.rootViewController
 }
 
-public let BsAppIcon = BsApp.bs.icon
+//public let BsAppIcon = BsApp.bs.icon
 
 public let BsAppBundle = Bundle.main
 

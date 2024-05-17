@@ -6,4 +6,12 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
-import Foundation
+public extension CAShapeLayer {
+    func applying(rounded rect: CGRect, radius: CGFloat, corners: UIRectCorner) {
+        let bezierPath = UIBezierPath(roundedRect: rect,
+                                      byRoundingCorners: corners,
+                                      cornerRadii: [radius, radius])
+        path = bezierPath.cgPath
+        frame = rect
+    }
+}

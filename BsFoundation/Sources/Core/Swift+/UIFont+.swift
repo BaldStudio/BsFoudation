@@ -53,5 +53,4 @@ public extension UIFont {
             registerFont(with: url)
         }
     }
-
 }

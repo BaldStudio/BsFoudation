@@ -33,8 +33,3 @@ public extension SwiftCompatible {
         set {}
     }
 }
-
-extension NSObject: SwiftCompatible {}
-extension String: SwiftCompatible {}
-extension Data: SwiftCompatible {}
-
