@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension SwiftX where T: UIBarButtonItem {
+public extension BaldStudio where T: UIBarButtonItem {
     @inlinable
     static var spacer: UIBarButtonItem {
         UIBarButtonItem(barButtonSystemItem: .flexibleSpace,

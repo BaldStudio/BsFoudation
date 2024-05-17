@@ -7,7 +7,7 @@
 //
 
 public extension CAShapeLayer {
-    func applying(rounded rect: CGRect, radius: CGFloat, corners: UIRectCorner) {
+    func applying(rounded radius: CGFloat, corners: UIRectCorner = .allCorners, rect: CGRect) {
         let bezierPath = UIBezierPath(roundedRect: rect,
                                       byRoundingCorners: corners,
                                       cornerRadii: [radius, radius])

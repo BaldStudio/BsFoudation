@@ -16,3 +16,15 @@ public extension UIResponder {
         return next?.nearest(ofKind: kind)
     }
 }
+
+// MARK: - Events
+
+public extension UIResponder {
+    func postEvent(with name: String, userInfo: Any? = nil) {
+        handleEvent(with: name, userInfo: userInfo)
+    }
+    
+    func handleEvent(with name: String, userInfo: Any? = nil) {
+        next?.handleEvent(with: name, userInfo: userInfo)
+    }
+}

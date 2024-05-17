@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension SwiftX where T: DispatchQueue {
+public extension BaldStudio where T: DispatchQueue {
         
     // MARK: - delay
     @inlinable
@@ -79,7 +79,7 @@ private extension DispatchQueue {
 
 // https://gist.github.com/nil-biribiri/67f158c8a93ff0a5d8c99ff41d8fe3bd
 
-public extension SwiftX where T: DispatchQueue {
+public extension BaldStudio where T: DispatchQueue {
 
     /**
      Executes a block of code, associated with a auto generate unique token by file name + fuction name + line of code, only once.  The code is thread safe and will

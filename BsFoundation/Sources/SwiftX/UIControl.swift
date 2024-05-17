@@ -13,7 +13,7 @@ private struct RuntimeKey {
 
 // MARK: - Touch Actions
 
-public extension SwiftX where T: UIControl {
+public extension BaldStudio where T: UIControl {
     
     func onTouchUpInside(_ action: @escaping BlockT<UIControl>) {
         this.touchUpInsideAction = action

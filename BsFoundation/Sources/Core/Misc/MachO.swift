@@ -13,20 +13,19 @@ public protocol MachODataConvertible {
     static func convert(_ t: RawType) -> Self
 }
 
-/// 这里如果是 struct 会崩，莫名其妙的
 public final class MachOSegment {
     public let name: String
     
     public init(name: String) {
         self.name = name
     }
-
+    
     // refer to __DATA
     public static let data = MachOSegment(name: SEG_DATA)
     
     // refer to __TEXT
     public static let text = MachOSegment(name: SEG_TEXT)
-
+    
 }
 
 public final class MachOSection {
@@ -35,7 +34,7 @@ public final class MachOSection {
     public init(name: String) {
         self.name = name
     }
-
+    
     // refer to __data
     public static let data = MachOSection(name: SECT_DATA)
     
@@ -49,14 +48,14 @@ public func loadMachOData<T: MachODataConvertible>(segment: MachOSegment,
     var frameworkNames: [String] = []
     
     /*
-        按照下面的目录找二进制文件，其他目录看情况加吧
+     按照下面的目录找二进制文件，其他目录看情况加吧
      
-        ├── Demo   # App的主二进制，包含需要找的静态库信息
-        ├── Frameworks # App的动态库目录
-        ├── Plugins # 其他Bundle目录，如单测Bundle
-
-    */
-            
+     ├── Demo   # App的主二进制，包含需要找的静态库信息
+     ├── Frameworks # App的动态库目录
+     ├── Plugins # 其他Bundle目录，如单测Bundle
+     
+     */
+    
     // 主二进制
     if let url = Bundle.main.executableURL {
         let name = url.lastPathComponent
@@ -72,7 +71,7 @@ public func loadMachOData<T: MachODataConvertible>(segment: MachOSegment,
             frameworkNames.append((filePath as NSString).deletingPathExtension)
         }
     }
-
+    
     // Plugins
     if let path = Bundle.main.builtInPlugInsPath,
        let contents = try? FileManager.default.contentsOfDirectory(atPath: path) {
@@ -85,8 +84,8 @@ public func loadMachOData<T: MachODataConvertible>(segment: MachOSegment,
 }
 
 public func loadMachOData<T: MachODataConvertible>(by frameworkNames: [String],
-                                                    segment: MachOSegment,
-                                                    section: MachOSection) -> [T] {
+                                                   segment: MachOSegment,
+                                                   section: MachOSection) -> [T] {
     var results: [T] = []
     for name in frameworkNames {
         var size: UInt = 0
@@ -98,7 +97,7 @@ public func loadMachOData<T: MachODataConvertible>(by frameworkNames: [String],
         
         let stride = MemoryLayout<T.RawType>.stride
         let count = Int(size) / stride
-
+        
         for i in 0..<count {
             let raw = UnsafeRawPointer(memory.advanced(by: i * stride))
             let value = raw.assumingMemoryBound(to: T.RawType.self).pointee
@@ -107,7 +106,6 @@ public func loadMachOData<T: MachODataConvertible>(by frameworkNames: [String],
     }
     
     return results
-
 }
 
 /**

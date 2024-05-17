@@ -2,26 +2,9 @@
 //  Runtime.swift
 //  BsFoundation
 //
-//  Created by crzorz on 2021/9/3.
-//  Copyright © 2021 BaldStudio. All rights reserved.
+//  Created by Runze Chang on 2024/5/17.
+//  Copyright © 2024 BaldStudio. All rights reserved.
 //
-
-import Foundation
-
-public protocol AnyOptional {
-    
-    var isNil: Bool { get }
-    
-}
-
-extension Optional: AnyOptional {
-    
-    @inlinable
-    public var isNil: Bool {
-        self == nil
-    }
-    
-}
 
 // MARK: - Associated Object
 
@@ -65,7 +48,7 @@ public extension ObjectAssociatable {
                                  value,
                                  atomic ? .OBJC_ASSOCIATION_RETAIN : .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
-    
+        
     static func set(associateCopy value: Any?, for key: UnsafeRawPointer, atomic: Bool = false) {
         objc_setAssociatedObject(self,
                                  key,
@@ -81,11 +64,11 @@ public extension ObjectAssociatable {
     }
     
     static func set(associateWeak value: AnyObject?, for key: UnsafeRawPointer, atomic: Bool = false) {
-        set(associate: WeakValueHolder(value), for: key, atomic: false)
+        set(associate: WeakValueHolder(value), for: key, atomic: atomic)
     }
     
     func set(associateWeak value: AnyObject?, for key: UnsafeRawPointer, atomic: Bool = false) {
-        set(associateCopy: WeakValueHolder(value), for: key, atomic: false)
+        set(associate: WeakValueHolder(value), for: key, atomic: atomic)
     }
     
     static func value<T>(forAssociated key: UnsafeRawPointer) -> T? {
@@ -112,3 +95,23 @@ public extension ObjectAssociatable {
         objc_removeAssociatedObjects(self)
     }
 }
+
+// MARK: - Reference
+
+@dynamicMemberLookup
+public struct Reference<Object> {
+    public let object: Object
+        
+    public init(_ object: Object) {
+        self.object = object
+    }
+    
+    public subscript<Value>(dynamicMember keyPath: WritableKeyPath<Object, Value>) -> ((Value) -> Reference<Object>) {
+        var object = object
+        return { value in
+            object[keyPath: keyPath] = value
+            return Reference(object)
+        }
+    }
+}
+

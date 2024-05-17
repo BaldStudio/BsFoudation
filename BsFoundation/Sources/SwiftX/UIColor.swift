@@ -13,7 +13,7 @@ extension UIColor {
     /// rgb color, value limit 0 - 255
 }
 
-public extension SwiftX where T: UIColor {
+public extension BaldStudio where T: UIColor {
     
     
     static func dynamic(light: T, dark: T) -> T {
@@ -37,7 +37,7 @@ public extension SwiftX where T: UIColor {
 
 #if DEBUG
 
-public extension SwiftX where T: UIColor {
+public extension BaldStudio where T: UIColor {
     var literial: String {
         var r: CGFloat = 0
         var g: CGFloat = 0

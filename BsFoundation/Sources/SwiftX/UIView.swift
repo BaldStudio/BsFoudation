@@ -6,86 +6,9 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
-private struct RuntimeKey {
-    static var singleTap = 0
-    static var gestures = 0
-}
-
-// MARK: - Gestures
-
-public extension SwiftX where T: UIView {
-    @discardableResult
-    func addGestureAction<Target: AnyObject, Gesture: UIGestureRecognizer>(_ target: Target,
-                                                                      action: @escaping Action<Target, Gesture>) -> Gesture {
-        let gesture = Gesture(target: this, action: #selector(UIView.bs_onGestureEvent(_:)))
-        this.addGestureRecognizer(gesture)
-        this.gestures.append(UIView.GestureAction(gesture: gesture) { [weak target] gesture in
-            guard let target, let gesture = gesture as? Gesture else { return }
-            action(target)(gesture)
-        })
-        return gesture
-    }
-    
-    func removeGestureAction(_ gesture: UIGestureRecognizer) {
-        this.gestures.removeAll { $0.gesture == gesture }
-        this.removeGestureRecognizer(gesture)
-    }
-    
-    // MARK: - single tap
-    
-    func onSingleTap(_ closure: @escaping BlockT<UITapGestureRecognizer>) {
-        this.singleTap = closure
-        addGestureAction(this, action: UIView._onSingleTap)
-    }
-    
-}
-
-private extension UIView {
-    
-    struct GestureAction {
-        let gesture: UIGestureRecognizer
-        let action: (UIGestureRecognizer) -> Void
-    }
-    
-    var gestures: [GestureAction] {
-        get {
-            var value: [GestureAction]? = value(forAssociated: &RuntimeKey.gestures)
-            if value.isNil {
-                value = []
-                set(associate: value, for: &RuntimeKey.gestures)
-            }
-            return value!
-            
-        }
-        set {
-            set(associate: newValue, for: &RuntimeKey.gestures)
-        }
-    }
-    
-    @objc
-    func bs_onGestureEvent(_ sender: UIGestureRecognizer) {
-        for gesture in gestures where gesture.gesture == sender {
-            gesture.action(sender)
-        }
-    }
-    
-    func _onSingleTap(_ sender: UITapGestureRecognizer) {
-        singleTap?(sender)
-    }
-    
-    var singleTap: BlockT<UITapGestureRecognizer>? {
-        get {
-            value(forAssociated: &RuntimeKey.singleTap)
-        }
-        set {
-            set(associate: newValue, for: &RuntimeKey.singleTap)
-        }
-    }
-}
-
 // MARK: Shape
 
-public extension SwiftX where T: UIView {
+public extension BaldStudio where T: UIView {
     
     /// 添加边框
     @inlinable

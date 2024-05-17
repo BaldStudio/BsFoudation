@@ -6,10 +6,13 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
+public typealias Byte = UInt8
+public typealias Bytes = [Byte]
+
 public extension Data {
     @inlinable
-    var bytes: [UInt8] {
-        [UInt8](self)
+    var bytes: Bytes {
+        Bytes(self)
     }
     
     @inlinable

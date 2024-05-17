@@ -2,14 +2,22 @@
 //  BsBoxLabel.swift
 //  BsFoundation
 //
-//  Created by crzorz on 2022/3/3.
-//  Copyright © 2022 BaldStudio. All rights reserved.
+//  Created by changrunze on 2023/6/16.
+//  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-import UIKit
+@IBDesignable
+open class BsBoxLabel: BsUILabel {
+    open override func commonInit() {
+        super.commonInit()
+        applyingFixed()
+    }
 
-open class BsBoxLabel: UILabel {
-    open var textInsets: UIEdgeInsets = .zero
+    open var textInsets: UIEdgeInsets = .zero {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
     
     open override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: textInsets))
@@ -19,9 +27,6 @@ open class BsBoxLabel: UILabel {
         let insets = textInsets
         var rect = super.textRect(forBounds: bounds.inset(by: insets),
                                   limitedToNumberOfLines: numberOfLines)
-        
-        rect.origin.x -= insets.left
-        rect.origin.y -= insets.top
         rect.size.width += (insets.left + insets.right)
         rect.size.height += (insets.top + insets.bottom)
         return rect

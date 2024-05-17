@@ -1,6 +1,6 @@
 //
 //  SwiftX.swift
-//  SwiftX
+//  BsFoundation
 //
 //  Created by crzorz on 2020/9/27.
 //  Copyright © 2020 BaldStudio. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SwiftX<T> {
+public struct BaldStudio<T> {
     public static var this: T.Type {
         T.self
     }
@@ -17,19 +17,21 @@ public struct SwiftX<T> {
 
 public protocol SwiftCompatible {
     associatedtype CompatibleType
-    static var bs: SwiftX<CompatibleType>.Type { get set }
-    var bs: SwiftX<CompatibleType> { get set }
+    static var bs: BaldStudio<CompatibleType>.Type { get set }
+    var bs: BaldStudio<CompatibleType> { get set }
 
 }
 
 public extension SwiftCompatible {
-    static var bs: SwiftX<Self>.Type {
-        get { SwiftX<Self>.self }
+    static var bs: BaldStudio<Self>.Type {
+        get { BaldStudio<Self>.self }
         set {}
     }
 
-    var bs: SwiftX<Self> {
-        get { SwiftX(this: self) }
+    var bs: BaldStudio<Self> {
+        get { BaldStudio(this: self) }
         set {}
     }
 }
+
+extension NSObject: SwiftCompatible {}
