@@ -93,7 +93,6 @@
 		D28584FD2A83669000604748 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28584FC2A83669000604748 /* UIControl.swift */; };
 		D29601512732ACA500B6511A /* SwiftX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftX.swift */; };
 		D29601532732ACB900B6511A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601522732ACB900B6511A /* Collection.swift */; };
-		D2986EA2295D6FA2007A334E /* SchemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2986EA1295D6FA2007A334E /* SchemeService.swift */; };
 		D2B89DFA2AD8E3A40047CD72 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B89DF92AD8E3A40047CD72 /* UIStackView.swift */; };
 		D2C8B9D227D744AB00F790DF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8B9D127D744AB00F790DF /* UIApplication.swift */; };
 		D2D70DC32A53CE4B0042C251 /* CAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D70DC22A53CE4B0042C251 /* CAShapeLayer.swift */; };
@@ -224,7 +223,6 @@
 		D29601502732ACA500B6511A /* SwiftX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftX.swift; sourceTree = "<group>"; };
 		D29601522732ACB900B6511A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D297DB782568F6390096BD54 /* BsFoundation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BsFoundation-Info.plist"; sourceTree = "<group>"; };
-		D2986EA1295D6FA2007A334E /* SchemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeService.swift; sourceTree = "<group>"; };
 		D2B89DF92AD8E3A40047CD72 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		D2C8B9D127D744AB00F790DF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		D2D70DC22A53CE4B0042C251 /* CAShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAShapeLayer.swift; sourceTree = "<group>"; };
@@ -588,21 +586,12 @@
 				6F035F162BF5AC3C00A070A3 /* Core */,
 				6F035F172BF5AC4000A070A3 /* UIKit */,
 				D2137E9529CD98940031221C /* Utils */,
-				D2986EA0295D6DFA007A334E /* Scheme */,
 				D222369D294B0F8300135713 /* Timer */,
 				D20F0BC028B9B17C00BD6E4C /* Device */,
 				D26FC62826E0AF76003B9F11 /* SwiftX */,
 				D25B3BF8282D020A005C2C01 /* AppStore */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		D2986EA0295D6DFA007A334E /* Scheme */ = {
-			isa = PBXGroup;
-			children = (
-				D2986EA1295D6FA2007A334E /* SchemeService.swift */,
-			);
-			path = Scheme;
 			sourceTree = "<group>";
 		};
 		D2A3334327D0D5F900705185 /* Supporting Files */ = {
@@ -958,7 +947,6 @@
 				6F035F722BF606D200A070A3 /* BsTableViewController.swift in Sources */,
 				6F035F5D2BF603D800A070A3 /* UIImageView+.swift in Sources */,
 				D26FC63726E0AF8C003B9F11 /* Bundle.swift in Sources */,
-				D2986EA2295D6FA2007A334E /* SchemeService.swift in Sources */,
 				D222369B294B0B3D00135713 /* BsTimer.swift in Sources */,
 				6F035F1C2BF5E34B00A070A3 /* BsApp.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
