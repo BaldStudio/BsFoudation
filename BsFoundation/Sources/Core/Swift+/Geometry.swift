@@ -11,20 +11,16 @@ import UIKit
 // MARK: - CGRect
 
 extension CGRect: ExpressibleByArrayLiteral {
-    
     @inlinable
     public init(arrayLiteral elements: CGFloat...) {
         assert(elements.count == 4)
         self.init(x: elements[0], y: elements[1], width: elements[2], height: elements[3])
     }
-    
 }
-
 
 // MARK: - Point
 
 public extension CGPoint {
-    
     @inlinable
     static func + (left: CGPoint, right: CGPoint) -> CGPoint {
         CGPoint(x: left.x + right.x, y: left.y + right.y)
@@ -64,23 +60,19 @@ public extension CGPoint {
     static func /= (point: inout CGPoint, scalar: CGFloat) {
         point = point / scalar
     }
-
 }
 
 extension CGPoint: ExpressibleByArrayLiteral {
-    
     @inlinable
     public init(arrayLiteral elements: CGFloat...) {
         assert(elements.count == 2)
         self.init(x: elements[0], y: elements[1])
     }
-    
 }
 
 // MARK: - Size
 
 public extension CGSize {
-
     @inlinable
     static func + (left: CGSize, right: CGSize) -> CGSize {
         CGSize(width: left.width + right.width, height: left.height + right.height)
@@ -120,7 +112,6 @@ public extension CGSize {
     static func /= (size: inout CGSize, scalar: CGFloat) {
         size = size / scalar
     }
-    
 }
 
 extension CGSize: ExpressibleByArrayLiteral {
@@ -134,7 +125,6 @@ extension CGSize: ExpressibleByArrayLiteral {
 // MARK: - UIEdgeInsets
 
 public extension UIEdgeInsets {
-
     @inlinable
     init(horizontal: CGFloat = 0, vertical: CGFloat = 0) {
         self.init(top: vertical,
@@ -145,7 +135,7 @@ public extension UIEdgeInsets {
     
     @inlinable
     static func all(_ inset: CGFloat) -> Self {
-        Self(top: inset, left: inset, bottom: inset, right: inset)
+        UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
 
     @inlinable
@@ -153,7 +143,7 @@ public extension UIEdgeInsets {
                      left: CGFloat = 0,
                      bottom: CGFloat = 0,
                      right: CGFloat = 0) -> Self {
-        Self(top: top, left: left, bottom: bottom, right: right)
+        UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
     
     @inlinable
@@ -165,11 +155,9 @@ public extension UIEdgeInsets {
     var horizontal: CGFloat {
         top + bottom
     }
-
 }
 
 extension UIEdgeInsets: ExpressibleByArrayLiteral {
-    
     @inlinable
     public init(arrayLiteral elements: CGFloat...) {
         assert(elements.count == 4)
@@ -178,5 +166,4 @@ extension UIEdgeInsets: ExpressibleByArrayLiteral {
                   bottom: elements[2],
                   right: elements[3])
     }
-    
 }

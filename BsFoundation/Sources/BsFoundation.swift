@@ -8,5 +8,6 @@
 
 @_exported import UIKit
 @_exported import BsLogging
+@_exported import SwiftCollections
 
 let logger = Logger(label: "BsFoundation")

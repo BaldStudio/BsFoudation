@@ -7,8 +7,6 @@ use_frameworks!
 
 target 'BsFoundation' do
   
-  pod 'BsLogging'
-  
 end
 
 target 'BsFoundationDemo' do
