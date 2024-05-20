@@ -34,4 +34,28 @@ open class BsUINavigationController: UINavigationController {
     open func commonInit() {
         
     }
+    
+    open override var shouldAutorotate: Bool {
+        topViewController?.shouldAutorotate ?? super.shouldAutorotate
+    }
+
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
+
+    open override var childForStatusBarStyle: UIViewController? {
+        topViewController ?? super.childForStatusBarStyle
+    }
+
+    open override var childForStatusBarHidden: UIViewController? {
+        topViewController ?? super.childForStatusBarHidden
+    }
+
+    open override var childForHomeIndicatorAutoHidden: UIViewController? {
+        topViewController ?? super.childForHomeIndicatorAutoHidden
+    }
+
+    open override var childForScreenEdgesDeferringSystemGestures: UIViewController? {
+        topViewController ?? super.childForScreenEdgesDeferringSystemGestures
+    }
 }

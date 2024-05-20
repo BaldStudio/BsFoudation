@@ -1,12 +1,12 @@
 //
-//  BsUICollectionReusableView.swift
+//  BsUICollectionSupplementaryView.swift
 //  BsFoundation
 //
 //  Created by 常润泽 on 2023/12/8.
 //  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-open class BsUICollectionReusableView: UICollectionReusableView {
+open class BsUICollectionSupplementaryView: UICollectionReusableView {
     deinit {
         logger.debug("\(classForCoder) -> deinit 🔥")
     }

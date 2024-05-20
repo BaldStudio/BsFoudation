@@ -24,5 +24,4 @@ open class BsUITableViewCell: UITableViewCell {
     open func commonInit() {
         
     }
-    
 }

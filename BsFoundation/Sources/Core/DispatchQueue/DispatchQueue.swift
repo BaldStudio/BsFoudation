@@ -8,13 +8,13 @@
 
 import Foundation
 
-public extension BaldStudio where T: DispatchQueue {
-        
+public extension DispatchQueue {
     // MARK: - delay
+    
     @inlinable
     func delay(_ delay: TimeInterval, action: @escaping Block) {
         let when = DispatchTime.now() + delay
-        this.asyncAfter(deadline: when) {
+        asyncAfter(deadline: when) {
             action()
         }
     }
@@ -29,7 +29,7 @@ public extension BaldStudio where T: DispatchQueue {
         return {
             worker?.cancel()
             worker = DispatchWorkItem { action() }
-            this.asyncAfter(deadline: .now() + interval, execute: worker!)
+            self.asyncAfter(deadline: .now() + interval, execute: worker!)
         }
     }
     
@@ -52,11 +52,11 @@ public extension BaldStudio where T: DispatchQueue {
             }
             
             if DispatchTime.now() > deadline() {
-                this.async(execute: worker!)
+                self.async(execute: worker!)
                 return
             }
 
-            this.asyncAfter(deadline: .now() + interval, execute: worker!)
+            self.asyncAfter(deadline: .now() + interval, execute: worker!)
         }
     }
     
@@ -68,18 +68,15 @@ public extension BaldStudio where T: DispatchQueue {
             DispatchQueue.main.async(execute: work)
         }
     }
-
 }
 
 // MARK: - once
 
-private extension DispatchQueue {
-    static var pocket: [String] = []
-}
+private var _pocket: [String] = []
 
 // https://gist.github.com/nil-biribiri/67f158c8a93ff0a5d8c99ff41d8fe3bd
 
-public extension BaldStudio where T: DispatchQueue {
+public extension DispatchQueue {
 
     /**
      Executes a block of code, associated with a auto generate unique token by file name + fuction name + line of code, only once.  The code is thread safe and will
@@ -103,9 +100,9 @@ public extension BaldStudio where T: DispatchQueue {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
 
-        guard !T.pocket.contains(token) else { return }
+        guard !_pocket.contains(token) else { return }
 
-        T.pocket.append(token)
+        _pocket.append(token)
         action()
     }
 

@@ -61,3 +61,18 @@ public extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
 }
+
+#if DEBUG
+
+public extension UIColor {
+    var literial: String {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        return "#colorLiteral(red: \(r), green: \(g), blue: \(b), alpha: \(a))"
+    }
+}
+
+#endif

@@ -10,7 +10,7 @@ public extension Bundle {
     struct InfoKey {
         public let rawValue: String
         
-        init(rawValue: String) {
+        public init(rawValue: String) {
             self.rawValue = rawValue
         }
 

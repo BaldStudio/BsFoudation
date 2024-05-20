@@ -7,7 +7,6 @@
 //
 
 open class BsUITableViewHeaderFooterView: UITableViewHeaderFooterView {
-
     deinit {
         logger.debug("\(classForCoder) -> deinit 🔥")
     }
@@ -25,5 +24,4 @@ open class BsUITableViewHeaderFooterView: UITableViewHeaderFooterView {
     open func commonInit() {
 
     }
-
 }

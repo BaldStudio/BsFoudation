@@ -32,7 +32,6 @@ final class BsCollectionViewProxy: NSObject, UICollectionViewDelegate, UICollect
     override func responds(to aSelector: Selector!) -> Bool {
         target?.responds(to: aSelector) == true || impl?.responds(to: aSelector) == true || super.responds(to: aSelector)
     }
-
 }
 
 // MARK: - Delegate Impl
@@ -53,7 +52,6 @@ private class BsCollectionViewProxyImpl: NSObject, UICollectionViewDelegate, UIC
 // MARK: - Cell
 
 extension BsCollectionViewProxyImpl {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         proxy.dataSource[indexPath].collectionView(collectionView, didSelectItemAt: indexPath)
     }
@@ -86,13 +84,11 @@ extension BsCollectionViewProxyImpl {
         }
         section[indexPath.item].collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
     }
-    
 }
 
 // MARK: - Supplementary View
 
 extension BsCollectionViewProxyImpl {
-    
     func collectionView(_ collectionView: UICollectionView,
                         willDisplaySupplementaryView view: UICollectionReusableView,
                         forElementKind elementKind: String,
@@ -131,13 +127,11 @@ extension BsCollectionViewProxyImpl {
                                    at: indexPath)
         }
     }
-
 }
 
 // MARK: - Flow Layout
 
 extension BsCollectionViewProxyImpl {
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -176,5 +170,4 @@ extension BsCollectionViewProxyImpl {
                         referenceSizeForFooterInSection section: Int) -> CGSize {
         proxy.dataSource[section].footerSize
     }
-
 }

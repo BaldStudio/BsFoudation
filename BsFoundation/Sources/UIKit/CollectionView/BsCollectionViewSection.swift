@@ -9,7 +9,6 @@
 // MARK: - Property
 
 open class BsCollectionViewSection: NSObject {
-        
     public typealias Parent = BsCollectionViewDataSource
     public typealias Child = BsCollectionViewNode
 
@@ -229,7 +228,6 @@ open class BsCollectionViewSection: NSObject {
 // MARK: - Operator
 
 public extension BsCollectionViewSection {
-    
     static func += (left: BsCollectionViewSection, right: Child) {
         left.append(right)
     }
@@ -237,5 +235,4 @@ public extension BsCollectionViewSection {
     static func -= (left: BsCollectionViewSection, right: Child) {
         left.remove(right)
     }
-
 }
