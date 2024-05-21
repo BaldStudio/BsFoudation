@@ -17,7 +17,7 @@ public struct GUID {
         case keychain
     }
     
-    private static var storeKey = "com.bald-studio.BsDevice"
+    private static var storeKey = "com.baldstudio.BsDevice"
     
     private static var stringValue = ""
     

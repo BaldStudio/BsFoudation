@@ -9,10 +9,12 @@
 // MARK: - Property
 
 open class BsCollectionViewDataSource: NSObject {
-    
+    public typealias Parent = BsCollectionView
     public typealias Child = BsCollectionViewSection
 
-    open internal(set) weak var collectionView: BsCollectionView!
+    open internal(set) weak var parent: Parent?
+    
+    open var collectionView: BsCollectionView? { parent }
 
     open var children: ContiguousArray<Child> = []
     
@@ -23,7 +25,7 @@ open class BsCollectionViewDataSource: NSObject {
     public override init() {
         super.init()
     }
-
+    
     // MARK: - Node Actions
     
     open var count: Int {
@@ -42,9 +44,7 @@ open class BsCollectionViewDataSource: NSObject {
     }
     
     open func append(children: [Child]) {
-        for child in children {
-            append(child)
-        }
+        children.forEach { append($0) }
     }
     
     open func insert(_ child: Child, at index: Int) {
@@ -76,15 +76,11 @@ open class BsCollectionViewDataSource: NSObject {
     }
 
     open func remove(children: [Child]) {
-        for child in children {
-            remove(child)
-        }
+        children.forEach { remove($0) }
     }
 
     open func removeAll() {
-        for i in 0..<children.count {
-            remove(at: i)
-        }
+        children.reversed().forEach { remove($0) }
     }
         
     open func child(at index: Int) -> Child {
@@ -112,13 +108,11 @@ open class BsCollectionViewDataSource: NSObject {
             self[indexPath.section][indexPath.item]
         }
     }
-
 }
 
 // MARK: - DataSource Delegate
 
 extension BsCollectionViewDataSource: UICollectionViewDataSource {
-    
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         count
     }
@@ -128,19 +122,28 @@ extension BsCollectionViewDataSource: UICollectionViewDataSource {
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        self[indexPath].collectionView(self.collectionView, cellForItemAt: indexPath)
+        guard let parent else {
+            fatalError("tableView dataSource is null")
+        }
+        return self[indexPath].collectionView(parent, cellForItemAt: indexPath)
     }
     
-    open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    open func collectionView(_ collectionView: UICollectionView, 
+                             viewForSupplementaryElementOfKind kind: String,
+                             at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let parent else {
+            fatalError("tableView dataSource is null")
+        }
+
         if kind == UICollectionView.elementKindSectionHeader {
-            return self[indexPath.section].collectionView(self.collectionView, viewForHeaderAt: indexPath)
+            return self[indexPath.section].collectionView(parent, viewForHeaderAt: indexPath)
         }
         
         if kind == UICollectionView.elementKindSectionFooter {
-            return self[indexPath.section].collectionView(self.collectionView, viewForFooterAt: indexPath)
+            return self[indexPath.section].collectionView(parent, viewForFooterAt: indexPath)
         }
         
-        return self[indexPath.section].collectionView(self.collectionView,
+        return self[indexPath.section].collectionView(parent,
                                                       viewForSupplementaryElementOfKind: kind,
                                                       at: indexPath)
     }
@@ -149,7 +152,6 @@ extension BsCollectionViewDataSource: UICollectionViewDataSource {
 // MARK: - Operator
 
 public extension BsCollectionViewDataSource {
-    
     static func += (left: BsCollectionViewDataSource, right: Child) {
         left.append(right)
     }
@@ -157,5 +159,4 @@ public extension BsCollectionViewDataSource {
     static func -= (left: BsCollectionViewDataSource, right: Child) {
         left.remove(right)
     }
-
 }

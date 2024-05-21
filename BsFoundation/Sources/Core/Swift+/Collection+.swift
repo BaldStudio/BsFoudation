@@ -76,27 +76,33 @@ public extension Dictionary {
     static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
         lhs.merge(rhs) { _, new in new }
     }
-    
-    private static var emptyJSONString: String { "{}" }
+}
+
+// MARK: - JSONString
+
+private enum JSONString {
+    static let emptyArray = "[]"
+    static let emptyDictionary = "[]"
+}
+
+public extension Dictionary {
     var asJSONString: String {
-        guard JSONSerialization.isValidJSONObject(self) else { return Self.emptyJSONString }
+        guard JSONSerialization.isValidJSONObject(self) else { return JSONString.emptyDictionary }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: self,
                                                          options: .prettyPrinted) else {
-            return Self.emptyJSONString
+            return JSONString.emptyDictionary
         }
-        return String(data: jsonData, encoding: .utf8) ?? Self.emptyJSONString
+        return String(data: jsonData, encoding: .utf8) ?? JSONString.emptyDictionary
     }
 }
-
-// MARK: - Array
 
 public extension Array {
-    private static var emptyJSONString: String { "[]" }
     var asJSONString: String {
-        guard JSONSerialization.isValidJSONObject(self) else { return Self.emptyJSONString }
+        guard JSONSerialization.isValidJSONObject(self) else { return JSONString.emptyArray }
         guard let jsonData = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted) else {
-            return Self.emptyJSONString
+            return JSONString.emptyArray
         }
-        return String(data: jsonData, encoding: .utf8) ?? Self.emptyJSONString
+        return String(data: jsonData, encoding: .utf8) ?? JSONString.emptyArray
     }
 }
+

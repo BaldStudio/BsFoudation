@@ -9,13 +9,12 @@
 // MARK: - Property
 
 open class BsTableView: UITableView {
-    private var proxy = BsTableViewProxy()
-    fileprivate var _dataSource = BsTableViewDataSource()
+    fileprivate let proxy = BsTableViewProxy()
     
     open private(set) var registryMap: [String: AnyObject] = [:]
     
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
     
     public override init(frame: CGRect, style: Style) {
@@ -38,9 +37,9 @@ open class BsTableView: UITableView {
     }
     
     open func commonInit() {
-        delegate = proxy
-        dataSource = _dataSource
         proxy.tableView = self
+        delegate = proxy
+        dataSource = proxy.dataSource
     }
 
     // MARK: - Override
@@ -49,29 +48,25 @@ open class BsTableView: UITableView {
         set {
             if let dataSource = newValue as? BsTableViewDataSource {
                 super.dataSource = dataSource
-                _dataSource = dataSource
                 proxy.dataSource = dataSource
-                dataSource.parent = self
             } else {
                 super.dataSource = newValue
             }
         }
         get {
-            _dataSource
+            proxy.dataSource
         }
     }
     
     open override var delegate: UITableViewDelegate? {
         set {
-            guard let newValue = newValue else {
+            guard let newValue else {
                 proxy.target = nil
                 return
             }
-            
             if !(newValue is BsTableViewProxy) {
                 proxy.target = newValue
             }
-            
             super.delegate = proxy
         }
         get {
@@ -108,19 +103,19 @@ open class BsTableView: UITableView {
     // MARK: - Additions
     
     open func append(section: BsTableViewSection) {
-        _dataSource.append(section)
+        proxy.dataSource.append(section)
     }
 
     open func insert(_ section: BsTableViewSection, at index: Int) {
-        _dataSource.insert(section, at: index)
+        proxy.dataSource.insert(section, at: index)
     }
 
     open func remove(section: BsTableViewSection) {
-        _dataSource.remove(section)
+        proxy.dataSource.remove(section)
     }
 
     open func removeAll() {
-        _dataSource.removeAll()
+        proxy.dataSource.removeAll()
     }
     
     open func setDataSource(_ newValue: BsTableViewDataSource?) {
@@ -177,5 +172,5 @@ extension BsTableView {
 // MARK: - Extensions
 
 public extension BaldStudio where T: BsTableView {
-    var dataSource: BsTableViewDataSource { this._dataSource }
+    var dataSource: BsTableViewDataSource { this.proxy.dataSource }
 }

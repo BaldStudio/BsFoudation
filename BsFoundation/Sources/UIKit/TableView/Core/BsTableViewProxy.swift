@@ -9,35 +9,36 @@
 // MARK: - Property
 
 final class BsTableViewProxy: NSObject, UITableViewDelegate {
-    private var impl: BsTableViewProxyImpl?
-
-    weak var dataSource: BsTableViewDataSource!
-    weak var tableView: BsTableView!
+    private lazy var impl = BsTableViewProxyImpl(self)
+    
+    @NullResetable(default: BsTableViewDataSource())
+    var dataSource: BsTableViewDataSource!
+    
+    weak var tableView: BsTableView! {
+        didSet {
+            dataSource.parent = tableView
+        }
+    }
     
     weak var target: UITableViewDelegate?
     
     deinit {
         logger.debug("\(self.classForCoder) -> deinit 🔥")
     }
-    
-    override init() {
-        super.init()
-        impl = BsTableViewProxyImpl(self)
-    }
-    
+
     override func forwardingTarget(for aSelector: Selector!) -> Any? {
         (target?.responds(to: aSelector) == true ? target : impl) ?? super.forwardingTarget(for: aSelector)
     }
     
     override func responds(to aSelector: Selector!) -> Bool {
-        target?.responds(to: aSelector) == true || impl?.responds(to: aSelector) == true || super.responds(to: aSelector)
+        target?.responds(to: aSelector) == true || impl.responds(to: aSelector) == true || super.responds(to: aSelector)
     }
     
 }
 
 // MARK: - Delegate Impl
 
-private class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
+private final class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
     weak var proxy: BsTableViewProxy!
     
     deinit {
@@ -53,7 +54,6 @@ private class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
 // MARK: - Cell
 
 extension BsTableViewProxyImpl {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = proxy.dataSource[indexPath]
         var height = row.tableView(tableView, preferredFixedAxisSizeAt: indexPath)
@@ -91,13 +91,11 @@ extension BsTableViewProxyImpl {
                    didSelectRowAt indexPath: IndexPath) {
         proxy.dataSource[indexPath].tableView(tableView, didSelectRowAt: indexPath)
     }
-
 }
 
 // MARK: - Header
 
 extension BsTableViewProxyImpl {
-    
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         proxy.dataSource[section].tableView(tableView, preferredHeaderLayoutSizeFittingInSection: section)
@@ -127,13 +125,11 @@ extension BsTableViewProxyImpl {
         }
         proxy.dataSource[section].didEndDisplaying(header: view, in: section)
     }
-    
 }
 
 // MARK: - Footer
 
 extension BsTableViewProxyImpl {
-    
     func tableView(_ tableView: UITableView,
                    heightForFooterInSection section: Int) -> CGFloat {
         proxy.dataSource[section].tableView(tableView, preferredFooterLayoutSizeFittingInSection: section)
@@ -165,6 +161,5 @@ extension BsTableViewProxyImpl {
         }
         proxy.dataSource[section].didEndDisplaying(footer: view, in: section)
     }
-    
 }
 

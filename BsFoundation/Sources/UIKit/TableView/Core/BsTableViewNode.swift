@@ -16,14 +16,17 @@ open class BsTableViewNode: NSObject {
     
     open internal(set) weak var parent: Parent? = nil
     
+    open var tableView: BsTableView? { parent?.tableView }
+
     open var nib: UINib? = nil
     
     /// 指定cell的固定高度，在使用自适应高度时，则为最小高度
     open var cellHeight: CGFloat = 44
 
     /// 自动计算尺寸的缓存
-    private var layoutSizeFittingCache = UIView.noIntrinsicMetric
-
+    private var layoutSizeFittingCache: CGFloat = 0
+    private var isLayoutSizeFittingFinished = false
+    
     /// 自适应尺寸，设置 vertical 自适应高度
     open var preferredLayoutSizeFitting: LayoutSizeFitting = .none
 
@@ -56,11 +59,7 @@ open class BsTableViewNode: NSObject {
     open var reuseIdentifier: String {
         "\(Self.self).\(cellClass).Cell"
     }
-    
-    open var tableView: BsTableView? {
-        parent?.tableView
-    }
-    
+        
     open var cell: UITableViewCell? {
         guard let indexPath = indexPath,
               let tableView = tableView else {
@@ -86,7 +85,8 @@ open class BsTableViewNode: NSObject {
     }
     
     open func invalidateCellSize() {
-        layoutSizeFittingCache = UIView.noIntrinsicMetric
+        layoutSizeFittingCache = 0
+        isLayoutSizeFittingFinished = false
     }
 
     // MARK: - Additions
@@ -98,7 +98,7 @@ open class BsTableViewNode: NSObject {
     // MARK: -  Cell
     
     func prepareLayoutSizeFitting(_ cell: UITableViewCell, at indexPath: IndexPath) -> CGFloat {
-        // TODO: 以下计算可以使用，但还需要完善，处理 Accessory View 相关的逻辑
+        // TODO: 以下计算可以使用，但还需要完善，比如需要处理 Accessory View 相关的逻辑
         let widthConstraint = cell.contentView.widthAnchor.constraint(equalToConstant: cell.bounds.width)
         widthConstraint.priority = .required - 1 // 避免约束冲突
         widthConstraint.isActive = true
@@ -135,15 +135,14 @@ open class BsTableViewNode: NSObject {
 
 // MARK: - Layout Fitting
 
-private var EPSILON: CGFloat = 1e-2
-
 extension BsTableViewNode {
     /// 自适应尺寸计算
     func tableView(_ tableView: UITableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat {
         if preferredLayoutSizeFitting == .none || preferredLayoutSizeFitting == .horizontal { return cellHeight }
         if preferredLayoutStyle == .auto { return UITableView.automaticDimension }
-        guard EPSILON > abs(layoutSizeFittingCache - UIView.noIntrinsicMetric) else { return layoutSizeFittingCache }
+        guard !isLayoutSizeFittingFinished else { return layoutSizeFittingCache }
         let cell = cellClass.init(style: .default, reuseIdentifier: reuseIdentifier)
+        isLayoutSizeFittingFinished = true
         return prepareLayoutSizeFitting(cell, at: indexPath)
     }
     

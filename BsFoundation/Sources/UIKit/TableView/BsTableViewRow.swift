@@ -52,12 +52,10 @@ open class BsTableViewRow<T: UITableViewCell>: BsTableViewNode {
 // MARK: - Mutable Cell Class
 
 open class BsTableViewMutableRow: BsTableViewRow<UITableViewCell> {
-
     private var _cellClass: UITableViewCell.Type = UITableViewCell.self
     
     open override var cellClass: UITableViewCell.Type {
         set { _cellClass = newValue }
         get { _cellClass }
     }
-    
 }

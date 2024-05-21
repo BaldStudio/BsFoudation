@@ -2,8 +2,8 @@
 //  BsTableViewNode+.swift
 //  BsFoundation
 //
-//  Created by changrunze on 2023/10/30.
-//  Copyright © 2023 BaldStudio. All rights reserved.
+//  Created by 常润泽 on 2024/2/23.
+//  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
 public extension BsTableViewNode {

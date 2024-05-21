@@ -8,17 +8,18 @@
 
 /// 逻辑基类
 open class BsCollectionViewNode: NSObject {
-    
     public typealias Parent = BsCollectionViewSection
     
     /// 自动计算尺寸的标记位和缓存
     private var layoutSizeFittingCache: CGSize = .zero
-    private var layoutSizeFittingFinished = false
+    private var isLayoutSizeFittingFinished = false
     
     var cellClass: UICollectionViewCell.Type { UICollectionViewCell.self }
     
     open internal(set) weak var parent: Parent? = nil
     
+    open var collectionView: BsCollectionView? { parent?.collectionView }
+
     open var nib: UINib? = nil
     
     /// 指定cell的固定尺寸，在自适应尺寸时，则为自动计算方向上的最小值
@@ -44,11 +45,7 @@ open class BsCollectionViewNode: NSObject {
     open var reuseIdentifier: String {
         "\(Self.self).\(cellClass).Cell"
     }
-    
-    open var collectionView: BsCollectionView? {
-        parent?.collectionView
-    }
-    
+        
     open var cell: UICollectionViewCell? {
         guard let collectionView = collectionView,
               let indexPath = indexPath else {
@@ -77,7 +74,7 @@ open class BsCollectionViewNode: NSObject {
     /// 重置cell的高度 会重新执行计算逻辑
     open func invalidateCellSize() {
         layoutSizeFittingCache = .zero
-        layoutSizeFittingFinished = false
+        isLayoutSizeFittingFinished = false
     }
     
     // MARK: - Additions
@@ -117,15 +114,16 @@ open class BsCollectionViewNode: NSObject {
 // MARK: - Layout Fitting
 
 extension BsCollectionViewNode {
-    
     /// 撑满父视图的计算
     func collectionView(_ collectionView: UICollectionView, preferredFixedAxisSizeAt indexPath: IndexPath) -> CGSize {
         if preferredFixedAxisSize == .none { return cellSize }
         guard let section = parent else { return cellSize }
+        let bounds = collectionView.bounds
+        let insets = section.insets
         if preferredFixedAxisSize == .horizontal {
-            cellSize.width = collectionView.bounds.width - section.insets.left - section.insets.right
+            cellSize.width = bounds.width - insets.left - insets.right
         } else {
-            cellSize.height = collectionView.bounds.height - section.insets.top - section.insets.bottom
+            cellSize.height = bounds.height - insets.top - insets.bottom
         }
         return cellSize
     }
@@ -133,9 +131,10 @@ extension BsCollectionViewNode {
     /// 自适应尺寸计算，如果计算不正确，请检查约束是否符合计算条件
     func collectionView(_ collectionView: UICollectionView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGSize {
         if preferredLayoutSizeFitting == .none { return cellSize }
-        guard !layoutSizeFittingFinished else { return layoutSizeFittingCache }
+        guard !isLayoutSizeFittingFinished else { return layoutSizeFittingCache }
         
-        func prototypeCell(with size: CGSize) -> UICollectionViewCell {
+        func makePrototypeCell(with size: CGSize) -> UICollectionViewCell {
+            // 这个临时cell可以缓存起来
             let cell = cellClass.init(frame: CGRect(origin: .zero, size: size))
             prepareLayoutSizeFitting(cell, at: indexPath)
             return cell
@@ -143,17 +142,15 @@ extension BsCollectionViewNode {
         
         var layoutSize: CGSize = .zero
         if preferredLayoutSizeFitting == .vertical {
-            /// 这个临时cell可以缓存起来
             // height 是预设一个大值，避免约束冲突
             let estimatedSize = CGSize(width: cellSize.width, height: collectionView.bounds.height)
-            let cell = prototypeCell(with: estimatedSize)
+            let cell = makePrototypeCell(with: estimatedSize)
             layoutSize = cell.systemLayoutSizeFitting(estimatedSize,
                                                       withHorizontalFittingPriority: .required,
                                                       verticalFittingPriority: .fittingSizeLevel)
         } else {
-            /// 这个临时cell可以缓存起来
             let estimatedSize = CGSize(width: collectionView.bounds.width, height: cellSize.height)
-            let cell = prototypeCell(with: estimatedSize)
+            let cell = makePrototypeCell(with: estimatedSize)
             layoutSize = cell.systemLayoutSizeFitting(estimatedSize,
                                                       withHorizontalFittingPriority: .fittingSizeLevel,
                                                       verticalFittingPriority: .required)
@@ -163,8 +160,7 @@ extension BsCollectionViewNode {
             max(cellSize.width, layoutSize.width),
             max(cellSize.height, layoutSize.height)
         ]
-        layoutSizeFittingFinished = true
+        isLayoutSizeFittingFinished = true
         return layoutSizeFittingCache
     }
-    
 }

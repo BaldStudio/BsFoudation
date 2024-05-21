@@ -27,7 +27,6 @@ public struct NullResetable<T> {
             if value == nil {
                 value = closure()
             }
-            
             return value
         }
         set {

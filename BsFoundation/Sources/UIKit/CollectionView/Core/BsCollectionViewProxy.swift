@@ -9,20 +9,21 @@
 // MARK: - Property
 
 final class BsCollectionViewProxy: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private var impl: BsCollectionViewProxyImpl?
+    private lazy var impl = BsCollectionViewProxyImpl(self)
 
-    weak var dataSource: BsCollectionViewDataSource!
-    weak var collectionView: BsCollectionView!
+    @NullResetable(default: BsCollectionViewDataSource())
+    var dataSource: BsCollectionViewDataSource!
+    
+    weak var collectionView: BsCollectionView! {
+        didSet {
+            dataSource.parent = collectionView
+        }
+    }
     
     weak var target: UICollectionViewDelegate?
     
     deinit {
         logger.debug("\(self.classForCoder) -> deinit 🔥")
-    }
-    
-    override init() {
-        super.init()
-        impl = BsCollectionViewProxyImpl(self)
     }
         
     override func forwardingTarget(for aSelector: Selector!) -> Any? {
@@ -30,7 +31,7 @@ final class BsCollectionViewProxy: NSObject, UICollectionViewDelegate, UICollect
     }
         
     override func responds(to aSelector: Selector!) -> Bool {
-        target?.responds(to: aSelector) == true || impl?.responds(to: aSelector) == true || super.responds(to: aSelector)
+        target?.responds(to: aSelector) == true || impl.responds(to: aSelector) == true || super.responds(to: aSelector)
     }
 }
 

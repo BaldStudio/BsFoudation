@@ -9,12 +9,13 @@
 // MARK: - Property
 
 open class BsTableViewSection: NSObject {
-
     public typealias Parent = BsTableViewDataSource
     public typealias Child = BsTableViewNode
 
     open weak internal(set) var parent: Parent? = nil
     
+    open var tableView: BsTableView? { parent?.parent }
+
     open var children: ContiguousArray<Child> = []
         
     deinit {
@@ -23,10 +24,6 @@ open class BsTableViewSection: NSObject {
 
     public override init() {
         super.init()
-    }
-
-    open var tableView: BsTableView? {
-        parent?.parent
     }
     
     open func reload(with animation: UITableView.RowAnimation = .none) {
@@ -56,9 +53,7 @@ open class BsTableViewSection: NSObject {
     }
     
     open func append(children: [Child]) {
-        for child in children {
-            append(child)
-        }
+        children.forEach { append($0) }
     }
     
     open func insert(_ child: Child, at index: Int) {
@@ -90,15 +85,11 @@ open class BsTableViewSection: NSObject {
     }
     
     open func remove(children: [Child]) {
-        for child in children {
-            remove(child)
-        }
+        children.forEach { remove($0) }
     }
     
     open func removeAll() {
-        for child in children.reversed() {
-            remove(child)
-        }
+        children.reversed().forEach { remove($0) }
     }
     
     open func removeFromParent() {
@@ -252,7 +243,6 @@ extension BsTableViewSection {
 // MARK: - Operator
 
 public extension BsTableViewSection {
-    
     static func += (left: BsTableViewSection, right: Child) {
         left.append(right)
     }

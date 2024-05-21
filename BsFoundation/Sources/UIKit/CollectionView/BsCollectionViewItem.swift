@@ -52,12 +52,10 @@ open class BsCollectionViewItem<T: UICollectionViewCell>: BsCollectionViewNode {
 // MARK: - Mutable Cell Class
 
 open class BsCollectionViewMutableItem: BsCollectionViewItem<UICollectionViewCell> {
-        
     private var _cellClass: UICollectionViewCell.Type = UICollectionViewCell.self
 
     open override var cellClass: UICollectionViewCell.Type {
         set { _cellClass = newValue }
         get { _cellClass }
     }
-    
 }

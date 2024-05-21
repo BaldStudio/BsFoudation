@@ -12,8 +12,8 @@ open class BsTableViewDataSource: NSObject {
     public typealias Parent = BsTableView
     public typealias Child = BsTableViewSection
     
-    open internal(set) weak var parent: Parent?
-    
+    open internal(set) weak var parent: Parent? = nil
+
     open var tableView: BsTableView? { parent }
 
     open var children: ContiguousArray<Child> = []
@@ -25,7 +25,7 @@ open class BsTableViewDataSource: NSObject {
     public override init() {
         super.init()
     }
-
+    
     // MARK: - Node Actions
     
     open var count: Int {
@@ -52,9 +52,7 @@ open class BsTableViewDataSource: NSObject {
     }
     
     open func append(children: [Child]) {
-        for child in children {
-            append(child)
-        }
+        children.forEach { append($0) }
     }
     
     open func insert(_ child: Child, at index: Int) {
@@ -86,15 +84,11 @@ open class BsTableViewDataSource: NSObject {
     }
     
     open func remove(children: [Child]) {
-        for child in children {
-            remove(child)
-        }
+        children.forEach { remove($0) }
     }
     
     open func removeAll() {
-        for child in children.reversed() {
-            remove(child)
-        }
+        children.reversed().forEach { remove($0) }
     }
     
     open func removeFromParent() {
@@ -148,7 +142,7 @@ extension BsTableViewDataSource: UITableViewDataSource {
     open func tableView(_ tableView: UITableView,
                         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let parent else {
-            fatalError("the tableView of DataSource is null")
+            fatalError("tableView dataSource is null")
         }
         return self[indexPath].tableView(parent, cellForRowAt: indexPath)
     }

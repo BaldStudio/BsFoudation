@@ -14,6 +14,8 @@ open class BsCollectionViewSection: NSObject {
 
     open weak internal(set) var parent: Parent? = nil
     
+    open var collectionView: BsCollectionView? { parent?.parent }
+
     open var children: ContiguousArray<Child> = []
     
     open var insets: UIEdgeInsets = .zero
@@ -26,10 +28,6 @@ open class BsCollectionViewSection: NSObject {
 
     public override init() {
         super.init()
-    }
-
-    open var collectionView: BsCollectionView? {
-        parent?.collectionView
     }
             
     open func reload() {
@@ -60,9 +58,7 @@ open class BsCollectionViewSection: NSObject {
     }
     
     open func append(children: [Child]) {
-        for child in children {
-            append(child)
-        }
+        children.forEach { append($0) }
     }
     
     open func insert(_ child: Child, at index: Int) {
@@ -94,15 +90,11 @@ open class BsCollectionViewSection: NSObject {
     }
 
     open func remove(children: [Child]) {
-        for child in children {
-            remove(child)
-        }
+        children.forEach { remove($0) }
     }
     
     open func removeAll() {
-        for child in children.reversed() {
-            remove(child)
-        }
+        children.reversed().forEach { remove($0) }
     }
     
     open func removeFromParent() {

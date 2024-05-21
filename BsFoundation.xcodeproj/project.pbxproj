@@ -447,11 +447,11 @@
 			children = (
 				6F78E8652BF7A6B600C8A0C4 /* Core */,
 				6F78E8622BF7A6B600C8A0C4 /* Extensions */,
-				6F78E8672BF7A6B600C8A0C4 /* BsTableView.swift */,
 				6F035F712BF606D200A070A3 /* BsTableViewController.swift */,
+				6F78E8672BF7A6B600C8A0C4 /* BsTableView.swift */,
 				6F78E8662BF7A6B600C8A0C4 /* BsTableViewDataSource.swift */,
-				6F78E8692BF7A6B600C8A0C4 /* BsTableViewRow.swift */,
 				6F78E8682BF7A6B600C8A0C4 /* BsTableViewSection.swift */,
+				6F78E8692BF7A6B600C8A0C4 /* BsTableViewRow.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -461,11 +461,11 @@
 			children = (
 				6F78E8552BF7A6AC00C8A0C4 /* Core */,
 				6F78E8522BF7A6AC00C8A0C4 /* Extensions */,
-				6F78E84E2BF7A6AC00C8A0C4 /* BsCollectionView.swift */,
 				6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */,
+				6F78E84E2BF7A6AC00C8A0C4 /* BsCollectionView.swift */,
 				6F78E8562BF7A6AC00C8A0C4 /* BsCollectionViewDataSource.swift */,
-				6F78E8572BF7A6AC00C8A0C4 /* BsCollectionViewItem.swift */,
 				6F78E84F2BF7A6AC00C8A0C4 /* BsCollectionViewSection.swift */,
+				6F78E8572BF7A6AC00C8A0C4 /* BsCollectionViewItem.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";

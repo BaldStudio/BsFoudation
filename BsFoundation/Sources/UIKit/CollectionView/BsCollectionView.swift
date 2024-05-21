@@ -9,8 +9,7 @@
 // MARK: - Property
 
 open class BsCollectionView: UICollectionView {
-    private var proxy = BsCollectionViewProxy()
-    fileprivate var _dataSource = BsCollectionViewDataSource()
+    fileprivate let proxy = BsCollectionViewProxy()
     
     open private(set) var registryMap: [String: AnyObject] = [:]
 
@@ -39,10 +38,9 @@ open class BsCollectionView: UICollectionView {
     }
     
     open func commonInit() {
-        backgroundColor = .white
-        delegate = proxy
-        dataSource = _dataSource
         proxy.collectionView = self
+        delegate = proxy
+        dataSource = proxy.dataSource
     }
     
     // MARK: - Override
@@ -51,30 +49,26 @@ open class BsCollectionView: UICollectionView {
         set {
             if let dataSource = newValue as? BsCollectionViewDataSource {
                 super.dataSource = dataSource
-                _dataSource = dataSource
                 proxy.dataSource = dataSource
-                dataSource.collectionView = self
             }
             else {
                 super.dataSource = newValue
             }
         }
         get {
-            _dataSource
+            proxy.dataSource
         }
     }
     
     open override var delegate: UICollectionViewDelegate? {
         set {
-            guard let newValue = newValue else {
+            guard let newValue else {
                 proxy.target = nil
                 return
             }
-            
             if !(newValue is BsCollectionViewProxy) {
                 proxy.target = newValue
             }
-            
             super.delegate = proxy
         }
         get {
@@ -111,19 +105,23 @@ open class BsCollectionView: UICollectionView {
     // MARK: - Additions
 
     open func append(section: BsCollectionViewSection) {
-        _dataSource.append(section)
+        proxy.dataSource.append(section)
     }
 
     open func insert(_ section: BsCollectionViewSection, at index: Int) {
-        _dataSource.insert(section, at: index)
+        proxy.dataSource.insert(section, at: index)
     }
 
     open func remove(_ section: BsCollectionViewSection) {
-        _dataSource.remove(section)
+        proxy.dataSource.remove(section)
     }
 
     open func removeAll() {
-        _dataSource.removeAll()
+        proxy.dataSource.removeAll()
+    }
+    
+    open func setDataSource(_ newValue: BsCollectionViewDataSource?) {
+        dataSource = newValue
     }
 }
 
@@ -184,5 +182,5 @@ extension BsCollectionView {
 // MARK: - Extensions
 
 public extension BaldStudio where T: BsCollectionView {
-    var dataSource: BsCollectionViewDataSource { this._dataSource }
+    var dataSource: BsCollectionViewDataSource { this.proxy.dataSource }
 }

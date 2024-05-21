@@ -195,30 +195,33 @@ public extension String {
     
     @inlinable
     var asDictionary: [String: Any] {
-        guard let data = data(using: .utf8) else { return [:] }
+        let empty: [String: Any] = [:]
+        guard let data = data(using: .utf8) else { return empty }
         guard let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-            return [:]
+            return empty
         }
         return result
     }
     
     @inlinable
     var asArray: [Any] {
-        guard let data = data(using: .utf8) else { return [] }
+        let empty: [Any] = []
+        guard let data = data(using: .utf8) else { return empty }
         guard let result = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [Any] else {
-            return []
+            return empty
         }
         return result
     }
     
     @inlinable
     var asHTMLAttributedString: NSAttributedString {
-        guard let data = data(using: .utf8) else { return NSAttributedString() }
+        let empty = NSAttributedString()
+        guard let data = data(using: .utf8) else { return empty }
         let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
             .documentType: NSAttributedString.DocumentType.html,
         ]
         guard let result = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
-            return NSAttributedString()
+            return empty
         }
         return result
     }
