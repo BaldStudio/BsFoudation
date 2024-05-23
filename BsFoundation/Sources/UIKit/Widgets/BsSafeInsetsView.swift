@@ -13,7 +13,7 @@ public extension BsSafeInsetsView {
     }
 }
 
-public final class BsSafeInsetsView: BsLayoutSpacer {
+public final class BsSafeInsetsView: BsLayoutMargin {
     public private(set) var edge: Edge = .bottom
 
     public required init(edge: Edge = .bottom) {

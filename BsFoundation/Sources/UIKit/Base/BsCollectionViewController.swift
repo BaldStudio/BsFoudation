@@ -6,9 +6,9 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
-open class BsCollectionViewController: BsUIViewController, UICollectionViewDelegate {
-    public lazy var section = BsCollectionViewSection().then {
-        collectionView.bs.dataSource.insert($0, at: 0)
+open class BsCollectionViewController: BsViewController, UICollectionViewDelegate {
+    open lazy var section = BsCollectionViewSection().then {
+        collectionView.insert($0, at: 0)
     }
     
     public convenience init(layout: UICollectionViewLayout) {
@@ -23,14 +23,14 @@ open class BsCollectionViewController: BsUIViewController, UICollectionViewDeleg
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.alwaysBounceVertical = true
-        collectionViewDidMoveToSuperview()
+        collectionViewWillMoveToSuperview()
     }
 
-    open func collectionViewDidMoveToSuperview() {
+    open func collectionViewWillMoveToSuperview() {
         view.addSubview(collectionView)
         collectionView.edgesEqualToSuperview()
+        collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
     }
 }
 

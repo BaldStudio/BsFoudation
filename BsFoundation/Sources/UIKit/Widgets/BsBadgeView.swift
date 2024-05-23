@@ -15,7 +15,6 @@ open class BsBadgeView: BsBoxLabel {
     @objc
     public static let preferredTextHeight: CGFloat = 10
     
-    #warning("需要完善圆角的默认值和Layout中的处理")
     /// 默认为 -1 时，视图呈现圆角为高度的一半
     open var cornerRadius: CGFloat = -1 {
         didSet {

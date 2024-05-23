@@ -50,8 +50,9 @@ public extension BsApp {
                     }
                 }
             }
+        } else {
+            if let window = shared.keyWindow { return window }
         }
-        if let window = shared.keyWindow { return window }
         for window in shared.windows where window.isKeyWindow { return window }
         return nil
     }

@@ -6,8 +6,8 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
-open class BsTableViewController: BsUIViewController, UITableViewDelegate {
-    public lazy var section = BsTableViewSection().then {
+open class BsTableViewController: BsViewController, UITableViewDelegate {
+    open lazy var section = BsTableViewSection().then {
         tableView.insert($0, at: 0)
     }
     

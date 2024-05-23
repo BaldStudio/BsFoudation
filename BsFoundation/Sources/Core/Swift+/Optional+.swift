@@ -12,10 +12,12 @@ public protocol AnyOptional {
 }
 
 extension Optional: AnyOptional {
+    @inlinable
     public var isNil: Bool {
         self == nil
     }
 
+    @inlinable
     public var isNotNil: Bool {
         self != nil
     }

@@ -24,14 +24,14 @@ public extension UIControl {
         targetActions = [
             TargetAction(target: target, action: trigger, controlEvents: controlEvents)
         ]
-        addTarget(self, action: #selector(bs_onTargetAction), for: controlEvents)
+        addTarget(self, action: #selector(bs_onControlEvent), for: controlEvents)
     }
 
     func removeTarget<T: AnyObject>(_ target: T, for controlEvents: UIControl.Event) {
         targetActions.removeAll {
             $0.target === target && $0.controlEvents == controlEvents
         }
-        removeTarget(self, action: #selector(bs_onTargetAction), for: controlEvents)
+        removeTarget(self, action: #selector(bs_onControlEvent), for: controlEvents)
     }
 
     func onTouchUpInside(_ action: @escaping BlockT<UIControl>) {
@@ -67,7 +67,7 @@ private extension UIControl {
     }
 
     @objc
-    func bs_onTargetAction() {
+    func bs_onControlEvent() {
         for trigger in targetActions {
             trigger.action(self)
         }

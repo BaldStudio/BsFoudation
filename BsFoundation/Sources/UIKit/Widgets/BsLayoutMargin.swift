@@ -1,5 +1,5 @@
 //
-//  BsLayoutSpacer.swift
+//  BsLayoutMargin.swift
 //  BsFoundation
 //
 //  Created by 常润泽 on 2024/1/25.
@@ -9,7 +9,7 @@
 /**
  不参与渲染，只负责撑开布局或占位
  */
-open class BsLayoutSpacer: BsUIView {
+open class BsLayoutMargin: BsUIView {
     private var contentSize: CGSize = .zero
 
     public convenience init(size: CGSize) {

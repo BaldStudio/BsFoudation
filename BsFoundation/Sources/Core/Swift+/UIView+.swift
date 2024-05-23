@@ -211,31 +211,43 @@ private struct RuntimeKey {
 
 public extension UIView {
     @discardableResult
-    func addGestureAction<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
-                                                                      action: @escaping Action<T, Gesture>) -> Gesture {
+    func addTarget<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
+                                                               action: @escaping Action<T, Gesture>) -> Gesture {
         let gesture = Gesture(target: self, action: #selector(bs_onGestureEvent(_:)))
         addGestureRecognizer(gesture)
-        gestures.append(GestureAction(gesture: gesture) { [weak target] gesture in
+        let gestureAction = GestureAction(target: target, gesture: gesture) { [weak target] gesture in
             guard let target, let gesture = gesture as? Gesture else { return }
             action(target)(gesture)
-        })
+        }
+        gestures.append(gestureAction)
         return gesture
     }
-
-    func removeGestureAction(_ gesture: UIGestureRecognizer) {
-        gestures.removeAll { $0.gesture == gesture }
-        removeGestureRecognizer(gesture)
-    }
     
+    func removeTarget<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
+                                                                  gesture: Gesture?) {
+        if let gesture {
+            gestures.removeAll {
+                if $0.target === target, $0.gesture == gesture {
+                    removeGestureRecognizer(gesture)
+                    return true
+                }
+                return false
+            }
+        } else {
+            gestures.removeAll()
+        }
+    }
+        
     // MARK: - single tap
     
     func onSingleTap(_ action: @escaping BlockT<UITapGestureRecognizer>) {
-        addGestureAction(self) { (t: UIView) -> BlockT<UITapGestureRecognizer> in { action($0) } }
+        addTarget(self) { (v: UIView) -> BlockT<UITapGestureRecognizer> in { action($0) } }
     }
 }
 
 private extension UIView {
     struct GestureAction {
+        let target: AnyObject
         let gesture: UIGestureRecognizer
         let action: BlockT<UIGestureRecognizer>
     }
