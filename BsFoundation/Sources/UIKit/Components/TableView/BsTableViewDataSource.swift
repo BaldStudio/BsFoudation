@@ -159,3 +159,15 @@ public extension BsTableViewDataSource {
         left.remove(right)
     }
 }
+
+// MARK: -  Description
+
+extension BsTableViewDataSource {
+    open override var description: String {
+        var text = "\(self)"
+        if children.isNotEmpty {
+            text = " {" + children.map { $0.description }.joined(separator: ", ") + "} "
+        }
+        return text
+    }
+}

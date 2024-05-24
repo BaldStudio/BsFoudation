@@ -160,3 +160,15 @@ public extension BsCollectionViewDataSource {
         left.remove(right)
     }
 }
+
+// MARK: -  Description
+
+extension BsCollectionViewDataSource {
+    open override var description: String {
+        var text = "\(self)"
+        if children.isNotEmpty {
+            text = " {" + children.map { $0.description }.joined(separator: ", ") + "} "
+        }
+        return text
+    }
+}

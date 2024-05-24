@@ -88,6 +88,7 @@ open class BsTableViewNode: NSObject {
 
     // MARK: - Additions
     
+    @inlinable
     open func removeFromParent() {
         parent?.remove(self)
     }

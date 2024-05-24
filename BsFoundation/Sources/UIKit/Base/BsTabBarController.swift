@@ -15,7 +15,7 @@ public protocol BsTabBarControllerDelegate: AnyObject {
                           didSelect viewController: UIViewController)
 }
 
-extension BsTabBarControllerDelegate {
+public extension BsTabBarControllerDelegate {
     func tabBarController(_ tabBarController: BsTabBarController,
                           shouldSelect viewController: UIViewController) -> Bool { true }
     
@@ -26,23 +26,25 @@ extension BsTabBarControllerDelegate {
 // MARK: - Controller
 
 open class BsTabBarController: BsViewController {
-    open lazy var tabBar = BsTabBar().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview($0)
-        NSLayoutConstraint.activate([
-            $0.leftAnchor.constraint(equalTo: view.leftAnchor),
-            $0.rightAnchor.constraint(equalTo: view.rightAnchor),
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+    open lazy var tabBar = BsTabBar() {
+        didSet {
+            tabBar.tabBarController = self
+            tabBar.reloadItems()
+        }
     }
+    
+    open override var children: [UIViewController] { viewControllers }
     
     open var viewControllers: [UIViewController] = [] {
         willSet {
             viewControllers.forEach { $0.bs_tabBarController = nil }
-            newValue.forEach { $0.bs_tabBarController = self }
-        }
-        didSet {
-            reloadTabBar()
+            var items: [BsTabBarItem] = []
+            newValue.forEach {
+                $0.bs_tabBarController = self
+                items.append($0.bs_tabBarItem)
+            }
+            tabBar.items = items
+            selectedIndex = 0
         }
     }
     
@@ -51,40 +53,61 @@ open class BsTabBarController: BsViewController {
             tabBar.selectedIndex
         }
         set {
+            let newValue = max(0, newValue)
+            guard newValue < viewControllers.count, selectedIndex != newValue else { return }
             tabBar.selectedIndex = newValue
+            setSelectedViewController(viewControllers[newValue])
         }
     }
     
     open var selectedViewController: UIViewController? {
+        get {
+            viewControllers[safe: selectedIndex]
+        }
         set {
-            removeSelectedViewController()
-            guard let newValue = newValue ?? viewControllers.first else {
+            guard let newValue, 
+                  selectedViewController != newValue,
+                  let index = viewControllers.firstIndex(of: newValue) else {
                 return
             }
+            tabBar.selectedIndex = index
             setSelectedViewController(newValue)
-            delegate?.tabBarController(self, didSelect: newValue)
-        }
-        get {
-            viewControllers.isEmpty ? nil : viewControllers[selectedIndex]
         }
     }
     
     open weak var delegate: BsTabBarControllerDelegate?
     
     open override var title: String? {
+        get {
+            super.title ?? tabBarItem.title
+        }
         set {
             super.title = newValue
             parent?.title = newValue
         }
-        get {
-            super.title ?? tabBarItem.title
+    }
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        tabBar.tabBarController = self
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tabBar)
+        NSLayoutConstraint.activate([
+            tabBar.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tabBar.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+    
+    open override func addChild(_ childController: UIViewController) {
+        let isEmpty = children.isEmpty
+        viewControllers.append(childController)
+        childController.bs_tabBarController = self
+        if isEmpty {
+            selectedIndex = 0
         }
     }
     
-    open func reloadTabBar() {
-        tabBar.reloadItems()
-    }
-
     open override var shouldAutorotate: Bool {
         selectedViewController?.shouldAutorotate ?? super.shouldAutorotate
     }
@@ -124,11 +147,15 @@ open class BsTabBarController: BsViewController {
 
 private extension BsTabBarController {
     func setSelectedViewController(_ vc: UIViewController) {
+        removeSelectedViewController()
+
         addChild(vc)
         view.addSubview(vc.view)
         vc.didMove(toParent: self)
         title = vc.title
         view.bringSubviewToFront(tabBar)
+        
+        delegate?.tabBarController(self, didSelect: vc)
     }
     
     func removeSelectedViewController() {
@@ -136,6 +163,12 @@ private extension BsTabBarController {
         selectedViewController.willMove(toParent: nil)
         selectedViewController.view.removeFromSuperview()
         selectedViewController.removeFromParent()
+    }
+    
+    func onSelectTabBarItem(_ sender: UITapGestureRecognizer) {
+        guard let item = sender.view as? BsTabBarItem else { return }
+        guard delegate?.tabBarController(self, shouldSelect: item.relatedViewController) == true else { return }
+        tabBar.selectedItem = item
     }
 }
 
@@ -149,30 +182,32 @@ open class BsTabBar: BsView {
         $0.alignment = .top
     }
     private let backdropView: UIVisualEffectView = .blur()
-    
-    private var viewControllers: [UIViewController] = []
+        
+    fileprivate weak var tabBarController: BsTabBarController!
     
     open var items: [BsTabBarItem] = [] {
         didSet {
             reloadItems()
+            selectedItem = items.first
         }
     }
     
     open var selectedItem: BsTabBarItem? {
+        get {
+            items[safe: selectedIndex]
+        }
         set {
-            if newValue.isNil {
-                selectedIndex = 0
+            guard let newValue,
+                  selectedItem != newValue,
+                  let index = items.firstIndex(of: newValue) else {
                 return
             }
-            guard let newValue, let index = items.firstIndex(of: newValue) else { return }
             selectedIndex = index
-        }
-        get {
-            items.safe(objectAt: selectedIndex)
+            tabBarController.selectedIndex = index
         }
     }
     
-    open var selectedIndex: Int = 0 {
+    var selectedIndex: Int = -1 {
         willSet {
             let newValue = max(0, newValue)
             if selectedIndex == newValue { return }
@@ -194,19 +229,13 @@ open class BsTabBar: BsView {
         [UIView.noIntrinsicMetric, 49 + SafeArea.bottom]
     }
     
-    func reloadItems() {
+    fileprivate func reloadItems() {
         contentView.removeSubviews()
         items.forEach {
             contentView.addArrangedSubview($0)
-            $0.removeTarget(self, gesture: nil)
-            $0.addTarget(self, action: BsTabBar.onSelectTabBarItem)
+            $0.removeTarget(tabBarController, gesture: nil)
+            $0.addTarget(tabBarController, action: BsTabBarController.onSelectTabBarItem)
         }
-        selectedIndex = 0
-    }
-    
-    private func onSelectTabBarItem(_ sender: UITapGestureRecognizer) {
-        guard let item = sender.view as? BsTabBarItem else { return }
-        selectedItem = item
     }
 }
 
@@ -219,14 +248,18 @@ open class BsTabBarItem: BsView {
         $0.distribution = .fill
         $0.alignment = .center
     }
+    
     private let imageView = UIImageView().then {
         $0.contentMode = .center
     }
+    
     private let titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 10)
         $0.textAlignment = .center
     }
-
+    
+    fileprivate weak var relatedViewController: UIViewController!
+    
     open var title: String?
     
     open var image: UIImage?
@@ -244,12 +277,12 @@ open class BsTabBarItem: BsView {
     }
     
     public required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     public required init(viewController: UIViewController) {
         super.init(frame: .zero)
-        
+        relatedViewController = viewController
         guard let tabBarItem = viewController.tabBarItem else { return }
         
         image = tabBarItem.image

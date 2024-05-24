@@ -118,6 +118,7 @@ open class BsTableView: UITableView {
         proxy.dataSource.removeAll()
     }
     
+    @inlinable
     open func setDataSource(_ newValue: BsTableViewDataSource?) {
         dataSource = newValue
     }

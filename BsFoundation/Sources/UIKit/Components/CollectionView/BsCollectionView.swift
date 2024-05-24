@@ -120,6 +120,7 @@ open class BsCollectionView: UICollectionView {
         proxy.dataSource.removeAll()
     }
     
+    @inlinable
     open func setDataSource(_ newValue: BsCollectionViewDataSource?) {
         dataSource = newValue
     }
