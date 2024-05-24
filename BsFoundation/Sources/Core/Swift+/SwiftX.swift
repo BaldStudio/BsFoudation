@@ -9,9 +9,7 @@
 import Foundation
 
 public struct BaldStudio<T> {
-    public static var this: T.Type {
-        T.self
-    }
+    public static var this: T.Type { T.self }
     public var this: T
 }
 

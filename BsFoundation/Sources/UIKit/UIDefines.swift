@@ -9,11 +9,11 @@
 // MARK: -  屏幕宽高
 
 public enum Screen {
-    static let scale: CGFloat = UIScreen.main.scale
-    static let bounds: CGRect = UIScreen.main.bounds
-    static let size: CGSize = bounds.size
-    static let width: CGFloat = size.width
-    static let height: CGFloat = size.height
+    public static let scale: CGFloat = UIScreen.main.scale
+    public static let bounds: CGRect = UIScreen.main.bounds
+    public static let size: CGSize = bounds.size
+    public static let width: CGFloat = size.width
+    public static let height: CGFloat = size.height
 }
 
 // MARK: -  安全边距
@@ -30,15 +30,15 @@ public enum Design {}
 
 public extension Design {
     enum Height {
-        static let statusBar: CGFloat = 20
-        static let navigationBar: CGFloat = 44 + SafeArea.top
-        static let tabBar: CGFloat = 49 + SafeArea.bottom
-        static let line: CGFloat = 1.0 / Screen.scale
+        public static let statusBar: CGFloat = 20
+        public static let navigationBar: CGFloat = 44 + SafeArea.top
+        public static let tabBar: CGFloat = 49 + SafeArea.bottom
+        public static let line: CGFloat = 1.0 / Screen.scale
     }
 }
 
 /// 自动布局的计算方式
-public enum LayoutStyle {
+public enum LayoutMode {
     /// 系统算法，如 TableView 中指定 cell 的高度为 automaticDimension
     case auto
     /// 通过代码实现，这个过程调用方可以感知到
@@ -53,7 +53,7 @@ public enum LayoutSizeFitting {
 }
 
 /// 布局尺寸的固定拉伸方向
-public enum FixedAxisSize {
+public enum LayoutSizeFixed {
     case none
     case vertical   /// 垂直方向撑满父视图
     case horizontal /// 水平方向撑满父视图

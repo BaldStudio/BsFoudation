@@ -27,7 +27,7 @@ open class BsTableViewSection: NSObject {
     }
     
     open func reload(with animation: UITableView.RowAnimation = .none) {
-        guard let tableView = tableView, let index = index else { return }
+        guard let tableView, let index else { return }
         tableView.reloadSections([index], with: animation)
     }
     
@@ -143,8 +143,7 @@ open class BsTableViewSection: NSObject {
     }
     
     open var headerView: UITableViewHeaderFooterView? {
-        guard let index = index,
-              let tableView = tableView else {
+        guard let index, let tableView else {
             return nil
         }
         
@@ -154,14 +153,14 @@ open class BsTableViewSection: NSObject {
     open func tableView(_ tableView: BsTableView,
                         viewForHeaderInSection section: Int) -> UIView? {
         tableView.registerHeaderIfNeeded(self)
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseIdentifier)
-        else { return nil }
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerReuseIdentifier) else {
+            return nil
+        }
         update(header: header, in: section)
         return header
     }
     
-    open func update(header: UITableViewHeaderFooterView,
-                     in section: Int) {}
+    open func update(header: UITableViewHeaderFooterView, in section: Int) {}
     
     open func willDisplay(header view: UIView, in section: Int) {}
     
@@ -197,8 +196,7 @@ open class BsTableViewSection: NSObject {
     }
     
     open var footerView: UITableViewHeaderFooterView? {
-        guard let index = index,
-              let tableView = tableView else {
+        guard let index, let tableView else {
             return nil
         }
         
@@ -215,8 +213,7 @@ open class BsTableViewSection: NSObject {
         return footer
     }
     
-    open func update(footer: UITableViewHeaderFooterView,
-                     in section: Int) {}
+    open func update(footer: UITableViewHeaderFooterView, in section: Int) {}
     
     open func willDisplay(footer view: UIView, in section: Int) {}
     

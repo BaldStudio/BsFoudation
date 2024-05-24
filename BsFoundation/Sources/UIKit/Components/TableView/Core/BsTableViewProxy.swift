@@ -56,14 +56,16 @@ private final class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
 extension BsTableViewProxyImpl {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = proxy.dataSource[indexPath]
-        var height = row.tableView(tableView, preferredFixedAxisSizeAt: indexPath)
+        if let heightCache = row.heightCache { return heightCache }
+        var height = row.tableView(tableView, preferredLayoutSizeFixedAt: indexPath)
         height = row.tableView(tableView, preferredLayoutSizeFittingAt: indexPath)
+        row.heightCache = height
         return height
     }
     
     func tableView(_ tableView: UITableView,
                    estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        proxy.dataSource[indexPath].estimatedRowHeight
+        proxy.dataSource[indexPath].estimatedHeight
     }
     
     func tableView(_ tableView: UITableView,

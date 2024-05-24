@@ -137,8 +137,10 @@ extension BsCollectionViewProxyImpl {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = proxy.dataSource[indexPath]
-        var size = item.collectionView(collectionView, preferredFixedAxisSizeAt: indexPath)
+        if let sizeCache = item.sizeCache { return sizeCache }
+        var size = item.collectionView(collectionView, preferredLayoutSizeFixedAt: indexPath)
         size = item.collectionView(collectionView, preferredLayoutSizeFittingAt: indexPath)
+        item.sizeCache = size
         return size
     }
 

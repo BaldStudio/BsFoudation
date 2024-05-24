@@ -20,27 +20,26 @@ open class BsTableViewNode: NSObject {
 
     open var nib: UINib? = nil
     
-    /// 指定cell的固定高度，在使用自适应高度时，则为最小高度
-    open var cellHeight: CGFloat = 44
+    /// 指定 cell 的固定高度，在使用自适应高度时，则为最小高度
+    open var height: CGFloat = 44
+    
+    // whatever but nonzero
+    var estimatedHeight: CGFloat = 44
 
     /// 自动计算尺寸的缓存
-    private var layoutSizeFittingCache: CGFloat = 0
-    private var isLayoutSizeFittingFinished = false
+    var heightCache: CGFloat? = nil
     
     /// 自适应尺寸，设置 vertical 自适应高度
     open var preferredLayoutSizeFitting: LayoutSizeFitting = .none
 
-    /// 是否在视图纵轴方向撑满父视图，计算结果会改变 cellHeight
-    open var preferredFixedAxisSize: FixedAxisSize = .none
+    /// 是否在视图纵轴方向撑满父视图，计算结果会改变 height
+    open var preferredLayoutSizeFixed: LayoutSizeFixed = .none
 
-    // whatever but nonzero
-    var estimatedRowHeight: CGFloat = 44
-
-    /// 自适应高度的计算方式，，默认为系统计算，即 cellHeight 为 automaticDimension
-    /// 如果需要预先计算高度或是需要获取内容最终高度的情况下，可以设置为 program
+    /// 自适应高度的计算方式，默认为系统计算，即 rowHeight 为 automaticDimension
+    /// 如果需要预先计算高度或是需要获取内容最终高度的情况下，可以设置为 manual
     /// 此时调用 prepareLayoutSizeFitting 方法即可满足需求
-    /// !!!: program的情况下，目前是忽略 cell 的 Accessory View，如有必要，可以在子类中按需实现
-    open var preferredLayoutStyle: LayoutStyle = .auto
+    /// !!!: manual的情况下，目前是忽略 cell 的 Accessory View，如有必要，可以在子类中按需实现
+    open var preferredLayoutMode: LayoutMode = .auto
 
     /// 选中cell的回调闭包
     open var onSelectRow: BlockT<IndexPath>?
@@ -49,7 +48,7 @@ open class BsTableViewNode: NSObject {
     open var isSelectionAnimated = true
     
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
 
     public override init() {
@@ -61,8 +60,7 @@ open class BsTableViewNode: NSObject {
     }
         
     open var cell: UITableViewCell? {
-        guard let indexPath = indexPath,
-              let tableView = tableView else {
+        guard let indexPath, let tableView else {
             return nil
         }
         
@@ -70,7 +68,7 @@ open class BsTableViewNode: NSObject {
     }
     
     open var indexPath: IndexPath? {
-        guard let parent = parent,
+        guard let parent,
               let section = parent.index,
               let row = parent.children.firstIndex(of: self) else {
             return nil
@@ -84,9 +82,8 @@ open class BsTableViewNode: NSObject {
         tableView.reloadRows(at: [indexPath], with: animation)
     }
     
-    open func invalidateCellSize() {
-        layoutSizeFittingCache = 0
-        isLayoutSizeFittingFinished = false
+    open func invalidateHeight() {
+        heightCache = nil
     }
 
     // MARK: - Additions
@@ -103,8 +100,7 @@ open class BsTableViewNode: NSObject {
         widthConstraint.priority = .required - 1 // 避免约束冲突
         widthConstraint.isActive = true
         let layoutSize = cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        layoutSizeFittingCache = max(cellHeight, layoutSize.height)
-        return layoutSizeFittingCache
+        return max(height, layoutSize.height)
     }
     
     func tableView(_ tableView: BsTableView,
@@ -138,17 +134,15 @@ open class BsTableViewNode: NSObject {
 extension BsTableViewNode {
     /// 自适应尺寸计算
     func tableView(_ tableView: UITableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat {
-        if preferredLayoutSizeFitting == .none || preferredLayoutSizeFitting == .horizontal { return cellHeight }
-        if preferredLayoutStyle == .auto { return UITableView.automaticDimension }
-        guard !isLayoutSizeFittingFinished else { return layoutSizeFittingCache }
+        if preferredLayoutMode == .auto { return UITableView.automaticDimension }
+        if preferredLayoutSizeFitting == .none || preferredLayoutSizeFitting == .horizontal { return height }
         let cell = cellClass.init(style: .default, reuseIdentifier: reuseIdentifier)
-        isLayoutSizeFittingFinished = true
         return prepareLayoutSizeFitting(cell, at: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, preferredFixedAxisSizeAt indexPath: IndexPath) -> CGFloat {
-        if preferredFixedAxisSize == .none || preferredFixedAxisSize == .horizontal { return cellHeight }
-        cellHeight = tableView.bounds.height - tableView.adjustedContentInset.top
-        return cellHeight
-    }
+    func tableView(_ tableView: UITableView, preferredLayoutSizeFixedAt indexPath: IndexPath) -> CGFloat {
+        if preferredLayoutSizeFixed == .none || preferredLayoutSizeFixed == .horizontal { return height }
+        height = tableView.bounds.height - tableView.adjustedContentInset.top
+        return height
+    }    
 }

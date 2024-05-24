@@ -38,18 +38,11 @@ open class BsTabBarController: BsViewController {
     
     open var viewControllers: [UIViewController] = [] {
         willSet {
-            viewControllers.forEach {
-                $0.willMove(toParent: nil)
-                $0.view.removeFromSuperview()
-                $0.removeFromParent()
-                $0.bs_tabBarController = nil
-            }
+            viewControllers.forEach { $0.bs_tabBarController = nil }
             newValue.forEach { $0.bs_tabBarController = self }
-            selectedViewController = newValue.first
         }
         didSet {
             reloadTabBar()
-            selectedIndex = 0
         }
     }
     
@@ -64,15 +57,11 @@ open class BsTabBarController: BsViewController {
     
     open var selectedViewController: UIViewController? {
         set {
-            guard let newValue else {
-                removeSelectedViewController()
+            removeSelectedViewController()
+            guard let newValue = newValue ?? viewControllers.first else {
                 return
             }
-            addChild(newValue)
-            view.addSubview(newValue.view)
-            newValue.didMove(toParent: self)
-            title = newValue.title
-            view.bringSubviewToFront(tabBar)
+            setSelectedViewController(newValue)
             delegate?.tabBarController(self, didSelect: newValue)
         }
         get {
@@ -93,7 +82,7 @@ open class BsTabBarController: BsViewController {
     }
     
     open func reloadTabBar() {
-        tabBar.reloadItems(with: viewControllers)
+        tabBar.reloadItems()
     }
 
     open override var shouldAutorotate: Bool {
@@ -134,6 +123,14 @@ open class BsTabBarController: BsViewController {
 }
 
 private extension BsTabBarController {
+    func setSelectedViewController(_ vc: UIViewController) {
+        addChild(vc)
+        view.addSubview(vc.view)
+        vc.didMove(toParent: self)
+        title = vc.title
+        view.bringSubviewToFront(tabBar)
+    }
+    
     func removeSelectedViewController() {
         guard let selectedViewController else { return }
         selectedViewController.willMove(toParent: nil)
@@ -157,7 +154,7 @@ open class BsTabBar: BsView {
     
     open var items: [BsTabBarItem] = [] {
         didSet {
-            reloadItems(with: viewControllers)
+            reloadItems()
         }
     }
     
@@ -175,8 +172,9 @@ open class BsTabBar: BsView {
         }
     }
     
-    fileprivate var selectedIndex: Int = 0 {
+    open var selectedIndex: Int = 0 {
         willSet {
+            let newValue = max(0, newValue)
             if selectedIndex == newValue { return }
             guard newValue < items.count else { return }
             items[selectedIndex].isSelected = false
@@ -196,16 +194,14 @@ open class BsTabBar: BsView {
         [UIView.noIntrinsicMetric, 49 + SafeArea.bottom]
     }
     
-    open func reloadItems(with viewControllers: [UIViewController]) {
-        self.viewControllers = viewControllers
+    func reloadItems() {
         contentView.removeSubviews()
-        items.removeAll()
-        viewControllers.forEach {
-            let item = BsTabBarItem(viewController: $0)
-            items.append(item)
-            contentView.addArrangedSubview(item)
-            item.addTarget(self, action: BsTabBar.onSelectTabBarItem)
+        items.forEach {
+            contentView.addArrangedSubview($0)
+            $0.removeTarget(self, gesture: nil)
+            $0.addTarget(self, action: BsTabBar.onSelectTabBarItem)
         }
+        selectedIndex = 0
     }
     
     private func onSelectTabBarItem(_ sender: UITapGestureRecognizer) {
@@ -291,6 +287,7 @@ open class BsTabBarItem: BsView {
 
 private enum RuntimeKey {
     static var tabBarController = 0
+    static var tabBarItem = 0
 }
 
 private extension UIViewController {
@@ -302,8 +299,19 @@ private extension UIViewController {
             set(associate: newValue, for: &RuntimeKey.tabBarController)
         }
     }
+    
+    var bs_tabBarItem: BsTabBarItem {
+        get {
+            value(forAssociated: &RuntimeKey.tabBarItem) ?? BsTabBarItem(viewController: self)
+        }
+        set {
+            set(associate: newValue, for: &RuntimeKey.tabBarItem)
+        }
+    }
+
 }
 
 public extension BaldStudio where T: UIViewController {
     var tabBarController: BsTabBarController? { this.bs_tabBarController }
+    var tabBarItem: BsTabBarItem { this.bs_tabBarItem }
 }

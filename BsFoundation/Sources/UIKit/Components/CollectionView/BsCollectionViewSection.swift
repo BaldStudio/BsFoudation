@@ -31,9 +31,8 @@ open class BsCollectionViewSection: NSObject {
     }
             
     open func reload() {
-        guard let collectionView = collectionView,
-              let section = index else { return }
-        collectionView.reloadSections([section])
+        guard let collectionView, let index else { return }
+        collectionView.reloadSections([index])
     }
 
     // MARK: - Node Actions
@@ -150,14 +149,11 @@ open class BsCollectionViewSection: NSObject {
         return view
     }
     
-    open func update(header: UICollectionReusableView,
-                     at indexPath: IndexPath) {}
+    open func update(header: UICollectionReusableView, at indexPath: IndexPath) {}
         
-    open func willDisplay(header: UICollectionReusableView,
-                          at indexPath: IndexPath) {}
+    open func willDisplay(header: UICollectionReusableView, at indexPath: IndexPath) {}
     
-    open func didEndDisplaying(header: UICollectionReusableView,
-                               at indexPath: IndexPath) {}
+    open func didEndDisplaying(header: UICollectionReusableView, at indexPath: IndexPath) {}
 
     // MARK: - Footer
 
@@ -172,8 +168,8 @@ open class BsCollectionViewSection: NSObject {
     }
     
     open var footerView: UICollectionReusableView? {
-        guard let index = index,
-              let collectionView = collectionView else {
+        guard let index,
+              let collectionView else {
             return nil
         }
 
@@ -192,14 +188,11 @@ open class BsCollectionViewSection: NSObject {
         return view
     }
     
-    open func update(footer: UICollectionReusableView,
-                     at indexPath: IndexPath) {}
+    open func update(footer: UICollectionReusableView, at indexPath: IndexPath) {}
     
-    open func willDisplay(footer: UICollectionReusableView,
-                          at indexPath: IndexPath) {}
+    open func willDisplay(footer: UICollectionReusableView, at indexPath: IndexPath) {}
     
-    open func didEndDisplaying(footer: UICollectionReusableView,
-                               at indexPath: IndexPath) {}
+    open func didEndDisplaying(footer: UICollectionReusableView, at indexPath: IndexPath) {}
 
     // MARK: - Supplementary
     
