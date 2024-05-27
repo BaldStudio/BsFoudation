@@ -32,18 +32,33 @@ private class _Reference<T> {
 public typealias Async = AsyncBlock<Void, Void>
 
 public struct AsyncBlock<Input, Output> {
-    private let block: DispatchWorkItem
     private let input: _Reference<Input>?
     private let output: _Reference<Output>
-    
+    private let block: DispatchWorkItem
+
     public var value: Output? { output.value }
     
-    private init(_ block: DispatchWorkItem,
-                 input: _Reference<Input>? = nil,
-                 output: _Reference<Output> = _Reference()) {
+    private init(input: _Reference<Input>? = nil,
+                 output: _Reference<Output> = _Reference(),
+                 _ block: DispatchWorkItem) {
         self.block = block
         self.input = input
         self.output = output
+    }
+    
+    @discardableResult
+    public init(_ block: @escaping Block) where Input == Void, Output == Void {
+        input = nil
+        
+        let output = _Reference<Void>()
+        let block = DispatchWorkItem(block: {
+            output.value = block()
+        })
+        let queue = GCD.custom(queue: .global()).queue
+        queue.async(execute: block)
+        
+        self.output = output
+        self.block = block
     }
 }
 
@@ -103,7 +118,7 @@ public extension AsyncBlock {
             queue.async(execute: block)
         }
 
-        return AsyncBlock<Void, Result>(block, output: output)
+        return AsyncBlock<Void, Result>(output: output, block)
     }
 }
 
@@ -175,7 +190,7 @@ public extension AsyncBlock {
             block.notify(queue: queue, execute: executor)
         }
 
-        return AsyncBlock<Output, Result>(executor, input: output, output: result)
+        return AsyncBlock<Output, Result>(input: output, output: result, executor)
     }
 }
 

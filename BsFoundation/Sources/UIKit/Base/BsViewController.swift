@@ -64,13 +64,17 @@ private extension BsViewController {
 
 // MARK: - Back Button
 
+private extension UIImage {
+    static let backArrow = UIImage(systemName: "chevron.left",
+                                   withConfiguration: SymbolConfiguration(pointSize: 24))
+}
+
 private class NavigationBackItem: UIBarButtonItem {
-    
     convenience init(_ target: BsViewController, _ action: Selector) {
         let button = UIButton(type: .custom).then {
             $0.contentHorizontalAlignment = .left
             $0.frame = CGRect(origin: .zero, size: [44, 44])
-            $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+            $0.setImage(.backArrow, for: .normal)
             $0.addTarget(target, action: action, for: .touchUpInside)
         }
         self.init(customView: button)
@@ -79,5 +83,4 @@ private class NavigationBackItem: UIBarButtonItem {
             gesture.delegate = target
         }
     }
-    
 }

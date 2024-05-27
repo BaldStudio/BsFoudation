@@ -22,7 +22,7 @@ open class BsCollectionViewNode: NSObject {
     open var size: CGSize = .zero
     
     /// 自动计算尺寸的缓存
-    var sizeCache: CGSize? = .zero
+    var sizeCache: CGSize? = nil
 
     /// 是否自动计算尺寸，vertical会自动算高，horizontal会自动算宽
     open var preferredLayoutSizeFitting: LayoutSizeFitting = .none
