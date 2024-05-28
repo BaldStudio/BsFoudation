@@ -15,15 +15,15 @@ open class BsUIControl: UIControl {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        onInit()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        onInit()
     }
     
-    open func commonInit() {
+    open func onInit() {
 
     }
 }

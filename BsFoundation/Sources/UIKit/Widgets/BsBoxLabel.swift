@@ -8,8 +8,8 @@
 
 @IBDesignable
 open class BsBoxLabel: BsUILabel {
-    open override func commonInit() {
-        super.commonInit()
+    open override func onInit() {
+        super.onInit()
         applyingFixed()
     }
 

@@ -13,15 +13,15 @@ open class BsUITableViewHeaderFooterView: UITableViewHeaderFooterView {
     
     public override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        commonInit()
+        onInit()
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        onInit()
     }
 
-    open func commonInit() {
+    open func onInit() {
 
     }
 }

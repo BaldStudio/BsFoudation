@@ -12,8 +12,8 @@ open class BsCopyableLabel: BsUILabel {
     
     open var copyItemTitle = "Copy"
     
-    open override func commonInit() {
-        super.commonInit()
+    open override func onInit() {
+        super.onInit()
         isUserInteractionEnabled = true
         
         longPressGesture = UILongPressGestureRecognizer(target: self,

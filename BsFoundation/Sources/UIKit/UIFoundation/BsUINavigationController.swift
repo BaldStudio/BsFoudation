@@ -13,25 +13,25 @@ open class BsUINavigationController: UINavigationController {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        commonInit()
+        onInit()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+        onInit()
     }
     
     public override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
-        commonInit()
+        onInit()
     }
     
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-        commonInit()
+        onInit()
     }
     
-    open func commonInit() {
+    open func onInit() {
         
     }
     

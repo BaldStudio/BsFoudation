@@ -7,7 +7,7 @@
 //
 
 open class BsDivideLine: BsUIView {    
-    open override func commonInit() {
+    open override func onInit() {
         backgroundColor = UIColor(0xD8D8D8)
     }
     

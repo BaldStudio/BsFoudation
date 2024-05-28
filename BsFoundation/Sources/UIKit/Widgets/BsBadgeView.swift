@@ -22,7 +22,7 @@ open class BsBadgeView: BsBoxLabel {
         }
     }
     
-    open override func commonInit() {
+    open override func onInit() {
         layer.masksToBounds = true
         textAlignment = NSTextAlignment.center
         textInsets = UIEdgeInsets(horizontal: 6, vertical: 2)

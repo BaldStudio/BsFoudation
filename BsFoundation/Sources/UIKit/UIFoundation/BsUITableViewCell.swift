@@ -13,15 +13,15 @@ open class BsUITableViewCell: UITableViewCell {
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+        onInit()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        onInit()
     }
     
-    open func commonInit() {
+    open func onInit() {
         
     }
 }

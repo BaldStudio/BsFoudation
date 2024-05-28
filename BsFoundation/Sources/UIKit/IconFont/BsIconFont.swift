@@ -36,11 +36,9 @@ public extension BsIconFontRepresentable {
         if let path = Bundle.main.path(forResource: name, ofType: "ttf") {
             return path
         }
-        
         if let path = Bundle(for: IconFontLocale.self).path(forResource: name, ofType: "ttf") {
             return path
         }
-        
         return nil
     }
 }

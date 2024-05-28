@@ -21,25 +21,30 @@ public enum BsApp {
         }
         return appStoreReceiptURL.lastPathComponent == "sandboxReceipt"
     }
+    
+    public static let connectedScenes: Set<UIScene> = shared.connectedScenes
+    
+    public static let windowScene: UIWindowScene? = connectedScenes.first as? UIWindowScene
 }
 
 public extension BsApp {
+    static var windows: [UIWindow] {
+        if let scene = windowScene {
+            return scene.windows
+        }
+        return shared.windows
+    }
+    
     static var mainWindow: UIWindow? {
         if let window = shared.delegate?.window {
             return window
         }
-                
-        if #available(iOS 13.0, *) {
-            if let scene = shared.connectedScenes.first as? UIWindowScene {
-                return scene.windows.first
-            }
-        }
-        return shared.windows.first
+        return windows.first
     }
     
     static var keyWindow: UIWindow? {
         if #available(iOS 13.0, *) {
-            for scene in shared.connectedScenes where scene.activationState == .foregroundActive {
+            for scene in connectedScenes where scene.activationState == .foregroundActive {
                 if let windowScene = scene as? UIWindowScene {
                     if #available(iOS 15.0, *), let keyWindow = windowScene.keyWindow {
                         return keyWindow

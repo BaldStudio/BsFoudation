@@ -34,6 +34,11 @@ public extension Bundle {
     func info(for key: Bundle.InfoKey) -> String {
         info[key.rawValue] as? String ?? ""
     }
-
 }
 
+public extension Bundle {
+    convenience init?(for name: String, in bundle: Bundle = .main) {
+        let target = bundle.path(forResource: name, ofType: "bundle") ?? ""
+        self.init(path: target)
+    }
+}

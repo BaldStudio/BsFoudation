@@ -33,8 +33,8 @@ open class BsLoaderButton: BsUIButton {
         }
     }
             
-    open override func commonInit() {
-        super.commonInit()
+    open override func onInit() {
+        super.onInit()
         addSubview(spinner)
         NSLayoutConstraint.activate([
             spinner.centerXAnchor.constraint(equalTo: centerXAnchor),

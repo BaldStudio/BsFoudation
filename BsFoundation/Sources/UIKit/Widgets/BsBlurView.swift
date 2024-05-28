@@ -38,7 +38,7 @@ open class BsBlurView: BsUIView {
         self.intensity = intensity
     }
 
-    open override func commonInit() {
+    open override func onInit() {
         effect = UIBlurEffect(style: effectStyle)
         setupEffectView()
         setupAnimator()

@@ -19,12 +19,12 @@ open class BsTableView: UITableView {
     
     public override init(frame: CGRect, style: Style) {
         super.init(frame: frame, style: style)
-        commonInit()
+        onInit()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        onInit()
     }
     
     public convenience init(delegate: UITableViewDelegate?) {
@@ -36,7 +36,7 @@ open class BsTableView: UITableView {
         self.delegate = delegate
     }
     
-    open func commonInit() {
+    open func onInit() {
         proxy.tableView = self
         delegate = proxy
         dataSource = proxy.dataSource

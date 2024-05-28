@@ -7,8 +7,8 @@
 //
 
 open class BsView: BsUIView {
-    open override func commonInit() {
-        super.commonInit()
+    open override func onInit() {
+        super.onInit()
         backgroundColor = .white
     }
 }

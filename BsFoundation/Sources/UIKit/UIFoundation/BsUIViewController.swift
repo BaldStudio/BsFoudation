@@ -14,15 +14,15 @@ open class BsUIViewController: UIViewController {
     public override init(nibName nibNameOrNil: String?,
                          bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        commonInit()
+        onInit()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        onInit()
     }
     
-    open func commonInit() {
+    open func onInit() {
 
     }
     

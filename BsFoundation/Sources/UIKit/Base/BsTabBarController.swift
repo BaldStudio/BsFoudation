@@ -215,7 +215,7 @@ open class BsTabBar: BsView {
         }
     }
     
-    open override func commonInit() {
+    open override func onInit() {
         addSubview(backdropView)
         backdropView.edgesEqualToSuperview()
         

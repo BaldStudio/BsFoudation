@@ -19,12 +19,12 @@ open class BsCollectionView: UICollectionView {
     
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        commonInit()
+        onInit()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
+        onInit()
     }
     
     public convenience init(delegate: UICollectionViewDelegate?) {
@@ -37,7 +37,7 @@ open class BsCollectionView: UICollectionView {
         self.delegate = delegate
     }
     
-    open func commonInit() {
+    open func onInit() {
         proxy.collectionView = self
         delegate = proxy
         dataSource = proxy.dataSource
