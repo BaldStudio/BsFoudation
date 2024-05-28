@@ -26,6 +26,19 @@ public extension UIViewController {
             dismiss(animated: true)
         }
     }
+    
+    func move(toParent parent: UIViewController) {
+        parent.addChild(self)
+        parent.view.addSubview(view)
+        self.didMove(toParent: parent)
+    }
+    
+    func removeFromParentIfNeeded() {
+        guard parent != nil else { return }
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
 }
 
 //MARK: - SwiftUI

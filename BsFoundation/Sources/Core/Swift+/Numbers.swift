@@ -6,17 +6,23 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
+// MARK: -  Bool
+
 public extension Bool {
     var asInt: Int {
         self ? 1 : 0
     }
 }
 
+// MARK: -  UInt
+
 public extension UInt {
     var asInt: Int {
         Int(self)
     }
 }
+
+// MARK: -  Int
 
 public extension Int {
     var asBool: Bool {
@@ -32,6 +38,8 @@ public extension Int {
     }
     
 }
+
+// MARK: -  BinaryFloatingPoint
 
 public extension BinaryFloatingPoint {
     var asInt: Int {

@@ -160,9 +160,7 @@ private extension BsTabBarController {
     
     func removeSelectedViewController() {
         guard let selectedViewController else { return }
-        selectedViewController.willMove(toParent: nil)
-        selectedViewController.view.removeFromSuperview()
-        selectedViewController.removeFromParent()
+        selectedViewController.removeFromParentIfNeeded()
     }
     
     func onSelectTabBarItem(_ sender: UITapGestureRecognizer) {

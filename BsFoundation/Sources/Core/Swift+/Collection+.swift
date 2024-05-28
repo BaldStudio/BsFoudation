@@ -82,7 +82,7 @@ public extension Dictionary {
 
 private enum JSONString {
     static let emptyArray = "[]"
-    static let emptyDictionary = "[]"
+    static let emptyDictionary = "{}"
 }
 
 public extension Dictionary {

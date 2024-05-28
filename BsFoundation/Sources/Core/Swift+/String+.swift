@@ -9,8 +9,7 @@
 import CommonCrypto
 
 public extension String {
-    @inlinable
-    static var empty: String { "" }
+    static let empty: String = ""
 
     @inlinable
     var isNotEmpty: Bool {
@@ -224,5 +223,10 @@ public extension String {
             return empty
         }
         return result
+    }
+    
+    @inlinable
+    var asData: Data {
+        data(using: .utf8) ?? Data()
     }
 }
