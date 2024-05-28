@@ -23,12 +23,10 @@ public extension Bundle {
         public static let copyright = InfoKey(rawValue: "NSHumanReadableCopyright")
     }
     
-    @inlinable
     subscript(_ key: InfoKey) -> String {
         info(for: key)
     }
     
-    @inlinable
     var info: [String : Any] {
         infoDictionary ?? [:]
     }

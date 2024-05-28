@@ -23,6 +23,8 @@ public extension Collection {
 // MARK: - Dictionary
 
 public extension Dictionary {
+    static var empty: [Key: Value] { [:] }
+    
     func contains(_ key: Key) -> Bool {
         index(forKey: key) != nil
     }
@@ -76,6 +78,10 @@ public extension Dictionary {
     static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
         lhs.merge(rhs) { _, new in new }
     }
+}
+
+public extension Array {
+    static var empty: [Element] { [] }
 }
 
 // MARK: - JSONString

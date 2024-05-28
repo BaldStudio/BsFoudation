@@ -9,14 +9,12 @@
 import UIKit
 
 public extension BaldStudio where T: UIBarButtonItem {
-    @inlinable
     static var spacer: UIBarButtonItem {
         UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                         target: nil,
                         action: nil)
     }
     
-    @inlinable
     static func fixedSpacer(_ w: CGFloat = 16) -> UIBarButtonItem {
         let item = UIBarButtonItem(barButtonSystemItem: .fixedSpace,
                                    target: nil,

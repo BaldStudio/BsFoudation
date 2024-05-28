@@ -7,7 +7,6 @@
 //
 
 public extension UIView {
-    @inlinable
     var isVisible: Bool {
         !isHidden
     }
@@ -39,7 +38,6 @@ public extension UIView {
 // MARK: - Hierarchy
 
 public extension UIView {
-    @inlinable
     func removeSubviews() {
         subviews.forEach { $0.removeFromSuperview() }
     }
@@ -80,22 +78,18 @@ public extension UIView {
         edgesEqual(to: superview, with: insets)
     }
     
-    @inlinable
     var safeTopAnchor: NSLayoutYAxisAnchor {
         safeAreaLayoutGuide.topAnchor
     }
     
-    @inlinable
     var safeLeftAnchor: NSLayoutXAxisAnchor {
         safeAreaLayoutGuide.leftAnchor
     }
     
-    @inlinable
     var safeRightAnchor: NSLayoutXAxisAnchor {
         safeAreaLayoutGuide.rightAnchor
     }
     
-    @inlinable
     var safeBottomAnchor: NSLayoutYAxisAnchor {
         safeAreaLayoutGuide.bottomAnchor
     }

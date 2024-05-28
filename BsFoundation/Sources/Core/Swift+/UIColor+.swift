@@ -12,7 +12,6 @@ public extension UIColor {
     }
     
     /// 随机色
-    @inlinable
     static var random: UIColor {
         UIColor(red: .random(in: 0...1),
                 green: .random(in: 0...1),

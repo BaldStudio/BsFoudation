@@ -51,7 +51,6 @@ public extension DispatchQueue {
         }
     }
     
-    @inlinable
     static func asyncMain(execute work: @escaping Block) {
         if Thread.isMainThread {
             work()

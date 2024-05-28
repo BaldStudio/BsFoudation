@@ -7,15 +7,15 @@
 //
 
 public enum BsApp {
-    static let shared = UIApplication.shared
+    public static let shared = UIApplication.shared
         
-    static let bundle: Bundle = Bundle.main
+    public static let bundle: Bundle = Bundle.main
 
-    static let id = Bundle.main.info(for: .id)
-    static let name = Bundle.main.info(for: .displayName)
-    static let version = Bundle.main.info(for: .version)
+    public static let id = Bundle.main.info(for: .id)
+    public static let name = Bundle.main.info(for: .displayName)
+    public static let version = Bundle.main.info(for: .version)
     
-    static var isTestFlight: Bool {
+    public static var isTestFlight: Bool {
         guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {
             return false
         }

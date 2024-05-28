@@ -11,12 +11,10 @@ import CommonCrypto
 public extension String {
     static let empty: String = ""
 
-    @inlinable
     var isNotEmpty: Bool {
         !isEmpty
     }
     
-    @inlinable
     func slice(at idx: Int = 0, count: Int = .max) -> String {
         let i = min(count, max(idx, 0))
         let len = min(count - i, max(count, 0))
@@ -25,17 +23,14 @@ public extension String {
         return String(self[begin..<end])
     }
     
-    @inlinable
     var isBlank: Bool {
         trimmed.isEmpty
     }
     
-    @inlinable
     var trimmed: String {
         trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    @inlinable
     mutating func trim(_ set: CharacterSet = .whitespacesAndNewlines) {
         self = trimmingCharacters(in: set)
     }
@@ -148,31 +143,26 @@ public extension String {
 // MARK: - Convert
 
 public extension Character {
-    @inlinable
     var asString: String {
         String(self)
     }
 }
 
 public extension Substring {
-    @inlinable
     var asString: String {
         String(self)
     }
 }
 
 public extension String {
-    @inlinable
     var asInt: Int {
         Int(self) ?? 0
     }
 
-    @inlinable
     var asDouble: Double {
         Double(self) ?? 0
     }
 
-    @inlinable
     var asBool: Bool {
         switch lowercased() {
         case "true", "t", "yes", "y":
@@ -187,12 +177,10 @@ public extension String {
         return false
     }
     
-    @inlinable
     var asURL: URL? {
         URL(string: self)
     }
     
-    @inlinable
     var asDictionary: [String: Any] {
         let empty: [String: Any] = [:]
         guard let data = data(using: .utf8) else { return empty }
@@ -202,7 +190,6 @@ public extension String {
         return result
     }
     
-    @inlinable
     var asArray: [Any] {
         let empty: [Any] = []
         guard let data = data(using: .utf8) else { return empty }
@@ -212,7 +199,6 @@ public extension String {
         return result
     }
     
-    @inlinable
     var asHTMLAttributedString: NSAttributedString {
         let empty = NSAttributedString()
         guard let data = data(using: .utf8) else { return empty }
@@ -225,7 +211,6 @@ public extension String {
         return result
     }
     
-    @inlinable
     var asData: Data {
         data(using: .utf8) ?? Data()
     }

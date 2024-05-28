@@ -6,4 +6,16 @@
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
-import Foundation
+public enum Timestamp {
+    public static var seconds: Int {
+        Date().timeIntervalSince1970.asInt
+    }
+    
+    public static var milliseconds: Int64 {
+        Int64(Date().timeIntervalSince1970 * 1000)
+    }
+}
+
+public extension Date {
+
+}

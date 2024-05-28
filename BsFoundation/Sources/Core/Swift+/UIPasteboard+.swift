@@ -13,7 +13,7 @@ public extension UIPasteboard {
     
     static func pasted() -> String {
         guard let pasteboard = UIPasteboard.general.string else {
-            return ""
+            return .empty
         }
         return pasteboard
     }

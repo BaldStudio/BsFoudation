@@ -18,7 +18,6 @@ public extension UIViewController {
     }
     
     /// 判断是 push 或 present，然后执行对应的退出方法
-    @inlinable
     func backwards() {
         if let navigationController, navigationController.children.count > 1 {
             navigationController.popViewController(animated: true)
