@@ -26,7 +26,7 @@ public extension UIViewController {
         }
     }
     
-    func move(toParent parent: UIViewController) {
+    func moveToParent(_ parent: UIViewController) {
         parent.addChild(self)
         parent.view.addSubview(view)
         self.didMove(toParent: parent)

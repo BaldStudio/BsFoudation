@@ -8,7 +8,7 @@
 
 // MARK: - Associated Object
 
-private class WeakValueHolder {
+private class WeakWrapper {
     weak var value: AnyObject?
     required init(_ value: AnyObject?) {
         self.value = value
@@ -64,16 +64,16 @@ public extension ObjectAssociatable {
     }
     
     static func set(associateWeak value: AnyObject?, for key: UnsafeRawPointer, atomic: Bool = false) {
-        set(associate: WeakValueHolder(value), for: key, atomic: atomic)
+        set(associate: WeakWrapper(value), for: key, atomic: atomic)
     }
     
     func set(associateWeak value: AnyObject?, for key: UnsafeRawPointer, atomic: Bool = false) {
-        set(associate: WeakValueHolder(value), for: key, atomic: atomic)
+        set(associate: WeakWrapper(value), for: key, atomic: atomic)
     }
     
     static func value<T>(forAssociated key: UnsafeRawPointer) -> T? {
         let value = objc_getAssociatedObject(self, key)
-        if let value = value as? WeakValueHolder {
+        if let value = value as? WeakWrapper {
             return value.value as? T
         }
         return value as? T
@@ -81,7 +81,7 @@ public extension ObjectAssociatable {
     
     func value<T>(forAssociated key: UnsafeRawPointer) -> T? {
         let value = objc_getAssociatedObject(self, key)
-        if let value = value as? WeakValueHolder {
+        if let value = value as? WeakWrapper {
             return value.value as? T
         }
         return value as? T

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'BsFoundation'
-  s.version      = '1.0.1'
+  s.version      = '1.1.0'
   s.summary      = 'BsFoundation'
   s.homepage     = 'https://github.com/BaldStudio/BsFoundation.git'
   s.license      = { :type => 'MIT', :text => 'LICENSE' }

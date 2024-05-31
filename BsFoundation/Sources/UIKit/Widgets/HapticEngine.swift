@@ -7,7 +7,7 @@
 //
 
 public struct HapticEngine {
-    public static func driven(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
+    public static func drive(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
         let gen = UIImpactFeedbackGenerator(style: style)
         gen.prepare()
         gen.impactOccurred()

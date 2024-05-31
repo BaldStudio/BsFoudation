@@ -96,14 +96,9 @@ public extension BsApp {
         topViewController?.navigationController
     }
 
-    static func canOpenURL(_ url: URL) -> Bool {
-        shared.canOpenURL(url)
-    }
-
-    static func openURL(_ url: URL,
-                        options: [UIApplication.OpenExternalURLOptionsKey : Any] = [:],
-                        completionHandler completion: BlockT<Bool>? = nil) {
+    static func open(_ url: URL,
+                     options: [UIApplication.OpenExternalURLOptionsKey: Any] = [:],
+                     completionHandler completion: BlockT<Bool>? = nil) {
         shared.open(url, options: options, completionHandler: completion)
     }
-
 }

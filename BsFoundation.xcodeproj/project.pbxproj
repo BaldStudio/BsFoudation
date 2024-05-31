@@ -45,6 +45,11 @@
 		6F035F6C2BF606AD00A070A3 /* BsUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F6B2BF606AD00A070A3 /* BsUINavigationController.swift */; };
 		6F035F722BF606D200A070A3 /* BsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F712BF606D200A070A3 /* BsTableViewController.swift */; };
 		6F035F742BF606DD00A070A3 /* BsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */; };
+		6F50BC482C08190F00B25765 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC472C08190F00B25765 /* Applet.swift */; };
+		6F50BC4A2C08194900B25765 /* AppletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC492C08194900B25765 /* AppletController.swift */; };
+		6F50BC4C2C081E5200B25765 /* AppletContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC4B2C081E5200B25765 /* AppletContext.swift */; };
+		6F50BC4E2C08225200B25765 /* AppletManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC4D2C08225200B25765 /* AppletManifest.swift */; };
+		6F5BC72B2C0733FA00876B93 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5BC72A2C0733FA00876B93 /* Toast.swift */; };
 		6F6B7DAF2BFD9A96007502AE /* BsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B7DAE2BFD9A96007502AE /* BsViewController.swift */; };
 		6F6B7DB12BFD9AAB007502AE /* BsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B7DB02BFD9AAB007502AE /* BsNavigationController.swift */; };
 		6F6B7DB32BFD9AB8007502AE /* BsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B7DB22BFD9AB8007502AE /* BsTabBarController.swift */; };
@@ -199,6 +204,11 @@
 		6F035F6B2BF606AD00A070A3 /* BsUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsUINavigationController.swift; sourceTree = "<group>"; };
 		6F035F712BF606D200A070A3 /* BsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTableViewController.swift; sourceTree = "<group>"; };
 		6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsCollectionViewController.swift; sourceTree = "<group>"; };
+		6F50BC472C08190F00B25765 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
+		6F50BC492C08194900B25765 /* AppletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletController.swift; sourceTree = "<group>"; };
+		6F50BC4B2C081E5200B25765 /* AppletContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletContext.swift; sourceTree = "<group>"; };
+		6F50BC4D2C08225200B25765 /* AppletManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletManifest.swift; sourceTree = "<group>"; };
+		6F5BC72A2C0733FA00876B93 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		6F6B7DAE2BFD9A96007502AE /* BsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsViewController.swift; sourceTree = "<group>"; };
 		6F6B7DB02BFD9AAB007502AE /* BsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsNavigationController.swift; sourceTree = "<group>"; };
 		6F6B7DB22BFD9AB8007502AE /* BsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTabBarController.swift; sourceTree = "<group>"; };
@@ -353,9 +363,10 @@
 			isa = PBXGroup;
 			children = (
 				6F78E80E2BF75C4E00C8A0C4 /* UIDefines.swift */,
+				6F50BC462C0818CE00B25765 /* Applet */,
+				6F035F622BF6050800A070A3 /* UICore */,
 				6F6B7DAB2BFD9971007502AE /* UIFoundation */,
 				6F6B7DAD2BFD9A52007502AE /* Components */,
-				6F035F622BF6050800A070A3 /* Base */,
 				6F035F1E2BF5EB5C00A070A3 /* IconFont */,
 				6F035F3F2BF5F52100A070A3 /* Widgets */,
 			);
@@ -428,7 +439,7 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
-		6F035F622BF6050800A070A3 /* Base */ = {
+		6F035F622BF6050800A070A3 /* UICore */ = {
 			isa = PBXGroup;
 			children = (
 				6F6B7DB42BFD9B03007502AE /* BsView.swift */,
@@ -438,7 +449,7 @@
 				6F035F712BF606D200A070A3 /* BsTableViewController.swift */,
 				6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */,
 			);
-			path = Base;
+			path = UICore;
 			sourceTree = "<group>";
 		};
 		6F035F632BF6052400A070A3 /* Misc */ = {
@@ -479,6 +490,33 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		6F50BC462C0818CE00B25765 /* Applet */ = {
+			isa = PBXGroup;
+			children = (
+				6F50BC472C08190F00B25765 /* Applet.swift */,
+				6F50BC4B2C081E5200B25765 /* AppletContext.swift */,
+				6F50BC492C08194900B25765 /* AppletController.swift */,
+				6F50BC4D2C08225200B25765 /* AppletManifest.swift */,
+			);
+			path = Applet;
+			sourceTree = "<group>";
+		};
+		6F5BC7282C0733C600876B93 /* Presentations */ = {
+			isa = PBXGroup;
+			children = (
+				6F5BC7292C0733D200876B93 /* Toast */,
+			);
+			path = Presentations;
+			sourceTree = "<group>";
+		};
+		6F5BC7292C0733D200876B93 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				6F5BC72A2C0733FA00876B93 /* Toast.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
 		6F6B7DAB2BFD9971007502AE /* UIFoundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +537,7 @@
 		6F6B7DAD2BFD9A52007502AE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6F5BC7282C0733C600876B93 /* Presentations */,
 				6F035F662BF605B700A070A3 /* CollectionView */,
 				6F035F642BF605AD00A070A3 /* TableView */,
 			);
@@ -1111,12 +1150,15 @@
 				6F78E8482BF7A54D00C8A0C4 /* BsLoaderButton.swift in Sources */,
 				6F035F3A2BF5F40A00A070A3 /* HapticEngine.swift in Sources */,
 				6F035F1A2BF5DDFE00A070A3 /* TargetConditionals.swift in Sources */,
+				6F50BC4E2C08225200B25765 /* AppletManifest.swift in Sources */,
 				6F78E8292BF7A17E00C8A0C4 /* UnkeyedContainer.swift in Sources */,
 				6F78E86F2BF7A6B600C8A0C4 /* BsTableView.swift in Sources */,
 				6F78E86C2BF7A6B600C8A0C4 /* BsTableViewNode.swift in Sources */,
+				6F50BC482C08190F00B25765 /* Applet.swift in Sources */,
 				6F035F572BF6037B00A070A3 /* UIView+.swift in Sources */,
 				6F78E82E2BF7A17E00C8A0C4 /* JSONKey.swift in Sources */,
 				D20F0BC628B9B17C00BD6E4C /* Device.swift in Sources */,
+				6F50BC4C2C081E5200B25765 /* AppletContext.swift in Sources */,
 				6F035F682BF6064D00A070A3 /* BsUIView.swift in Sources */,
 				6F035F2E2BF5F08000A070A3 /* UIImageView+IconFont.swift in Sources */,
 				6F035F242BF5ED2300A070A3 /* URL+.swift in Sources */,
@@ -1137,6 +1179,7 @@
 				6F6B7DB32BFD9AB8007502AE /* BsTabBarController.swift in Sources */,
 				6F78E8152BF7A10500C8A0C4 /* PropertyWrapper.swift in Sources */,
 				6F78E8472BF7A54D00C8A0C4 /* BsBadgeView.swift in Sources */,
+				6F50BC4A2C08194900B25765 /* AppletController.swift in Sources */,
 				6F6B7DB52BFD9B03007502AE /* BsView.swift in Sources */,
 				6F035F5D2BF603D800A070A3 /* UIImageView+.swift in Sources */,
 				6F78E84A2BF7A54D00C8A0C4 /* BsLayoutMargin.swift in Sources */,
@@ -1146,6 +1189,7 @@
 				6F78E82B2BF7A17E00C8A0C4 /* JSONParser.swift in Sources */,
 				D222369B294B0B3D00135713 /* BsTimer.swift in Sources */,
 				6F035F1C2BF5E34B00A070A3 /* BsApp.swift in Sources */,
+				6F5BC72B2C0733FA00876B93 /* Toast.swift in Sources */,
 				6F78E8262BF7A17E00C8A0C4 /* JSONDecoder.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
 				6F035F492BF6028900A070A3 /* Bundle+.swift in Sources */,
