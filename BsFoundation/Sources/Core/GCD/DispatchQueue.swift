@@ -50,12 +50,4 @@ public extension DispatchQueue {
             self.asyncAfter(deadline: .now() + interval, execute: worker!)
         }
     }
-    
-    static func asyncMain(execute work: @escaping Block) {
-        if Thread.isMainThread {
-            work()
-        } else {
-            DispatchQueue.main.async(execute: work)
-        }
-    }
 }

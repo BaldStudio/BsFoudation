@@ -37,10 +37,10 @@ public extension UIColor {
         var hex = hexString.uppercased()
         
         if hex.hasPrefix("0X") {
-            hex = hex.slice(at: 2)
+            hex = hex[2...]
         }
         else if hex.hasPrefix("#") {
-            hex = hex.slice(at: 1)
+            hex = hex[1...]
         }
 
         let alpha = min(1, max(0, alpha))

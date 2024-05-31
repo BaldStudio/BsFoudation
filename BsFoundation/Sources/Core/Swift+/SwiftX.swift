@@ -17,7 +17,6 @@ public protocol SwiftCompatible {
     associatedtype CompatibleType
     static var bs: BaldStudio<CompatibleType>.Type { get set }
     var bs: BaldStudio<CompatibleType> { get set }
-
 }
 
 public extension SwiftCompatible {

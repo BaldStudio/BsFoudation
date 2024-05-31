@@ -9,5 +9,5 @@
 @_exported
 import XCTest
 
-@_exported @testable
-import BsFoundation
+@_exported
+@testable import BsFoundation

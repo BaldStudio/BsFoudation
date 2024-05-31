@@ -14,14 +14,14 @@ public struct GUID {
         case none
         case memory
         case disk
-        case keychain
+//        case keychain
     }
     
     private static var storeKey = "com.baldstudio.BsDevice"
     
     private static var stringValue = ""
     
-    private static let keychain = Keychain()
+//    private static let keychain = Keychain()
     
     private static var systemUUID: String {
         UUID().uuidString
@@ -45,13 +45,13 @@ public struct GUID {
                 UserDefaults.standard.set(value, forKey: storeKey)
             }
             return value
-        case .keychain:
-            var value: String! = keychain["UDID"]
-            if value == nil {
-                value = systemUUID
-                keychain["UDID"] = value
-            }
-            return value
+//        case .keychain:
+//            var value: String! = keychain["UDID"]
+//            if value == nil {
+//                value = systemUUID
+//                keychain["UDID"] = value
+//            }
+//            return value
         }
     }
 

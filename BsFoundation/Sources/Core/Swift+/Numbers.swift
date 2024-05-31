@@ -12,6 +12,10 @@ public extension Bool {
     var asInt: Int {
         self ? 1 : 0
     }
+
+    var asCFBoolean: CFBoolean {
+        self ? kCFBooleanTrue : kCFBooleanFalse
+    }
 }
 
 // MARK: -  UInt

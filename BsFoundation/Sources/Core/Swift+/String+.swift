@@ -15,14 +15,6 @@ public extension String {
         !isEmpty
     }
     
-    func slice(at idx: Int = 0, count: Int = .max) -> String {
-        let i = min(count, max(idx, 0))
-        let len = min(count - i, max(count, 0))
-        let begin = index(startIndex, offsetBy: i)
-        let end = index(begin, offsetBy: len)
-        return String(self[begin..<end])
-    }
-    
     var isBlank: Bool {
         trimmed.isEmpty
     }
@@ -107,34 +99,34 @@ public extension String {
     }
     
     subscript (bounds: CountableRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
+        let start = index(startIndex, offsetBy: min(bounds.lowerBound, count - 1))
+        let end = index(startIndex, offsetBy: min(bounds.upperBound, count - 1))
         if end < start { return "" }
         return self[start..<end].asString
     }
     
     subscript (bounds: CountableClosedRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
+        let start = index(startIndex, offsetBy: min(bounds.lowerBound, count - 1))
+        let end = index(startIndex, offsetBy: min(bounds.upperBound, count - 1))
         if end < start { return "" }
         return self[start...end].asString
     }
     
     subscript (bounds: CountablePartialRangeFrom<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let start = index(startIndex, offsetBy: min(bounds.lowerBound, count - 1))
         let end = index(endIndex, offsetBy: -1)
         if end < start { return "" }
         return self[start...end].asString
     }
     
     subscript (bounds: PartialRangeThrough<Int>) -> String {
-        let end = index(startIndex, offsetBy: bounds.upperBound)
+        let end = index(startIndex, offsetBy: min(bounds.upperBound, count - 1))
         if end < startIndex { return "" }
         return self[startIndex...end].asString
     }
     
     subscript (bounds: PartialRangeUpTo<Int>) -> String {
-        let end = index(startIndex, offsetBy: bounds.upperBound)
+        let end = index(startIndex, offsetBy: min(bounds.upperBound, count - 1))
         if end < startIndex { return "" }
         return self[startIndex..<end].asString
     }
@@ -149,6 +141,12 @@ public extension Character {
 }
 
 public extension Substring {
+    var asString: String {
+        String(self)
+    }
+}
+
+public extension CFString {
     var asString: String {
         String(self)
     }

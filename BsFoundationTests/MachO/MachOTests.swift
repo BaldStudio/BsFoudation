@@ -6,7 +6,7 @@
 //  Copyright © 2022 BaldStudio. All rights reserved.
 //
 
-import XCTest
+@testable import BsFoundation
 
 class MachOTests: XCTestCase {
 

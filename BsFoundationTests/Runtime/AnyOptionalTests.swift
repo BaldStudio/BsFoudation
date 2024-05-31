@@ -6,7 +6,7 @@
 //  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-import Foundation
+@testable import BsFoundation
 
 class AnyOptionalTests: XCTestCase {
     

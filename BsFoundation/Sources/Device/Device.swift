@@ -11,7 +11,7 @@ import UIKit
 public struct Device {
         
     /// unique identifier
-    public static var uid = GUID.generate(mode: .keychain)
+    public static var uid = GUID.generate(mode: .disk)
     
 }
 

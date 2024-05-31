@@ -1,23 +1,23 @@
 //
-//  LazyTests.swift
+//  NullResetableTests.swift
 //  BsFoundationTests
 //
 //  Created by crzorz on 2022/10/19.
 //  Copyright © 2022 BaldStudio. All rights reserved.
 //
 
-import XCTest
+@testable import BsFoundation
 
-class LazyTests: XCTestCase {
+class NullResetableTests: XCTestCase {
 
     static func defaultText() -> String {
         "0"
     }
         
-    @Lazy(default: "0")
+    @NullResetable(default: "0")
     var testDefaultValue: String!
 
-    @Lazy(body: defaultText)
+    @NullResetable(body: defaultText)
     var testBodyValue: String!
 
     func testDefault() {

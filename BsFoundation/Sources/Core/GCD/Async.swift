@@ -66,46 +66,46 @@ public struct AsyncBlock<Input, Output> {
 
 public extension AsyncBlock {
     @discardableResult
-    static func main<Result>(after seconds: TimeInterval? = nil,
-                             _ block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
+    static func main<R>(after seconds: TimeInterval? = nil,
+                             _ block: @escaping () -> R) -> AsyncBlock<Void, R> {
         AsyncBlock.async(queue: .main, after: seconds, block: block)
     }
     
     @discardableResult
-    static func userInteractive<Result>(after seconds: TimeInterval? = nil,
-                                        _ block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
+    static func userInteractive<R>(after seconds: TimeInterval? = nil,
+                                        _ block: @escaping () -> R) -> AsyncBlock<Void, R> {
         AsyncBlock.async(queue: .userInteractive, after: seconds, block: block)
     }
     
     @discardableResult
-    static func userInitiated<Result>(after seconds: TimeInterval? = nil,
-                                      _ block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
+    static func userInitiated<R>(after seconds: TimeInterval? = nil,
+                                      _ block: @escaping () -> R) -> AsyncBlock<Void, R> {
         AsyncBlock.async(queue: .userInitiated, after: seconds, block: block)
     }
     
     @discardableResult
-    static func utility<Result>(after seconds: TimeInterval? = nil,
-                                _ block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
+    static func utility<R>(after seconds: TimeInterval? = nil,
+                                _ block: @escaping () -> R) -> AsyncBlock<Void, R> {
         AsyncBlock.async(queue: .utility, after: seconds, block: block)
     }
     
     @discardableResult
-    static func background<Result>(after seconds: TimeInterval? = nil,
-                                   _ block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
+    static func background<R>(after seconds: TimeInterval? = nil,
+                                   _ block: @escaping () -> R) -> AsyncBlock<Void, R> {
         AsyncBlock.async(queue: .background, after: seconds, block: block)
     }
     
     @discardableResult
-    static func custom<Result>(queue: DispatchQueue,
+    static func custom<R>(queue: DispatchQueue,
                                after seconds: TimeInterval? = nil,
-                               _ block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
+                               _ block: @escaping () -> R) -> AsyncBlock<Void, R> {
         AsyncBlock.async(queue: .custom(queue: queue), after: seconds, block: block)
     }
     
-    private static func async<Result>(queue: GCD,
+    private static func async<R>(queue: GCD,
                                       after seconds: TimeInterval? = nil,
-                                      block: @escaping () -> Result) -> AsyncBlock<Void, Result> {
-        let output = _Reference<Result>()
+                                      block: @escaping () -> R) -> AsyncBlock<Void, R> {
+        let output = _Reference<R>()
         let block = DispatchWorkItem(block: {
             output.value = block()
         })
@@ -118,7 +118,7 @@ public extension AsyncBlock {
             queue.async(execute: block)
         }
 
-        return AsyncBlock<Void, Result>(output: output, block)
+        return AsyncBlock<Void, R>(output: output, block)
     }
 }
 
@@ -126,39 +126,39 @@ public extension AsyncBlock {
 
 public extension AsyncBlock {
     @discardableResult
-    func main<Result>(after seconds: TimeInterval? = nil,
-                      _ block: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
+    func main<R>(after seconds: TimeInterval? = nil,
+                      _ block: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
         chain(queue: .main, after: seconds, block: block)
     }
     
     @discardableResult
-    func userInteractive<Result>(after seconds: TimeInterval? = nil,
-                                 _ block: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
+    func userInteractive<R>(after seconds: TimeInterval? = nil,
+                                 _ block: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
         chain(queue: .userInteractive, after: seconds, block: block)
     }
 
     @discardableResult
-    func userInitiated<Result>(after seconds: TimeInterval? = nil,
-                               _ block: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
+    func userInitiated<R>(after seconds: TimeInterval? = nil,
+                               _ block: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
         chain(queue: .userInitiated, after: seconds, block: block)
     }
     
     @discardableResult
-    func utility<Result>(after seconds: TimeInterval? = nil,
-                         _ block: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
+    func utility<R>(after seconds: TimeInterval? = nil,
+                         _ block: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
         chain(queue: .utility, after: seconds, block: block)
     }
     
     @discardableResult
-    func background<Result>(after seconds: TimeInterval? = nil,
-                            _ block: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
+    func background<R>(after seconds: TimeInterval? = nil,
+                            _ block: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
         chain(queue: .background, after: seconds, block: block)
     }
     
     @discardableResult
-    func custom<Result>(queue: DispatchQueue,
+    func custom<R>(queue: DispatchQueue,
                         after seconds: TimeInterval? = nil,
-                        _ block: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
+                        _ block: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
         chain(queue: .custom(queue: queue), after: seconds, block: block)
     }
         
@@ -172,10 +172,10 @@ public extension AsyncBlock {
         block.cancel()
     }
     
-    private func chain<Result>(queue: GCD,
+    private func chain<R>(queue: GCD,
                                after seconds: TimeInterval? = nil,
-                               block chain: @escaping (Output) -> Result) -> AsyncBlock<Output, Result> {
-        let result = _Reference<Result>()
+                               block chain: @escaping (Output) -> R) -> AsyncBlock<Output, R> {
+        let result = _Reference<R>()
         let executor = DispatchWorkItem(block: {
             result.value = chain(self.value!)
         })
@@ -190,7 +190,7 @@ public extension AsyncBlock {
             block.notify(queue: queue, execute: executor)
         }
 
-        return AsyncBlock<Output, Result>(input: output, output: result, executor)
+        return AsyncBlock<Output, R>(input: output, output: result, executor)
     }
 }
 
