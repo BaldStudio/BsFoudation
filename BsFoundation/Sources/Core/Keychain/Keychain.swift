@@ -71,9 +71,7 @@ public struct Keychain {
     }
     
     public subscript<T: KeychainSerializable>(key: Key<T>, 
-                                              default defaultValue: @autoclosure () -> T.Value)
-        -> Result<T.Value, KeychainError> {
-
+                                              default defaultValue: @autoclosure () -> T.Value) -> Result<T.Value, KeychainError> {
         do {
             return .success(try value(for: key, default: defaultValue()))
         } catch {

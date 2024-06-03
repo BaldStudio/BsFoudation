@@ -50,3 +50,11 @@ public extension BinaryFloatingPoint {
         Int(self)
     }
 }
+
+// MARK: -  Double
+
+public extension Double {
+    var asNSNumber: NSNumber {
+        NSNumber(floatLiteral: self)
+    }
+}

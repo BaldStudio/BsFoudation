@@ -196,19 +196,7 @@ public extension String {
         }
         return result
     }
-    
-    var asHTMLAttributedString: NSAttributedString {
-        let empty = NSAttributedString()
-        guard let data = data(using: .utf8) else { return empty }
-        let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-        ]
-        guard let result = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
-            return empty
-        }
-        return result
-    }
-    
+        
     var asData: Data {
         data(using: .utf8) ?? Data()
     }

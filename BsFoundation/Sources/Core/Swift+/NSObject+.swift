@@ -1,8 +1,8 @@
 //
-//  Runtime.swift
+//  NSObject+.swift
 //  BsFoundation
 //
-//  Created by Runze Chang on 2024/5/17.
+//  Created by Runze Chang on 2024/6/3.
 //  Copyright © 2024 BaldStudio. All rights reserved.
 //
 
@@ -96,22 +96,14 @@ public extension ObjectAssociatable {
     }
 }
 
-// MARK: - Reference
+// MARK: -  Copy & MutableCopy
 
-@dynamicMemberLookup
-public struct Reference<Object> {
-    public let object: Object
-        
-    public init(_ object: Object) {
-        self.object = object
+public extension NSObject {
+    func toMutableCopy<T: NSMutableCopying>() -> T {
+        mutableCopy() as! T
     }
-    
-    public subscript<Value>(dynamicMember keyPath: WritableKeyPath<Object, Value>) -> ((Value) -> Reference<Object>) {
-        var object = object
-        return { value in
-            object[keyPath: keyPath] = value
-            return Reference(object)
-        }
+
+    func toCopy<T: NSCopying>() -> T {
+        copy() as! T
     }
 }
-
