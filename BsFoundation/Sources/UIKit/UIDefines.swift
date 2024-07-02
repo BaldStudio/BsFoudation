@@ -19,6 +19,11 @@ public enum Screen {
 // MARK: -  安全边距
 
 public enum SafeArea {
+    public enum Edge {
+        case bottom
+        case top
+    }
+
     public static let insets = BsApp.mainWindow?.safeAreaInsets ?? .zero
     public static let top = insets.top
     public static let bottom = insets.bottom

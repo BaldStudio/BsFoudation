@@ -99,11 +99,11 @@ public extension ObjectAssociatable {
 // MARK: -  Copy & MutableCopy
 
 public extension NSObject {
-    func toMutableCopy<T: NSMutableCopying>() -> T {
+    func asMutableCopy<T: NSMutableCopying>() -> T {
         mutableCopy() as! T
     }
 
-    func toCopy<T: NSCopying>() -> T {
+    func asCopy<T: NSCopying>() -> T {
         copy() as! T
     }
 }

@@ -186,7 +186,7 @@ public func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributed
 
 public func + (lhs: NSParagraphStyle, rhs: NSParagraphStyle) -> NSParagraphStyle {
     let defaultParagraph = NSParagraphStyle.default
-    let combinedAttributes: NSMutableParagraphStyle = lhs.toMutableCopy()
+    let combinedAttributes: NSMutableParagraphStyle = lhs.asMutableCopy()
     
     if rhs.lineSpacing != defaultParagraph.lineSpacing {
         combinedAttributes.lineSpacing = rhs.lineSpacing

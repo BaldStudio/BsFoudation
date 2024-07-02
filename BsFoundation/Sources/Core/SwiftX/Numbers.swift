@@ -18,9 +18,9 @@ public extension Bool {
     }
 }
 
-// MARK: -  UInt
+// MARK: -  UnsignedInteger
 
-public extension UInt {
+public extension UnsignedInteger {
     var asInt: Int {
         Int(self)
     }

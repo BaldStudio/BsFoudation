@@ -87,22 +87,3 @@ final public class Atomic<T> {
         }
     }
 }
-
-// MARK: - Reference
-
-@dynamicMemberLookup
-public struct Reference<Object> {
-    public let object: Object
-        
-    public init(_ object: Object) {
-        self.object = object
-    }
-    
-    public subscript<Value>(dynamicMember keyPath: WritableKeyPath<Object, Value>) -> ((Value) -> Reference<Object>) {
-        var object = object
-        return { value in
-            object[keyPath: keyPath] = value
-            return Reference(object)
-        }
-    }
-}

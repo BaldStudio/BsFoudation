@@ -6,17 +6,10 @@
 //  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-public extension BsSafeInsetsView {
-    enum Edge {
-        case bottom
-        case top
-    }
-}
-
 public final class BsSafeInsetsView: BsLayoutMargin {
-    public private(set) var edge: Edge = .bottom
+    public private(set) var edge: SafeArea.Edge = .bottom
 
-    public required init(edge: Edge = .bottom) {
+    public required init(edge: SafeArea.Edge = .bottom) {
         super.init(frame: .zero)
         self.edge = edge
     }
