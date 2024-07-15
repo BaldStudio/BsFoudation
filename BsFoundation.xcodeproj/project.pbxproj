@@ -45,6 +45,7 @@
 		6F035F6C2BF606AD00A070A3 /* BsUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F6B2BF606AD00A070A3 /* BsUINavigationController.swift */; };
 		6F035F722BF606D200A070A3 /* BsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F712BF606D200A070A3 /* BsTableViewController.swift */; };
 		6F035F742BF606DD00A070A3 /* BsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */; };
+		6F3782632C3E25D3006DA597 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3782622C3E25D3006DA597 /* C.swift */; };
 		6F50BC482C08190F00B25765 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC472C08190F00B25765 /* Applet.swift */; };
 		6F50BC4A2C08194900B25765 /* AppletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC492C08194900B25765 /* AppletController.swift */; };
 		6F50BC4C2C081E5200B25765 /* AppletContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC4B2C081E5200B25765 /* AppletContext.swift */; };
@@ -214,6 +215,7 @@
 		6F035F6B2BF606AD00A070A3 /* BsUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsUINavigationController.swift; sourceTree = "<group>"; };
 		6F035F712BF606D200A070A3 /* BsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTableViewController.swift; sourceTree = "<group>"; };
 		6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsCollectionViewController.swift; sourceTree = "<group>"; };
+		6F3782622C3E25D3006DA597 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		6F50BC472C08190F00B25765 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		6F50BC492C08194900B25765 /* AppletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletController.swift; sourceTree = "<group>"; };
 		6F50BC4B2C081E5200B25765 /* AppletContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletContext.swift; sourceTree = "<group>"; };
@@ -397,9 +399,10 @@
 		6F035F182BF5AC4C00A070A3 /* SwiftX */ = {
 			isa = PBXGroup;
 			children = (
-				6F035F1B2BF5E34B00A070A3 /* BsApp.swift */,
 				D29601502732ACA500B6511A /* SwiftX.swift */,
+				6F035F1B2BF5E34B00A070A3 /* BsApp.swift */,
 				D26FC62B26E0AF8B003B9F11 /* Then.swift */,
+				6F3782622C3E25D3006DA597 /* C.swift */,
 				6F035F482BF6028900A070A3 /* Bundle+.swift */,
 				6F035F522BF6036400A070A3 /* CAShapeLayer+.swift */,
 				6F035F602BF6040400A070A3 /* Collection+.swift */,
@@ -1235,6 +1238,7 @@
 				6F50BC4A2C08194900B25765 /* AppletController.swift in Sources */,
 				6FD41BA82C09A724009B7EA2 /* KeychainAuthenticationType.swift in Sources */,
 				6F6B7DB52BFD9B03007502AE /* BsView.swift in Sources */,
+				6F3782632C3E25D3006DA597 /* C.swift in Sources */,
 				6F035F5D2BF603D800A070A3 /* UIImageView+.swift in Sources */,
 				6F78E84A2BF7A54D00C8A0C4 /* BsLayoutMargin.swift in Sources */,
 				6F6B7DB72BFDA182007502AE /* BsUIControl.swift in Sources */,

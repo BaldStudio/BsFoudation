@@ -201,3 +201,11 @@ public extension String {
         data(using: .utf8) ?? Data()
     }
 }
+
+// MARK: -  Others
+
+public extension String {
+    static func * (text: String, count: Int) -> String {
+        String(repeating: text, count: count)
+    }
+}

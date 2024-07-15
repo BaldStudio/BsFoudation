@@ -48,6 +48,11 @@ class StringTests: XCTestCase {
         
         result = str[99...99]
         XCTAssertTrue(result == "5")
-
+    }
+    
+    func testOperators() {
+        let target = "111111"
+        let value = "1" * 6
+        XCTAssertTrue(value == target)
     }
 }
