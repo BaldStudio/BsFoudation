@@ -16,15 +16,15 @@ public extension String {
     }
     
     var isBlank: Bool {
-        trimmed.isEmpty
+        trimmed().isEmpty
     }
     
-    var trimmed: String {
-        trimmingCharacters(in: .whitespacesAndNewlines)
+    func trimmed(_ set: CharacterSet = .whitespacesAndNewlines) -> String {
+        trimmingCharacters(in: set)
     }
-
+    
     mutating func trim(_ set: CharacterSet = .whitespacesAndNewlines) {
-        self = trimmingCharacters(in: set)
+        self = trimmed(set)
     }
 }
 
@@ -61,12 +61,12 @@ public extension String {
         self = urlEncoded(retain: retain, unretain: unretain)
     }
     
-    var urlDecoded: String {
+    func urlDecoded() -> String {
         removingPercentEncoding ?? self
     }
     
     mutating func urlDecode() {
-        self = urlDecoded
+        self = urlDecoded()
     }
 }
 

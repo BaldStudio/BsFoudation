@@ -45,13 +45,12 @@ public extension BsApp {
     static var keyWindow: UIWindow? {
         if #available(iOS 13.0, *) {
             for scene in connectedScenes where scene.activationState == .foregroundActive {
-                if let windowScene = scene as? UIWindowScene {
-                    if #available(iOS 15.0, *), let keyWindow = windowScene.keyWindow {
-                        return keyWindow
-                    } else {
-                        for window in windowScene.windows where window.isKeyWindow {
-                            return window
-                        }
+                guard let windowScene = scene as? UIWindowScene else { continue }
+                if #available(iOS 15.0, *), let keyWindow = windowScene.keyWindow {
+                    return keyWindow
+                } else {
+                    for window in windowScene.windows where window.isKeyWindow {
+                        return window
                     }
                 }
             }

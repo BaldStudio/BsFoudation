@@ -101,10 +101,7 @@ public extension UIView {
             setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
             setContentHuggingPriority(.fittingSizeLevel, for: .vertical)
             setContentCompressionResistancePriority(.fittingSizeLevel, for: .vertical)
-            return
-        }
-
-        if axis == .horizontal {
+        } else if axis == .horizontal {
             setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
             setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
         } else {
@@ -119,10 +116,7 @@ public extension UIView {
             setContentCompressionResistancePriority(.required, for: .horizontal)
             setContentHuggingPriority(.required, for: .vertical)
             setContentCompressionResistancePriority(.required, for: .vertical)
-            return
-        }
-
-        if axis == .horizontal {
+        } else if axis == .horizontal {
             setContentHuggingPriority(.required, for: .horizontal)
             setContentCompressionResistancePriority(.required, for: .horizontal)
         } else {
@@ -130,6 +124,7 @@ public extension UIView {
             setContentCompressionResistancePriority(.required, for: .vertical)
         }
     }
+
 
     /// 移除自身的所有约束
     func removeConstraints() {

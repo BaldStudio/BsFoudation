@@ -6,12 +6,16 @@
 //  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-open class BsDivideLine: BsUIView {    
-    open override func onInit() {
-        backgroundColor = UIColor(0xD8D8D8)
+public final class BsDivideLine: BsUIView {
+    /// 分割线颜色，修改后，每次创建的线都会改变
+    /// 如果仅改变当前的线，可以直接修改backgroundColor
+    public static var defaultColor: UIColor = UIColor(0xD8D8D8)
+    
+    public override func onInit() {
+        backgroundColor = BsDivideLine.defaultColor
     }
     
-    open override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         [UIView.noIntrinsicMetric, Design.Height.line]
     }
 }

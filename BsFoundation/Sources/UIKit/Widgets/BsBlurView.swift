@@ -15,12 +15,14 @@ open class BsBlurView: BsUIView {
     
     private var animator: UIViewPropertyAnimator!
     
+    /// 模糊效果
     open var effectStyle: UIBlurEffect.Style = .regular {
         didSet {
             effect = UIBlurEffect(style: effectStyle)
         }
     }
     
+    /// 控制模糊程度，0~1
     @Clamp(0...1)
     open var intensity: Double = 1 {
         didSet {
@@ -53,10 +55,11 @@ private extension BsBlurView {
     
     func setupAnimator() {
         effectView.effect = nil
-        animator = UIViewPropertyAnimator(duration: 0, curve: .linear, animations: { [weak self] in
+        let animation = { [weak self] in
             guard let self else { return }
             self.effectView.effect = self.effect
-        })
+        }
+        animator = UIViewPropertyAnimator(duration: 0, curve: .linear, animations: animation)
         animator.pausesOnCompletion = true
         animator.fractionComplete = intensity
     }

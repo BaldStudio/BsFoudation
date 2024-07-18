@@ -139,7 +139,7 @@
 		D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */; };
 		D23FF0E525AD9C5600D755D9 /* BsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D27A8A1D25203F1A006A6125 /* BsFoundation.framework */; platformFilter = ios; };
 		D26FC63826E0AF8C003B9F11 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62B26E0AF8B003B9F11 /* Then.swift */; };
-		D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62D26E0AF8B003B9F11 /* DispatchQueue.swift */; };
+		D26FC63A26E0AF8C003B9F11 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62D26E0AF8B003B9F11 /* Task.swift */; };
 		D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */; };
 		D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62F26E0AF8C003B9F11 /* Geometry.swift */; };
 		D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */; };
@@ -316,7 +316,7 @@
 		D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsFoundationTests.swift; sourceTree = "<group>"; };
 		D23FF0E425AD9C5600D755D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D26FC62B26E0AF8B003B9F11 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; tabWidth = 2; wrapsLines = 1; };
-		D26FC62D26E0AF8B003B9F11 /* DispatchQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		D26FC62D26E0AF8B003B9F11 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
 		D26FC62F26E0AF8C003B9F11 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUI.swift; sourceTree = "<group>"; };
@@ -641,7 +641,7 @@
 			isa = PBXGroup;
 			children = (
 				6F78E8732BFAF91700C8A0C4 /* Async.swift */,
-				D26FC62D26E0AF8B003B9F11 /* DispatchQueue.swift */,
+				D26FC62D26E0AF8B003B9F11 /* Task.swift */,
 			);
 			path = GCD;
 			sourceTree = "<group>";
@@ -1251,7 +1251,7 @@
 				6F5BC72B2C0733FA00876B93 /* Toast.swift in Sources */,
 				6FD41B9A2C097C3F009B7EA2 /* KeychainSerializable.swift in Sources */,
 				6F78E8262BF7A17E00C8A0C4 /* JSONDecoder.swift in Sources */,
-				D26FC63A26E0AF8C003B9F11 /* DispatchQueue.swift in Sources */,
+				D26FC63A26E0AF8C003B9F11 /* Task.swift in Sources */,
 				6F035F492BF6028900A070A3 /* Bundle+.swift in Sources */,
 				6F035F512BF6035200A070A3 /* UIColor+.swift in Sources */,
 				6F035F552BF6037200A070A3 /* UIImage+.swift in Sources */,
