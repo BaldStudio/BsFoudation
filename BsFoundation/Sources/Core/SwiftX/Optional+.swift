@@ -13,18 +13,11 @@ public protocol AnyOptional {
 
 extension Optional: AnyOptional {
     public var isNil: Bool {
+        // TODO: Optional嵌套问题
         self == nil
     }
 
     public var isNotNil: Bool {
-        self != nil
-    }
-}
-
-infix operator ?=
-/// 将  a = a ?? b 简化为 a ?= b
-public func ?= <T>(lhs: inout T?, rhs: @autoclosure BlockR<T>) {
-    if lhs == nil {
-        lhs = rhs()
+        !isNil
     }
 }

@@ -9,13 +9,10 @@
 @testable import BsFoundation
 
 class MachOTests: XCTestCase {
-
     func testFetch() {
-                
         let data: [MachOData] = loadMachOData(segment: .test, section: .test)
         XCTAssertTrue(data.count == 1)
         XCTAssertTrue(data.first!.name == "test")
-        
     }
 }
 
@@ -28,7 +25,6 @@ struct MachOData: MachODataConvertible {
     static func convert(_ t: RawType) -> Self {
         Self(name: String(cString: t.name))
     }
-            
 }
 
 extension MachOSegment {

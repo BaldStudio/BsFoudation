@@ -181,6 +181,6 @@ extension BsCollectionView {
 
 // MARK: - Extensions
 
-public extension BaldStudio where T: BsCollectionView {
+public extension BaldStudio where Hair: BsCollectionView {
     var dataSource: BsCollectionViewDataSource { this.proxy.dataSource }
 }

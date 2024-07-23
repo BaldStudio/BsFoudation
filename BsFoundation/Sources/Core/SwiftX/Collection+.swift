@@ -7,14 +7,6 @@
 //
 
 public extension Collection {
-    subscript (safe index: Self.Index) -> Iterator.Element? {
-        (startIndex ..< endIndex).contains(index) ? self[index] : nil
-    }
-    
-    func safe(objectAt index: Self.Index) -> Iterator.Element? {
-        self[safe: index]
-    }
-    
     var isNotEmpty: Bool {
         !isEmpty
     }
@@ -25,54 +17,71 @@ public extension Collection {
 public extension Dictionary {
     static var empty: [Key: Value] { [:] }
     
-    func contains(_ key: Key) -> Bool {
+    func contains(key: Key) -> Bool {
         index(forKey: key) != nil
     }
     
-    func contains(_ value: Value) -> Bool where Value: Equatable {
+    func contains(value: Value) -> Bool where Value: Equatable {
         contains { $0.1 == value }
     }
     
     // MARK: - Safe Access
     
     func safe<T>(valueForKey key: Key) -> T? {
-        guard let value = self[key] else { return nil }
-        if value is NSNull { return nil }
-        return value as? T
+        // !!!: 暂不考虑兼容 NSNull 的情况
+        if let value = self[key] {
+            return value as? T
+        }
+        return nil
+    }
+        
+    func safe(intForKey key: Key) -> Int {
+        if let value: Any = safe(valueForKey: key) {
+            if let result = value as? Int { return result }
+            if let result = value as? String { return result.asInt }
+            if let result = value as? Bool { return result.asInt }
+            // !!!: 暂不考虑兼容更多类型，减少复杂度
+            // if let result = value as? Int16 { return result.asInt }
+            // if let result = value as? UInt { return result.asInt }
+            // if let result = value as? Float { return result.asInt }
+            // if let result = value as? Double { return result.asInt }
+            // if let result = value as? CGFloat { return result.asInt }
+        }
+        return .zero
     }
     
     func safe(boolForKey key: Key) -> Bool {
-        guard let value: Any = safe(valueForKey: key) else { return false }
-        if let result = value as? Bool { return result }
-        if let result = value as? Int { return result.asBool }
-        if let result = value as? String { return result.asBool }
+        if let value: Any = safe(valueForKey: key) {
+            if let result = value as? Bool { return result }
+            if let result = value as? Int { return result.asBool }
+            if let result = value as? String { return result.asBool }
+            // !!!: 暂不考虑兼容更多类型，减少复杂度
+        }
         return false
     }
-    
-    func safe(intForKey key: Key) -> Int {
-        guard let value: Any = safe(valueForKey: key) else { return 0 }
-        if let result = value as? Int { return result }
-        if let result = value as? String { return Int(result) ?? 0 }
-        return 0
-    }
-    
+
     func safe(stringForKey key: Key) -> String {
-        guard let value: Any = safe(valueForKey: key) else { return "" }
-        if let result = value as? String { return result }
-        if let result = value as? Int { return String(result) }
-        return ""
+        if let value: Any = safe(valueForKey: key) {
+            if let result = value as? String { return result }
+            if let result = value as? Int { return String(result) }
+            if let result = value as? Bool { return String(result) }
+            // !!!: 暂不考虑兼容更多类型，减少复杂度
+        }
+        return .empty
     }
     
-    func safe(dictionaryForKey key: Key) -> Self {
-        guard let value: Any = safe(valueForKey: key) else { return [:] }
-        if let result = value as? Self { return result }
-        return [:]
+    func safe<K: Hashable, V>(dictionaryForKey key: Key) -> [K: V] {
+        if let value: [K: V] = safe(valueForKey: key) {
+            return value
+        }
+        return .empty
     }
     
-    func safe(arrayForKey key: Key) -> [Any] {
-        guard let value: Any = safe(valueForKey: key) else { return [] }
-        if let result = value as? [Any] { return result }
-        return []
+    func safe<E>(arrayForKey key: Key) -> [E] {
+        if let value: [E] = safe(valueForKey: key) {
+            return value
+        }
+        return .empty
     }
     
     static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
@@ -82,6 +91,14 @@ public extension Dictionary {
 
 public extension Array {
     static var empty: [Element] { [] }
+    
+    subscript (safe index: Self.Index) -> Iterator.Element? {
+        (startIndex ..< endIndex).contains(index) ? self[index] : nil
+    }
+    
+    func safe(objectAt index: Self.Index) -> Iterator.Element? {
+        self[safe: index]
+    }
 }
 
 // MARK: - JSONString

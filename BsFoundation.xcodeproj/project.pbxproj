@@ -46,6 +46,10 @@
 		6F035F722BF606D200A070A3 /* BsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F712BF606D200A070A3 /* BsTableViewController.swift */; };
 		6F035F742BF606DD00A070A3 /* BsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */; };
 		6F3782632C3E25D3006DA597 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3782622C3E25D3006DA597 /* C.swift */; };
+		6F49A7E62C50E1E400FDB613 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49A7E52C50E1E400FDB613 /* Operators.swift */; };
+		6F49A7EB2C50E29C00FDB613 /* AsyncTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49A7E82C50E29C00FDB613 /* AsyncTaskTests.swift */; };
+		6F49A7EC2C50E29C00FDB613 /* DelayTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49A7E92C50E29C00FDB613 /* DelayTaskTests.swift */; };
+		6F49A7ED2C50E29C00FDB613 /* MainTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49A7EA2C50E29C00FDB613 /* MainTaskTests.swift */; };
 		6F50BC482C08190F00B25765 /* Applet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC472C08190F00B25765 /* Applet.swift */; };
 		6F50BC4A2C08194900B25765 /* AppletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC492C08194900B25765 /* AppletController.swift */; };
 		6F50BC4C2C081E5200B25765 /* AppletContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F50BC4B2C081E5200B25765 /* AppletContext.swift */; };
@@ -118,6 +122,7 @@
 		6FD41BAD2C09BC3A009B7EA2 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD41BAC2C09BC3A009B7EA2 /* KeychainTests.swift */; };
 		6FD41BAF2C09D245009B7EA2 /* KeychainAttributeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD41BAE2C09D245009B7EA2 /* KeychainAttributeTests.swift */; };
 		6FD41BB12C0D5F57009B7EA2 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD41BB02C0D5F57009B7EA2 /* NSObject+.swift */; };
+		6FDD27552C50A9BE000BF3DC /* DictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD27542C50A9BE000BF3DC /* DictionaryTests.swift */; };
 		D200AD1928FCF9C800B43F52 /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1828FCF9C800B43F52 /* MachO.swift */; };
 		D200AD1B28FCFE7D00B43F52 /* MachOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1A28FCFE7D00B43F52 /* MachOTests.swift */; };
 		D200AD1F28FCFEAC00B43F52 /* MachOTestsOC.m in Sources */ = {isa = PBXBuildFile; fileRef = D200AD1E28FCFEAC00B43F52 /* MachOTestsOC.m */; };
@@ -143,7 +148,7 @@
 		D26FC63B26E0AF8C003B9F11 /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */; };
 		D26FC63C26E0AF8C003B9F11 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC62F26E0AF8C003B9F11 /* Geometry.swift */; };
 		D26FC64026E0AF8C003B9F11 /* SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */; };
-		D276EDDD2A7B4CBA00397F68 /* AnyOptionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276EDDC2A7B4CBA00397F68 /* AnyOptionalTests.swift */; };
+		D276EDDD2A7B4CBA00397F68 /* OptionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276EDDC2A7B4CBA00397F68 /* OptionalTests.swift */; };
 		D276EDDF2A7B4CC600397F68 /* ObjectAssociatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276EDDE2A7B4CC600397F68 /* ObjectAssociatableTests.swift */; };
 		D29601512732ACA500B6511A /* SwiftX.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29601502732ACA500B6511A /* SwiftX.swift */; };
 		D2E3287229C092EF000E375C /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E3287129C092EF000E375C /* DataTests.swift */; };
@@ -216,6 +221,10 @@
 		6F035F712BF606D200A070A3 /* BsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsTableViewController.swift; sourceTree = "<group>"; };
 		6F035F732BF606DD00A070A3 /* BsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BsCollectionViewController.swift; sourceTree = "<group>"; };
 		6F3782622C3E25D3006DA597 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
+		6F49A7E52C50E1E400FDB613 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		6F49A7E82C50E29C00FDB613 /* AsyncTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncTaskTests.swift; sourceTree = "<group>"; };
+		6F49A7E92C50E29C00FDB613 /* DelayTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayTaskTests.swift; sourceTree = "<group>"; };
+		6F49A7EA2C50E29C00FDB613 /* MainTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTaskTests.swift; sourceTree = "<group>"; };
 		6F50BC472C08190F00B25765 /* Applet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applet.swift; sourceTree = "<group>"; };
 		6F50BC492C08194900B25765 /* AppletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletController.swift; sourceTree = "<group>"; };
 		6F50BC4B2C081E5200B25765 /* AppletContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppletContext.swift; sourceTree = "<group>"; };
@@ -288,6 +297,7 @@
 		6FD41BAC2C09BC3A009B7EA2 /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		6FD41BAE2C09D245009B7EA2 /* KeychainAttributeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAttributeTests.swift; sourceTree = "<group>"; };
 		6FD41BB02C0D5F57009B7EA2 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		6FDD27542C50A9BE000BF3DC /* DictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTests.swift; sourceTree = "<group>"; };
 		9B4F7FFA965B4F9C0116DBED /* Pods-BsFoundationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BsFoundationTests.release.xcconfig"; path = "Target Support Files/Pods-BsFoundationTests/Pods-BsFoundationTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B7C8F6657DFE4BF87E0ED35 /* Pods_BsFoundationDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BsFoundationDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D200AD1828FCF9C800B43F52 /* MachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
@@ -320,7 +330,7 @@
 		D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
 		D26FC62F26E0AF8C003B9F11 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		D26FC63326E0AF8C003B9F11 /* SwiftUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUI.swift; sourceTree = "<group>"; };
-		D276EDDC2A7B4CBA00397F68 /* AnyOptionalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyOptionalTests.swift; sourceTree = "<group>"; };
+		D276EDDC2A7B4CBA00397F68 /* OptionalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalTests.swift; sourceTree = "<group>"; };
 		D276EDDE2A7B4CC600397F68 /* ObjectAssociatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectAssociatableTests.swift; sourceTree = "<group>"; };
 		D27A8A1D25203F1A006A6125 /* BsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29601502732ACA500B6511A /* SwiftX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftX.swift; sourceTree = "<group>"; };
@@ -484,6 +494,7 @@
 				6F035F192BF5DDFE00A070A3 /* TargetConditionals.swift */,
 				6F78E8122BF7A0AA00C8A0C4 /* Closure.swift */,
 				6F78E8142BF7A10500C8A0C4 /* PropertyWrapper.swift */,
+				6F49A7E52C50E1E400FDB613 /* Operators.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -512,6 +523,16 @@
 				6F78E8572BF7A6AC00C8A0C4 /* BsCollectionViewItem.swift */,
 			);
 			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		6F49A7E72C50E28B00FDB613 /* Async */ = {
+			isa = PBXGroup;
+			children = (
+				6F49A7E82C50E29C00FDB613 /* AsyncTaskTests.swift */,
+				6F49A7E92C50E29C00FDB613 /* DelayTaskTests.swift */,
+				6F49A7EA2C50E29C00FDB613 /* MainTaskTests.swift */,
+			);
+			path = Async;
 			sourceTree = "<group>";
 		};
 		6F50BC462C0818CE00B25765 /* Applet */ = {
@@ -716,8 +737,11 @@
 		D200AD6128FFDD4F00B43F52 /* SwiftX */ = {
 			isa = PBXGroup;
 			children = (
+				D276EDDC2A7B4CBA00397F68 /* OptionalTests.swift */,
+				D276EDDE2A7B4CC600397F68 /* ObjectAssociatableTests.swift */,
 				D200AD6228FFDD9B00B43F52 /* StringTests.swift */,
 				D2E3287129C092EF000E375C /* DataTests.swift */,
+				6FDD27542C50A9BE000BF3DC /* DictionaryTests.swift */,
 			);
 			path = SwiftX;
 			sourceTree = "<group>";
@@ -772,8 +796,8 @@
 			isa = PBXGroup;
 			children = (
 				D23FF0E225AD9C5600D755D9 /* BsFoundationTests.swift */,
+				6F49A7E72C50E28B00FDB613 /* Async */,
 				6FD41BAB2C09BC25009B7EA2 /* Keychain */,
-				D276EDDB2A7B4CA800397F68 /* Runtime */,
 				D222369E294B0FA200135713 /* Timer */,
 				D200AD6128FFDD4F00B43F52 /* SwiftX */,
 				D200AD5E28FFD26A00B43F52 /* PropertyWrapper */,
@@ -790,15 +814,6 @@
 				D26FC62E26E0AF8B003B9F11 /* UIBarButtonItem.swift */,
 			);
 			path = SwiftX;
-			sourceTree = "<group>";
-		};
-		D276EDDB2A7B4CA800397F68 /* Runtime */ = {
-			isa = PBXGroup;
-			children = (
-				D276EDDC2A7B4CBA00397F68 /* AnyOptionalTests.swift */,
-				D276EDDE2A7B4CC600397F68 /* ObjectAssociatableTests.swift */,
-			);
-			path = Runtime;
 			sourceTree = "<group>";
 		};
 		D27A8A1325203F1A006A6125 = {
@@ -1120,6 +1135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F49A7EC2C50E29C00FDB613 /* DelayTaskTests.swift in Sources */,
 				D22236A0294B0FBB00135713 /* BsTimerTests.swift in Sources */,
 				D276EDDF2A7B4CC600397F68 /* ObjectAssociatableTests.swift in Sources */,
 				6FD41BAD2C09BC3A009B7EA2 /* KeychainTests.swift in Sources */,
@@ -1127,9 +1143,12 @@
 				D200AD1F28FCFEAC00B43F52 /* MachOTestsOC.m in Sources */,
 				D200AD6028FFD64400B43F52 /* NullResetableTests.swift in Sources */,
 				6FD41BAF2C09D245009B7EA2 /* KeychainAttributeTests.swift in Sources */,
-				D276EDDD2A7B4CBA00397F68 /* AnyOptionalTests.swift in Sources */,
+				6F49A7EB2C50E29C00FDB613 /* AsyncTaskTests.swift in Sources */,
+				6F49A7ED2C50E29C00FDB613 /* MainTaskTests.swift in Sources */,
+				D276EDDD2A7B4CBA00397F68 /* OptionalTests.swift in Sources */,
 				D200AD5D28FFD1DD00B43F52 /* ClampTests.swift in Sources */,
 				D200AD6328FFDD9B00B43F52 /* StringTests.swift in Sources */,
+				6FDD27552C50A9BE000BF3DC /* DictionaryTests.swift in Sources */,
 				D23FF0E325AD9C5600D755D9 /* BsFoundationTests.swift in Sources */,
 				D2E3287229C092EF000E375C /* DataTests.swift in Sources */,
 			);
@@ -1253,6 +1272,7 @@
 				6F78E8262BF7A17E00C8A0C4 /* JSONDecoder.swift in Sources */,
 				D26FC63A26E0AF8C003B9F11 /* Task.swift in Sources */,
 				6F035F492BF6028900A070A3 /* Bundle+.swift in Sources */,
+				6F49A7E62C50E1E400FDB613 /* Operators.swift in Sources */,
 				6F035F512BF6035200A070A3 /* UIColor+.swift in Sources */,
 				6F035F552BF6037200A070A3 /* UIImage+.swift in Sources */,
 				6FD41BA62C09A6F9009B7EA2 /* KeychainItemType.swift in Sources */,

@@ -154,11 +154,11 @@ public extension CFString {
 
 public extension String {
     var asInt: Int {
-        Int(self) ?? 0
+        Int(self) ?? .zero
     }
 
     var asDouble: Double {
-        Double(self) ?? 0
+        Double(self) ?? .zero
     }
 
     var asBool: Bool {

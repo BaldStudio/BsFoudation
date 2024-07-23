@@ -9,7 +9,6 @@
 @testable import BsFoundation
 
 class StringTests: XCTestCase {
-    
     func testSlice() {
         let str = "12345"
         // 正常用

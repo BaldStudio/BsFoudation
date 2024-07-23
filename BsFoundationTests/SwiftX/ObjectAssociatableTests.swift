@@ -9,7 +9,6 @@
 @testable import BsFoundation
 
 class ObjectAssociatableTests: XCTestCase {
-    
     func testInstanceFunc() {
         let test1 = TestClass()
         test1.set(associate: 1, for: &key, atomic: false)

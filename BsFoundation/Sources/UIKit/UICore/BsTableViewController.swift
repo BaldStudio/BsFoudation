@@ -16,8 +16,8 @@ open class BsTableViewController: BsViewController, UITableViewDelegate {
         tableView = BsTableView(frame: .zero, style: style)
     }
 
-    @NullResetable(body: initTableView)
-    open var tableView: BsTableView!
+    @NullResetable
+    open var tableView: BsTableView! = BsTableView(delegate: nil)
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +29,6 @@ open class BsTableViewController: BsViewController, UITableViewDelegate {
         tableView.edgesEqualToSuperview()
         tableView.delegate = self
         tableView.tableFooterView = BsSafeInsetsView()
-    }
-}
-
-private extension BsTableViewController {
-    static func initTableView() -> BsTableView {
-        BsTableView(delegate: nil)
     }
 }
 

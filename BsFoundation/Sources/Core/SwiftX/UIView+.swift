@@ -194,28 +194,28 @@ public extension UIView {
 
 // MARK: - Gestures
 
-private struct RuntimeKey {
-    static var gestures = 0
+private enum RuntimeKey {
+    static var gestureEvents = 0
 }
 
 public extension UIView {
     @discardableResult
-    func addTarget<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
-                                                               action: @escaping Action<T, Gesture>) -> Gesture {
-        let gesture = Gesture(target: self, action: #selector(bs_onGestureEvent(_:)))
+    func addGestureTarget<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
+                                                                      action: @escaping Action<T, Gesture>) -> Gesture {
+        let gesture = Gesture(target: self.target, action: #selector(UIView.bs_onGestureEvent(_:)))
         addGestureRecognizer(gesture)
-        let gestureAction = GestureAction(target: target, gesture: gesture) { [weak target] gesture in
+        let event = UIView.GestureEvent(target: target, gesture: gesture) { [weak target] gesture in
             guard let target, let gesture = gesture as? Gesture else { return }
             action(target)(gesture)
         }
-        gestures.append(gestureAction)
+        bs_gestureEvents.append(event)
         return gesture
     }
     
-    func removeTarget<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
-                                                                  gesture: Gesture?) {
+    func removeGestureTarget<T: AnyObject, Gesture: UIGestureRecognizer>(_ target: T,
+                                                                         gesture: Gesture? = nil) {
         if let gesture {
-            gestures.removeAll {
+            bs_gestureEvents.removeAll {
                 if $0.target === target, $0.gesture == gesture {
                     removeGestureRecognizer(gesture)
                     return true
@@ -223,40 +223,40 @@ public extension UIView {
                 return false
             }
         } else {
-            gestures.removeAll()
+            bs_gestureEvents.removeAll()
         }
     }
-        
+
     // MARK: - single tap
     
     func onSingleTap(_ action: @escaping BlockT<UITapGestureRecognizer>) {
-        addTarget(self) { (v: UIView) -> BlockT<UITapGestureRecognizer> in { action($0) } }
+        addGestureTarget(self) { (v: UIView) -> BlockT<UITapGestureRecognizer> in { action($0) } }
     }
 }
 
 private extension UIView {
-    struct GestureAction {
+    struct GestureEvent {
         let target: AnyObject
         let gesture: UIGestureRecognizer
         let action: BlockT<UIGestureRecognizer>
     }
 
-    var gestures: [GestureAction] {
+    var bs_gestureEvents: [GestureEvent] {
         get {
-            if let value: [GestureAction] = value(forAssociated: &RuntimeKey.gestures) { return value }
-            let value: [GestureAction] = []
-            set(associate: value, for: &RuntimeKey.gestures)
+            if let value: [GestureEvent] = value(forAssociated: &RuntimeKey.gestureEvents) { return value }
+            let value: [GestureEvent] = []
+            set(associate: value, for: &RuntimeKey.gestureEvents)
             return value
         }
         set {
-            set(associate: newValue, for: &RuntimeKey.gestures)
+            set(associate: newValue, for: &RuntimeKey.gestureEvents)
         }
     }
     
     @objc
     func bs_onGestureEvent(_ sender: UIGestureRecognizer) {
-        for gesture in gestures where gesture.gesture == sender {
-            gesture.action(sender)
+        for event in bs_gestureEvents where event.gesture == sender {
+            event.action(sender)
         }
     }
 }

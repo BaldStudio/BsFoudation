@@ -220,7 +220,7 @@ extension Keychain {
 }
 
 extension [Keychain.Attribute]: SwiftCompatible {}
-public extension BaldStudio where T == [Keychain.Attribute] {
+public extension BaldStudio where Hair == [Keychain.Attribute] {
     var item: Keychain.ItemType? {
         this.compactMap { if case let .item(value) = $0 { return value } else { return nil } }.first
     }

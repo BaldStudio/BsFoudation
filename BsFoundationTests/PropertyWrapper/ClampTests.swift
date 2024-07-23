@@ -9,7 +9,6 @@
 @testable import BsFoundation
 
 class ClampTests: XCTestCase {
-
     @Clamp(0...1)
     var floatValue: CGFloat = 0
 
@@ -51,6 +50,5 @@ class ClampTests: XCTestCase {
 
         intValue = 11
         XCTAssertTrue(intValue == 10)
-
     }
 }

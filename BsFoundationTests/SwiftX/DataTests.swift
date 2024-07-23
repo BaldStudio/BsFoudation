@@ -9,9 +9,7 @@
 @testable import BsFoundation
 
 final class DataTests: XCTestCase {
-    
     func testAppendPositiveInt() {
-        
         var data = Data()
         let v8: Int8 = 10
         data.append(v8.bigEndian)
@@ -28,7 +26,7 @@ final class DataTests: XCTestCase {
         let v32: Int32 = 10
         data.append(v32.bigEndian)
         print("Positive Int32 \(data.bytes)")
-        /// 4字节，不够补0
+        // 4字节，不够补0
         XCTAssertTrue(data.count == 4)
 
         data = Data()
@@ -57,7 +55,7 @@ final class DataTests: XCTestCase {
         let v32: Int32 = -10
         data.append(v32.bigEndian)
         print("Negative Int32 \(data.bytes)")
-        /// 4字节，不够补f
+        // 4字节，不够补f
         XCTAssertTrue(data.count == 4)
 
         data = Data()
@@ -86,7 +84,7 @@ final class DataTests: XCTestCase {
         let v32: UInt32 = 10
         data.append(v32.bigEndian)
         print("UInt32 \(data.bytes)")
-        /// 4字节，不够补0
+        // 4字节，不够补0
         XCTAssertTrue(data.count == 4)
 
         data = Data()
@@ -139,6 +137,5 @@ final class DataTests: XCTestCase {
         print("Negative UInt64 \(data.bytes)")
         // 8字节，不够补0
         XCTAssertTrue(data.count == 8)
-
     }
 }

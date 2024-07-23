@@ -18,8 +18,8 @@ open class BsCollectionViewController: BsViewController, UICollectionViewDelegat
         
     }
 
-    @NullResetable(body: initCollectionView)
-    open var collectionView: BsCollectionView!
+    @NullResetable
+    open var collectionView: BsCollectionView! = BsCollectionView(delegate: nil)
     
     open override func viewDidLoad() {
         super.viewDidLoad()

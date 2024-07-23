@@ -11,8 +11,8 @@
 final class BsCollectionViewProxy: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private lazy var impl = BsCollectionViewProxyImpl(self)
 
-    @NullResetable(default: BsCollectionViewDataSource())
-    var dataSource: BsCollectionViewDataSource!
+    @NullResetable
+    var dataSource: BsCollectionViewDataSource! = BsCollectionViewDataSource()
     
     weak var collectionView: BsCollectionView! {
         didSet {

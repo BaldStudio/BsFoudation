@@ -171,6 +171,6 @@ extension BsTableView {
 
 // MARK: - Extensions
 
-public extension BaldStudio where T: BsTableView {
+public extension BaldStudio where Hair: BsTableView {
     var dataSource: BsTableViewDataSource { this.proxy.dataSource }
 }

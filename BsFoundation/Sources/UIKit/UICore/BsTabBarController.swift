@@ -231,8 +231,8 @@ open class BsTabBar: BsView {
         contentView.removeSubviews()
         items.forEach {
             contentView.addArrangedSubview($0)
-            $0.removeTarget(tabBarController, gesture: nil)
-            $0.addTarget(tabBarController, action: BsTabBarController.onSelectTabBarItem)
+            $0.removeGestureTarget(tabBarController)
+            $0.addGestureTarget(tabBarController, action: BsTabBarController.onSelectTabBarItem)
         }
     }
 }
@@ -342,7 +342,7 @@ private extension UIViewController {
 
 }
 
-public extension BaldStudio where T: UIViewController {
+public extension BaldStudio where Hair: UIViewController {
     var tabBarController: BsTabBarController? { this.bs_tabBarController }
     var tabBarItem: BsTabBarItem { this.bs_tabBarItem }
 }

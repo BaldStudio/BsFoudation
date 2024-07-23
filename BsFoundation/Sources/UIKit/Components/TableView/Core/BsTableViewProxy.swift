@@ -11,8 +11,8 @@
 final class BsTableViewProxy: NSObject, UITableViewDelegate {
     private lazy var impl = BsTableViewProxyImpl(self)
     
-    @NullResetable(default: BsTableViewDataSource())
-    var dataSource: BsTableViewDataSource!
+    @NullResetable
+    var dataSource: BsTableViewDataSource! = BsTableViewDataSource()
     
     weak var tableView: BsTableView! {
         didSet {

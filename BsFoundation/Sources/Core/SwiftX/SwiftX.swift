@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct BaldStudio<T> {
-    public static var this: T.Type { T.self }
-    public var this: T
+public struct BaldStudio<Hair> {
+    public static var this: Hair.Type { Hair.self }
+    public var this: Hair
 }
 
 public protocol SwiftCompatible {

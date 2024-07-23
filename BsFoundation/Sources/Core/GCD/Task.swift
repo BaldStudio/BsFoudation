@@ -8,15 +8,33 @@
 
 import Foundation
 
+// MARK: -  Async
+
+/// 异步任务，会根据当前线程是否为主线程做处理，强制异步执行
+public struct AsyncTask {
+    private init() {}
+    
+    @discardableResult
+    public init(queue: DispatchQueue = .global(), _ block: @escaping Block) {
+        if Thread.isMainThread || OperationQueue.current == .main {
+            queue.async(execute: block)
+        } else {
+            block()
+        }
+    }
+}
+
+
 // MARK: -  Main
 
+/// 主线程任务，会根据当前线程是否为主线程做处理，强制切换到主线程执行，支持 async 和 sync
 public struct MainTask {
     let mainQueue = DispatchQueue.main
     private init() {}
     
     @discardableResult
     public init(sync: Bool = false, _ block: @escaping Block) {
-        if Thread.isMainThread {
+        if Thread.isMainThread || OperationQueue.current == .main {
             block()
             return
         }
@@ -30,15 +48,14 @@ public struct MainTask {
 
 // MARK: -  Delay
 
+/// 延迟任务
 public struct DelayTask {
     private init() {}
     
     @discardableResult
     public init(_ seconds: TimeInterval, queue: DispatchQueue = .main, block: @escaping Block) {
         let when = DispatchTime.now() + seconds
-        queue.asyncAfter(deadline: when) {
-            block()
-        }
+        queue.asyncAfter(deadline: when, execute: block)
     }
 }
 
