@@ -8,7 +8,7 @@
 
 import UIKit
 
-public extension BaldStudio where T: UIBarButtonItem {
+public extension BaldStudio where Hair: UIBarButtonItem {
     static var spacer: UIBarButtonItem {
         UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                         target: nil,
