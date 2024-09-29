@@ -12,8 +12,8 @@ class MainTaskTests: XCTestCase {
         MainTask {
             // 默认async
             XCTAssertTrue(Thread.isMainThread)
-            // 由于创建MainTask的线程为主线程，MainTask内部会同步执行block，所以这里flag还没被修改
-            XCTAssertTrue(flag == 0)
+            // 由于创建MainTask的线程为主线程，MainTask内部会异步执行block，所以这里flag已经被修改
+            XCTAssertTrue(flag == 1)
         }
         flag = 1
     }
@@ -107,7 +107,7 @@ class MainTaskTests: XCTestCase {
         MainTask(sync: true) {
             MainTask {
                 XCTAssertTrue(Thread.isMainThread)
-                XCTAssertTrue(flag == 0)
+                XCTAssertTrue(flag == 1)
                 exp.fulfill()
             }
             flag = 1

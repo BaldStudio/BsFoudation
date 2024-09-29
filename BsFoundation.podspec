@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     
   s.ios.frameworks = 'UIKit'
     
-  s.ios.dependency 'BsLogging'
+  s.ios.dependency 'BsLog'
   s.ios.dependency 'SwiftCollections', '1.1.0'
   
   s.subspec 'Core' do |ss|

@@ -16,7 +16,7 @@ public struct AsyncTask {
     
     @discardableResult
     public init(queue: DispatchQueue = .global(), _ block: @escaping Block) {
-        if Thread.isMainThread || OperationQueue.current == .main {
+        if Thread.isMainThread {
             queue.async(execute: block)
         } else {
             block()
@@ -29,17 +29,17 @@ public struct AsyncTask {
 
 /// 主线程任务，会根据当前线程是否为主线程做处理，强制切换到主线程执行，支持 async 和 sync
 public struct MainTask {
-    let mainQueue = DispatchQueue.main
+    private let mainQueue = DispatchQueue.main
     private init() {}
     
     @discardableResult
     public init(sync: Bool = false, _ block: @escaping Block) {
-        if Thread.isMainThread || OperationQueue.current == .main {
-            block()
-            return
-        }
         if sync {
-            mainQueue.sync(execute: block)
+            if Thread.isMainThread {
+                block()
+            } else {
+                mainQueue.sync(execute: block)
+            }
         } else {
             mainQueue.async(execute: block)
         }
@@ -95,14 +95,9 @@ public class DebounceTask {
     }
     
     public func execute(action: @escaping () -> Void) {
-        // 取消以前的工作
         workItem?.cancel()
-        
-        // 创建新的工作
         workItem = DispatchWorkItem(block: action)
-        
-        // 延迟执行新的工作
-        if let workItem = workItem {
+        if let workItem {
             queue.asyncAfter(deadline: .now() + delay, execute: workItem)
         }
     }
@@ -120,26 +115,19 @@ public class ThrottleTask {
     }
     
     public func execute(action: @escaping () -> Void) {
-        // 取消以前的工作
         workItem?.cancel()
-        
-        // 确定上次执行时间
         let now = Date()
-        if let lastRun = lastRun, now.timeIntervalSince(lastRun) < interval {
-            // 创建新的工作，在剩余时间结束后执行
+        if let lastRun, now.timeIntervalSince(lastRun) < interval {
             workItem = DispatchWorkItem(block: action)
-            if let workItem = workItem {
+            if let workItem {
                 queue.asyncAfter(deadline: .now() + interval - now.timeIntervalSince(lastRun), execute: workItem)
             }
         } else {
-            // 立即执行
             workItem = DispatchWorkItem(block: action)
-            if let workItem = workItem {
+            if let workItem {
                 queue.async(execute: workItem)
             }
         }
-        
-        // 更新上次执行时间
         lastRun = now
     }
 }
