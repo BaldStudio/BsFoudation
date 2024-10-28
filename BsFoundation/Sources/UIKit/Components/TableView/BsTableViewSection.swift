@@ -27,8 +27,8 @@ open class BsTableViewSection: NSObject {
     }
     
     open func reload(with animation: UITableView.RowAnimation = .none) {
-        guard let tableView, let index else { return }
-        tableView.reloadSections([index], with: animation)
+        guard let tableView, let section else { return }
+        tableView.reloadSections([section], with: animation)
     }
     
     // MARK: - Node Actions
@@ -41,12 +41,11 @@ open class BsTableViewSection: NSObject {
         children.isEmpty
     }
     
-    open var index: Int? {
+    open var section: Int? {
         parent?.children.firstIndex(of: self)
     }
     
     open func append(_ child: Child) {
-        guard !children.contains(child) else { return }
         child.removeFromParent()
         children.append(child)
         child.parent = self
@@ -57,35 +56,46 @@ open class BsTableViewSection: NSObject {
     }
     
     open func insert(_ child: Child, at index: Int) {
-        guard !children.contains(child) else { return }
+        guard isValidIndex(index) else {
+            logger.debug("Invalid index When Insert Row at \(index)")
+            return
+        }
         child.removeFromParent()
         children.insert(child, at: index)
         child.parent = self
     }
     
-    open func replace(childAt index: Int, with child: Child) {
-        if children.contains(child), let otherIndex = children.firstIndex(of: child) {
-            children.swapAt(index, otherIndex)
-        } else {
-            child.removeFromParent()
-            children[index] = child
-            child.parent = self
+    open func replaceChild(at index: Int, with newChild: Child) {
+        guard isValidIndex(index) else {
+            logger.error("Invalid index When Replace Row at \(index)")
+            return
         }
+        newChild.removeFromParent()
+        children[index] = newChild
+        newChild.parent = self
     }
     
     open func remove(at index: Int) {
-        children[index].parent = nil
+        guard isValidIndex(index) else {
+            logger.error("Invalid index When Remove Row at \(index)")
+            return
+        }
+        let child = children[index]
         children.remove(at: index)
+        child.parent = nil
     }
     
     open func remove(_ child: Child) {
-        if let index = children.firstIndex(of: child) {
-            remove(at: index)
+        guard let index = index(of: child) else {
+            logger.error("Invalid index When Remove Row \(child)")
+            return
         }
+        children.remove(at: index)
+        child.parent = nil
     }
     
     open func remove(children: [Child]) {
-        children.forEach { remove($0) }
+        children.reversed().forEach { remove($0) }
     }
     
     open func removeAll() {
@@ -100,19 +110,31 @@ open class BsTableViewSection: NSObject {
         children[index]
     }
     
+    open func index(of child: Child) -> Int? {
+        children.firstIndex(of: child)
+    }
+
     open func contains(_ child: Child) -> Bool {
-        children.contains { $0 == child }
+        children.contains(child)
     }
     
-    open subscript(index: Int) -> Child {
+    open func contains(where predicate: (Child) throws -> Bool) rethrows -> Bool {
+        try children.contains(where: predicate)
+    }
+
+    open subscript(index: Int) -> Child? {
         set {
-            replace(childAt: index, with: newValue)
+            if let newValue {
+                replaceChild(at: index, with: newValue)
+            } else {
+                remove(at: index)
+            }
         }
         get {
-            children[index]
+            isValidIndex(index) ? children[index] : nil
         }
     }
-    
+
     // MARK: - Header
 
     /// Header 自适应尺寸，设置 vertical 自适应高度
@@ -143,11 +165,11 @@ open class BsTableViewSection: NSObject {
     }
     
     open var headerView: UITableViewHeaderFooterView? {
-        guard let index, let tableView else {
+        guard let section, let tableView else {
             return nil
         }
         
-        return tableView.headerView(forSection: index)
+        return tableView.headerView(forSection: section)
     }
     
     open func tableView(_ tableView: BsTableView,
@@ -196,11 +218,11 @@ open class BsTableViewSection: NSObject {
     }
     
     open var footerView: UITableViewHeaderFooterView? {
-        guard let index, let tableView else {
+        guard let section, let tableView else {
             return nil
         }
         
-        return tableView.footerView(forSection: index)
+        return tableView.footerView(forSection: section)
     }
     
     open func tableView(_ tableView: BsTableView,
@@ -218,7 +240,12 @@ open class BsTableViewSection: NSObject {
     open func willDisplay(footer view: UIView, in section: Int) {}
     
     open func didEndDisplaying(footer view: UIView, in section: Int) {}
-    
+}
+
+private extension BsTableViewSection {
+    func isValidIndex(_ index: Int) -> Bool {
+        children.indices.contains(index)
+    }
 }
 
 // MARK: - Auto Size Fitting

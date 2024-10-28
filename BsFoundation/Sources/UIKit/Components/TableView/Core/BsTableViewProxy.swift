@@ -33,12 +33,11 @@ final class BsTableViewProxy: NSObject, UITableViewDelegate {
     override func responds(to aSelector: Selector!) -> Bool {
         target?.responds(to: aSelector) == true || impl.responds(to: aSelector) == true || super.responds(to: aSelector)
     }
-    
 }
 
 // MARK: - Delegate Impl
 
-private final class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
+private class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
     weak var proxy: BsTableViewProxy!
     
     deinit {
@@ -55,7 +54,7 @@ private final class BsTableViewProxyImpl: NSObject, UITableViewDelegate {
 
 extension BsTableViewProxyImpl {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = proxy.dataSource[indexPath]
+        guard let row = proxy.dataSource[indexPath] else { return 0 }
         if let heightCache = row.heightCache { return heightCache }
         var height = row.tableView(tableView, preferredLayoutSizeFixedAt: indexPath)
         height = row.tableView(tableView, preferredLayoutSizeFittingAt: indexPath)
@@ -65,13 +64,13 @@ extension BsTableViewProxyImpl {
     
     func tableView(_ tableView: UITableView,
                    estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        proxy.dataSource[indexPath].estimatedHeight
+        proxy.dataSource[indexPath]?.estimatedHeight ?? 0
     }
     
     func tableView(_ tableView: UITableView,
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
-        proxy.dataSource[indexPath].tableView(tableView, willDisplay: cell, forRowAt: indexPath)
+        proxy.dataSource[indexPath]?.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView,
@@ -82,16 +81,16 @@ extension BsTableViewProxyImpl {
         guard indexPath.section < proxy.dataSource.count else {
             return
         }
-        let section = proxy.dataSource[indexPath.section]
-        guard indexPath.row < section.count else {
+        guard let section = proxy.dataSource[indexPath.section],
+                indexPath.row < section.count else {
             return
         }
-        section[indexPath.row].tableView(tableView, didEndDisplaying: cell, forRowAt: indexPath)
+        section[indexPath.row]?.tableView(tableView, didEndDisplaying: cell, forRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        proxy.dataSource[indexPath].tableView(tableView, didSelectRowAt: indexPath)
+        proxy.dataSource[indexPath]?.tableView(tableView, didSelectRowAt: indexPath)
     }
 }
 
@@ -100,22 +99,23 @@ extension BsTableViewProxyImpl {
 extension BsTableViewProxyImpl {
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        proxy.dataSource[section].tableView(tableView, preferredHeaderLayoutSizeFittingInSection: section)
+        guard let sect = proxy.dataSource[section] else { return 0 }
+        return sect.tableView(tableView, preferredHeaderLayoutSizeFittingInSection: section)
     }
     
     func tableView(_ tableView: UITableView,
                    estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        proxy.dataSource[section].estimatedHeaderHeight
+        proxy.dataSource[section]?.estimatedHeaderHeight ?? 0
     }
     
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
-        proxy.dataSource[section].tableView(proxy.tableView, viewForHeaderInSection: section)
+        proxy.dataSource[section]?.tableView(proxy.tableView, viewForHeaderInSection: section)
     }
     
     func tableView(_ tableView: UITableView,
                    willDisplayHeaderView view: UIView, forSection section: Int) {
-        proxy.dataSource[section].willDisplay(header: view, in: section)
+        proxy.dataSource[section]?.willDisplay(header: view, in: section)
     }
     
     func tableView(_ tableView: UITableView,
@@ -125,7 +125,7 @@ extension BsTableViewProxyImpl {
         guard section < proxy.dataSource.count else {
             return
         }
-        proxy.dataSource[section].didEndDisplaying(header: view, in: section)
+        proxy.dataSource[section]?.didEndDisplaying(header: view, in: section)
     }
 }
 
@@ -134,23 +134,24 @@ extension BsTableViewProxyImpl {
 extension BsTableViewProxyImpl {
     func tableView(_ tableView: UITableView,
                    heightForFooterInSection section: Int) -> CGFloat {
-        proxy.dataSource[section].tableView(tableView, preferredFooterLayoutSizeFittingInSection: section)
+        guard let sect = proxy.dataSource[section] else { return 0 }
+        return sect.tableView(tableView, preferredFooterLayoutSizeFittingInSection: section)
     }
     
     func tableView(_ tableView: UITableView,
                    estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        proxy.dataSource[section].estimatedFooterHeight
+        proxy.dataSource[section]?.estimatedFooterHeight ?? 0
     }
     
     func tableView(_ tableView: UITableView,
                    viewForFooterInSection section: Int) -> UIView? {
-        proxy.dataSource[section].tableView(proxy.tableView, viewForFooterInSection: section)
+        proxy.dataSource[section]?.tableView(proxy.tableView, viewForFooterInSection: section)
     }
     
     func tableView(_ tableView: UITableView,
                    willDisplayFooterView view: UIView,
                    forSection section: Int) {
-        proxy.dataSource[section].willDisplay(footer: view, in: section)
+        proxy.dataSource[section]?.willDisplay(footer: view, in: section)
     }
     
     func tableView(_ tableView: UITableView,
@@ -161,7 +162,7 @@ extension BsTableViewProxyImpl {
         guard section < proxy.dataSource.count else {
             return
         }
-        proxy.dataSource[section].didEndDisplaying(footer: view, in: section)
+        proxy.dataSource[section]?.didEndDisplaying(footer: view, in: section)
     }
 }
 

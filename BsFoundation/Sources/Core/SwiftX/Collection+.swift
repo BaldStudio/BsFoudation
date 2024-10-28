@@ -93,7 +93,7 @@ public extension Array {
     static var empty: [Element] { [] }
     
     subscript (safe index: Self.Index) -> Iterator.Element? {
-        (startIndex ..< endIndex).contains(index) ? self[index] : nil
+        indices.contains(index) ? self[index] : nil
     }
     
     func safe(objectAt index: Self.Index) -> Iterator.Element? {

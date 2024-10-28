@@ -69,7 +69,7 @@ open class BsTableViewNode: NSObject {
     
     open var indexPath: IndexPath? {
         guard let parent,
-              let section = parent.index,
+              let section = parent.section,
               let row = parent.children.firstIndex(of: self) else {
             return nil
         }
@@ -135,13 +135,13 @@ extension BsTableViewNode {
     /// 自适应尺寸计算
     func tableView(_ tableView: UITableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat {
         if preferredLayoutMode == .auto { return UITableView.automaticDimension }
-        if preferredLayoutSizeFitting == .none || preferredLayoutSizeFitting == .horizontal { return height }
+        if preferredLayoutSizeFixed != .vertical { return height }
         let cell = cellClass.init(style: .default, reuseIdentifier: reuseIdentifier)
         return prepareLayoutSizeFitting(cell, at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, preferredLayoutSizeFixedAt indexPath: IndexPath) -> CGFloat {
-        if preferredLayoutSizeFixed == .none || preferredLayoutSizeFixed == .horizontal { return height }
+        if preferredLayoutSizeFixed != .vertical { return height }
         height = tableView.bounds.height - tableView.adjustedContentInset.top
         return height
     }    

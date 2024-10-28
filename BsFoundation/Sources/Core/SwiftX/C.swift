@@ -18,3 +18,8 @@ public extension UnsafeRawPointer {
     }
 }
 
+public extension UnsafeMutablePointer {
+    init(allocate capacity: Int) {
+        self = UnsafeMutablePointer<Pointee>.allocate(capacity: capacity)
+    }
+}

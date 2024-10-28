@@ -7,7 +7,7 @@ use_frameworks!
 
 target 'BsFoundation' do
   
-  pod 'BsLog'
+  pod 'BsLog', :path => '../BsLog'
   pod 'SwiftCollections', '1.1.0'
   
 end

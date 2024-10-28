@@ -45,7 +45,6 @@ open class BsTableViewDataSource: NSObject {
     }
     
     open func append(_ child: Child) {
-        guard !children.contains(child) else { return }
         child.removeFromParent()
         children.append(child)
         child.parent = self
@@ -56,35 +55,46 @@ open class BsTableViewDataSource: NSObject {
     }
     
     open func insert(_ child: Child, at index: Int) {
-        guard !children.contains(child) else { return }
+        guard isValidIndex(index) else {
+            logger.debug("Invalid index When Insert Section at \(index)")
+            return
+        }
         child.removeFromParent()
         children.insert(child, at: index)
         child.parent = self
     }
     
-    open func replace(childAt index: Int, with child: Child) {
-        if children.contains(child), let otherIndex = children.firstIndex(of: child) {
-            children.swapAt(index, otherIndex)
-        } else {
-            child.removeFromParent()
-            children[index] = child
-            child.parent = self
+    open func replaceChild(at index: Int, with newChild: Child) {
+        guard isValidIndex(index) else {
+            logger.debug("Invalid index When Replace Section at \(index)")
+            return
         }
+        newChild.removeFromParent()
+        children[index] = newChild
+        newChild.parent = self
     }
     
     open func remove(at index: Int) {
-        children[index].parent = nil
+        guard isValidIndex(index) else {
+            logger.debug("Invalid index When Remove Section at \(index)")
+            return
+        }
+        let child = children[index]
         children.remove(at: index)
+        child.parent = nil
     }
     
     open func remove(_ child: Child) {
-        if let index = children.firstIndex(of: child) {
-            remove(at: index)
+        guard let index = index(of: child) else {
+            logger.error("Invalid index When Remove Section \(child)")
+            return
         }
+        children.remove(at: index)
+        child.parent = nil
     }
     
     open func remove(children: [Child]) {
-        children.forEach { remove($0) }
+        children.reversed().forEach { remove($0) }
     }
     
     open func removeAll() {
@@ -93,37 +103,51 @@ open class BsTableViewDataSource: NSObject {
     
     open func removeFromParent() {
         guard let parent else { return }
-        parent.setDataSource(nil)
+        parent.dataSource = nil
     }
 
     open func child(at index: Int) -> Child {
         children[index]
     }
     
+    open func index(of child: Child) -> Int? {
+        children.firstIndex(of: child)
+    }
+    
     open func contains(_ child: Child) -> Bool {
-        children.contains { $0 == child }
+        children.contains(child)
     }
     
     open func contains(where predicate: (Child) throws -> Bool) rethrows -> Bool {
         try children.contains(where: predicate)
     }
     
-    open subscript(index: Int) -> Child {
+    open subscript(index: Int) -> Child? {
         set {
-            replace(childAt: index, with: newValue)
+            if let newValue {
+                replaceChild(at: index, with: newValue)
+            } else {
+                remove(at: index)
+            }
         }
         get {
-            children[index]
+            isValidIndex(index) ? children[index] : nil
         }
     }
     
-    open subscript(indexPath: IndexPath) -> Child.Child {
+    open subscript(indexPath: IndexPath) -> Child.Child? {
         set {
-            self[indexPath.section][indexPath.row] = newValue
+            self[indexPath.section]?[indexPath.row] = newValue
         }
         get {
-            self[indexPath.section][indexPath.row]
+            self[indexPath.section]?[indexPath.row]
         }
+    }
+}
+
+private extension BsTableViewDataSource {
+    func isValidIndex(_ index: Int) -> Bool {
+        children.indices.contains(index)
     }
 }
 
@@ -136,15 +160,15 @@ extension BsTableViewDataSource: UITableViewDataSource {
     
     open func tableView(_ tableView: UITableView,
                         numberOfRowsInSection section: Int) -> Int {
-        self[section].count
+        self[section]?.count ?? 0
     }
     
     open func tableView(_ tableView: UITableView,
                         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let parent else {
-            fatalError("tableView dataSource is null")
+        guard let parent, let row = self[indexPath] else {
+            return UITableViewCell()
         }
-        return self[indexPath].tableView(parent, cellForRowAt: indexPath)
+        return row.tableView(parent, cellForRowAt: indexPath)
     }
 }
 
