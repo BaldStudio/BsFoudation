@@ -23,7 +23,7 @@ open class BsCollectionViewSection: NSObject {
     open var minimumInteritemSpacing: CGFloat = 0
 
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
 
     public override init() {

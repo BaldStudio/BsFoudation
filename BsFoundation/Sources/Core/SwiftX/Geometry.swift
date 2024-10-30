@@ -6,8 +6,6 @@
 //  Copyright © 2021 BaldStudio. All rights reserved.
 //
 
-import UIKit
-
 // MARK: - CGRect
 
 extension CGRect: ExpressibleByArrayLiteral {

@@ -7,10 +7,6 @@
 //
 
 open class BsTableViewController: BsViewController, UITableViewDelegate {
-    open lazy var section = BsTableViewSection().then {
-        tableView.insert($0, at: 0)
-    }
-    
     public convenience init(style: UITableView.Style) {
         self.init(nibName: nil, bundle: nil)
         tableView = BsTableView(frame: .zero, style: style)

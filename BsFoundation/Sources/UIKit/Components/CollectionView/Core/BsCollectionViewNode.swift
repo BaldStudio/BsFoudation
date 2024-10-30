@@ -34,7 +34,7 @@ open class BsCollectionViewNode: NSObject {
     open var onSelectItem: BlockT<IndexPath>?
 
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
 
     public override init() {

@@ -10,6 +10,10 @@ public extension Collection {
     var isNotEmpty: Bool {
         !isEmpty
     }
+    
+    func hasIndex(_ index: Index) -> Bool {
+        indices.contains(index)
+    }
 }
 
 // MARK: - Dictionary

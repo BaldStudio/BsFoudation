@@ -23,7 +23,7 @@ final class BsCollectionViewProxy: NSObject, UICollectionViewDelegate, UICollect
     weak var target: UICollectionViewDelegate?
     
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
         
     override func forwardingTarget(for aSelector: Selector!) -> Any? {
@@ -41,7 +41,7 @@ private class BsCollectionViewProxyImpl: NSObject, UICollectionViewDelegate, UIC
     weak var proxy: BsCollectionViewProxy!
     
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
     
     convenience init(_ proxy: BsCollectionViewProxy) {

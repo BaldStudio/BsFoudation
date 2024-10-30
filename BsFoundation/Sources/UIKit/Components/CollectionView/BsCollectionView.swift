@@ -14,7 +14,7 @@ open class BsCollectionView: UICollectionView {
     open private(set) var registryMap: [String: AnyObject] = [:]
 
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
     
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {

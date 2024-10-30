@@ -9,17 +9,16 @@
 // MARK: - Property
 
 open class BsTableViewDataSource: NSObject {
-    public typealias Parent = BsTableView
-    public typealias Child = BsTableViewSection
-    
-    open internal(set) weak var parent: Parent? = nil
+    public typealias SectionType = BsTableViewSection
+
+    open internal(set) weak var parent: BsTableView? = nil
 
     open var tableView: BsTableView? { parent }
 
-    open var children: ContiguousArray<Child> = []
+    var children: ContiguousArray<SectionType> = []
     
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
 
     public override init() {
@@ -36,27 +35,15 @@ open class BsTableViewDataSource: NSObject {
         children.isEmpty
     }
     
-    open var first: Child? {
-        children.first
-    }
-    
-    open var last: Child? {
-        children.last
-    }
-    
-    open func append(_ child: Child) {
+    open func append(_ child: SectionType) {
         child.removeFromParent()
         children.append(child)
         child.parent = self
     }
-    
-    open func append(children: [Child]) {
-        children.forEach { append($0) }
-    }
-    
-    open func insert(_ child: Child, at index: Int) {
-        guard isValidIndex(index) else {
-            logger.debug("Invalid index When Insert Section at \(index)")
+        
+    open func insert(_ child: SectionType, at index: Int) {
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Insert Section at \(index)")
             return
         }
         child.removeFromParent()
@@ -64,9 +51,9 @@ open class BsTableViewDataSource: NSObject {
         child.parent = self
     }
     
-    open func replaceChild(at index: Int, with newChild: Child) {
-        guard isValidIndex(index) else {
-            logger.debug("Invalid index When Replace Section at \(index)")
+    open func replaceChild(at index: Int, with newChild: SectionType) {
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Replace Section at \(index)")
             return
         }
         newChild.removeFromParent()
@@ -75,8 +62,8 @@ open class BsTableViewDataSource: NSObject {
     }
     
     open func remove(at index: Int) {
-        guard isValidIndex(index) else {
-            logger.debug("Invalid index When Remove Section at \(index)")
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Remove Section at \(index)")
             return
         }
         let child = children[index]
@@ -84,7 +71,7 @@ open class BsTableViewDataSource: NSObject {
         child.parent = nil
     }
     
-    open func remove(_ child: Child) {
+    open func remove(_ child: SectionType) {
         guard let index = index(of: child) else {
             logger.error("Invalid index When Remove Section \(child)")
             return
@@ -93,12 +80,8 @@ open class BsTableViewDataSource: NSObject {
         child.parent = nil
     }
     
-    open func remove(children: [Child]) {
-        children.reversed().forEach { remove($0) }
-    }
-    
     open func removeAll() {
-        children.reversed().forEach { remove($0) }
+        children.reversed().forEach { $0.removeFromParent() }
     }
     
     open func removeFromParent() {
@@ -106,23 +89,27 @@ open class BsTableViewDataSource: NSObject {
         parent.dataSource = nil
     }
 
-    open func child(at index: Int) -> Child {
-        children[index]
+    open func child(at index: Int) -> SectionType? {
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Get Row at \(index)")
+            return nil
+        }
+        return children[index]
     }
     
-    open func index(of child: Child) -> Int? {
+    open func index(of child: SectionType) -> Int? {
         children.firstIndex(of: child)
     }
     
-    open func contains(_ child: Child) -> Bool {
+    open func contains(_ child: SectionType) -> Bool {
         children.contains(child)
     }
     
-    open func contains(where predicate: (Child) throws -> Bool) rethrows -> Bool {
+    open func contains(where predicate: (SectionType) throws -> Bool) rethrows -> Bool {
         try children.contains(where: predicate)
     }
     
-    open subscript(index: Int) -> Child? {
+    open subscript(index: Int) -> SectionType? {
         set {
             if let newValue {
                 replaceChild(at: index, with: newValue)
@@ -131,23 +118,17 @@ open class BsTableViewDataSource: NSObject {
             }
         }
         get {
-            isValidIndex(index) ? children[index] : nil
+            child(at: index)
         }
     }
     
-    open subscript(indexPath: IndexPath) -> Child.Child? {
+    open subscript(indexPath: IndexPath) -> SectionType.RowType? {
         set {
             self[indexPath.section]?[indexPath.row] = newValue
         }
         get {
             self[indexPath.section]?[indexPath.row]
         }
-    }
-}
-
-private extension BsTableViewDataSource {
-    func isValidIndex(_ index: Int) -> Bool {
-        children.indices.contains(index)
     }
 }
 
@@ -165,7 +146,7 @@ extension BsTableViewDataSource: UITableViewDataSource {
     
     open func tableView(_ tableView: UITableView,
                         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let parent, let row = self[indexPath] else {
+        guard let parent, let row = self[indexPath]?.inner else {
             return UITableViewCell()
         }
         return row.tableView(parent, cellForRowAt: indexPath)
@@ -175,11 +156,11 @@ extension BsTableViewDataSource: UITableViewDataSource {
 // MARK: - Operator
 
 public extension BsTableViewDataSource {
-    static func += (left: BsTableViewDataSource, right: Child) {
+    static func += (left: BsTableViewDataSource, right: SectionType) {
         left.append(right)
     }
     
-    static func -= (left: BsTableViewDataSource, right: Child) {
+    static func -= (left: BsTableViewDataSource, right: SectionType) {
         left.remove(right)
     }
 }
@@ -193,5 +174,19 @@ extension BsTableViewDataSource {
             text = " {" + children.map { $0.description }.joined(separator: ", ") + "} "
         }
         return text
+    }
+}
+
+// MARK: -  Sequence
+
+extension BsTableViewDataSource: Sequence {
+    public func makeIterator() -> AnyIterator<SectionType> {
+        var index = 0
+        return AnyIterator {
+            guard index < self.children.count else { return nil }
+            let sect = self.children[index]
+            index += 1
+            return sect
+        }
     }
 }

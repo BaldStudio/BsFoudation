@@ -117,16 +117,12 @@ open class BsTableView: UITableView {
     open func removeAll() {
         proxy.dataSource.removeAll()
     }
-    
-    open func setDataSource(_ newValue: BsTableViewDataSource?) {
-        dataSource = newValue
-    }
 }
 
 // MARK: - Registry
 
 extension BsTableView {
-    final func registerCellIfNeeded(_ row: BsTableViewNode) {
+    final func registerCellIfNeeded(_ row: _BsTableViewRowRepresentable) {
         let id = row.reuseIdentifier
         if registryMap.contains(where: { $0.key == id }) {
             return

@@ -6,7 +6,7 @@
 //  Copyright © 2023 BaldStudio. All rights reserved.
 //
 
-public final class BsSafeInsetsView: BsLayoutMargin {
+public final class BsSafeInsetsView: BsLayoutGuideView {
     public private(set) var edge: SafeArea.Edge = .bottom
 
     public required init(edge: SafeArea.Edge = .bottom) {

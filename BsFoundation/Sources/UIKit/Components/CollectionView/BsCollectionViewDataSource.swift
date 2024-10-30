@@ -19,7 +19,7 @@ open class BsCollectionViewDataSource: NSObject {
     open var children: ContiguousArray<Child> = []
     
     deinit {
-        logger.debug("\(self.classForCoder) -> deinit 🔥")
+        logger.debug("\(classForCoder) -> deinit 🔥")
     }
 
     public override init() {
