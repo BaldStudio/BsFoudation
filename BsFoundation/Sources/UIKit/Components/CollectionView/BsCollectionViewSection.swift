@@ -9,14 +9,13 @@
 // MARK: - Property
 
 open class BsCollectionViewSection: NSObject {
-    public typealias Parent = BsCollectionViewDataSource
-    public typealias Child = BsCollectionViewNode
+    public typealias ItemType = BsCollectionViewItemRepresentable
 
-    open weak internal(set) var parent: Parent? = nil
+    open weak internal(set) var parent: BsCollectionViewDataSource? = nil
     
     open var collectionView: BsCollectionView? { parent?.parent }
 
-    open var children: ContiguousArray<Child> = []
+    var children: ContiguousArray<ItemType> = []
     
     open var insets: UIEdgeInsets = .zero
     open var minimumLineSpacing: CGFloat = 0
@@ -31,8 +30,8 @@ open class BsCollectionViewSection: NSObject {
     }
             
     open func reload() {
-        guard let collectionView, let index else { return }
-        collectionView.reloadSections([index])
+        guard let collectionView, let section else { return }
+        collectionView.reloadSections([section])
     }
 
     // MARK: - Node Actions
@@ -45,53 +44,55 @@ open class BsCollectionViewSection: NSObject {
         children.isEmpty
     }
     
-    open var index: Int? {
-        parent?.children.firstIndex(of: self)
+    open var section: Int? {
+        parent?.index(of: self)
     }
     
-    open func append(_ child: Child) {
-        guard !children.contains(child) else { return }
-        child.removeFromParent()
+    open func append(_ child: ItemType) {
+        child.inner.removeFromParent()
         children.append(child)
-        child.parent = self
+        child.inner.parent = self
     }
-    
-    open func append(children: [Child]) {
-        children.forEach { append($0) }
-    }
-    
-    open func insert(_ child: Child, at index: Int) {
-        guard !children.contains(child) else { return }
-        child.removeFromParent()
+        
+    open func insert(_ child: ItemType, at index: Int) {
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Insert Row at \(index)")
+            return
+        }
+        child.inner.removeFromParent()
         children.insert(child, at: index)
-        child.parent = self
+        child.inner.parent = self
     }
     
-    open func replace(childAt index: Int, with child: Child) {
-        if children.contains(child), let otherIndex = children.firstIndex(of: child) {
-            children.swapAt(index, otherIndex)
-        } else {
-            child.removeFromParent()
-            children[index] = child
-            child.parent = self
+    open func replaceChild(at index: Int, with newChild: ItemType) {
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Replace Row at \(index)")
+            return
         }
+        newChild.inner.removeFromParent()
+        children[index] = newChild
+        newChild.inner.parent = self
     }
-
+    
     open func remove(at index: Int) {
-        children[index].parent = nil
-        children.remove(at: index)
-    }
-    
-    open func remove(_ child: Child) {
-        if let index = children.firstIndex(of: child) {
-            remove(at: index)
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Remove Row at \(index)")
+            return
         }
-    }
-
-    open func remove(children: [Child]) {
-        children.forEach { remove($0) }
+        let child = children[index]
+        children.remove(at: index)
+        child.inner.parent = nil
     }
     
+    open func remove(_ child: ItemType) {
+        guard let index = index(of: child) else {
+            logger.error("Invalid index When Remove Row \(child)")
+            return
+        }
+        children.remove(at: index)
+        child.inner.parent = nil
+    }
+        
     open func removeAll() {
         children.reversed().forEach { remove($0) }
     }
@@ -100,23 +101,39 @@ open class BsCollectionViewSection: NSObject {
         parent?.remove(self)
     }
     
-    open func child(at index: Int) -> Child {
-        children[index]
+    open func child(at index: Int) -> ItemType? {
+        guard children.hasIndex(index) else {
+            logger.error("Invalid index When Get Row at \(index)")
+            return nil
+        }
+        return children[index]
     }
     
-    open func contains(_ child: Child) -> Bool {
-        children.contains { $0 == child }
+    open func index(of child: ItemType) -> Int? {
+        children.firstIndex { $0 === child }
     }
     
-    open subscript(index: Int) -> Child {
+    open func contains(_ child: ItemType) -> Bool {
+        children.contains { $0 === child }
+    }
+    
+    open func contains(where predicate: (ItemType) throws -> Bool) rethrows -> Bool {
+        try children.contains(where: predicate)
+    }
+
+    open subscript(index: Int) -> ItemType? {
         set {
-            replace(childAt: index, with: newValue)
+            if let newValue {
+                replaceChild(at: index, with: newValue)
+            } else {
+                remove(at: index)
+            }
         }
         get {
-            children[index]
+            child(at: index)
         }
     }
-    
+
     // MARK: - Header
 
     open var headerSize: CGSize = .zero
@@ -130,13 +147,9 @@ open class BsCollectionViewSection: NSObject {
     }
     
     open var headerView: UICollectionReusableView? {
-        guard let index = index,
-              let collectionView = collectionView else {
-            return nil
-        }
-
+        guard let section, let collectionView else { return nil }
         return collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader,
-                                                at: IndexPath(index: index))
+                                                at: IndexPath(index: section))
     }
 
     open func collectionView(_ collectionView: BsCollectionView,
@@ -168,13 +181,9 @@ open class BsCollectionViewSection: NSObject {
     }
     
     open var footerView: UICollectionReusableView? {
-        guard let index,
-              let collectionView else {
-            return nil
-        }
-
+        guard let section, let collectionView else { return nil }
         return collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter,
-                                                at: IndexPath(index: index))
+                                                at: IndexPath(index: section))
     }
 
     open func collectionView(_ collectionView: BsCollectionView,
@@ -213,11 +222,11 @@ open class BsCollectionViewSection: NSObject {
 // MARK: - Operator
 
 public extension BsCollectionViewSection {
-    static func += (left: BsCollectionViewSection, right: Child) {
+    static func += (left: BsCollectionViewSection, right: ItemType) {
         left.append(right)
     }
     
-    static func -= (left: BsCollectionViewSection, right: Child) {
+    static func -= (left: BsCollectionViewSection, right: ItemType) {
         left.remove(right)
     }
 }
@@ -231,5 +240,31 @@ extension BsCollectionViewSection {
             text = " {" + children.map { $0.description }.joined(separator: ", ") + "} "
         }
         return text
+    }
+}
+
+// MARK: -  Utils
+
+public extension BsCollectionViewSection {
+    var viewController: UIViewController? {
+        collectionView?.viewController
+    }
+    
+    var navigationController: UINavigationController? {
+        collectionView?.navigationController
+    }
+}
+
+// MARK: -  Sequence
+
+extension BsCollectionViewSection: Sequence {
+    public func makeIterator() -> AnyIterator<ItemType> {
+        var index = 0
+        return AnyIterator {
+            guard index < self.children.count else { return nil }
+            let row = self.children[index]
+            index += 1
+            return row
+        }
     }
 }

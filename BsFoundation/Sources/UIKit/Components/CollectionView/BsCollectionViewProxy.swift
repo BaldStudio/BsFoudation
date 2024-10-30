@@ -40,6 +40,8 @@ final class BsCollectionViewProxy: NSObject, UICollectionViewDelegate, UICollect
 private class BsCollectionViewProxyImpl: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     weak var proxy: BsCollectionViewProxy!
     
+    var dataSource: BsCollectionViewDataSource { proxy.dataSource }
+    
     deinit {
         logger.debug("\(classForCoder) -> deinit 🔥")
     }
@@ -54,21 +56,21 @@ private class BsCollectionViewProxyImpl: NSObject, UICollectionViewDelegate, UIC
 
 extension BsCollectionViewProxyImpl {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        proxy.dataSource[indexPath].collectionView(collectionView, didSelectItemAt: indexPath)
+        dataSource[indexPath]?.inner.collectionView(proxy.collectionView, didSelectItemAt: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        proxy.dataSource[indexPath].collectionView(collectionView, didHighlightItemAt: indexPath)
+        dataSource[indexPath]?.inner.collectionView(proxy.collectionView, didHighlightItemAt: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        proxy.dataSource[indexPath].collectionView(collectionView, didUnhighlightItemAt: indexPath)
+        dataSource[indexPath]?.inner.collectionView(proxy.collectionView, didUnhighlightItemAt: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        proxy.dataSource[indexPath].collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
+        dataSource[indexPath]?.inner.collectionView(proxy.collectionView, willDisplay: cell, forItemAt: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, 
@@ -76,14 +78,7 @@ extension BsCollectionViewProxyImpl {
                         forItemAt indexPath: IndexPath) {
         // 数据源发生变化，执行remove时，会先触发这里，需要处理数组越界问题
         // 此时外部 Item 对象不再触发该方法，如有特殊需要，可在其他类（如ViewController）实现该代理方法执行逻辑
-        guard indexPath.section < proxy.dataSource.count else {
-            return
-        }
-        let section = proxy.dataSource[indexPath.section]
-        guard indexPath.item < section.count else {
-            return
-        }
-        section[indexPath.item].collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
+        dataSource[indexPath]?.inner.collectionView(proxy.collectionView, didEndDisplaying: cell, forItemAt: indexPath)
     }
 }
 
@@ -94,16 +89,16 @@ extension BsCollectionViewProxyImpl {
                         willDisplaySupplementaryView view: UICollectionReusableView,
                         forElementKind elementKind: String,
                         at indexPath: IndexPath) {
-        let element = proxy.dataSource[indexPath.section]
+        let sect = dataSource[indexPath.section]
         if elementKind == UICollectionView.elementKindSectionHeader {
-            element.willDisplay(header: view, at: indexPath)
+            sect?.willDisplay(header: view, at: indexPath)
         } else if elementKind == UICollectionView.elementKindSectionFooter {
-            element.willDisplay(footer: view, at: indexPath)
+            sect?.willDisplay(footer: view, at: indexPath)
         } else {
-            element.collectionView(proxy.collectionView,
-                                   willDisplaySupplementaryView: view,
-                                   forElementKind: elementKind,
-                                   at: indexPath)
+            sect?.collectionView(proxy.collectionView,
+                                willDisplaySupplementaryView: view,
+                                forElementKind: elementKind,
+                                at: indexPath)
         }
     }
 
@@ -112,20 +107,16 @@ extension BsCollectionViewProxyImpl {
                         forElementOfKind elementKind: String, at indexPath: IndexPath) {
         // 数据源发生变化，执行remove时，会先触发这里，需要处理数组越界问题
         // 此时外部 Item 对象不再触发该方法，如有特殊需要，可在其他类（如ViewController）实现该代理方法执行逻辑
-        guard indexPath.section < proxy.dataSource.count else {
-            return
-        }
-
-        let element = proxy.dataSource[indexPath.section]
+        let sect = dataSource[indexPath.section]
         if elementKind == UICollectionView.elementKindSectionHeader {
-            element.didEndDisplaying(header: view, at: indexPath)
+            sect?.didEndDisplaying(header: view, at: indexPath)
         } else if elementKind == UICollectionView.elementKindSectionFooter {
-            element.didEndDisplaying(footer: view, at: indexPath)
+            sect?.didEndDisplaying(footer: view, at: indexPath)
         } else {
-            element.collectionView(proxy.collectionView,
-                                   didEndDisplayingSupplementaryView: view,
-                                   forElementOfKind: elementKind,
-                                   at: indexPath)
+            sect?.collectionView(proxy.collectionView,
+                                 didEndDisplayingSupplementaryView: view,
+                                 forElementOfKind: elementKind,
+                                 at: indexPath)
         }
     }
 }
@@ -136,10 +127,10 @@ extension BsCollectionViewProxyImpl {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let item = proxy.dataSource[indexPath]
+        guard let item = dataSource[indexPath]?.inner else { return .zero }
         if let sizeCache = item.sizeCache { return sizeCache }
-        var size = item.collectionView(collectionView, preferredLayoutSizeFixedAt: indexPath)
-        size = item.collectionView(collectionView, preferredLayoutSizeFittingAt: indexPath)
+        var size = item.collectionView(proxy.collectionView, preferredLayoutSizeFixedAt: indexPath)
+        size = item.collectionView(proxy.collectionView, preferredLayoutSizeFittingAt: indexPath)
         item.sizeCache = size
         return size
     }
@@ -147,30 +138,30 @@ extension BsCollectionViewProxyImpl {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        proxy.dataSource[section].insets
+        dataSource[section]?.insets ?? .zero
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        proxy.dataSource[section].minimumLineSpacing
+        dataSource[section]?.minimumLineSpacing ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        proxy.dataSource[section].minimumInteritemSpacing
+        dataSource[section]?.minimumInteritemSpacing ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        proxy.dataSource[section].headerSize
+        dataSource[section]?.headerSize ?? .zero
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForFooterInSection section: Int) -> CGSize {
-        proxy.dataSource[section].footerSize
+        dataSource[section]?.footerSize ?? .zero
     }
 }

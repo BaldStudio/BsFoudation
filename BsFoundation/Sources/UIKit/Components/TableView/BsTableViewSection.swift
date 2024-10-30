@@ -41,7 +41,7 @@ open class BsTableViewSection: NSObject {
     }
     
     open var section: Int? {
-        parent?.children.firstIndex(of: self)
+        parent?.index(of: self)
     }
     
     open func append(_ child: RowType) {
@@ -275,7 +275,7 @@ extension BsTableViewSection {
     }
 }
 
-// MARK: -  Extensions
+// MARK: -  Utils
 
 public extension BsTableViewSection {
     var viewController: UIViewController? {

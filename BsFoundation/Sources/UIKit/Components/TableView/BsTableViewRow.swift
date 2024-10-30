@@ -32,14 +32,14 @@ protocol _BsTableViewRowRepresentable: BsTableViewRowRepresentable {
     func tableView(_ tableView: BsTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 
     func tableView(_ tableView: BsTableView, didSelectRowAt indexPath: IndexPath)
-
-    func tableView(_ tableView: UITableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat
     
-    func tableView(_ tableView: UITableView, preferredLayoutSizeFixedAt indexPath: IndexPath) -> CGFloat
+    func tableView(_ tableView: BsTableView, preferredLayoutSizeFixedAt indexPath: IndexPath) -> CGFloat
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    func tableView(_ tableView: BsTableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat
+
+    func tableView(_ tableView: BsTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    func tableView(_ tableView: BsTableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath)
 }
 
 // MARK: - Property
@@ -92,10 +92,7 @@ open class BsTableViewRow<CellType: UITableViewCell>: NSObject, _BsTableViewRowR
     }
     
     open var cell: CellType? {
-        guard let indexPath, let tableView else {
-            return nil
-        }
-        
+        guard let indexPath, let tableView else { return nil }
         return tableView.cellForRow(at: indexPath) as? CellType
     }
     
@@ -105,12 +102,11 @@ open class BsTableViewRow<CellType: UITableViewCell>: NSObject, _BsTableViewRowR
               let row = parent.index(of: self) else {
             return nil
         }
-        
         return IndexPath(row: row, section: section)
     }
     
     open func reload(with animation: UITableView.RowAnimation = .none) {
-        guard let tableView = tableView, let indexPath = indexPath else { return }
+        guard let tableView, let indexPath else { return }
         tableView.reloadRows(at: [indexPath], with: animation)
     }
     
@@ -123,36 +119,57 @@ open class BsTableViewRow<CellType: UITableViewCell>: NSObject, _BsTableViewRowR
     }
 
     // MARK: -  Cell
-    
-    open func tableView(_ tableView: BsTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.registerCellIfNeeded(self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        if let cell = cell as? CellType {
-            update(cell, at: indexPath)
+            
+    open func prepareLayoutSizeFitting(at indexPath: IndexPath) -> CGFloat {
+        let cell = cellClass.init(style: .default, reuseIdentifier: reuseIdentifier)
+        guard let cell = cell as? CellType else {
+            assertionFailure("cellClass is not match with \(CellType.self)")
+            return height
         }
-        return cell
+
+        // 触发 cell 的更新，填充数据以便计算尺寸
+        cellForRow(cell, at: indexPath)
+        // TODO: 以下计算可以使用，但还需要完善，比如需要处理 Accessory View 相关的逻辑
+        let widthConstraint = cell.contentView.widthAnchor.constraint(equalToConstant: cell.bounds.width)
+        widthConstraint.priority = .required - 1 // 避免约束冲突
+        widthConstraint.isActive = true
+        return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
-    open func update(_ cell: CellType, at indexPath: IndexPath) {}
-    
-    open func tableView(_ tableView: BsTableView, didSelectRowAt indexPath: IndexPath) {
+    open func didSelectRow(at indexPath: IndexPath) {
         if isSelectionAnimated {
-            tableView.deselectRow(at: indexPath, animated: true)
+            tableView?.deselectRow(at: indexPath, animated: true)
         }
         onDidSelect?(indexPath)
     }
     
+    open func cellForRow(_ cell: CellType, at indexPath: IndexPath) {}
     open func willDisplay(_ cell: CellType, at indexPath: IndexPath) {}
     open func didEndDisplaying(_ cell: CellType, at indexPath: IndexPath) {}
 }
 
+// MARK: -  Cell Delegate
+
 extension BsTableViewRow {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: BsTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.registerCellIfNeeded(self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        if let cell = cell as? CellType {
+            cellForRow(cell, at: indexPath)
+        }
+        return cell
+    }
+
+    func tableView(_ tableView: BsTableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRow(at: indexPath)
+    }
+
+    func tableView(_ tableView: BsTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? CellType else { return }
         willDisplay(cell, at: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: BsTableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? CellType else { return }
         didEndDisplaying(cell, at: indexPath)
     }
@@ -161,49 +178,37 @@ extension BsTableViewRow {
 // MARK: - Layout Fitting
 
 extension BsTableViewRow {
-    func prepareLayoutSizeFitting(_ cell: UITableViewCell, at indexPath: IndexPath) -> CGFloat {
-        // 触发 cell 的更新，填充数据以便计算尺寸
-        if let cell = cell as? CellType {
-            update(cell, at: indexPath)
-        } else {
-            assertionFailure("cell as? \(CellType.self) failed")
-        }
-        
-        // TODO: 以下计算可以使用，但还需要完善，比如需要处理 Accessory View 相关的逻辑
-        let widthConstraint = cell.contentView.widthAnchor.constraint(equalToConstant: cell.bounds.width)
-        widthConstraint.priority = .required - 1 // 避免约束冲突
-        widthConstraint.isActive = true
-        let layoutSize = cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        return max(height, layoutSize.height)
-    }
-
-    /// 自适应尺寸计算
-    func tableView(_ tableView: UITableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat {
-        if preferredLayoutMode == .auto { return UITableView.automaticDimension }
-        if preferredLayoutSizeFixed != .vertical { return height }
-        let cell = cellClass.init(style: .default, reuseIdentifier: reuseIdentifier)
-        return prepareLayoutSizeFitting(cell, at: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, preferredLayoutSizeFixedAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: BsTableView, preferredLayoutSizeFixedAt indexPath: IndexPath) -> CGFloat {
         if preferredLayoutSizeFixed != .vertical { return height }
         height = tableView.bounds.height - tableView.adjustedContentInset.top
         return height
+    }
+
+    /// 自适应尺寸计算
+    func tableView(_ tableView: BsTableView, preferredLayoutSizeFittingAt indexPath: IndexPath) -> CGFloat {
+        if preferredLayoutMode == .auto { return UITableView.automaticDimension }
+        if preferredLayoutSizeFixed != .vertical { return height }
+        let layoutHeight = prepareLayoutSizeFitting(at: indexPath)
+        return max(height, layoutHeight)
     }
 }
 
 // MARK: - Mutable Cell Class
 
 open class BsTableViewMutableRow: BsTableViewRow<UITableViewCell> {
-    private var _cellClass: UITableViewCell.Type = UITableViewCell.self
+    private struct Metadata {
+        var cellClass: UITableViewCell.Type = UITableViewCell.self
+    }
+    
+    private var metadata = Metadata()
     
     open override var cellClass: UITableViewCell.Type {
-        set { _cellClass = newValue }
-        get { _cellClass }
+        set { metadata.cellClass = newValue }
+        get { metadata.cellClass }
     }
 }
 
-// MARK: -  Extensions
+// MARK: -  Utils
 
 public extension BsTableViewRow {
     var viewController: UIViewController? {

@@ -85,8 +85,7 @@ open class BsTableViewDataSource: NSObject {
     }
     
     open func removeFromParent() {
-        guard let parent else { return }
-        parent.dataSource = nil
+        parent?.dataSource = nil
     }
 
     open func child(at index: Int) -> SectionType? {

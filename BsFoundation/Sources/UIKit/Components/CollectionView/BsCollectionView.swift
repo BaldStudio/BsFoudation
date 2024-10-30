@@ -119,16 +119,12 @@ open class BsCollectionView: UICollectionView {
     open func removeAll() {
         proxy.dataSource.removeAll()
     }
-    
-    open func setDataSource(_ newValue: BsCollectionViewDataSource?) {
-        dataSource = newValue
-    }
 }
 
 // MARK: - Registry
 
 extension BsCollectionView {
-    final func registerCellIfNeeded(_ item: BsCollectionViewNode) {
+    final func registerCellIfNeeded(_ item: _BsCollectionViewItemRepresentable) {
         let id = item.reuseIdentifier
         if registryMap.contains(where: { $0.key == id }) {
             return

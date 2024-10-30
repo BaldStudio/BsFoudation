@@ -58,8 +58,8 @@ extension BsTableViewProxyImpl {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let row = dataSource[indexPath]?.inner else { return 0 }
         if let heightCache = row.heightCache { return heightCache }
-        var height = row.tableView(tableView, preferredLayoutSizeFixedAt: indexPath)
-        height = row.tableView(tableView, preferredLayoutSizeFittingAt: indexPath)
+        var height = row.tableView(proxy.tableView, preferredLayoutSizeFixedAt: indexPath)
+        height = row.tableView(proxy.tableView, preferredLayoutSizeFittingAt: indexPath)
         row.heightCache = height
         return height
     }
@@ -69,17 +69,16 @@ extension BsTableViewProxyImpl {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        dataSource[indexPath]?.inner.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
+        dataSource[indexPath]?.inner.tableView(proxy.tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // 数据源发生变化，执行remove时，会先触发这里，需要处理数组越界问题
         // 此时外部 Item 对象不再触发该方法，如有特殊需要，可在其他类（如ViewController）实现该代理方法执行逻辑
-        dataSource[indexPath]?.inner.tableView(tableView, didEndDisplaying: cell, forRowAt: indexPath)
+        dataSource[indexPath]?.inner.tableView(proxy.tableView, didEndDisplaying: cell, forRowAt: indexPath)
     }
     
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dataSource[indexPath]?.inner.tableView(proxy.tableView, didSelectRowAt: indexPath)
     }
 }
